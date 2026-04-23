@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Usage Analysis — Level Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #111118;
+  --card-hover: #16161f;
+  --border: #1e1e2a;
+  --border-light: #2a2a3a;
+  --text: #e4e4ef;
+  --text-muted: #8888a0;
+  --text-dim: #555570;
+  --accent: #6366f1;
+  --accent-glow: rgba(99,102,241,0.15);
+  --red: #ef4444;
+  --red-glow: rgba(239,68,68,0.12);
+  --orange: #f59e0b;
+  --orange-glow: rgba(245,158,11,0.12);
+  --green: #22c55e;
+  --green-glow: rgba(34,197,94,0.12);
+  --purple: #a855f7;
+  --purple-glow: rgba(168,85,247,0.12);
+  --cyan: #06b6d4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.header {
+  padding: 24px 24px 0;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  display: inline;
+}
+
+.header .date {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-left: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-top: 16px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.tab:hover { color: var(--text-muted); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab .badge {
+  background: var(--red-glow);
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-left: 6px;
+}
+
+.content { padding: 24px; max-width: 1100px; }
+
+.stats-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  flex: 1 1 0;
+  min-width: 160px;
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.stat-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.card-title { font-size: 13px; font-weight: 600; padding: 14px 18px; }
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 0 18px;
+}
+
+.bar-label { width: 140px; font-size: 12px; color: var(--text-muted); }
+.bar-track { flex: 1; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+.bar-value { width: 70px; text-align: right; font-size: 12px; }
+.bar-pct { width: 40px; text-align: right; font-size: 11px; color: var(--text-dim); }
+
+.flag-card { margin-bottom: 16px; }
+.flag-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.flag-header:hover { background: var(--card-hover); }
+.flag-header .icon { font-size: 18px; }
+.flag-header .title { font-weight: 600; font-size: 14px; flex: 1; }
+.flag-header .count { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+.flag-header .chevron { color: var(--text-dim); font-size: 14px; transition: transform 0.2s; }
+.flag-header .chevron.open { transform: rotate(180deg); }
+
+.flag-desc { padding: 14px 18px; font-size: 12px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+
+.flag-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.flag-row:last-child { border-bottom: none; }
+.flag-row .name { flex: 1; font-weight: 500; font-size: 13px; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+}
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr:hover { background: var(--card-hover); }
+tbody tr.max-row { background: var(--red-glow); }
+
+.model-bar { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; width: 100%; }
+.model-bar .opus { background: var(--red); }
+.model-bar .sonnet { background: var(--accent); }
+.model-bar .haiku { background: var(--green); }
+
+.legend { padding: 12px; display: flex; gap: 16px; justify-content: center; border-top: 1px solid var(--border); }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-dim); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+.power-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.power-row:last-child { border-bottom: none; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.cpr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; padding: 18px; }
+.cpr-card {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.cpr-label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+.cpr-value { font-size: 20px; font-weight: 700; }
+.cpr-sub { font-size: 10px; color: var(--text-dim); }
+
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Claude Usage Analysis</h1>
+    <span class="date mono" id="date-label"></span>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+<div class="content" id="content"></div>
+
+<script>
+const DATA = null; // Will be loaded from data.json
+let _data = null;
+let activeTab = 'overview';
+
+function fmt(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtK(n) { return n >= 1e6 ? (n/1e6).toFixed(1) + 'M' : n >= 1e3 ? (n/1e3).toFixed(0) + 'K' : n.toString(); }
+
+const TABS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'leaderboard', label: 'Leaderboard' },
+  { id: 'flags', label: 'Flags & Alerts' },
+  { id: 'breakdown', label: 'Breakdowns' },
+];
+
+function bar(value, max, color) {
+  const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0;
+  return `<div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>`;
+}
+
+function modelBar(models) {
+  const total = (models.opus||0) + (models.sonnet||0) + (models.haiku||0);
+  if (!total) return '';
+  const o = ((models.opus||0)/total)*100, s = ((models.sonnet||0)/total)*100, h = ((models.haiku||0)/total)*100;
+  let html = '<div class="model-bar">';
+  if (o > 0) html += `<div class="opus" style="width:${o}%;min-width:2px" title="Opus ${o.toFixed(0)}%"></div>`;
+  if (s > 0) html += `<div class="sonnet" style="width:${s}%;min-width:2px" title="Sonnet ${s.toFixed(0)}%"></div>`;
+  if (h > 0) html += `<div class="haiku" style="width:${h}%;min-width:2px" title="Haiku ${h.toFixed(0)}%"></div>`;
+  html += '</div>';
+  if (models.opus && models.opus > 0) html += `<div style="font-size:10px;color:var(--text-dim);margin-top:3px"><span style="color:var(--red)">${((models.opus||0)/total*100).toFixed(0)}% Opus</span></div>`;
+  return html;
+}
+
+function renderTabs() {
+  const d = _data;
+  const flagCount = d.maxPlan.length + d.opusHeavy.filter(u => u.opusSpend >= 10).length + d.coworkOpus.length;
+  document.getElementById('tabs').innerHTML = TABS.map(t =>
+    `<button class="tab ${t.id === activeTab ? 'active' : ''}" onclick="switchTab('${t.id}')">${t.label}${t.id === 'flags' ? `<span class="badge">${flagCount}</span>` : ''}</button>`
+  ).join('');
+  document.getElementById('date-label').textContent = d.summary.weekOf;
+}
+
+function switchTab(id) {
+  activeTab = id;
+  renderTabs();
+  renderContent();
+}
+
+function renderContent() {
+  const d = _data;
+  const el = document.getElementById('content');
+  switch(activeTab) {
+    case 'overview': el.innerHTML = renderOverview(d); break;
+    case 'leaderboard': el.innerHTML = renderLeaderboard(d); break;
+    case 'flags': el.innerHTML = renderFlags(d); break;
+    case 'breakdown': el.innerHTML = renderBreakdown(d); break;
+  }
+}
+
+function renderOverview(d) {
+  const flagCount = d.maxPlan.length + d.opusHeavy.filter(u=>u.opusSpend>=10).length + d.coworkOpus.length + d.tokenDensity.filter(u=>u.spend>=20).length;
+  let html = `
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-label">Total Org Spend</div><div class="stat-value mono">${fmt(d.summary.totalSpend)}</div><div class="stat-sub">1-week period</div></div>
+    <div class="stat-card"><div class="stat-label">Active Users</div><div class="stat-value mono">${d.summary.activeUsers}</div><div class="stat-sub">${fmt(d.summary.avgSpend)} avg/user</div></div>
+    <div class="stat-card"><div class="stat-label">Top 10 Concentration</div><div class="stat-value mono" style="color:var(--orange)">${d.summary.top10Pct}%</div><div class="stat-sub">${fmt(d.summary.top10Spend)}</div></div>
+    <div class="stat-card"><div class="stat-label">Flags Raised</div><div class="stat-value mono" style="color:var(--red)">${flagCount}</div><div class="stat-sub">Action items</div></div>
+  </div>`;
+
+  // Model distribution
+  html += `<div class="card"><div class="card-title">Model Spend Distribution</div><div style="padding:0 18px 14px">`;
+  d.models.forEach(m => {
+    const color = m.name.includes('opus') ? 'var(--red)' : m.name.includes('sonnet') ? 'var(--accent)' : 'var(--green)';
+    const label = m.name.replace(/claude_/, '').replace(/_/g, ' ');
+    const pct = (m.spend / d.summary.totalSpend * 100);
+    html += `<div class="bar-row" style="padding:0"><div class="bar-label mono">${label}</div>${bar(m.spend, d.models[0].spend, color)}<div class="bar-value mono" style="color:${color}">${fmt(m.spend)}</div><div class="bar-pct">${pct.toFixed(0)}%</div></div>`;
+  });
+  html += `</div></div>`;
+
+  // Product distribution
+  html += `<div class="card"><div class="card-title">Product Surface Breakdown</div><div style="padding:0 18px 14px">`;
+  d.products.forEach(p => {
+    const pct = (p.spend / d.summary.totalSpend * 100);
+    html += `<div class="bar-row" style="padding:0"><div class="bar-label">${p.name}</div>${bar(p.spend, d.products[0].spend, 'var(--cyan)')}<div class="bar-value mono">${fmt(p.spend)}</div><div style="width:60px;text-align:right;font-size:11px;color:var(--text-dim)">${p.requests.toLocaleString()} reqs</div><div class="bar-pct">${pct.toFixed(0)}%</div></div>`;
+  });
+  html += `</div></div>`;
+
+  // Power users
+  html += `<div class="card"><div class="card-title" style="color:var(--green)">⚡ Power Users — Org Efficiency Benchmarks</div><div style="padding:0 18px 4px;font-size:11px;color:var(--text-dim)">High volume, Sonnet/Haiku dominant, low cost-per-request</div>`;
+  d.powerUsers.forEach((u, i) => {
+    html += `<div class="power-row">
+      <span style="width:22px;font-size:12px;color:var(--text-dim);text-align:center">${i+1}</span>
+      <span style="flex:1;font-size:13px;font-weight:500">${u.name}</span>
+      <span class="mono" style="font-size:12px;color:var(--green);width:60px;text-align:right">${u.requests} reqs</span>
+      <span class="mono" style="font-size:12px;color:var(--text-muted);width:70px;text-align:right">${fmt(u.spend)}</span>
+      <span class="mono" style="font-size:12px;color:var(--green);width:65px;text-align:right">${fmt(u.cpr)}/req</span>
+    </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function renderLeaderboard(d) {
+  let html = `<div class="card"><div class="card-title">Top 30 Spenders</div><div class="table-wrap"><table><thead><tr>
+    <th>#</th><th>User</th><th>Spend</th><th>Requests</th><th>$/Req</th><th>Model Mix</th><th>Top Product</th>
+  </tr></thead><tbody>`;
+  d.leaderboard.forEach((u, i) => {
+    const topProd = Object.entries(u.products).sort((a,b) => b[1]-a[1])[0];
+    const cls = u.spend > 200 ? ' class="max-row"' : '';
+    const spendColor = u.spend > 200 ? 'var(--red)' : u.spend > 100 ? 'var(--orange)' : 'var(--text)';
+    const cprColor = u.cpr > 0.5 ? 'var(--orange)' : 'var(--text-muted)';
+    html += `<tr${cls}>
+      <td style="color:var(--text-dim);width:30px">${i+1}</td>
+      <td><div style="font-weight:500">${u.name}</div><div style="font-size:11px;color:var(--text-dim)">${u.email.split('@')[0]}</div></td>
+      <td class="mono" style="font-weight:600;color:${spendColor}">${fmt(u.spend)}</td>
+      <td class="mono" style="color:var(--text-muted)">${u.requests.toLocaleString()}</td>
+      <td class="mono" style="color:${cprColor}">${fmt(u.cpr)}</td>
+      <td style="width:120px">${modelBar(u.models)}</td>
+      <td style="font-size:12px;color:var(--text-muted)">${topProd ? topProd[0]+' ('+fmt(topProd[1])+')' : '—'}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Opus</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span> Sonnet</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Haiku</span>
+  </div></div>`;
+  return html;
+}
+
+function flagSection(icon, title, count, color, glowColor, desc, id, rows) {
+  return `<div class="card flag-card"><div class="flag-header" onclick="toggleFlag('${id}')">
+    <span class="icon">${icon}</span><span class="title">${title}</span>
+    <span class="count" style="background:${glowColor};color:${color}">${count}</span>
+    <span class="chevron open" id="chev-${id}">▾</span>
+  </div><div id="body-${id}"><div class="flag-desc">${desc}</div>${rows}</div></div>`;
+}
+
+window.toggleFlag = function(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chev-' + id);
+  if (body.style.display === 'none') { body.style.display = ''; chev.classList.add('open'); }
+  else { body.style.display = 'none'; chev.classList.remove('open'); }
+};
+
+function renderFlags(d) {
+  let html = '';
+
+  // Max Plan
+  let rows = '';
+  d.maxPlan.forEach(u => {
+    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:13px;color:var(--red);font-weight:600">${fmt(u.weeklySpend)}/wk</span><span class="mono" style="font-size:12px;color:var(--text-dim)">→ ~${fmt(u.projectedMonthly)}/mo</span></div>`;
+  });
+  html += flagSection('🔴', 'Max Plan Candidates', d.maxPlan.length, 'var(--red)', 'var(--red-glow)', 'Weekly spend &gt;$200 (projected $800+/mo). Requires use-case assessment before plan decision.', 'maxplan', rows);
+
+  // Cowork + Opus
+  rows = '';
+  d.coworkOpus.forEach(u => {
+    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:13px;color:var(--orange);font-weight:600">${fmt(u.spend)}</span><span style="font-size:12px;color:var(--text-dim)">${u.requests} reqs</span><span class="mono" style="font-size:11px;color:var(--text-dim)">${u.model.replace(/_/g,' ')}</span></div>`;
+  });
+  html += flagSection('🟠', 'Cowork → Opus (Automated Routing)', d.coworkOpus.length, 'var(--orange)', 'var(--orange-glow)', 'Highest-priority cost control. No human selected Opus — Cowork routed automatically.', 'cowork', rows);
+
+  // Opus Heavy
+  const opusFiltered = d.opusHeavy.filter(u => u.opusSpend >= 10);
+  rows = '';
+  opusFiltered.forEach(u => {
+    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:12px;color:var(--purple)">${fmt(u.opusSpend)} Opus</span><span style="font-size:11px;color:var(--text-dim)">/ ${fmt(u.chatSpend)} Chat</span><span style="background:var(--purple-glow);color:var(--purple);font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px">${u.opusPct}%</span></div>`;
+  });
+  html += flagSection('🟣', 'Opus-Heavy Chat Users (≥30%)', opusFiltered.length, 'var(--purple)', 'var(--purple-glow)', '≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend.', 'opus', rows);
+
+  // Token Density
+  rows = '';
+  d.tokenDensity.slice(0, 15).forEach(u => {
+    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:12px;color:var(--orange)">${fmtK(u.avgPromptTokens)} avg</span><span style="font-size:11px;color:var(--text-dim)">${u.requests} reqs</span><span class="mono" style="font-size:12px;color:var(--text-muted)">${fmt(u.spend)}</span></div>`;
+  });
+  html += flagSection('📐', 'High Token Density (>500K avg prompt)', d.tokenDensity.length, 'var(--orange)', 'var(--orange-glow)', 'Prompt architecture issue — not a model problem. Large context windows driving cost.', 'tokens', rows);
+
+  // Legacy
+  rows = '';
+  d.legacyModels.forEach(u => {
+    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:11px;color:var(--text-dim)">${u.models.map(m=>m.replace(/claude_/,'').replace(/_/g,' ')).join(', ')}</span><span class="mono" style="font-size:12px;color:var(--text-muted)">${fmt(u.spend)}</span></div>`;
+  });
+  html += flagSection('⚠️', 'Legacy Model Usage', d.legacyModels.length, 'var(--orange)', 'var(--orange-glow)', 'Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7.', 'legacy', rows);
+
+  return html;
+}
+
+function renderBreakdown(d) {
+  let html = '<div class="grid-2">';
+
+  // Model breakdown
+  html += `<div class="card"><div class="card-title">Model Breakdown</div><div style="padding:0 18px 14px">`;
+  d.models.forEach(m => {
+    const color = m.name.includes('opus') ? 'var(--red)' : m.name.includes('sonnet') ? 'var(--accent)' : 'var(--green)';
+    const label = m.name.replace(/claude_/,'').replace(/_/g,' ');
+    const pct = (m.spend / d.summary.totalSpend * 100);
+    html += `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text-muted)">${label}</span><span class="mono" style="font-size:12px;color:${color}">${fmt(m.spend)} (${pct.toFixed(1)}%)</span></div>
+      ${bar(m.spend, d.models[0].spend, color)}
+      <div style="font-size:11px;color:var(--text-dim);margin-top:2px">${m.requests.toLocaleString()} requests</div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  // Product breakdown
+  html += `<div class="card"><div class="card-title">Product Surface Breakdown</div><div style="padding:0 18px 14px">`;
+  d.products.forEach(p => {
+    const pct = (p.spend / d.summary.totalSpend * 100);
+    html += `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text-muted)">${p.name}</span><span class="mono" style="font-size:12px;color:var(--cyan)">${fmt(p.spend)} (${pct.toFixed(1)}%)</span></div>
+      ${bar(p.spend, d.products[0].spend, 'var(--cyan)')}
+      <div style="font-size:11px;color:var(--text-dim);margin-top:2px">${p.requests.toLocaleString()} requests • ${fmt(p.spend/p.requests)}/req avg</div>
+    </div>`;
+  });
+  html += `</div></div></div>`;
+
+  // Cost per request
+  html += `<div class="card"><div class="card-title">Cost Per Request by Product</div><div class="cpr-grid">`;
+  d.products.forEach(p => {
+    const cpr = p.spend / p.requests;
+    html += `<div class="cpr-card"><div class="cpr-label">${p.name}</div><div class="cpr-value mono" style="color:${cpr > 0.3 ? 'var(--orange)' : 'var(--text)'}">${fmt(cpr)}</div><div class="cpr-sub">per request</div></div>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+// Load data and render
+fetch('./data.json')
+  .then(r => r.json())
+  .then(data => {
+    _data = data;
+    renderTabs();
+    renderContent();
+  })
+  .catch(() => {
+    document.getElementById('content').innerHTML = '<p style="padding:40px;color:var(--red)">Failed to load data.json</p>';
+  });
+</script>
+</body>
+</html>
