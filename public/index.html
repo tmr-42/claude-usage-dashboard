@@ -212,16 +212,6 @@ function AllUsersTab({ users }) {
 
 function Dashboard({ DATA }) {
   const [activeTab, setActiveTab] = useState("overview");
-  const allDrafts = useMemo(() => {
-    const drafts = [];
-    DATA.maxPlan.forEach(u => drafts.push({ ...u, flagType: "max-plan", message: generateMaxPlanMsg(u) }));
-    DATA.opusHeavy.filter(u => u.opusSpend >= 10).forEach(u => drafts.push({ ...u, flagType: "opus", message: generateOpusMsg(u) }));
-    DATA.coworkOpus.forEach(u => drafts.push({ ...u, flagType: "cowork-opus", message: generateCoworkMsg(u) }));
-    DATA.tokenDensity.filter(u => u.spend >= 20).forEach(u => drafts.push({ ...u, flagType: "token", message: generateTokenMsg(u) }));
-    DATA.legacyModels.filter(u => u.spend >= 5).forEach(u => drafts.push({ ...u, flagType: "legacy", message: generateLegacyMsg(u) }));
-    return drafts;
-  }, [DATA]);
-
   return (
     <div style={{ background: COLORS.bg, color: COLORS.text, minHeight: "100vh", padding: 0 }}>
       <div style={{ padding: "24px 24px 0", borderBottom: "1px solid " + COLORS.border }}>
