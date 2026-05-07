@@ -40,7 +40,6 @@ const TABS = [
   { id: "users", label: "All Users" },
   { id: "flags", label: "Flags & Alerts" },
   { id: "breakdown", label: "Breakdowns" },
-  { id: "actions", label: "Slack Actions" },
 ];
 
 function fmt(n) { return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -94,29 +93,6 @@ function FlagCard({ icon, title, count, color, glowColor, children }) {
     </div>
   );
 }
-
-function generateMaxPlanMsg(u) {
-  return "Hey " + u.name.split(" ")[0] + " — quick note on Claude usage. Your spend this past week was " + fmt(u.weeklySpend) + ", which projects to ~" + fmt(u.projectedMonthly) + "/month. That potentially qualifies you for a Max plan, but before we go that route I want to understand what you're working on.\n\nA couple of questions:\n1. What's the primary use case driving your volume this week — is it a specific project or steady-state workflow?\n2. Are you intentionally selecting Opus for certain tasks, or is it your default model?\n3. Would shifting some work to Sonnet impact your output quality?\n\nNo wrong answers here — just want to make sure we're matching cost to value.";
-}
-function generateOpusMsg(u) {
-  return "Hey " + u.name.split(" ")[0] + " — noticed your Chat usage this week: " + fmt(u.opusSpend) + " of your " + fmt(u.chatSpend) + " Chat spend (" + u.opusPct + "%) went to Opus models.\n\nQuick questions so I can help optimize:\n1. Is Opus your intentional choice for specific tasks (complex analysis, code review, etc.), or is it set as your default?\n2. Have you tried running similar tasks on Sonnet to compare quality? For most Chat workflows, Sonnet 4.6 performs comparably at ~3x lower cost.\n3. What types of tasks are you typically using Chat for?\n\nThis isn't about restricting access — it's about making sure you're getting value where Opus matters and saving cost where it doesn't.";
-}
-function generateCoworkMsg(u) {
-  return "Hey " + u.name.split(" ")[0] + " — flagging a Cowork routing issue. Your Cowork usage this week routed " + u.requests + " requests to " + u.model.replace(/_/g, " ") + " at " + fmt(u.spend) + ". Since Cowork selects models automatically, no human made that model choice — and Opus is significantly more expensive than Sonnet for automated tasks.\n\nCan you help me understand:\n1. What Cowork workflows are you running? (This helps us determine if Opus routing is justified or a misconfiguration.)\n2. Have you noticed quality differences when Cowork uses Sonnet vs. Opus for these tasks?\n\nThis is the highest-priority cost item because it's automated spend — I want to make sure the routing is intentional.";
-}
-function generateTokenMsg(u) {
-  return "Hey " + u.name.split(" ")[0] + " — your Claude usage this week averaged " + fmtK(u.avgPromptTokens) + " prompt tokens per request across " + u.requests + " requests (" + fmt(u.spend) + " total). That's well above the org average and suggests very large context windows per conversation.\n\nA couple things I'd like to explore:\n1. Are you uploading large documents or pasting long text blocks into conversations? If so, there may be ways to break those into smaller chunks for better results and lower cost.\n2. Are you using long-running conversations where the context keeps growing? Starting fresh conversations for new topics can significantly reduce token usage.\n\nThis is about prompt architecture, not model choice — small changes here can meaningfully reduce spend without changing your workflow.";
-}
-function generateLegacyMsg(u) {
-  return "Hey " + u.name.split(" ")[0] + " — noticed some of your Claude usage this week is running on legacy model versions (" + u.models.map(m => m.replace(/_/g, " ")).join(", ") + "). These older models are deprecated, and the current versions (Sonnet 4.6, Opus 4.7) offer better performance.\n\nQuick ask:\n1. Is there a reason you're pinned to older versions — a specific project dependency or integration?\n2. If not, can you update your model selection to the current versions? It should be a straight upgrade in quality.\n\nHappy to help with migration if anything is blocking the switch.";
-}
-
-function generateChannelSummary(d) {
-  const opusTotal = d.models.filter(m => m.name.includes("opus")).reduce((s, m) => s + m.spend, 0);
-  const sonnetTotal = d.models.filter(m => m.name.includes("sonnet")).reduce((s, m) => s + m.spend, 0);
-  return "*Claude Utilization Report — " + d.summary.weekOf + "*\n\n*Spend Summary*\n• Total org spend: " + fmt(d.summary.totalSpend) + "\n• Active users: " + d.summary.activeUsers + "\n• Avg spend/user: " + fmt(d.summary.avgSpend) + "\n• Top 10 users = " + fmt(d.summary.top10Spend) + " (" + d.summary.top10Pct + "% of total)\n\n*Model Mix*\n• Sonnet: " + fmt(sonnetTotal) + " (" + (sonnetTotal / d.summary.totalSpend * 100).toFixed(0) + "%)\n• Opus: " + fmt(opusTotal) + " (" + (opusTotal / d.summary.totalSpend * 100).toFixed(0) + "%)\n\n*Flags This Week*\n• Max plan candidates: " + d.maxPlan.length + " (" + (d.maxPlan.map(u => u.name).join(", ") || "none") + ")\n• Opus-heavy Chat users (≥30%): " + d.opusHeavy.length + " users totaling " + fmt(d.opusHeavy.reduce((s, u) => s + u.opusSpend, 0)) + " in Chat Opus\n• Cowork → Opus routing: " + d.coworkOpus.length + " users, " + fmt(d.coworkOpus.reduce((s, u) => s + u.spend, 0)) + " (highest-priority automated cost)\n• High token density (>500K avg): " + d.tokenDensity.length + " users\n• Legacy model users: " + d.legacyModels.length + " users\n\n*Power Users (Efficient Benchmarks)*\n" + d.powerUsers.slice(0, 5).map(u => "• " + u.name + ": " + u.requests + " reqs, " + fmt(u.cpr) + "/req, 0% Opus").join("\n") + "\n\nDMs sent to flagged users for use-case assessment. Will follow up with recommendations next week.";
-}
-
 
 function flagPillStyle(t) {
   const bg = t === "max-plan" ? COLORS.redGlow : t === "opus" ? COLORS.purpleGlow : COLORS.orangeGlow;
@@ -498,43 +474,7 @@ function Dashboard({ DATA }) {
           </>
         )}
 
-        {activeTab === "actions" && (
-          <>
-            <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18, marginBottom: 20 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600 }}>#claude-utilization Channel Summary</div>
-                  <div style={{ fontSize: 12, color: COLORS.textDim }}>Read-only static view — interactive send is in the Claude artifact</div>
-                </div>
-              </div>
-              <div style={{ background: "#0d0d14", borderRadius: 8, padding: 16, fontSize: 12, lineHeight: 1.7, color: COLORS.textMuted, whiteSpace: "pre-wrap", fontFamily: "'JetBrains Mono', monospace", border: "1px solid " + COLORS.border, maxHeight: 400, overflow: "auto" }}>
-                {generateChannelSummary(DATA)}
-              </div>
-            </div>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>Draft DMs ({allDrafts.length})</div>
-            <div style={{ fontSize: 12, color: COLORS.textDim, marginBottom: 16 }}>Each message asks 2–3 questions about the user's specific data before recommending changes.</div>
-            {allDrafts.map((d, i) => (
-              <div key={i} style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 16, marginBottom: 12 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                  <div>
-                    <span style={{ fontWeight: 600, color: COLORS.text, fontSize: 14 }}>{d.name}</span>
-                    <span style={{ color: COLORS.textDim, fontSize: 12, marginLeft: 8 }}>{d.email}</span>
-                  </div>
-                  <span style={{
-                    fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em",
-                    padding: "3px 8px", borderRadius: 6,
-                    background: d.flagType === "max-plan" ? COLORS.redGlow : d.flagType === "opus" ? COLORS.purpleGlow : d.flagType === "cowork-opus" ? COLORS.orangeGlow : d.flagType === "token" ? COLORS.orangeGlow : COLORS.orangeGlow,
-                    color: d.flagType === "max-plan" ? COLORS.red : d.flagType === "opus" ? COLORS.purple : d.flagType === "cowork-opus" ? COLORS.orange : COLORS.orange,
-                  }}>{d.flagType.replace("-", " ")}</span>
-                </div>
-                <div style={{ background: "#0d0d14", borderRadius: 8, padding: 14, fontSize: 13, lineHeight: 1.6, color: COLORS.textMuted, whiteSpace: "pre-wrap", fontFamily: "'JetBrains Mono', monospace", border: "1px solid " + COLORS.border }}>
-                  {d.message}
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-      </div>
+</div>
     </div>
   );
 }
