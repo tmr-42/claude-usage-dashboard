@@ -1281,5 +1281,3398 @@
       "spend": 0.51,
       "requests": 1
     }
+  ],
+  "allUsers": [
+    {
+      "email": "stacey.heubeck@level.agency",
+      "name": "Stacey Heubeck",
+      "spend": 508.37,
+      "requests": 4383,
+      "cpr": 0.116,
+      "avgPromptTokens": 143555,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 503.54,
+        "haiku": 4.83
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 409.78,
+      "flags": [
+        "max-plan"
+      ]
+    },
+    {
+      "email": "brian.mcleod@level.agency",
+      "name": "Brian Mcleod",
+      "spend": 296.31,
+      "requests": 381,
+      "cpr": 0.778,
+      "avgPromptTokens": 1055842,
+      "opusPct": 78,
+      "models": {
+        "opus": 231.16,
+        "sonnet": 65.14,
+        "haiku": 0.01
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 278.81,
+      "flags": [
+        "max-plan",
+        "opus",
+        "token"
+      ]
+    },
+    {
+      "email": "tanya.true@level.agency",
+      "name": "Tanya True",
+      "spend": 252.22,
+      "requests": 3916,
+      "cpr": 0.064,
+      "avgPromptTokens": 131289,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 238.15,
+        "haiku": 14.07
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 153.99,
+      "flags": [
+        "max-plan",
+        "legacy"
+      ]
+    },
+    {
+      "email": "bogdan.cioanta@level.agency",
+      "name": "Bogdan Cioanta",
+      "spend": 130.17,
+      "requests": 283,
+      "cpr": 0.46,
+      "avgPromptTokens": 490398,
+      "opusPct": 96,
+      "models": {
+        "opus": 124.89,
+        "sonnet": 5.28
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 126.47,
+      "flags": []
+    },
+    {
+      "email": "taylor.mathauer@level.agency",
+      "name": "Taylor Mathauer",
+      "spend": 118.24,
+      "requests": 75,
+      "cpr": 1.577,
+      "avgPromptTokens": 2049347,
+      "opusPct": 86,
+      "models": {
+        "opus": 101.53,
+        "sonnet": 16.71
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 118.24,
+      "flags": [
+        "opus",
+        "token"
+      ]
+    },
+    {
+      "email": "matt.beaulieu@level.agency",
+      "name": "Matt Beaulieu",
+      "spend": 112.03,
+      "requests": 112,
+      "cpr": 1.0,
+      "avgPromptTokens": 1235396,
+      "opusPct": 43,
+      "models": {
+        "opus": 48.52,
+        "sonnet": 63.51
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 112.03,
+      "flags": [
+        "opus",
+        "token"
+      ]
+    },
+    {
+      "email": "sara.siebert@level.agency",
+      "name": "Sara Siebert",
+      "spend": 110.5,
+      "requests": 1355,
+      "cpr": 0.082,
+      "avgPromptTokens": 117061,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 106.0,
+        "haiku": 4.5
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 60.77,
+      "flags": [
+        "legacy"
+      ]
+    },
+    {
+      "email": "xavier.picquerey@level.agency",
+      "name": "Xavier Picquerey",
+      "spend": 110.32,
+      "requests": 1573,
+      "cpr": 0.07,
+      "avgPromptTokens": 113007,
+      "opusPct": 39,
+      "models": {
+        "opus": 42.97,
+        "sonnet": 65.33,
+        "haiku": 2.02
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 100.18,
+      "flags": []
+    },
+    {
+      "email": "bill.buchanan@level.agency",
+      "name": "Bill Buchanan",
+      "spend": 109.65,
+      "requests": 427,
+      "cpr": 0.257,
+      "avgPromptTokens": 298896,
+      "opusPct": 99,
+      "models": {
+        "opus": 108.59,
+        "sonnet": 1.0,
+        "haiku": 0.06
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 76.45,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "lin.wang@level.agency",
+      "name": "Lin Wang",
+      "spend": 107.32,
+      "requests": 76,
+      "cpr": 1.412,
+      "avgPromptTokens": 2438563,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 107.32
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 107.32,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "pete.meyers@level.agency",
+      "name": "Pete Meyers",
+      "spend": 104.19,
+      "requests": 195,
+      "cpr": 0.534,
+      "avgPromptTokens": 629135,
+      "opusPct": 83,
+      "models": {
+        "opus": 86.55,
+        "sonnet": 17.64
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 104.19,
+      "flags": [
+        "opus",
+        "token"
+      ]
+    },
+    {
+      "email": "eric.sichak@level.agency",
+      "name": "Eric Sichak",
+      "spend": 103.13,
+      "requests": 647,
+      "cpr": 0.159,
+      "avgPromptTokens": 157901,
+      "opusPct": 83,
+      "models": {
+        "opus": 85.42,
+        "sonnet": 16.33,
+        "haiku": 1.38
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 91.93,
+      "flags": [
+        "cowork-opus"
+      ]
+    },
+    {
+      "email": "eddie.aja@level.agency",
+      "name": "Eddie Aja",
+      "spend": 100.91,
+      "requests": 231,
+      "cpr": 0.437,
+      "avgPromptTokens": 752830,
+      "opusPct": 1,
+      "models": {
+        "opus": 1.22,
+        "sonnet": 99.69
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 100.91,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "walt.irby@level.agency",
+      "name": "Walt Irby",
+      "spend": 98.92,
+      "requests": 593,
+      "cpr": 0.167,
+      "avgPromptTokens": 190392,
+      "opusPct": 79,
+      "models": {
+        "opus": 77.87,
+        "sonnet": 20.55,
+        "haiku": 0.5
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 77.93,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "brent.davis@level.agency",
+      "name": "Brent Davis",
+      "spend": 98.79,
+      "requests": 1150,
+      "cpr": 0.086,
+      "avgPromptTokens": 64009,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 98.49,
+        "haiku": 0.3
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 97.73,
+      "flags": []
+    },
+    {
+      "email": "krish.sailam@level.agency",
+      "name": "Krish Sailam",
+      "spend": 97.77,
+      "requests": 488,
+      "cpr": 0.2,
+      "avgPromptTokens": 229987,
+      "opusPct": 97,
+      "models": {
+        "opus": 94.92,
+        "sonnet": 0.2,
+        "haiku": 2.65
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 81.36,
+      "flags": [
+        "opus",
+        "cowork-opus"
+      ]
+    },
+    {
+      "email": "jarrod.miller-dean@level.agency",
+      "name": "Jarrod Miller-Dean",
+      "spend": 97.7,
+      "requests": 199,
+      "cpr": 0.491,
+      "avgPromptTokens": 635251,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 97.7
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 97.7,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "mary.hopkins@level.agency",
+      "name": "Mary Hopkins",
+      "spend": 91.54,
+      "requests": 235,
+      "cpr": 0.39,
+      "avgPromptTokens": 768651,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 91.54
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 91.54,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "ernie.decoite@level.agency",
+      "name": "Ernie Decoite",
+      "spend": 89.07,
+      "requests": 666,
+      "cpr": 0.134,
+      "avgPromptTokens": 113396,
+      "opusPct": 45,
+      "models": {
+        "opus": 40.26,
+        "sonnet": 45.09,
+        "haiku": 3.72
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 57.1,
+      "flags": []
+    },
+    {
+      "email": "kaylei.sadler@level.agency",
+      "name": "Kaylei Sadler",
+      "spend": 85.47,
+      "requests": 325,
+      "cpr": 0.263,
+      "avgPromptTokens": 257114,
+      "opusPct": 97,
+      "models": {
+        "opus": 82.9,
+        "sonnet": 2.57
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 85.47,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "jessy.yi-ting.lin@level.agency",
+      "name": "Jessy Yi-Ting Lin",
+      "spend": 84.51,
+      "requests": 156,
+      "cpr": 0.542,
+      "avgPromptTokens": 463365,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 84.51
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 84.51,
+      "flags": []
+    },
+    {
+      "email": "brian.ryback@level.agency",
+      "name": "Brian Ryback",
+      "spend": 82.62,
+      "requests": 148,
+      "cpr": 0.558,
+      "avgPromptTokens": 793108,
+      "opusPct": 1,
+      "models": {
+        "opus": 0.91,
+        "sonnet": 81.71
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 81.71,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "claire.beaudry@level.agency",
+      "name": "Claire Beaudry",
+      "spend": 74.42,
+      "requests": 1016,
+      "cpr": 0.073,
+      "avgPromptTokens": 127574,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 74.23,
+        "haiku": 0.19
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 51.26,
+      "flags": []
+    },
+    {
+      "email": "jeramie.wright@level.agency",
+      "name": "Jeramie Wright",
+      "spend": 71.53,
+      "requests": 135,
+      "cpr": 0.53,
+      "avgPromptTokens": 973188,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 71.53
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 70.54,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "thiago.wehbe@level.agency",
+      "name": "Thiago Wehbe",
+      "spend": 67.6,
+      "requests": 679,
+      "cpr": 0.1,
+      "avgPromptTokens": 92224,
+      "opusPct": 4,
+      "models": {
+        "opus": 2.88,
+        "sonnet": 64.71,
+        "haiku": 0.01
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 67.36,
+      "flags": []
+    },
+    {
+      "email": "ashley.gordon@level.agency",
+      "name": "Ashley Gordon",
+      "spend": 62.58,
+      "requests": 1874,
+      "cpr": 0.033,
+      "avgPromptTokens": 79620,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 60.28,
+        "haiku": 2.3
+      },
+      "topProduct": "Browser Extension",
+      "topProductSpend": 52.47,
+      "flags": []
+    },
+    {
+      "email": "abby.kelley@level.agency",
+      "name": "Abby Kelley",
+      "spend": 59.76,
+      "requests": 101,
+      "cpr": 0.592,
+      "avgPromptTokens": 1018115,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 59.76
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 59.76,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "deangelica.rose@level.agency",
+      "name": "Deangelica Rose",
+      "spend": 59.22,
+      "requests": 231,
+      "cpr": 0.256,
+      "avgPromptTokens": 412962,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 59.22
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 59.22,
+      "flags": []
+    },
+    {
+      "email": "giordan.tobia@level.agency",
+      "name": "Giordan Tobia",
+      "spend": 58.26,
+      "requests": 146,
+      "cpr": 0.399,
+      "avgPromptTokens": 502690,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 58.26
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 58.26,
+      "flags": []
+    },
+    {
+      "email": "brandon.grimes@level.agency",
+      "name": "Brandon Grimes",
+      "spend": 58.04,
+      "requests": 194,
+      "cpr": 0.299,
+      "avgPromptTokens": 311607,
+      "opusPct": 89,
+      "models": {
+        "opus": 51.77,
+        "sonnet": 5.51,
+        "haiku": 0.76
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 55.09,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "jordan.grace@level.agency",
+      "name": "Jordan Grace",
+      "spend": 57.36,
+      "requests": 221,
+      "cpr": 0.26,
+      "avgPromptTokens": 327496,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 55.1,
+        "haiku": 2.26
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 52.92,
+      "flags": [
+        "legacy"
+      ]
+    },
+    {
+      "email": "gustavo.morantes@level.agency",
+      "name": "Gustavo Morantes",
+      "spend": 57.31,
+      "requests": 686,
+      "cpr": 0.084,
+      "avgPromptTokens": 146125,
+      "opusPct": 4,
+      "models": {
+        "opus": 2.57,
+        "sonnet": 51.07,
+        "haiku": 3.67
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 34.52,
+      "flags": []
+    },
+    {
+      "email": "matt.miller@level.agency",
+      "name": "Matt Miller",
+      "spend": 57.0,
+      "requests": 927,
+      "cpr": 0.061,
+      "avgPromptTokens": 105488,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 50.57,
+        "haiku": 6.43
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 24.76,
+      "flags": [
+        "legacy"
+      ]
+    },
+    {
+      "email": "kelly.shelton@level.agency",
+      "name": "Kelly Shelton",
+      "spend": 55.13,
+      "requests": 272,
+      "cpr": 0.203,
+      "avgPromptTokens": 277171,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 55.13
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 55.13,
+      "flags": []
+    },
+    {
+      "email": "tanner.medina@level.agency",
+      "name": "Tanner Medina",
+      "spend": 53.25,
+      "requests": 161,
+      "cpr": 0.331,
+      "avgPromptTokens": 244422,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 53.25
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 53.25,
+      "flags": []
+    },
+    {
+      "email": "bryan.marrero@level.agency",
+      "name": "Bryan Marrero",
+      "spend": 52.59,
+      "requests": 99,
+      "cpr": 0.531,
+      "avgPromptTokens": 377027,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 52.59
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 52.59,
+      "flags": []
+    },
+    {
+      "email": "carly.fridhandler@level.agency",
+      "name": "Carly Fridhandler",
+      "spend": 49.48,
+      "requests": 660,
+      "cpr": 0.075,
+      "avgPromptTokens": 78647,
+      "opusPct": 26,
+      "models": {
+        "opus": 12.65,
+        "sonnet": 36.35,
+        "haiku": 0.48
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 31.38,
+      "flags": []
+    },
+    {
+      "email": "jarrett.fleagle@level.agency",
+      "name": "Jarrett Fleagle",
+      "spend": 47.7,
+      "requests": 318,
+      "cpr": 0.15,
+      "avgPromptTokens": 203583,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 46.93,
+        "haiku": 0.77
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 34.2,
+      "flags": []
+    },
+    {
+      "email": "jeremy.bochenek@level.agency",
+      "name": "Jeremy Bochenek",
+      "spend": 47.58,
+      "requests": 184,
+      "cpr": 0.259,
+      "avgPromptTokens": 247181,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 47.58
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 47.58,
+      "flags": []
+    },
+    {
+      "email": "connor.thorpe@level.agency",
+      "name": "Connor Thorpe",
+      "spend": 43.95,
+      "requests": 80,
+      "cpr": 0.549,
+      "avgPromptTokens": 528406,
+      "opusPct": 96,
+      "models": {
+        "opus": 42.39,
+        "sonnet": 1.56
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 43.95,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "myles.biggs@level.agency",
+      "name": "Myles Biggs",
+      "spend": 43.07,
+      "requests": 130,
+      "cpr": 0.331,
+      "avgPromptTokens": 449074,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 42.97,
+        "haiku": 0.1
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 43.01,
+      "flags": []
+    },
+    {
+      "email": "sam.clark@level.agency",
+      "name": "Sam Clark",
+      "spend": 41.06,
+      "requests": 190,
+      "cpr": 0.216,
+      "avgPromptTokens": 188148,
+      "opusPct": 28,
+      "models": {
+        "opus": 11.3,
+        "sonnet": 29.02,
+        "haiku": 0.74
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 37.45,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "george.landsly@level.agency",
+      "name": "George Landsly",
+      "spend": 39.15,
+      "requests": 684,
+      "cpr": 0.057,
+      "avgPromptTokens": 87056,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 33.36,
+        "haiku": 5.79
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 38.86,
+      "flags": [
+        "legacy"
+      ]
+    },
+    {
+      "email": "matt.rose@level.agency",
+      "name": "Matt Rose",
+      "spend": 37.94,
+      "requests": 52,
+      "cpr": 0.73,
+      "avgPromptTokens": 721318,
+      "opusPct": 80,
+      "models": {
+        "opus": 30.44,
+        "sonnet": 7.5
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 37.94,
+      "flags": []
+    },
+    {
+      "email": "michael.imbasciani@level.agency",
+      "name": "Michael Imbasciani",
+      "spend": 37.65,
+      "requests": 373,
+      "cpr": 0.101,
+      "avgPromptTokens": 157241,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 37.65
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 20.89,
+      "flags": []
+    },
+    {
+      "email": "trinity.foster@level.agency",
+      "name": "Trinity Foster",
+      "spend": 36.59,
+      "requests": 151,
+      "cpr": 0.242,
+      "avgPromptTokens": 345967,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 36.59
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 36.59,
+      "flags": []
+    },
+    {
+      "email": "jordan.smith@level.agency",
+      "name": "Jordan Smith",
+      "spend": 34.06,
+      "requests": 28,
+      "cpr": 1.216,
+      "avgPromptTokens": 1090693,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 34.06
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 34.06,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "julida.celaj@level.agency",
+      "name": "Julida Celaj",
+      "spend": 34.02,
+      "requests": 152,
+      "cpr": 0.224,
+      "avgPromptTokens": 185700,
+      "opusPct": 99,
+      "models": {
+        "opus": 33.72,
+        "haiku": 0.3
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 34.02,
+      "flags": [
+        "cowork-opus"
+      ]
+    },
+    {
+      "email": "adam.muscott@level.agency",
+      "name": "Adam Muscott",
+      "spend": 34.0,
+      "requests": 90,
+      "cpr": 0.378,
+      "avgPromptTokens": 405138,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 34.0
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 34.0,
+      "flags": []
+    },
+    {
+      "email": "miguel.pino-poma@level.agency",
+      "name": "Miguel Pino-Poma",
+      "spend": 34.0,
+      "requests": 1081,
+      "cpr": 0.031,
+      "avgPromptTokens": 50861,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 31.32,
+        "haiku": 2.68
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 33.36,
+      "flags": []
+    },
+    {
+      "email": "sarah.vader@level.agency",
+      "name": "Sarah Vader",
+      "spend": 32.38,
+      "requests": 86,
+      "cpr": 0.377,
+      "avgPromptTokens": 481723,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 32.38
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 32.38,
+      "flags": []
+    },
+    {
+      "email": "justin.schultz@level.agency",
+      "name": "Justin Schultz",
+      "spend": 31.11,
+      "requests": 131,
+      "cpr": 0.237,
+      "avgPromptTokens": 289590,
+      "opusPct": 85,
+      "models": {
+        "opus": 26.59,
+        "sonnet": 4.52
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 26.59,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "evan.burr@level.agency",
+      "name": "Evan Burr",
+      "spend": 30.9,
+      "requests": 69,
+      "cpr": 0.448,
+      "avgPromptTokens": 737016,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 30.9
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 30.9,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "erin.patterson@level.agency",
+      "name": "Erin Patterson",
+      "spend": 30.62,
+      "requests": 132,
+      "cpr": 0.232,
+      "avgPromptTokens": 120532,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 30.62
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 30.62,
+      "flags": []
+    },
+    {
+      "email": "eric.znamirowski@level.agency",
+      "name": "Eric Znamirowski",
+      "spend": 28.82,
+      "requests": 111,
+      "cpr": 0.26,
+      "avgPromptTokens": 287446,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 28.82
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 28.82,
+      "flags": []
+    },
+    {
+      "email": "alysse.schultze@level.agency",
+      "name": "Alysse Schultze",
+      "spend": 28.77,
+      "requests": 88,
+      "cpr": 0.327,
+      "avgPromptTokens": 312372,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 28.77
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 28.77,
+      "flags": []
+    },
+    {
+      "email": "grant.denton@level.agency",
+      "name": "Grant Denton",
+      "spend": 28.56,
+      "requests": 196,
+      "cpr": 0.146,
+      "avgPromptTokens": 281469,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 28.56
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 28.56,
+      "flags": []
+    },
+    {
+      "email": "anika.knowles@level.agency",
+      "name": "Anika Knowles",
+      "spend": 27.89,
+      "requests": 57,
+      "cpr": 0.489,
+      "avgPromptTokens": 395643,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 27.89
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 27.89,
+      "flags": []
+    },
+    {
+      "email": "matt.korman@level.agency",
+      "name": "Matt Korman",
+      "spend": 27.82,
+      "requests": 170,
+      "cpr": 0.164,
+      "avgPromptTokens": 168557,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 27.82
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 27.82,
+      "flags": []
+    },
+    {
+      "email": "dave.brong@level.agency",
+      "name": "Dave Brong",
+      "spend": 27.17,
+      "requests": 83,
+      "cpr": 0.327,
+      "avgPromptTokens": 267949,
+      "opusPct": 77,
+      "models": {
+        "opus": 20.79,
+        "sonnet": 6.37,
+        "haiku": 0.01
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 21.64,
+      "flags": []
+    },
+    {
+      "email": "jonathan.gaugler@level.agency",
+      "name": "Jonathan Gaugler",
+      "spend": 25.28,
+      "requests": 232,
+      "cpr": 0.109,
+      "avgPromptTokens": 101008,
+      "opusPct": 34,
+      "models": {
+        "opus": 8.57,
+        "sonnet": 16.2,
+        "haiku": 0.51
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 12.95,
+      "flags": []
+    },
+    {
+      "email": "hui.wang@level.agency",
+      "name": "Hui Wang",
+      "spend": 24.85,
+      "requests": 105,
+      "cpr": 0.237,
+      "avgPromptTokens": 219021,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 24.85
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 24.85,
+      "flags": []
+    },
+    {
+      "email": "rashi.thakur@level.agency",
+      "name": "Rashi Thakur",
+      "spend": 24.07,
+      "requests": 1205,
+      "cpr": 0.02,
+      "avgPromptTokens": 42054,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 22.1,
+        "haiku": 1.97
+      },
+      "topProduct": "Browser Extension",
+      "topProductSpend": 23.34,
+      "flags": []
+    },
+    {
+      "email": "anjlee.majmudar@level.agency",
+      "name": "Anjlee Majmudar",
+      "spend": 23.15,
+      "requests": 221,
+      "cpr": 0.105,
+      "avgPromptTokens": 128787,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 23.15
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 14.4,
+      "flags": []
+    },
+    {
+      "email": "sara.smith@level.agency",
+      "name": "Sara Smith",
+      "spend": 22.01,
+      "requests": 177,
+      "cpr": 0.124,
+      "avgPromptTokens": 175518,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 22.01
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 22.01,
+      "flags": []
+    },
+    {
+      "email": "julian.shenoy@level.agency",
+      "name": "Julian Shenoy",
+      "spend": 21.3,
+      "requests": 40,
+      "cpr": 0.532,
+      "avgPromptTokens": 974942,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 21.3
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 21.3,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "rico.galassi@level.agency",
+      "name": "Rico Galassi",
+      "spend": 20.97,
+      "requests": 527,
+      "cpr": 0.04,
+      "avgPromptTokens": 62644,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 20.08,
+        "haiku": 0.89
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 18.33,
+      "flags": []
+    },
+    {
+      "email": "traci.gibbs@level.agency",
+      "name": "Traci Gibbs",
+      "spend": 20.89,
+      "requests": 106,
+      "cpr": 0.197,
+      "avgPromptTokens": 226099,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 20.89
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 20.89,
+      "flags": []
+    },
+    {
+      "email": "katie.blomberg@level.agency",
+      "name": "Katie Blomberg",
+      "spend": 20.51,
+      "requests": 33,
+      "cpr": 0.622,
+      "avgPromptTokens": 541329,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 20.51
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 20.51,
+      "flags": [
+        "token"
+      ]
+    },
+    {
+      "email": "anthony.turco@level.agency",
+      "name": "Anthony Turco",
+      "spend": 20.13,
+      "requests": 86,
+      "cpr": 0.234,
+      "avgPromptTokens": 205012,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 20.13
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 14.99,
+      "flags": []
+    },
+    {
+      "email": "robert.daitch@level.agency",
+      "name": "Robert Daitch",
+      "spend": 19.89,
+      "requests": 27,
+      "cpr": 0.737,
+      "avgPromptTokens": 1499165,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 19.89
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 19.89,
+      "flags": []
+    },
+    {
+      "email": "jt.smith@level.agency",
+      "name": "Jt Smith",
+      "spend": 19.83,
+      "requests": 33,
+      "cpr": 0.601,
+      "avgPromptTokens": 642998,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 19.83
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 18.7,
+      "flags": []
+    },
+    {
+      "email": "sarah.breitschwerdt@level.agency",
+      "name": "Sarah Breitschwerdt",
+      "spend": 19.78,
+      "requests": 143,
+      "cpr": 0.138,
+      "avgPromptTokens": 173267,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 19.73,
+        "haiku": 0.05
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 12.25,
+      "flags": []
+    },
+    {
+      "email": "maria.cataldi@level.agency",
+      "name": "Maria Cataldi",
+      "spend": 19.6,
+      "requests": 128,
+      "cpr": 0.153,
+      "avgPromptTokens": 269963,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 19.6
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 19.6,
+      "flags": []
+    },
+    {
+      "email": "jennifer.martin@level.agency",
+      "name": "Jennifer Martin",
+      "spend": 19.49,
+      "requests": 37,
+      "cpr": 0.527,
+      "avgPromptTokens": 804112,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 19.49
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 19.49,
+      "flags": []
+    },
+    {
+      "email": "brittany.jones@level.agency",
+      "name": "Brittany Jones",
+      "spend": 19.01,
+      "requests": 203,
+      "cpr": 0.094,
+      "avgPromptTokens": 101029,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 18.88,
+        "haiku": 0.13
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 15.81,
+      "flags": []
+    },
+    {
+      "email": "brian.marko@level.agency",
+      "name": "Brian Marko",
+      "spend": 18.84,
+      "requests": 71,
+      "cpr": 0.265,
+      "avgPromptTokens": 316069,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 18.84
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 18.84,
+      "flags": []
+    },
+    {
+      "email": "geoff.roebuck@level.agency",
+      "name": "Geoff Roebuck",
+      "spend": 18.66,
+      "requests": 291,
+      "cpr": 0.064,
+      "avgPromptTokens": 82666,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 17.68,
+        "haiku": 0.98
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 15.06,
+      "flags": []
+    },
+    {
+      "email": "kelly.langley@level.agency",
+      "name": "Kelly Langley",
+      "spend": 18.39,
+      "requests": 57,
+      "cpr": 0.323,
+      "avgPromptTokens": 354468,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 18.39
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 18.39,
+      "flags": []
+    },
+    {
+      "email": "justin.zanelli@level.agency",
+      "name": "Justin Zanelli",
+      "spend": 18.17,
+      "requests": 46,
+      "cpr": 0.395,
+      "avgPromptTokens": 682069,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 18.17
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 18.17,
+      "flags": []
+    },
+    {
+      "email": "alex.palermo@level.agency",
+      "name": "Alex Palermo",
+      "spend": 17.61,
+      "requests": 373,
+      "cpr": 0.047,
+      "avgPromptTokens": 79102,
+      "opusPct": 22,
+      "models": {
+        "opus": 3.93,
+        "sonnet": 11.97,
+        "haiku": 1.71
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 13.68,
+      "flags": []
+    },
+    {
+      "email": "stefanie.mcginnis@level.agency",
+      "name": "Stefanie Mcginnis",
+      "spend": 17.25,
+      "requests": 107,
+      "cpr": 0.161,
+      "avgPromptTokens": 171466,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 17.25
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 17.25,
+      "flags": []
+    },
+    {
+      "email": "emily.george@level.agency",
+      "name": "Emily George",
+      "spend": 17.16,
+      "requests": 47,
+      "cpr": 0.365,
+      "avgPromptTokens": 540328,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 17.16
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 17.16,
+      "flags": []
+    },
+    {
+      "email": "allie.stclair@level.agency",
+      "name": "Allie Stclair",
+      "spend": 16.84,
+      "requests": 8,
+      "cpr": 2.105,
+      "avgPromptTokens": 1832320,
+      "opusPct": 100,
+      "models": {
+        "opus": 16.84
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 16.84,
+      "flags": [
+        "opus"
+      ]
+    },
+    {
+      "email": "kyle.taljan@level.agency",
+      "name": "Kyle Taljan",
+      "spend": 16.76,
+      "requests": 288,
+      "cpr": 0.058,
+      "avgPromptTokens": 74072,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 15.22,
+        "haiku": 1.54
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 16.76,
+      "flags": []
+    },
+    {
+      "email": "lindsey.newman@level.agency",
+      "name": "Lindsey Newman",
+      "spend": 16.46,
+      "requests": 87,
+      "cpr": 0.189,
+      "avgPromptTokens": 229806,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 16.43,
+        "haiku": 0.03
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 8.6,
+      "flags": []
+    },
+    {
+      "email": "tyler.bowa@level.agency",
+      "name": "Tyler Bowa",
+      "spend": 16.35,
+      "requests": 31,
+      "cpr": 0.527,
+      "avgPromptTokens": 569385,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 16.35
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 16.35,
+      "flags": []
+    },
+    {
+      "email": "lisa.hurst@level.agency",
+      "name": "Lisa Hurst",
+      "spend": 16.03,
+      "requests": 73,
+      "cpr": 0.22,
+      "avgPromptTokens": 300641,
+      "opusPct": 1,
+      "models": {
+        "opus": 0.16,
+        "sonnet": 15.77,
+        "haiku": 0.1
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 10.84,
+      "flags": []
+    },
+    {
+      "email": "tyler.carson@level.agency",
+      "name": "Tyler Carson",
+      "spend": 15.96,
+      "requests": 49,
+      "cpr": 0.326,
+      "avgPromptTokens": 427373,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 15.96
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 15.96,
+      "flags": []
+    },
+    {
+      "email": "nancy.guiragossian@level.agency",
+      "name": "Nancy Guiragossian",
+      "spend": 15.41,
+      "requests": 110,
+      "cpr": 0.14,
+      "avgPromptTokens": 195059,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 15.41
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 11.66,
+      "flags": []
+    },
+    {
+      "email": "julianne.avolio@level.agency",
+      "name": "Julianne Avolio",
+      "spend": 15.27,
+      "requests": 34,
+      "cpr": 0.449,
+      "avgPromptTokens": 474479,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 15.27
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 15.27,
+      "flags": []
+    },
+    {
+      "email": "maricca.magdalera@level.agency",
+      "name": "Maricca Magdalera",
+      "spend": 15.26,
+      "requests": 35,
+      "cpr": 0.436,
+      "avgPromptTokens": 809183,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 15.26
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 15.26,
+      "flags": []
+    },
+    {
+      "email": "howard.diamond@level.agency",
+      "name": "Howard Diamond",
+      "spend": 15.24,
+      "requests": 221,
+      "cpr": 0.069,
+      "avgPromptTokens": 96290,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 15.24
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 12.56,
+      "flags": []
+    },
+    {
+      "email": "kara.turcotte@level.agency",
+      "name": "Kara Turcotte",
+      "spend": 15.15,
+      "requests": 264,
+      "cpr": 0.057,
+      "avgPromptTokens": 81542,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 14.37,
+        "haiku": 0.78
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 15.15,
+      "flags": []
+    },
+    {
+      "email": "logan.yovetich@level.agency",
+      "name": "Logan Yovetich",
+      "spend": 14.86,
+      "requests": 69,
+      "cpr": 0.215,
+      "avgPromptTokens": 508290,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 14.86
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 14.86,
+      "flags": []
+    },
+    {
+      "email": "nick.kao@level.agency",
+      "name": "Nick Kao",
+      "spend": 14.51,
+      "requests": 237,
+      "cpr": 0.061,
+      "avgPromptTokens": 74084,
+      "opusPct": 13,
+      "models": {
+        "opus": 1.95,
+        "sonnet": 12.56
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 12.12,
+      "flags": []
+    },
+    {
+      "email": "nicole.jennings@level.agency",
+      "name": "Nicole Jennings",
+      "spend": 14.28,
+      "requests": 189,
+      "cpr": 0.076,
+      "avgPromptTokens": 65147,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 14.04,
+        "haiku": 0.24
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 12.67,
+      "flags": []
+    },
+    {
+      "email": "maria.sukey@level.agency",
+      "name": "Maria Sukey",
+      "spend": 13.76,
+      "requests": 158,
+      "cpr": 0.087,
+      "avgPromptTokens": 73146,
+      "opusPct": 35,
+      "models": {
+        "opus": 4.77,
+        "sonnet": 8.99
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 6.01,
+      "flags": []
+    },
+    {
+      "email": "abby.baker@level.agency",
+      "name": "Abby Baker",
+      "spend": 13.41,
+      "requests": 71,
+      "cpr": 0.189,
+      "avgPromptTokens": 149367,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 13.41
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 13.41,
+      "flags": []
+    },
+    {
+      "email": "roland.tetteh@level.agency",
+      "name": "Roland Tetteh",
+      "spend": 13.29,
+      "requests": 54,
+      "cpr": 0.246,
+      "avgPromptTokens": 160199,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 13.29
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 13.15,
+      "flags": []
+    },
+    {
+      "email": "rachel.stockwell@level.agency",
+      "name": "Rachel Stockwell",
+      "spend": 12.96,
+      "requests": 80,
+      "cpr": 0.162,
+      "avgPromptTokens": 221971,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 12.96
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 12.96,
+      "flags": []
+    },
+    {
+      "email": "andrew.mucha@level.agency",
+      "name": "Andrew Mucha",
+      "spend": 12.13,
+      "requests": 77,
+      "cpr": 0.158,
+      "avgPromptTokens": 229598,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 12.13
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 12.13,
+      "flags": []
+    },
+    {
+      "email": "julia.berry@level.agency",
+      "name": "Julia Berry",
+      "spend": 11.67,
+      "requests": 31,
+      "cpr": 0.376,
+      "avgPromptTokens": 363466,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 11.67
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 11.67,
+      "flags": []
+    },
+    {
+      "email": "darren.chow@level.agency",
+      "name": "Darren Chow",
+      "spend": 11.53,
+      "requests": 125,
+      "cpr": 0.092,
+      "avgPromptTokens": 105827,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 11.53
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 11.53,
+      "flags": []
+    },
+    {
+      "email": "lucy.bellissimo@level.agency",
+      "name": "Lucy Bellissimo",
+      "spend": 11.45,
+      "requests": 103,
+      "cpr": 0.111,
+      "avgPromptTokens": 137147,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 11.45
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 11.45,
+      "flags": []
+    },
+    {
+      "email": "katie.woods@level.agency",
+      "name": "Katie Woods",
+      "spend": 11.25,
+      "requests": 183,
+      "cpr": 0.061,
+      "avgPromptTokens": 92486,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 11.25
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 11.25,
+      "flags": []
+    },
+    {
+      "email": "lisa.woolf@level.agency",
+      "name": "Lisa Woolf",
+      "spend": 10.99,
+      "requests": 84,
+      "cpr": 0.131,
+      "avgPromptTokens": 156878,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 10.99
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 10.99,
+      "flags": []
+    },
+    {
+      "email": "jessa.jacobs@level.agency",
+      "name": "Jessa Jacobs",
+      "spend": 10.98,
+      "requests": 102,
+      "cpr": 0.108,
+      "avgPromptTokens": 142931,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 10.95,
+        "haiku": 0.03
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 10.94,
+      "flags": []
+    },
+    {
+      "email": "mike.smith@level.agency",
+      "name": "Mike Smith",
+      "spend": 10.76,
+      "requests": 81,
+      "cpr": 0.133,
+      "avgPromptTokens": 150340,
+      "opusPct": 25,
+      "models": {
+        "opus": 2.71,
+        "sonnet": 7.96,
+        "haiku": 0.09
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 8.23,
+      "flags": [
+        "cowork-opus"
+      ]
+    },
+    {
+      "email": "alex.cattabiani@level.agency",
+      "name": "Alex Cattabiani",
+      "spend": 10.74,
+      "requests": 96,
+      "cpr": 0.112,
+      "avgPromptTokens": 186133,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 10.74
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 10.74,
+      "flags": []
+    },
+    {
+      "email": "elspeth.baird@level.agency",
+      "name": "Elspeth Baird",
+      "spend": 10.39,
+      "requests": 65,
+      "cpr": 0.16,
+      "avgPromptTokens": 204071,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 10.36,
+        "haiku": 0.03
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 9.88,
+      "flags": []
+    },
+    {
+      "email": "alex.swope@level.agency",
+      "name": "Alex Swope",
+      "spend": 10.04,
+      "requests": 26,
+      "cpr": 0.386,
+      "avgPromptTokens": 582106,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 10.04
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 10.03,
+      "flags": []
+    },
+    {
+      "email": "madison.fellner@level.agency",
+      "name": "Madison Fellner",
+      "spend": 9.99,
+      "requests": 30,
+      "cpr": 0.333,
+      "avgPromptTokens": 529396,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 9.99
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 9.99,
+      "flags": []
+    },
+    {
+      "email": "jess.kuhn@level.agency",
+      "name": "Jess Kuhn",
+      "spend": 9.98,
+      "requests": 53,
+      "cpr": 0.188,
+      "avgPromptTokens": 216930,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 9.98
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 9.98,
+      "flags": []
+    },
+    {
+      "email": "melissa.guliakearns@level.agency",
+      "name": "Melissa Guliakearns",
+      "spend": 9.97,
+      "requests": 44,
+      "cpr": 0.227,
+      "avgPromptTokens": 435175,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 9.97
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 9.97,
+      "flags": []
+    },
+    {
+      "email": "marie.karasseferian@level.agency",
+      "name": "Marie Karasseferian",
+      "spend": 9.94,
+      "requests": 31,
+      "cpr": 0.321,
+      "avgPromptTokens": 436650,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 9.94
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 9.94,
+      "flags": []
+    },
+    {
+      "email": "shirley.tian@level.agency",
+      "name": "Shirley Tian",
+      "spend": 9.86,
+      "requests": 124,
+      "cpr": 0.08,
+      "avgPromptTokens": 93529,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 9.86
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 6.42,
+      "flags": []
+    },
+    {
+      "email": "mackenzie.nowak@level.agency",
+      "name": "Mackenzie Nowak",
+      "spend": 9.35,
+      "requests": 46,
+      "cpr": 0.203,
+      "avgPromptTokens": 266792,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 9.35
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 9.35,
+      "flags": []
+    },
+    {
+      "email": "mike.hennessie@level.agency",
+      "name": "Mike Hennessie",
+      "spend": 8.76,
+      "requests": 312,
+      "cpr": 0.028,
+      "avgPromptTokens": 44993,
+      "opusPct": 4,
+      "models": {
+        "opus": 0.36,
+        "sonnet": 6.33,
+        "haiku": 2.07
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 8.03,
+      "flags": []
+    },
+    {
+      "email": "michelle.eatough@level.agency",
+      "name": "Michelle Eatough",
+      "spend": 8.43,
+      "requests": 96,
+      "cpr": 0.088,
+      "avgPromptTokens": 75492,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 8.43
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 8.43,
+      "flags": []
+    },
+    {
+      "email": "brittany.wroblewski@level.agency",
+      "name": "Brittany Wroblewski",
+      "spend": 8.29,
+      "requests": 12,
+      "cpr": 0.691,
+      "avgPromptTokens": 1401739,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 8.29
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 8.29,
+      "flags": []
+    },
+    {
+      "email": "timbre.wolf@level.agency",
+      "name": "Timbre Wolf",
+      "spend": 8.13,
+      "requests": 126,
+      "cpr": 0.065,
+      "avgPromptTokens": 60427,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 8.13
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 7.94,
+      "flags": []
+    },
+    {
+      "email": "brad.stephenson@level.agency",
+      "name": "Brad Stephenson",
+      "spend": 7.9,
+      "requests": 112,
+      "cpr": 0.071,
+      "avgPromptTokens": 81884,
+      "opusPct": 15,
+      "models": {
+        "opus": 1.17,
+        "sonnet": 6.72,
+        "haiku": 0.01
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 4.66,
+      "flags": []
+    },
+    {
+      "email": "michael.michniuk@level.agency",
+      "name": "Michael Michniuk",
+      "spend": 7.74,
+      "requests": 133,
+      "cpr": 0.058,
+      "avgPromptTokens": 81806,
+      "opusPct": 48,
+      "models": {
+        "opus": 3.68,
+        "sonnet": 3.59,
+        "haiku": 0.47
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.99,
+      "flags": []
+    },
+    {
+      "email": "stephen.bell@level.agency",
+      "name": "Stephen Bell",
+      "spend": 7.68,
+      "requests": 41,
+      "cpr": 0.187,
+      "avgPromptTokens": 333487,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 7.68
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 7.68,
+      "flags": []
+    },
+    {
+      "email": "spencer.emmerson@level.agency",
+      "name": "Spencer Emmerson",
+      "spend": 7.36,
+      "requests": 58,
+      "cpr": 0.127,
+      "avgPromptTokens": 142456,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 7.36
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 4.45,
+      "flags": []
+    },
+    {
+      "email": "lonn.shulkin@level.agency",
+      "name": "Lonn Shulkin",
+      "spend": 7.34,
+      "requests": 128,
+      "cpr": 0.057,
+      "avgPromptTokens": 73211,
+      "opusPct": 10,
+      "models": {
+        "opus": 0.72,
+        "sonnet": 6.42,
+        "haiku": 0.2
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 5.83,
+      "flags": []
+    },
+    {
+      "email": "seth.tongchinsub@level.agency",
+      "name": "Seth Tongchinsub",
+      "spend": 6.84,
+      "requests": 96,
+      "cpr": 0.071,
+      "avgPromptTokens": 103565,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 6.84
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 5.17,
+      "flags": []
+    },
+    {
+      "email": "joel.macdonald@level.agency",
+      "name": "Joel Macdonald",
+      "spend": 6.66,
+      "requests": 14,
+      "cpr": 0.476,
+      "avgPromptTokens": 651263,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 6.66
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 6.66,
+      "flags": []
+    },
+    {
+      "email": "steven.hines@level.agency",
+      "name": "Steven Hines",
+      "spend": 6.64,
+      "requests": 17,
+      "cpr": 0.391,
+      "avgPromptTokens": 513772,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 6.64
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 6.64,
+      "flags": []
+    },
+    {
+      "email": "taylor.lanier@level.agency",
+      "name": "Taylor Lanier",
+      "spend": 6.55,
+      "requests": 46,
+      "cpr": 0.142,
+      "avgPromptTokens": 137026,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 6.55
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 6.55,
+      "flags": []
+    },
+    {
+      "email": "hayley.schultz@level.agency",
+      "name": "Hayley Schultz",
+      "spend": 6.37,
+      "requests": 136,
+      "cpr": 0.047,
+      "avgPromptTokens": 95987,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.26,
+        "haiku": 2.11
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 5.52,
+      "flags": []
+    },
+    {
+      "email": "kristine.english@level.agency",
+      "name": "Kristine English",
+      "spend": 6.19,
+      "requests": 68,
+      "cpr": 0.091,
+      "avgPromptTokens": 130428,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 6.19
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.85,
+      "flags": []
+    },
+    {
+      "email": "justin.starnes@level.agency",
+      "name": "Justin Starnes",
+      "spend": 5.98,
+      "requests": 21,
+      "cpr": 0.285,
+      "avgPromptTokens": 328770,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 5.98
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 5.98,
+      "flags": [
+        "legacy"
+      ]
+    },
+    {
+      "email": "felix.strater@level.agency",
+      "name": "Felix Strater",
+      "spend": 5.8,
+      "requests": 5,
+      "cpr": 1.16,
+      "avgPromptTokens": 872207,
+      "opusPct": 100,
+      "models": {
+        "opus": 5.8
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 5.8,
+      "flags": []
+    },
+    {
+      "email": "whitney.miracle@level.agency",
+      "name": "Whitney Miracle",
+      "spend": 5.75,
+      "requests": 37,
+      "cpr": 0.155,
+      "avgPromptTokens": 105395,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 5.75
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 5.75,
+      "flags": []
+    },
+    {
+      "email": "luke.gracie@level.agency",
+      "name": "Luke Gracie",
+      "spend": 5.47,
+      "requests": 63,
+      "cpr": 0.087,
+      "avgPromptTokens": 165668,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 5.47
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.46,
+      "flags": []
+    },
+    {
+      "email": "rahil.shah@level.agency",
+      "name": "Rahil Shah",
+      "spend": 5.29,
+      "requests": 31,
+      "cpr": 0.171,
+      "avgPromptTokens": 208915,
+      "opusPct": 54,
+      "models": {
+        "opus": 2.84,
+        "sonnet": 2.44,
+        "haiku": 0.01
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 5.28,
+      "flags": []
+    },
+    {
+      "email": "sydney.roberts@level.agency",
+      "name": "Sydney Roberts",
+      "spend": 4.62,
+      "requests": 97,
+      "cpr": 0.048,
+      "avgPromptTokens": 63762,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.62
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.62,
+      "flags": []
+    },
+    {
+      "email": "bettina.young@level.agency",
+      "name": "Bettina Young",
+      "spend": 4.56,
+      "requests": 169,
+      "cpr": 0.027,
+      "avgPromptTokens": 50621,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.54,
+        "haiku": 0.02
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 3.75,
+      "flags": []
+    },
+    {
+      "email": "joanna.nagle@level.agency",
+      "name": "Joanna Nagle",
+      "spend": 4.52,
+      "requests": 15,
+      "cpr": 0.301,
+      "avgPromptTokens": 330755,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.52
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.52,
+      "flags": []
+    },
+    {
+      "email": "kellie.kaufman@level.agency",
+      "name": "Kellie Kaufman",
+      "spend": 4.21,
+      "requests": 11,
+      "cpr": 0.383,
+      "avgPromptTokens": 474411,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.21
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.21,
+      "flags": []
+    },
+    {
+      "email": "mike.criswell@level.agency",
+      "name": "Mike Criswell",
+      "spend": 4.21,
+      "requests": 5,
+      "cpr": 0.842,
+      "avgPromptTokens": 669076,
+      "opusPct": 86,
+      "models": {
+        "opus": 3.62,
+        "sonnet": 0.59
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.21,
+      "flags": []
+    },
+    {
+      "email": "dan.dix@level.agency",
+      "name": "Dan Dix",
+      "spend": 4.15,
+      "requests": 101,
+      "cpr": 0.041,
+      "avgPromptTokens": 64467,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.94,
+        "haiku": 0.21
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.25,
+      "flags": []
+    },
+    {
+      "email": "mikhail.parker@level.agency",
+      "name": "Mikhail Parker",
+      "spend": 4.09,
+      "requests": 53,
+      "cpr": 0.077,
+      "avgPromptTokens": 278926,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.78,
+        "haiku": 3.31
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.09,
+      "flags": []
+    },
+    {
+      "email": "alessandro.carvalho@level.agency",
+      "name": "Alessandro Carvalho",
+      "spend": 4.07,
+      "requests": 5,
+      "cpr": 0.814,
+      "avgPromptTokens": 782488,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.07
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.07,
+      "flags": []
+    },
+    {
+      "email": "renee.taillon@level.agency",
+      "name": "Renee Taillon",
+      "spend": 4.07,
+      "requests": 60,
+      "cpr": 0.068,
+      "avgPromptTokens": 52082,
+      "opusPct": 10,
+      "models": {
+        "opus": 0.41,
+        "sonnet": 3.65,
+        "haiku": 0.01
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 2.87,
+      "flags": []
+    },
+    {
+      "email": "matthieu.hakim@level.agency",
+      "name": "Matthieu Hakim",
+      "spend": 4.05,
+      "requests": 106,
+      "cpr": 0.038,
+      "avgPromptTokens": 55051,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.74,
+        "haiku": 0.31
+      },
+      "topProduct": "Claude Code",
+      "topProductSpend": 4.05,
+      "flags": []
+    },
+    {
+      "email": "tyler.robinson@level.agency",
+      "name": "Tyler Robinson",
+      "spend": 4.02,
+      "requests": 26,
+      "cpr": 0.155,
+      "avgPromptTokens": 221244,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 4.02
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 4.02,
+      "flags": []
+    },
+    {
+      "email": "kylie.vandendool@level.agency",
+      "name": "Kylie Vandendool",
+      "spend": 3.88,
+      "requests": 15,
+      "cpr": 0.259,
+      "avgPromptTokens": 442902,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.88
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.88,
+      "flags": []
+    },
+    {
+      "email": "alicia.levey@level.agency",
+      "name": "Alicia Levey",
+      "spend": 3.84,
+      "requests": 16,
+      "cpr": 0.24,
+      "avgPromptTokens": 284267,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.84
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.84,
+      "flags": []
+    },
+    {
+      "email": "natasha.warenycia@level.agency",
+      "name": "Natasha Warenycia",
+      "spend": 3.78,
+      "requests": 17,
+      "cpr": 0.222,
+      "avgPromptTokens": 243438,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.78
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.78,
+      "flags": []
+    },
+    {
+      "email": "lucy.puglisi@level.agency",
+      "name": "Lucy Puglisi",
+      "spend": 3.72,
+      "requests": 16,
+      "cpr": 0.233,
+      "avgPromptTokens": 106399,
+      "opusPct": 100,
+      "models": {
+        "opus": 3.72
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.72,
+      "flags": []
+    },
+    {
+      "email": "justin.glass@level.agency",
+      "name": "Justin Glass",
+      "spend": 3.65,
+      "requests": 48,
+      "cpr": 0.076,
+      "avgPromptTokens": 108803,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.65
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.65,
+      "flags": []
+    },
+    {
+      "email": "erin.scheel@level.agency",
+      "name": "Erin Scheel",
+      "spend": 3.6,
+      "requests": 42,
+      "cpr": 0.086,
+      "avgPromptTokens": 113241,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.6
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.6,
+      "flags": []
+    },
+    {
+      "email": "rhea.sabatine@level.agency",
+      "name": "Rhea Sabatine",
+      "spend": 3.58,
+      "requests": 73,
+      "cpr": 0.049,
+      "avgPromptTokens": 61243,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.58
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 3.58,
+      "flags": []
+    },
+    {
+      "email": "dominique.toutounji@level.agency",
+      "name": "Dominique Toutounji",
+      "spend": 3.53,
+      "requests": 37,
+      "cpr": 0.095,
+      "avgPromptTokens": 139364,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.53
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.53,
+      "flags": []
+    },
+    {
+      "email": "amy.lampitt@level.agency",
+      "name": "Amy Lampitt",
+      "spend": 3.52,
+      "requests": 6,
+      "cpr": 0.587,
+      "avgPromptTokens": 606634,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.52
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.52,
+      "flags": []
+    },
+    {
+      "email": "jenna.kerr@level.agency",
+      "name": "Jenna Kerr",
+      "spend": 3.22,
+      "requests": 4,
+      "cpr": 0.805,
+      "avgPromptTokens": 1117577,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 3.22
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 3.22,
+      "flags": []
+    },
+    {
+      "email": "kallan.carter@level.agency",
+      "name": "Kallan Carter",
+      "spend": 2.89,
+      "requests": 12,
+      "cpr": 0.241,
+      "avgPromptTokens": 395208,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.89
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.89,
+      "flags": []
+    },
+    {
+      "email": "karl.chaker@level.agency",
+      "name": "Karl Chaker",
+      "spend": 2.84,
+      "requests": 29,
+      "cpr": 0.098,
+      "avgPromptTokens": 86932,
+      "opusPct": 35,
+      "models": {
+        "opus": 0.98,
+        "sonnet": 1.73,
+        "haiku": 0.13
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.43,
+      "flags": []
+    },
+    {
+      "email": "karma.grindl@level.agency",
+      "name": "Karma Grindl",
+      "spend": 2.74,
+      "requests": 23,
+      "cpr": 0.119,
+      "avgPromptTokens": 110129,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.74
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.74,
+      "flags": []
+    },
+    {
+      "email": "shubhi.priya@level.agency",
+      "name": "Shubhi Priya",
+      "spend": 2.43,
+      "requests": 30,
+      "cpr": 0.081,
+      "avgPromptTokens": 118985,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.43
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.43,
+      "flags": []
+    },
+    {
+      "email": "danielle.biggs@level.agency",
+      "name": "Danielle Biggs",
+      "spend": 2.38,
+      "requests": 14,
+      "cpr": 0.17,
+      "avgPromptTokens": 248337,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.38
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.38,
+      "flags": []
+    },
+    {
+      "email": "tracy.velazquez@level.agency",
+      "name": "Tracy Velazquez",
+      "spend": 2.35,
+      "requests": 23,
+      "cpr": 0.102,
+      "avgPromptTokens": 139602,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.35
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.35,
+      "flags": []
+    },
+    {
+      "email": "jacinthe.levesque@level.agency",
+      "name": "Jacinthe Levesque",
+      "spend": 2.29,
+      "requests": 10,
+      "cpr": 0.229,
+      "avgPromptTokens": 312234,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.29
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.29,
+      "flags": []
+    },
+    {
+      "email": "beverly.vaz@level.agency",
+      "name": "Beverly Vaz",
+      "spend": 2.15,
+      "requests": 14,
+      "cpr": 0.154,
+      "avgPromptTokens": 196418,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.15
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.15,
+      "flags": []
+    },
+    {
+      "email": "savannah.juel@level.agency",
+      "name": "Savannah Juel",
+      "spend": 2.13,
+      "requests": 26,
+      "cpr": 0.082,
+      "avgPromptTokens": 85179,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.13
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 2.13,
+      "flags": []
+    },
+    {
+      "email": "dior.carley@level.agency",
+      "name": "Dior Carley",
+      "spend": 2.06,
+      "requests": 26,
+      "cpr": 0.079,
+      "avgPromptTokens": 104483,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.94,
+        "haiku": 0.12
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.94,
+      "flags": []
+    },
+    {
+      "email": "shiv.harrilal@level.agency",
+      "name": "Shiv Harrilal",
+      "spend": 2.0,
+      "requests": 26,
+      "cpr": 0.077,
+      "avgPromptTokens": 51484,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 2.0
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.71,
+      "flags": []
+    },
+    {
+      "email": "angie.johnson@level.agency",
+      "name": "Angie Johnson",
+      "spend": 1.94,
+      "requests": 18,
+      "cpr": 0.108,
+      "avgPromptTokens": 98974,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.94
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.94,
+      "flags": []
+    },
+    {
+      "email": "cael.hancock@level.agency",
+      "name": "Cael Hancock",
+      "spend": 1.93,
+      "requests": 11,
+      "cpr": 0.175,
+      "avgPromptTokens": 268285,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.93
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.93,
+      "flags": []
+    },
+    {
+      "email": "lisa-marie.faria@level.agency",
+      "name": "Lisa-Marie Faria",
+      "spend": 1.88,
+      "requests": 18,
+      "cpr": 0.104,
+      "avgPromptTokens": 46220,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.88
+      },
+      "topProduct": "Cowork",
+      "topProductSpend": 1.88,
+      "flags": []
+    },
+    {
+      "email": "miriam.valls@level.agency",
+      "name": "Miriam Valls",
+      "spend": 1.75,
+      "requests": 6,
+      "cpr": 0.292,
+      "avgPromptTokens": 319662,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.75
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.75,
+      "flags": []
+    },
+    {
+      "email": "siera.willner@level.agency",
+      "name": "Siera Willner",
+      "spend": 1.52,
+      "requests": 43,
+      "cpr": 0.035,
+      "avgPromptTokens": 57451,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.52
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.52,
+      "flags": []
+    },
+    {
+      "email": "josh.muskin@level.agency",
+      "name": "Josh Muskin",
+      "spend": 1.37,
+      "requests": 5,
+      "cpr": 0.274,
+      "avgPromptTokens": 204369,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.37
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.37,
+      "flags": []
+    },
+    {
+      "email": "camille.bosley@level.agency",
+      "name": "Camille Bosley",
+      "spend": 1.3,
+      "requests": 5,
+      "cpr": 0.26,
+      "avgPromptTokens": 395241,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.3
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.3,
+      "flags": []
+    },
+    {
+      "email": "dale.blignaut@level.agency",
+      "name": "Dale Blignaut",
+      "spend": 1.23,
+      "requests": 8,
+      "cpr": 0.154,
+      "avgPromptTokens": 109503,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.23
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.23,
+      "flags": []
+    },
+    {
+      "email": "shawn.wang@level.agency",
+      "name": "Shawn Wang",
+      "spend": 1.17,
+      "requests": 16,
+      "cpr": 0.073,
+      "avgPromptTokens": 76826,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.17
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.17,
+      "flags": []
+    },
+    {
+      "email": "miguel.sanchez@level.agency",
+      "name": "Miguel Sanchez",
+      "spend": 1.08,
+      "requests": 4,
+      "cpr": 0.27,
+      "avgPromptTokens": 444872,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.08
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.08,
+      "flags": []
+    },
+    {
+      "email": "patrick.bonsu@level.agency",
+      "name": "Patrick Bonsu",
+      "spend": 1.07,
+      "requests": 7,
+      "cpr": 0.153,
+      "avgPromptTokens": 170472,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 1.07
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 1.07,
+      "flags": []
+    },
+    {
+      "email": "quinn.ohearn@level.agency",
+      "name": "Quinn Ohearn",
+      "spend": 0.98,
+      "requests": 4,
+      "cpr": 0.245,
+      "avgPromptTokens": 261008,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.98
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.98,
+      "flags": []
+    },
+    {
+      "email": "kacey.holifield@level.agency",
+      "name": "Kacey Holifield",
+      "spend": 0.93,
+      "requests": 8,
+      "cpr": 0.116,
+      "avgPromptTokens": 88132,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.93
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.93,
+      "flags": []
+    },
+    {
+      "email": "katie.kaul@level.agency",
+      "name": "Katie Kaul",
+      "spend": 0.92,
+      "requests": 5,
+      "cpr": 0.184,
+      "avgPromptTokens": 530135,
+      "opusPct": 0,
+      "models": {
+        "haiku": 0.92
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.92,
+      "flags": []
+    },
+    {
+      "email": "kristine.serrano@level.agency",
+      "name": "Kristine Serrano",
+      "spend": 0.92,
+      "requests": 4,
+      "cpr": 0.23,
+      "avgPromptTokens": 376950,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.92
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.92,
+      "flags": []
+    },
+    {
+      "email": "jill.bartlett@level.agency",
+      "name": "Jill Bartlett",
+      "spend": 0.86,
+      "requests": 5,
+      "cpr": 0.172,
+      "avgPromptTokens": 169023,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.86
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.86,
+      "flags": []
+    },
+    {
+      "email": "clarisa.gimenez-comas@level.agency",
+      "name": "Clarisa Gimenez-Comas",
+      "spend": 0.75,
+      "requests": 11,
+      "cpr": 0.068,
+      "avgPromptTokens": 93152,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.75
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.75,
+      "flags": []
+    },
+    {
+      "email": "mike.rubino@level.agency",
+      "name": "Mike Rubino",
+      "spend": 0.75,
+      "requests": 2,
+      "cpr": 0.375,
+      "avgPromptTokens": 156200,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.75
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.75,
+      "flags": []
+    },
+    {
+      "email": "sara.trivisonno@level.agency",
+      "name": "Sara Trivisonno",
+      "spend": 0.73,
+      "requests": 7,
+      "cpr": 0.104,
+      "avgPromptTokens": 117939,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.73
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.73,
+      "flags": []
+    },
+    {
+      "email": "jim.crimella@level.agency",
+      "name": "Jim Crimella",
+      "spend": 0.71,
+      "requests": 10,
+      "cpr": 0.071,
+      "avgPromptTokens": 91481,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.71
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.71,
+      "flags": []
+    },
+    {
+      "email": "aakriti.aakriti@level.agency",
+      "name": "Aakriti Aakriti",
+      "spend": 0.65,
+      "requests": 5,
+      "cpr": 0.13,
+      "avgPromptTokens": 167153,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.65
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.65,
+      "flags": []
+    },
+    {
+      "email": "tina.lee@level.agency",
+      "name": "Tina Lee",
+      "spend": 0.6,
+      "requests": 4,
+      "cpr": 0.15,
+      "avgPromptTokens": 168076,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.6
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.6,
+      "flags": []
+    },
+    {
+      "email": "paul.forrest@level.agency",
+      "name": "Paul Forrest",
+      "spend": 0.6,
+      "requests": 5,
+      "cpr": 0.12,
+      "avgPromptTokens": 170482,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.6
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.6,
+      "flags": []
+    },
+    {
+      "email": "emily.rupert@level.agency",
+      "name": "Emily Rupert",
+      "spend": 0.6,
+      "requests": 3,
+      "cpr": 0.2,
+      "avgPromptTokens": 102743,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.6
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.6,
+      "flags": []
+    },
+    {
+      "email": "derek.cavaliero@level.agency",
+      "name": "Derek Cavaliero",
+      "spend": 0.51,
+      "requests": 11,
+      "cpr": 0.046,
+      "avgPromptTokens": 58688,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.51
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.51,
+      "flags": []
+    },
+    {
+      "email": "andrew.interisano@level.agency",
+      "name": "Andrew Interisano",
+      "spend": 0.48,
+      "requests": 4,
+      "cpr": 0.12,
+      "avgPromptTokens": 115971,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.48
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.48,
+      "flags": []
+    },
+    {
+      "email": "matt.parquette@level.agency",
+      "name": "Matt Parquette",
+      "spend": 0.47,
+      "requests": 4,
+      "cpr": 0.117,
+      "avgPromptTokens": 181856,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.47
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.47,
+      "flags": []
+    },
+    {
+      "email": "tim.fitzgerald@level.agency",
+      "name": "Tim Fitzgerald",
+      "spend": 0.44,
+      "requests": 9,
+      "cpr": 0.049,
+      "avgPromptTokens": 69083,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.44
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.44,
+      "flags": []
+    },
+    {
+      "email": "sarah.mckinney@level.agency",
+      "name": "Sarah Mckinney",
+      "spend": 0.42,
+      "requests": 3,
+      "cpr": 0.14,
+      "avgPromptTokens": 193815,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.42
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.42,
+      "flags": []
+    },
+    {
+      "email": "jessica.lovett@level.agency",
+      "name": "Jessica Lovett",
+      "spend": 0.38,
+      "requests": 7,
+      "cpr": 0.054,
+      "avgPromptTokens": 65132,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.38
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.38,
+      "flags": []
+    },
+    {
+      "email": "keefer.kopco@level.agency",
+      "name": "Keefer Kopco",
+      "spend": 0.36,
+      "requests": 3,
+      "cpr": 0.12,
+      "avgPromptTokens": 127631,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.36
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.36,
+      "flags": []
+    },
+    {
+      "email": "cornelius.mwalwanda@level.agency",
+      "name": "Cornelius Mwalwanda",
+      "spend": 0.35,
+      "requests": 8,
+      "cpr": 0.044,
+      "avgPromptTokens": 41510,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.35
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.35,
+      "flags": []
+    },
+    {
+      "email": "dennis.zechman@level.agency",
+      "name": "Dennis Zechman",
+      "spend": 0.28,
+      "requests": 3,
+      "cpr": 0.093,
+      "avgPromptTokens": 464988,
+      "opusPct": 0,
+      "models": {
+        "haiku": 0.28
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.28,
+      "flags": []
+    },
+    {
+      "email": "sage.mittal@level.agency",
+      "name": "Sage Mittal",
+      "spend": 0.24,
+      "requests": 3,
+      "cpr": 0.08,
+      "avgPromptTokens": 184306,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.24
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.24,
+      "flags": []
+    },
+    {
+      "email": "merari.cipriano@level.agency",
+      "name": "Merari Cipriano",
+      "spend": 0.23,
+      "requests": 3,
+      "cpr": 0.077,
+      "avgPromptTokens": 82381,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.23
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.23,
+      "flags": []
+    },
+    {
+      "email": "rj.smith@level.agency",
+      "name": "Rj Smith",
+      "spend": 0.2,
+      "requests": 1,
+      "cpr": 0.2,
+      "avgPromptTokens": 184780,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.2
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.2,
+      "flags": []
+    },
+    {
+      "email": "cassie.myers@level.agency",
+      "name": "Cassie Myers",
+      "spend": 0.18,
+      "requests": 2,
+      "cpr": 0.09,
+      "avgPromptTokens": 49456,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.18
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.18,
+      "flags": []
+    },
+    {
+      "email": "anne.matzke@level.agency",
+      "name": "Anne Matzke",
+      "spend": 0.17,
+      "requests": 3,
+      "cpr": 0.057,
+      "avgPromptTokens": 92237,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.17
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.17,
+      "flags": []
+    },
+    {
+      "email": "lydia.tallarini@level.agency",
+      "name": "Lydia Tallarini",
+      "spend": 0.14,
+      "requests": 3,
+      "cpr": 0.047,
+      "avgPromptTokens": 54368,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.14
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.14,
+      "flags": []
+    },
+    {
+      "email": "carrie.little@level.agency",
+      "name": "Carrie Little",
+      "spend": 0.11,
+      "requests": 1,
+      "cpr": 0.11,
+      "avgPromptTokens": 55240,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.11
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.11,
+      "flags": []
+    },
+    {
+      "email": "bryan.bonham@level.agency",
+      "name": "Bryan Bonham",
+      "spend": 0.1,
+      "requests": 1,
+      "cpr": 0.1,
+      "avgPromptTokens": 46196,
+      "opusPct": 100,
+      "models": {
+        "opus": 0.1
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.1,
+      "flags": []
+    },
+    {
+      "email": "abbey.schuyler@level.agency",
+      "name": "Abbey Schuyler",
+      "spend": 0.08,
+      "requests": 1,
+      "cpr": 0.08,
+      "avgPromptTokens": 48025,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.08
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.08,
+      "flags": []
+    },
+    {
+      "email": "will.gray@level.agency",
+      "name": "Will Gray",
+      "spend": 0.05,
+      "requests": 1,
+      "cpr": 0.05,
+      "avgPromptTokens": 84752,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.05
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.05,
+      "flags": []
+    },
+    {
+      "email": "roel.torres@level.agency",
+      "name": "Roel Torres",
+      "spend": 0.05,
+      "requests": 1,
+      "cpr": 0.05,
+      "avgPromptTokens": 39132,
+      "opusPct": 0,
+      "models": {
+        "sonnet": 0.05
+      },
+      "topProduct": "Chat",
+      "topProductSpend": 0.05,
+      "flags": []
+    },
+    {
+      "email": "erin.ferranto@level.agency",
+      "name": "Erin Ferranto",
+      "spend": 0.02,
+      "requests": 6,
+      "cpr": 0.003,
+      "avgPromptTokens": 2436,
+      "opusPct": 0,
+      "models": {
+        "haiku": 0.02
+      },
+      "topProduct": "Voice Mode",
+      "topProductSpend": 0.02,
+      "flags": []
+    }
   ]
 }

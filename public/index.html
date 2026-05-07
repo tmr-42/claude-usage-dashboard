@@ -1,482 +1,556 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Usage Analysis — Level Agency</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0a0a0f;
-  --card: #111118;
-  --card-hover: #16161f;
-  --border: #1e1e2a;
-  --border-light: #2a2a3a;
-  --text: #e4e4ef;
-  --text-muted: #8888a0;
-  --text-dim: #555570;
-  --accent: #6366f1;
-  --accent-glow: rgba(99,102,241,0.15);
-  --red: #ef4444;
-  --red-glow: rgba(239,68,68,0.12);
-  --orange: #f59e0b;
-  --orange-glow: rgba(245,158,11,0.12);
-  --green: #22c55e;
-  --green-glow: rgba(34,197,94,0.12);
-  --purple: #a855f7;
-  --purple-glow: rgba(168,85,247,0.12);
-  --cyan: #06b6d4;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-.mono { font-family: 'JetBrains Mono', monospace; }
-
-.header {
-  padding: 24px 24px 0;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  z-index: 100;
-}
-
-.header h1 {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  display: inline;
-}
-
-.header .date {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-left: 12px;
-}
-
-.tabs {
-  display: flex;
-  gap: 0;
-  margin-top: 16px;
-}
-
-.tab {
-  background: none;
-  border: none;
-  color: var(--text-dim);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-
-.tab:hover { color: var(--text-muted); }
-.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-.tab .badge {
-  background: var(--red-glow);
-  color: var(--red);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 8px;
-  margin-left: 6px;
-}
-
-.content { padding: 24px; max-width: 1100px; }
-
-.stats-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px 20px;
-  flex: 1 1 0;
-  min-width: 160px;
-}
-
-.stat-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-  font-weight: 500;
-}
-
-.stat-value {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.stat-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
-
-.card-title { font-size: 13px; font-weight: 600; padding: 14px 18px; }
-
-.bar-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-  padding: 0 18px;
-}
-
-.bar-label { width: 140px; font-size: 12px; color: var(--text-muted); }
-.bar-track { flex: 1; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
-.bar-value { width: 70px; text-align: right; font-size: 12px; }
-.bar-pct { width: 40px; text-align: right; font-size: 11px; color: var(--text-dim); }
-
-.flag-card { margin-bottom: 16px; }
-.flag-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 18px;
-  cursor: pointer;
-  border-bottom: 1px solid var(--border);
-}
-.flag-header:hover { background: var(--card-hover); }
-.flag-header .icon { font-size: 18px; }
-.flag-header .title { font-weight: 600; font-size: 14px; flex: 1; }
-.flag-header .count { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
-.flag-header .chevron { color: var(--text-dim); font-size: 14px; transition: transform 0.2s; }
-.flag-header .chevron.open { transform: rotate(180deg); }
-
-.flag-desc { padding: 14px 18px; font-size: 12px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
-
-.flag-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 18px;
-  border-bottom: 1px solid var(--border);
-}
-.flag-row:last-child { border-bottom: none; }
-.flag-row .name { flex: 1; font-weight: 500; font-size: 13px; }
-
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-thead th {
-  padding: 10px 14px;
-  text-align: left;
-  font-size: 11px;
-  color: var(--text-dim);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-bottom: 1px solid var(--border);
-}
-tbody td {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-}
-tbody tr:hover { background: var(--card-hover); }
-tbody tr.max-row { background: var(--red-glow); }
-
-.model-bar { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; width: 100%; }
-.model-bar .opus { background: var(--red); }
-.model-bar .sonnet { background: var(--accent); }
-.model-bar .haiku { background: var(--green); }
-
-.legend { padding: 12px; display: flex; gap: 16px; justify-content: center; border-top: 1px solid var(--border); }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-dim); }
-.legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
-
-.power-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 18px;
-  border-bottom: 1px solid var(--border);
-}
-.power-row:last-child { border-bottom: none; }
-
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
-
-.cpr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; padding: 18px; }
-.cpr-card {
-  background: var(--bg);
-  border-radius: 8px;
-  padding: 14px;
-  text-align: center;
-}
-.cpr-label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
-.cpr-value { font-size: 20px; font-weight: 700; }
-.cpr-sub { font-size: 10px; color: var(--text-dim); }
-
-.hidden { display: none; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Usage Analysis — Apr 30 – May 6, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0a0a0f; color: #e4e4ef; font-family: 'Inter', -apple-system, sans-serif; }
+    button { font-family: inherit; }
+    table { font-family: inherit; }
+  </style>
 </head>
 <body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+const { useState, useMemo, useEffect } = React;
 
-<div class="header">
-  <div>
-    <h1>Claude Usage Analysis</h1>
-    <span class="date mono" id="date-label"></span>
-  </div>
-  <div class="tabs" id="tabs"></div>
-</div>
-<div class="content" id="content"></div>
-
-<script>
-const DATA = null; // Will be loaded from data.json
-let _data = null;
-let activeTab = 'overview';
-
-function fmt(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-function fmtK(n) { return n >= 1e6 ? (n/1e6).toFixed(1) + 'M' : n >= 1e3 ? (n/1e3).toFixed(0) + 'K' : n.toString(); }
-
-const TABS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'leaderboard', label: 'Leaderboard' },
-  { id: 'flags', label: 'Flags & Alerts' },
-  { id: 'breakdown', label: 'Breakdowns' },
-];
-
-function bar(value, max, color) {
-  const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0;
-  return `<div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>`;
-}
-
-function modelBar(models) {
-  const total = (models.opus||0) + (models.sonnet||0) + (models.haiku||0);
-  if (!total) return '';
-  const o = ((models.opus||0)/total)*100, s = ((models.sonnet||0)/total)*100, h = ((models.haiku||0)/total)*100;
-  let html = '<div class="model-bar">';
-  if (o > 0) html += `<div class="opus" style="width:${o}%;min-width:2px" title="Opus ${o.toFixed(0)}%"></div>`;
-  if (s > 0) html += `<div class="sonnet" style="width:${s}%;min-width:2px" title="Sonnet ${s.toFixed(0)}%"></div>`;
-  if (h > 0) html += `<div class="haiku" style="width:${h}%;min-width:2px" title="Haiku ${h.toFixed(0)}%"></div>`;
-  html += '</div>';
-  if (models.opus && models.opus > 0) html += `<div style="font-size:10px;color:var(--text-dim);margin-top:3px"><span style="color:var(--red)">${((models.opus||0)/total*100).toFixed(0)}% Opus</span></div>`;
-  return html;
-}
-
-function renderTabs() {
-  const d = _data;
-  const flagCount = d.maxPlan.length + d.opusHeavy.filter(u => u.opusSpend >= 10).length + d.coworkOpus.length;
-  document.getElementById('tabs').innerHTML = TABS.map(t =>
-    `<button class="tab ${t.id === activeTab ? 'active' : ''}" onclick="switchTab('${t.id}')">${t.label}${t.id === 'flags' ? `<span class="badge">${flagCount}</span>` : ''}</button>`
-  ).join('');
-  document.getElementById('date-label').textContent = d.summary.weekOf;
-}
-
-function switchTab(id) {
-  activeTab = id;
-  renderTabs();
-  renderContent();
-}
-
-function renderContent() {
-  const d = _data;
-  const el = document.getElementById('content');
-  switch(activeTab) {
-    case 'overview': el.innerHTML = renderOverview(d); break;
-    case 'leaderboard': el.innerHTML = renderLeaderboard(d); break;
-    case 'flags': el.innerHTML = renderFlags(d); break;
-    case 'breakdown': el.innerHTML = renderBreakdown(d); break;
-  }
-}
-
-function renderOverview(d) {
-  const flagCount = d.maxPlan.length + d.opusHeavy.filter(u=>u.opusSpend>=10).length + d.coworkOpus.length + d.tokenDensity.filter(u=>u.spend>=20).length;
-  let html = `
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-label">Total Org Spend</div><div class="stat-value mono">${fmt(d.summary.totalSpend)}</div><div class="stat-sub">1-week period</div></div>
-    <div class="stat-card"><div class="stat-label">Active Users</div><div class="stat-value mono">${d.summary.activeUsers}</div><div class="stat-sub">${fmt(d.summary.avgSpend)} avg/user</div></div>
-    <div class="stat-card"><div class="stat-label">Top 10 Concentration</div><div class="stat-value mono" style="color:var(--orange)">${d.summary.top10Pct}%</div><div class="stat-sub">${fmt(d.summary.top10Spend)}</div></div>
-    <div class="stat-card"><div class="stat-label">Flags Raised</div><div class="stat-value mono" style="color:var(--red)">${flagCount}</div><div class="stat-sub">Action items</div></div>
-  </div>`;
-
-  // Model distribution
-  html += `<div class="card"><div class="card-title">Model Spend Distribution</div><div style="padding:0 18px 14px">`;
-  d.models.forEach(m => {
-    const color = m.name.includes('opus') ? 'var(--red)' : m.name.includes('sonnet') ? 'var(--accent)' : 'var(--green)';
-    const label = m.name.replace(/claude_/, '').replace(/_/g, ' ');
-    const pct = (m.spend / d.summary.totalSpend * 100);
-    html += `<div class="bar-row" style="padding:0"><div class="bar-label mono">${label}</div>${bar(m.spend, d.models[0].spend, color)}<div class="bar-value mono" style="color:${color}">${fmt(m.spend)}</div><div class="bar-pct">${pct.toFixed(0)}%</div></div>`;
-  });
-  html += `</div></div>`;
-
-  // Product distribution
-  html += `<div class="card"><div class="card-title">Product Surface Breakdown</div><div style="padding:0 18px 14px">`;
-  d.products.forEach(p => {
-    const pct = (p.spend / d.summary.totalSpend * 100);
-    html += `<div class="bar-row" style="padding:0"><div class="bar-label">${p.name}</div>${bar(p.spend, d.products[0].spend, 'var(--cyan)')}<div class="bar-value mono">${fmt(p.spend)}</div><div style="width:60px;text-align:right;font-size:11px;color:var(--text-dim)">${p.requests.toLocaleString()} reqs</div><div class="bar-pct">${pct.toFixed(0)}%</div></div>`;
-  });
-  html += `</div></div>`;
-
-  // Power users
-  html += `<div class="card"><div class="card-title" style="color:var(--green)">⚡ Power Users — Org Efficiency Benchmarks</div><div style="padding:0 18px 4px;font-size:11px;color:var(--text-dim)">High volume, Sonnet/Haiku dominant, low cost-per-request</div>`;
-  d.powerUsers.forEach((u, i) => {
-    html += `<div class="power-row">
-      <span style="width:22px;font-size:12px;color:var(--text-dim);text-align:center">${i+1}</span>
-      <span style="flex:1;font-size:13px;font-weight:500">${u.name}</span>
-      <span class="mono" style="font-size:12px;color:var(--green);width:60px;text-align:right">${u.requests} reqs</span>
-      <span class="mono" style="font-size:12px;color:var(--text-muted);width:70px;text-align:right">${fmt(u.spend)}</span>
-      <span class="mono" style="font-size:12px;color:var(--green);width:65px;text-align:right">${fmt(u.cpr)}/req</span>
-    </div>`;
-  });
-  html += `</div>`;
-  return html;
-}
-
-function renderLeaderboard(d) {
-  let html = `<div class="card"><div class="card-title">Top 30 Spenders</div><div class="table-wrap"><table><thead><tr>
-    <th>#</th><th>User</th><th>Spend</th><th>Requests</th><th>$/Req</th><th>Model Mix</th><th>Top Product</th>
-  </tr></thead><tbody>`;
-  d.leaderboard.forEach((u, i) => {
-    const topProd = Object.entries(u.products).sort((a,b) => b[1]-a[1])[0];
-    const cls = u.spend > 200 ? ' class="max-row"' : '';
-    const spendColor = u.spend > 200 ? 'var(--red)' : u.spend > 100 ? 'var(--orange)' : 'var(--text)';
-    const cprColor = u.cpr > 0.5 ? 'var(--orange)' : 'var(--text-muted)';
-    html += `<tr${cls}>
-      <td style="color:var(--text-dim);width:30px">${i+1}</td>
-      <td><div style="font-weight:500">${u.name}</div><div style="font-size:11px;color:var(--text-dim)">${u.email.split('@')[0]}</div></td>
-      <td class="mono" style="font-weight:600;color:${spendColor}">${fmt(u.spend)}</td>
-      <td class="mono" style="color:var(--text-muted)">${u.requests.toLocaleString()}</td>
-      <td class="mono" style="color:${cprColor}">${fmt(u.cpr)}</td>
-      <td style="width:120px">${modelBar(u.models)}</td>
-      <td style="font-size:12px;color:var(--text-muted)">${topProd ? topProd[0]+' ('+fmt(topProd[1])+')' : '—'}</td>
-    </tr>`;
-  });
-  html += `</tbody></table></div>
-  <div class="legend">
-    <span class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Opus</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span> Sonnet</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Haiku</span>
-  </div></div>`;
-  return html;
-}
-
-function flagSection(icon, title, count, color, glowColor, desc, id, rows) {
-  return `<div class="card flag-card"><div class="flag-header" onclick="toggleFlag('${id}')">
-    <span class="icon">${icon}</span><span class="title">${title}</span>
-    <span class="count" style="background:${glowColor};color:${color}">${count}</span>
-    <span class="chevron open" id="chev-${id}">▾</span>
-  </div><div id="body-${id}"><div class="flag-desc">${desc}</div>${rows}</div></div>`;
-}
-
-window.toggleFlag = function(id) {
-  const body = document.getElementById('body-' + id);
-  const chev = document.getElementById('chev-' + id);
-  if (body.style.display === 'none') { body.style.display = ''; chev.classList.add('open'); }
-  else { body.style.display = 'none'; chev.classList.remove('open'); }
+const COLORS = {
+  bg: "#0a0a0f", card: "#111118", cardHover: "#16161f",
+  border: "#1e1e2a", borderLight: "#2a2a3a",
+  text: "#e4e4ef", textMuted: "#8888a0", textDim: "#555570",
+  accent: "#6366f1", accentGlow: "rgba(99,102,241,0.15)",
+  red: "#ef4444", redGlow: "rgba(239,68,68,0.12)",
+  orange: "#f59e0b", orangeGlow: "rgba(245,158,11,0.12)",
+  green: "#22c55e", greenGlow: "rgba(34,197,94,0.12)",
+  purple: "#a855f7", purpleGlow: "rgba(168,85,247,0.12)",
+  cyan: "#06b6d4",
 };
 
-function renderFlags(d) {
-  let html = '';
+const TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "leaderboard", label: "Leaderboard" },
+  { id: "users", label: "All Users" },
+  { id: "flags", label: "Flags & Alerts" },
+  { id: "breakdown", label: "Breakdowns" },
+  { id: "actions", label: "Slack Actions" },
+];
 
-  // Max Plan
-  let rows = '';
-  d.maxPlan.forEach(u => {
-    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:13px;color:var(--red);font-weight:600">${fmt(u.weeklySpend)}/wk</span><span class="mono" style="font-size:12px;color:var(--text-dim)">→ ~${fmt(u.projectedMonthly)}/mo</span></div>`;
-  });
-  html += flagSection('🔴', 'Max Plan Candidates', d.maxPlan.length, 'var(--red)', 'var(--red-glow)', 'Weekly spend &gt;$200 (projected $800+/mo). Requires use-case assessment before plan decision.', 'maxplan', rows);
+function fmt(n) { return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtK(n) { return n >= 1000000 ? (n/1000000).toFixed(1) + "M" : n >= 1000 ? (n/1000).toFixed(0) + "K" : n.toString(); }
 
-  // Cowork + Opus
-  rows = '';
-  d.coworkOpus.forEach(u => {
-    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:13px;color:var(--orange);font-weight:600">${fmt(u.spend)}</span><span style="font-size:12px;color:var(--text-dim)">${u.requests} reqs</span><span class="mono" style="font-size:11px;color:var(--text-dim)">${u.model.replace(/_/g,' ')}</span></div>`;
-  });
-  html += flagSection('🟠', 'Cowork → Opus (Automated Routing)', d.coworkOpus.length, 'var(--orange)', 'var(--orange-glow)', 'Highest-priority cost control. No human selected Opus — Cowork routed automatically.', 'cowork', rows);
-
-  // Opus Heavy
-  const opusFiltered = d.opusHeavy.filter(u => u.opusSpend >= 10);
-  rows = '';
-  opusFiltered.forEach(u => {
-    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:12px;color:var(--purple)">${fmt(u.opusSpend)} Opus</span><span style="font-size:11px;color:var(--text-dim)">/ ${fmt(u.chatSpend)} Chat</span><span style="background:var(--purple-glow);color:var(--purple);font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px">${u.opusPct}%</span></div>`;
-  });
-  html += flagSection('🟣', 'Opus-Heavy Chat Users (≥30%)', opusFiltered.length, 'var(--purple)', 'var(--purple-glow)', '≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend.', 'opus', rows);
-
-  // Token Density
-  rows = '';
-  d.tokenDensity.slice(0, 15).forEach(u => {
-    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:12px;color:var(--orange)">${fmtK(u.avgPromptTokens)} avg</span><span style="font-size:11px;color:var(--text-dim)">${u.requests} reqs</span><span class="mono" style="font-size:12px;color:var(--text-muted)">${fmt(u.spend)}</span></div>`;
-  });
-  html += flagSection('📐', 'High Token Density (>500K avg prompt)', d.tokenDensity.length, 'var(--orange)', 'var(--orange-glow)', 'Prompt architecture issue — not a model problem. Large context windows driving cost.', 'tokens', rows);
-
-  // Legacy
-  rows = '';
-  d.legacyModels.forEach(u => {
-    rows += `<div class="flag-row"><span class="name">${u.name}</span><span class="mono" style="font-size:11px;color:var(--text-dim)">${u.models.map(m=>m.replace(/claude_/,'').replace(/_/g,' ')).join(', ')}</span><span class="mono" style="font-size:12px;color:var(--text-muted)">${fmt(u.spend)}</span></div>`;
-  });
-  html += flagSection('⚠️', 'Legacy Model Usage', d.legacyModels.length, 'var(--orange)', 'var(--orange-glow)', 'Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7.', 'legacy', rows);
-
-  return html;
+function Bar({ value, max, color = COLORS.accent }) {
+  const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0;
+  return (
+    <div style={{ width: "100%", height: 6, borderRadius: 3, background: COLORS.border, overflow: "hidden" }}>
+      <div style={{ width: pct + "%", height: "100%", borderRadius: 3, background: color, transition: "width 0.4s ease" }} />
+    </div>
+  );
 }
 
-function renderBreakdown(d) {
-  let html = '<div class="grid-2">';
-
-  // Model breakdown
-  html += `<div class="card"><div class="card-title">Model Breakdown</div><div style="padding:0 18px 14px">`;
-  d.models.forEach(m => {
-    const color = m.name.includes('opus') ? 'var(--red)' : m.name.includes('sonnet') ? 'var(--accent)' : 'var(--green)';
-    const label = m.name.replace(/claude_/,'').replace(/_/g,' ');
-    const pct = (m.spend / d.summary.totalSpend * 100);
-    html += `<div style="margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text-muted)">${label}</span><span class="mono" style="font-size:12px;color:${color}">${fmt(m.spend)} (${pct.toFixed(1)}%)</span></div>
-      ${bar(m.spend, d.models[0].spend, color)}
-      <div style="font-size:11px;color:var(--text-dim);margin-top:2px">${m.requests.toLocaleString()} requests</div>
-    </div>`;
-  });
-  html += `</div></div>`;
-
-  // Product breakdown
-  html += `<div class="card"><div class="card-title">Product Surface Breakdown</div><div style="padding:0 18px 14px">`;
-  d.products.forEach(p => {
-    const pct = (p.spend / d.summary.totalSpend * 100);
-    html += `<div style="margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text-muted)">${p.name}</span><span class="mono" style="font-size:12px;color:var(--cyan)">${fmt(p.spend)} (${pct.toFixed(1)}%)</span></div>
-      ${bar(p.spend, d.products[0].spend, 'var(--cyan)')}
-      <div style="font-size:11px;color:var(--text-dim);margin-top:2px">${p.requests.toLocaleString()} requests • ${fmt(p.spend/p.requests)}/req avg</div>
-    </div>`;
-  });
-  html += `</div></div></div>`;
-
-  // Cost per request
-  html += `<div class="card"><div class="card-title">Cost Per Request by Product</div><div class="cpr-grid">`;
-  d.products.forEach(p => {
-    const cpr = p.spend / p.requests;
-    html += `<div class="cpr-card"><div class="cpr-label">${p.name}</div><div class="cpr-value mono" style="color:${cpr > 0.3 ? 'var(--orange)' : 'var(--text)'}">${fmt(cpr)}</div><div class="cpr-sub">per request</div></div>`;
-  });
-  html += `</div></div>`;
-  return html;
+function ModelBar({ models }) {
+  const total = (models.opus || 0) + (models.sonnet || 0) + (models.haiku || 0);
+  if (total === 0) return null;
+  const opus = ((models.opus || 0) / total) * 100;
+  const sonnet = ((models.sonnet || 0) / total) * 100;
+  const haiku = ((models.haiku || 0) / total) * 100;
+  return (
+    <div style={{ display: "flex", gap: 2, height: 8, borderRadius: 4, overflow: "hidden", width: "100%" }}>
+      {opus > 0 && <div style={{ width: opus + "%", background: COLORS.red, minWidth: 2 }} title={"Opus " + opus.toFixed(0) + "%"} />}
+      {sonnet > 0 && <div style={{ width: sonnet + "%", background: COLORS.accent, minWidth: 2 }} title={"Sonnet " + sonnet.toFixed(0) + "%"} />}
+      {haiku > 0 && <div style={{ width: haiku + "%", background: COLORS.green, minWidth: 2 }} title={"Haiku " + haiku.toFixed(0) + "%"} />}
+    </div>
+  );
 }
 
-// Load data and render
-fetch('./data.json')
-  .then(r => r.json())
-  .then(data => {
-    _data = data;
-    renderTabs();
-    renderContent();
-  })
-  .catch(() => {
-    document.getElementById('content').innerHTML = '<p style="padding:40px;color:var(--red)">Failed to load data.json</p>';
-  });
-</script>
+function StatCard({ label, value, sub, color = COLORS.text }) {
+  return (
+    <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: "16px 20px", flex: "1 1 0" }}>
+      <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted, marginBottom: 6, fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: 26, fontWeight: 700, color, letterSpacing: "-0.02em", fontFamily: "'JetBrains Mono', monospace" }}>{value}</div>
+      {sub && <div style={{ fontSize: 12, color: COLORS.textDim, marginTop: 4 }}>{sub}</div>}
+    </div>
+  );
+}
+
+function FlagCard({ icon, title, count, color, glowColor, children }) {
+  const [open, setOpen] = useState(true);
+  return (
+    <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, overflow: "hidden", marginBottom: 16 }}>
+      <div onClick={() => setOpen(!open)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 18px", cursor: "pointer", borderBottom: open ? "1px solid " + COLORS.border : "none" }}>
+        <span style={{ fontSize: 18 }}>{icon}</span>
+        <span style={{ fontWeight: 600, fontSize: 14, color: COLORS.text, flex: 1 }}>{title}</span>
+        <span style={{ background: glowColor, color, fontSize: 12, fontWeight: 700, padding: "3px 10px", borderRadius: 12 }}>{count}</span>
+        <span style={{ color: COLORS.textDim, fontSize: 14, transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
+      </div>
+      {open && <div style={{ padding: 0 }}>{children}</div>}
+    </div>
+  );
+}
+
+function generateMaxPlanMsg(u) {
+  return "Hey " + u.name.split(" ")[0] + " — quick note on Claude usage. Your spend this past week was " + fmt(u.weeklySpend) + ", which projects to ~" + fmt(u.projectedMonthly) + "/month. That potentially qualifies you for a Max plan, but before we go that route I want to understand what you're working on.\n\nA couple of questions:\n1. What's the primary use case driving your volume this week — is it a specific project or steady-state workflow?\n2. Are you intentionally selecting Opus for certain tasks, or is it your default model?\n3. Would shifting some work to Sonnet impact your output quality?\n\nNo wrong answers here — just want to make sure we're matching cost to value.";
+}
+function generateOpusMsg(u) {
+  return "Hey " + u.name.split(" ")[0] + " — noticed your Chat usage this week: " + fmt(u.opusSpend) + " of your " + fmt(u.chatSpend) + " Chat spend (" + u.opusPct + "%) went to Opus models.\n\nQuick questions so I can help optimize:\n1. Is Opus your intentional choice for specific tasks (complex analysis, code review, etc.), or is it set as your default?\n2. Have you tried running similar tasks on Sonnet to compare quality? For most Chat workflows, Sonnet 4.6 performs comparably at ~3x lower cost.\n3. What types of tasks are you typically using Chat for?\n\nThis isn't about restricting access — it's about making sure you're getting value where Opus matters and saving cost where it doesn't.";
+}
+function generateCoworkMsg(u) {
+  return "Hey " + u.name.split(" ")[0] + " — flagging a Cowork routing issue. Your Cowork usage this week routed " + u.requests + " requests to " + u.model.replace(/_/g, " ") + " at " + fmt(u.spend) + ". Since Cowork selects models automatically, no human made that model choice — and Opus is significantly more expensive than Sonnet for automated tasks.\n\nCan you help me understand:\n1. What Cowork workflows are you running? (This helps us determine if Opus routing is justified or a misconfiguration.)\n2. Have you noticed quality differences when Cowork uses Sonnet vs. Opus for these tasks?\n\nThis is the highest-priority cost item because it's automated spend — I want to make sure the routing is intentional.";
+}
+function generateTokenMsg(u) {
+  return "Hey " + u.name.split(" ")[0] + " — your Claude usage this week averaged " + fmtK(u.avgPromptTokens) + " prompt tokens per request across " + u.requests + " requests (" + fmt(u.spend) + " total). That's well above the org average and suggests very large context windows per conversation.\n\nA couple things I'd like to explore:\n1. Are you uploading large documents or pasting long text blocks into conversations? If so, there may be ways to break those into smaller chunks for better results and lower cost.\n2. Are you using long-running conversations where the context keeps growing? Starting fresh conversations for new topics can significantly reduce token usage.\n\nThis is about prompt architecture, not model choice — small changes here can meaningfully reduce spend without changing your workflow.";
+}
+function generateLegacyMsg(u) {
+  return "Hey " + u.name.split(" ")[0] + " — noticed some of your Claude usage this week is running on legacy model versions (" + u.models.map(m => m.replace(/_/g, " ")).join(", ") + "). These older models are deprecated, and the current versions (Sonnet 4.6, Opus 4.7) offer better performance.\n\nQuick ask:\n1. Is there a reason you're pinned to older versions — a specific project dependency or integration?\n2. If not, can you update your model selection to the current versions? It should be a straight upgrade in quality.\n\nHappy to help with migration if anything is blocking the switch.";
+}
+
+function generateChannelSummary(d) {
+  const opusTotal = d.models.filter(m => m.name.includes("opus")).reduce((s, m) => s + m.spend, 0);
+  const sonnetTotal = d.models.filter(m => m.name.includes("sonnet")).reduce((s, m) => s + m.spend, 0);
+  return "*Claude Utilization Report — " + d.summary.weekOf + "*\n\n*Spend Summary*\n• Total org spend: " + fmt(d.summary.totalSpend) + "\n• Active users: " + d.summary.activeUsers + "\n• Avg spend/user: " + fmt(d.summary.avgSpend) + "\n• Top 10 users = " + fmt(d.summary.top10Spend) + " (" + d.summary.top10Pct + "% of total)\n\n*Model Mix*\n• Sonnet: " + fmt(sonnetTotal) + " (" + (sonnetTotal / d.summary.totalSpend * 100).toFixed(0) + "%)\n• Opus: " + fmt(opusTotal) + " (" + (opusTotal / d.summary.totalSpend * 100).toFixed(0) + "%)\n\n*Flags This Week*\n• Max plan candidates: " + d.maxPlan.length + " (" + (d.maxPlan.map(u => u.name).join(", ") || "none") + ")\n• Opus-heavy Chat users (≥30%): " + d.opusHeavy.length + " users totaling " + fmt(d.opusHeavy.reduce((s, u) => s + u.opusSpend, 0)) + " in Chat Opus\n• Cowork → Opus routing: " + d.coworkOpus.length + " users, " + fmt(d.coworkOpus.reduce((s, u) => s + u.spend, 0)) + " (highest-priority automated cost)\n• High token density (>500K avg): " + d.tokenDensity.length + " users\n• Legacy model users: " + d.legacyModels.length + " users\n\n*Power Users (Efficient Benchmarks)*\n" + d.powerUsers.slice(0, 5).map(u => "• " + u.name + ": " + u.requests + " reqs, " + fmt(u.cpr) + "/req, 0% Opus").join("\n") + "\n\nDMs sent to flagged users for use-case assessment. Will follow up with recommendations next week.";
+}
+
+
+function flagPillStyle(t) {
+  const bg = t === "max-plan" ? COLORS.redGlow : t === "opus" ? COLORS.purpleGlow : COLORS.orangeGlow;
+  const c = t === "max-plan" ? COLORS.red : t === "opus" ? COLORS.purple : COLORS.orange;
+  return { background: bg, color: c };
+}
+
+function AllUsersTab({ users }) {
+  const [search, setSearch] = useState("");
+  const [sortKey, setSortKey] = useState("spend");
+  const [sortDir, setSortDir] = useState("desc");
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    let list = users;
+    if (q) {
+      list = list.filter(u =>
+        u.name.toLowerCase().includes(q) ||
+        u.email.toLowerCase().includes(q) ||
+        (u.topProduct || "").toLowerCase().includes(q)
+      );
+    }
+    const sorted = [...list].sort((a, b) => {
+      let av = a[sortKey], bv = b[sortKey];
+      if (sortKey === "name" || sortKey === "email" || sortKey === "topProduct") {
+        av = (av || "").toLowerCase(); bv = (bv || "").toLowerCase();
+        if (av < bv) return sortDir === "asc" ? -1 : 1;
+        if (av > bv) return sortDir === "asc" ? 1 : -1;
+        return 0;
+      }
+      return sortDir === "asc" ? (av - bv) : (bv - av);
+    });
+    return sorted;
+  }, [users, search, sortKey, sortDir]);
+
+  function handleSort(key) {
+    if (sortKey === key) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortKey(key); setSortDir(["name", "email", "topProduct"].includes(key) ? "asc" : "desc"); }
+  }
+  function arrow(key) {
+    if (sortKey !== key) return <span style={{ color: COLORS.textDim, marginLeft: 4, fontSize: 9 }}>↕</span>;
+    return <span style={{ color: COLORS.accent, marginLeft: 4, fontSize: 10 }}>{sortDir === "asc" ? "↑" : "↓"}</span>;
+  }
+
+  const cols = [
+    { key: "name", label: "User", align: "left" },
+    { key: "spend", label: "Spend", align: "right" },
+    { key: "requests", label: "Requests", align: "right" },
+    { key: "cpr", label: "$/Req", align: "right" },
+    { key: "avgPromptTokens", label: "Avg Tokens", align: "right" },
+    { key: "opusPct", label: "Model Mix", align: "left" },
+    { key: "topProduct", label: "Top Product", align: "left" },
+    { key: "flags", label: "Flags", align: "left", noSort: true },
+  ];
+
+  const totalSpend = filtered.reduce((s, u) => s + u.spend, 0);
+
+  return (
+    <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, overflow: "hidden" }}>
+      <div style={{ padding: "14px 18px", borderBottom: "1px solid " + COLORS.border, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 600 }}>All Users ({filtered.length} of {users.length})</div>
+          <div style={{ fontSize: 11, color: COLORS.textDim, marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>
+            Filtered spend: {fmt(totalSpend)}
+          </div>
+        </div>
+        <input type="text" value={search} onChange={e => setSearch(e.target.value)}
+          placeholder="Search name, email, or product…"
+          style={{ background: COLORS.bg, color: COLORS.text, border: "1px solid " + COLORS.border, borderRadius: 6, padding: "8px 12px", fontSize: 12, fontFamily: "inherit", width: 280, outline: "none" }}
+        />
+      </div>
+      <div style={{ overflowX: "auto", maxHeight: 700, overflowY: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+          <thead style={{ position: "sticky", top: 0, background: COLORS.card, zIndex: 1 }}>
+            <tr style={{ borderBottom: "1px solid " + COLORS.border }}>
+              {cols.map(c => (
+                <th key={c.key} onClick={() => !c.noSort && handleSort(c.key)}
+                  style={{ padding: "10px 12px", textAlign: c.align, fontSize: 10, color: COLORS.textDim, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", cursor: c.noSort ? "default" : "pointer", userSelect: "none", background: COLORS.card, borderBottom: "1px solid " + COLORS.border, whiteSpace: "nowrap" }}>
+                  {c.label}{!c.noSort && arrow(c.key)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((u, i) => (
+              <tr key={u.email} style={{ borderBottom: "1px solid " + COLORS.border, background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.01)" }}>
+                <td style={{ padding: "8px 12px" }}>
+                  <div style={{ fontWeight: 500, fontSize: 12 }}>{u.name}</div>
+                  <div style={{ fontSize: 10, color: COLORS.textDim }}>{u.email}</div>
+                </td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text }}>{fmt(u.spend)}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>{u.requests.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted }}>{fmt(u.cpr)}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: u.avgPromptTokens > 500000 ? COLORS.orange : COLORS.textMuted }}>{fmtK(u.avgPromptTokens)}</td>
+                <td style={{ padding: "8px 12px", width: 120 }}>
+                  <ModelBar models={u.models} />
+                  {u.opusPct > 0 && <div style={{ fontSize: 9, color: COLORS.red, marginTop: 2 }}>{u.opusPct}% Opus</div>}
+                </td>
+                <td style={{ padding: "8px 12px", fontSize: 11, color: COLORS.textMuted }}>
+                  {u.topProduct === "—" ? "—" : (<span>{u.topProduct} <span style={{ color: COLORS.textDim, fontSize: 10 }}>({fmt(u.topProductSpend)})</span></span>)}
+                </td>
+                <td style={{ padding: "8px 12px" }}>
+                  {u.flags.length === 0 ? (<span style={{ color: COLORS.textDim, fontSize: 10 }}>—</span>) : (
+                    <div style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+                      {u.flags.map(f => (<span key={f} style={{ fontSize: 9, fontWeight: 600, padding: "2px 6px", borderRadius: 4, whiteSpace: "nowrap", ...flagPillStyle(f) }}>{f.replace("-", " ")}</span>))}
+                    </div>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function Dashboard({ DATA }) {
+  const [activeTab, setActiveTab] = useState("overview");
+  const allDrafts = useMemo(() => {
+    const drafts = [];
+    DATA.maxPlan.forEach(u => drafts.push({ ...u, flagType: "max-plan", message: generateMaxPlanMsg(u) }));
+    DATA.opusHeavy.filter(u => u.opusSpend >= 10).forEach(u => drafts.push({ ...u, flagType: "opus", message: generateOpusMsg(u) }));
+    DATA.coworkOpus.forEach(u => drafts.push({ ...u, flagType: "cowork-opus", message: generateCoworkMsg(u) }));
+    DATA.tokenDensity.filter(u => u.spend >= 20).forEach(u => drafts.push({ ...u, flagType: "token", message: generateTokenMsg(u) }));
+    DATA.legacyModels.filter(u => u.spend >= 5).forEach(u => drafts.push({ ...u, flagType: "legacy", message: generateLegacyMsg(u) }));
+    return drafts;
+  }, [DATA]);
+
+  return (
+    <div style={{ background: COLORS.bg, color: COLORS.text, minHeight: "100vh", padding: 0 }}>
+      <div style={{ padding: "24px 24px 0", borderBottom: "1px solid " + COLORS.border }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 4 }}>
+          <h1 style={{ fontSize: 22, fontWeight: 800, margin: 0, letterSpacing: "-0.03em" }}>Claude Usage Analysis</h1>
+          <span style={{ fontSize: 13, color: COLORS.textMuted, fontFamily: "'JetBrains Mono', monospace" }}>{DATA.summary.weekOf}</span>
+        </div>
+        <div style={{ display: "flex", gap: 0, marginTop: 16 }}>
+          {TABS.map(t => (
+            <button key={t.id} onClick={() => setActiveTab(t.id)} style={{
+              background: "none", border: "none", color: activeTab === t.id ? COLORS.accent : COLORS.textDim,
+              fontSize: 13, fontWeight: 600, padding: "8px 16px", cursor: "pointer",
+              borderBottom: activeTab === t.id ? "2px solid " + COLORS.accent : "2px solid transparent",
+              transition: "all 0.2s", marginBottom: -1,
+            }}>
+              {t.label}
+              {t.id === "flags" && <span style={{ background: COLORS.redGlow, color: COLORS.red, fontSize: 10, fontWeight: 700, padding: "1px 6px", borderRadius: 8, marginLeft: 6 }}>
+                {DATA.maxPlan.length + DATA.opusHeavy.filter(u => u.opusSpend >= 10).length + DATA.coworkOpus.length}
+              </span>}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ padding: 24, maxWidth: 1100 }}>
+        {activeTab === "overview" && (
+          <>
+            <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
+              <StatCard label="Total Org Spend" value={fmt(DATA.summary.totalSpend)} sub="1-week period" />
+              <StatCard label="Active Users" value={DATA.summary.activeUsers} sub={fmt(DATA.summary.avgSpend) + " avg/user"} />
+              <StatCard label="Top 10 Concentration" value={DATA.summary.top10Pct + "%"} sub={fmt(DATA.summary.top10Spend)} color={COLORS.orange} />
+              <StatCard label="Flags Raised" value={DATA.maxPlan.length + DATA.opusHeavy.filter(u=>u.opusSpend>=10).length + DATA.coworkOpus.length + DATA.tokenDensity.filter(u=>u.spend>=20).length} sub="Action items" color={COLORS.red} />
+            </div>
+
+            <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18, marginBottom: 20 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>Model Spend Distribution</div>
+              {DATA.models.map(m => {
+                const pct = (m.spend / DATA.summary.totalSpend * 100);
+                const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
+                const label = m.name.replace(/claude_/, "").replace(/_/g, " ");
+                return (
+                  <div key={m.name} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+                    <div style={{ width: 140, fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>{label}</div>
+                    <div style={{ flex: 1 }}><Bar value={m.spend} max={DATA.models[0].spend} color={color} /></div>
+                    <div style={{ width: 70, textAlign: "right", fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color }}>{fmt(m.spend)}</div>
+                    <div style={{ width: 40, textAlign: "right", fontSize: 11, color: COLORS.textDim }}>{pct.toFixed(0)}%</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18, marginBottom: 20 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>Product Surface Breakdown</div>
+              {DATA.products.map(p => {
+                const pct = (p.spend / DATA.summary.totalSpend * 100);
+                return (
+                  <div key={p.name} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+                    <div style={{ width: 140, fontSize: 12, color: COLORS.textMuted }}>{p.name}</div>
+                    <div style={{ flex: 1 }}><Bar value={p.spend} max={DATA.products[0].spend} color={COLORS.cyan} /></div>
+                    <div style={{ width: 70, textAlign: "right", fontSize: 12, fontFamily: "'JetBrains Mono', monospace" }}>{fmt(p.spend)}</div>
+                    <div style={{ width: 60, textAlign: "right", fontSize: 11, color: COLORS.textDim }}>{p.requests.toLocaleString()} reqs</div>
+                    <div style={{ width: 40, textAlign: "right", fontSize: 11, color: COLORS.textDim }}>{pct.toFixed(0)}%</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4, color: COLORS.green }}>⚡ Power Users — Org Efficiency Benchmarks</div>
+              <div style={{ fontSize: 11, color: COLORS.textDim, marginBottom: 14 }}>High volume, Sonnet/Haiku dominant, low cost-per-request</div>
+              {DATA.powerUsers.map((u, i) => (
+                <div key={u.email} style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 0", borderBottom: i < DATA.powerUsers.length - 1 ? "1px solid " + COLORS.border : "none" }}>
+                  <span style={{ width: 22, fontSize: 12, color: COLORS.textDim, textAlign: "center" }}>{i + 1}</span>
+                  <span style={{ flex: 1, fontSize: 13, fontWeight: 500 }}>{u.name}</span>
+                  <span style={{ fontSize: 12, color: COLORS.green, fontFamily: "'JetBrains Mono', monospace", width: 60, textAlign: "right" }}>{u.requests} reqs</span>
+                  <span style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'JetBrains Mono', monospace", width: 70, textAlign: "right" }}>{fmt(u.spend)}</span>
+                  <span style={{ fontSize: 12, color: COLORS.green, fontFamily: "'JetBrains Mono', monospace", width: 65, textAlign: "right" }}>{fmt(u.cpr)}/req</span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {activeTab === "leaderboard" && (
+          <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, overflow: "hidden" }}>
+            <div style={{ padding: "14px 18px", borderBottom: "1px solid " + COLORS.border, fontSize: 13, fontWeight: 600 }}>Top 30 Spenders</div>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid " + COLORS.border }}>
+                    {["#", "User", "Spend", "Requests", "$/Req", "Model Mix", "Top Product"].map(h => (
+                      <th key={h} style={{ padding: "10px 14px", textAlign: "left", fontSize: 11, color: COLORS.textDim, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.06em" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {DATA.leaderboard.map((u, i) => {
+                    const topProduct = Object.entries(u.products).sort((a, b) => b[1] - a[1])[0];
+                    const isMaxCandidate = u.spend > 200;
+                    return (
+                      <tr key={u.email} style={{ borderBottom: "1px solid " + COLORS.border, background: isMaxCandidate ? COLORS.redGlow : "transparent" }}>
+                        <td style={{ padding: "10px 14px", color: COLORS.textDim, width: 30 }}>{i + 1}</td>
+                        <td style={{ padding: "10px 14px" }}>
+                          <div style={{ fontWeight: 500 }}>{u.name}</div>
+                          <div style={{ fontSize: 11, color: COLORS.textDim }}>{u.email.split("@")[0]}</div>
+                        </td>
+                        <td style={{ padding: "10px 14px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text }}>{fmt(u.spend)}</td>
+                        <td style={{ padding: "10px 14px", fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>{u.requests.toLocaleString()}</td>
+                        <td style={{ padding: "10px 14px", fontFamily: "'JetBrains Mono', monospace", color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted }}>{fmt(u.cpr)}</td>
+                        <td style={{ padding: "10px 14px", width: 120 }}>
+                          <ModelBar models={u.models} />
+                          <div style={{ fontSize: 10, color: COLORS.textDim, marginTop: 3 }}>
+                            {u.opusPct > 0 && <span style={{ color: COLORS.red }}>{u.opusPct}% Opus</span>}
+                          </div>
+                        </td>
+                        <td style={{ padding: "10px 14px", fontSize: 12, color: COLORS.textMuted }}>{topProduct ? topProduct[0] + " (" + fmt(topProduct[1]) + ")" : "—"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ padding: 12, display: "flex", gap: 16, justifyContent: "center", borderTop: "1px solid " + COLORS.border }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: COLORS.textDim }}>
+                <span style={{ width: 10, height: 10, borderRadius: 2, background: COLORS.red, display: "inline-block" }} /> Opus
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: COLORS.textDim }}>
+                <span style={{ width: 10, height: 10, borderRadius: 2, background: COLORS.accent, display: "inline-block" }} /> Sonnet
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: COLORS.textDim }}>
+                <span style={{ width: 10, height: 10, borderRadius: 2, background: COLORS.green, display: "inline-block" }} /> Haiku
+              </span>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "users" && (<AllUsersTab users={DATA.allUsers || []} />)}
+
+        {activeTab === "flags" && (
+          <>
+            <FlagCard icon="🔴" title="Max Plan Candidates" count={DATA.maxPlan.length} color={COLORS.red} glowColor={COLORS.redGlow}>
+              <div style={{ padding: 14, fontSize: 12, color: COLORS.textDim, borderBottom: "1px solid " + COLORS.border }}>Weekly spend &gt;$200 (projected $800+/mo). Requires use-case assessment before plan decision.</div>
+              {DATA.maxPlan.map(u => (
+                <div key={u.email} style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 18px", borderBottom: "1px solid " + COLORS.border }}>
+                  <span style={{ flex: 1, fontWeight: 500, fontSize: 13 }}>{u.name}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, color: COLORS.red, fontWeight: 600 }}>{fmt(u.weeklySpend)}/wk</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: COLORS.textDim }}>→ ~{fmt(u.projectedMonthly)}/mo</span>
+                </div>
+              ))}
+            </FlagCard>
+            <FlagCard icon="🟠" title="Cowork → Opus (Automated Routing)" count={DATA.coworkOpus.length} color={COLORS.orange} glowColor={COLORS.orangeGlow}>
+              <div style={{ padding: 14, fontSize: 12, color: COLORS.textDim, borderBottom: "1px solid " + COLORS.border }}>Highest-priority cost control. No human selected Opus — Cowork routed automatically.</div>
+              {DATA.coworkOpus.map(u => (
+                <div key={u.email} style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 18px", borderBottom: "1px solid " + COLORS.border }}>
+                  <span style={{ flex: 1, fontWeight: 500, fontSize: 13 }}>{u.name}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, color: COLORS.orange, fontWeight: 600 }}>{fmt(u.spend)}</span>
+                  <span style={{ fontSize: 12, color: COLORS.textDim }}>{u.requests} reqs</span>
+                  <span style={{ fontSize: 11, color: COLORS.textDim, fontFamily: "'JetBrains Mono', monospace" }}>{u.model.replace(/_/g, " ")}</span>
+                </div>
+              ))}
+            </FlagCard>
+            <FlagCard icon="🟣" title="Opus-Heavy Chat Users (≥30%)" count={DATA.opusHeavy.filter(u => u.opusSpend >= 10).length} color={COLORS.purple} glowColor={COLORS.purpleGlow}>
+              <div style={{ padding: 14, fontSize: 12, color: COLORS.textDim, borderBottom: "1px solid " + COLORS.border }}>≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend.</div>
+              {DATA.opusHeavy.filter(u => u.opusSpend >= 10).map(u => (
+                <div key={u.email} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 18px", borderBottom: "1px solid " + COLORS.border }}>
+                  <span style={{ flex: 1, fontWeight: 500, fontSize: 13 }}>{u.name}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: COLORS.purple }}>{fmt(u.opusSpend)} Opus</span>
+                  <span style={{ fontSize: 11, color: COLORS.textDim }}>/ {fmt(u.chatSpend)} Chat</span>
+                  <span style={{ background: COLORS.purpleGlow, color: COLORS.purple, fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 8 }}>{u.opusPct}%</span>
+                </div>
+              ))}
+            </FlagCard>
+            <FlagCard icon="📐" title="High Token Density (>500K avg prompt)" count={DATA.tokenDensity.length} color={COLORS.orange} glowColor={COLORS.orangeGlow}>
+              <div style={{ padding: 14, fontSize: 12, color: COLORS.textDim, borderBottom: "1px solid " + COLORS.border }}>Prompt architecture issue — not a model problem. Large context windows driving cost.</div>
+              {DATA.tokenDensity.slice(0, 15).map(u => (
+                <div key={u.email} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 18px", borderBottom: "1px solid " + COLORS.border }}>
+                  <span style={{ flex: 1, fontWeight: 500, fontSize: 13 }}>{u.name}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: COLORS.orange }}>{fmtK(u.avgPromptTokens)} avg</span>
+                  <span style={{ fontSize: 11, color: COLORS.textDim }}>{u.requests} reqs</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: COLORS.textMuted }}>{fmt(u.spend)}</span>
+                </div>
+              ))}
+            </FlagCard>
+            <FlagCard icon="⚠️" title="Legacy Model Usage" count={DATA.legacyModels.length} color={COLORS.orange} glowColor={COLORS.orangeGlow}>
+              <div style={{ padding: 14, fontSize: 12, color: COLORS.textDim, borderBottom: "1px solid " + COLORS.border }}>Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7.</div>
+              {DATA.legacyModels.map(u => (
+                <div key={u.email} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 18px", borderBottom: "1px solid " + COLORS.border }}>
+                  <span style={{ flex: 1, fontWeight: 500, fontSize: 13 }}>{u.name}</span>
+                  <span style={{ fontSize: 11, color: COLORS.textDim, fontFamily: "'JetBrains Mono', monospace" }}>{u.models.map(m => m.replace(/claude_/, "").replace(/_/g, " ")).join(", ")}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: COLORS.textMuted }}>{fmt(u.spend)}</span>
+                </div>
+              ))}
+            </FlagCard>
+          </>
+        )}
+
+        {activeTab === "breakdown" && (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
+              <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18 }}>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14 }}>Model Breakdown</div>
+                {DATA.models.map(m => {
+                  const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
+                  const label = m.name.replace(/claude_/, "").replace(/_/g, " ");
+                  const pct = (m.spend / DATA.summary.totalSpend * 100);
+                  return (
+                    <div key={m.name} style={{ marginBottom: 12 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                        <span style={{ fontSize: 12, color: COLORS.textMuted }}>{label}</span>
+                        <span style={{ fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color }}>{fmt(m.spend)} ({pct.toFixed(1)}%)</span>
+                      </div>
+                      <Bar value={m.spend} max={DATA.models[0].spend} color={color} />
+                      <div style={{ fontSize: 11, color: COLORS.textDim, marginTop: 2 }}>{m.requests.toLocaleString()} requests</div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18 }}>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14 }}>Product Surface Breakdown</div>
+                {DATA.products.map(p => {
+                  const pct = (p.spend / DATA.summary.totalSpend * 100);
+                  return (
+                    <div key={p.name} style={{ marginBottom: 12 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                        <span style={{ fontSize: 12, color: COLORS.textMuted }}>{p.name}</span>
+                        <span style={{ fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color: COLORS.cyan }}>{fmt(p.spend)} ({pct.toFixed(1)}%)</span>
+                      </div>
+                      <Bar value={p.spend} max={DATA.products[0].spend} color={COLORS.cyan} />
+                      <div style={{ fontSize: 11, color: COLORS.textDim, marginTop: 2 }}>{p.requests.toLocaleString()} requests • {fmt(p.spend / p.requests)}/req avg</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14 }}>Cost Per Request by Product</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12 }}>
+                {DATA.products.map(p => {
+                  const cpr = p.spend / p.requests;
+                  return (
+                    <div key={p.name} style={{ background: COLORS.bg, borderRadius: 8, padding: 14, textAlign: "center" }}>
+                      <div style={{ fontSize: 11, color: COLORS.textDim, marginBottom: 6 }}>{p.name}</div>
+                      <div style={{ fontSize: 20, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: cpr > 0.3 ? COLORS.orange : COLORS.text }}>{fmt(cpr)}</div>
+                      <div style={{ fontSize: 10, color: COLORS.textDim }}>per request</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "actions" && (
+          <>
+            <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 18, marginBottom: 20 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>#claude-utilization Channel Summary</div>
+                  <div style={{ fontSize: 12, color: COLORS.textDim }}>Read-only static view — interactive send is in the Claude artifact</div>
+                </div>
+              </div>
+              <div style={{ background: "#0d0d14", borderRadius: 8, padding: 16, fontSize: 12, lineHeight: 1.7, color: COLORS.textMuted, whiteSpace: "pre-wrap", fontFamily: "'JetBrains Mono', monospace", border: "1px solid " + COLORS.border, maxHeight: 400, overflow: "auto" }}>
+                {generateChannelSummary(DATA)}
+              </div>
+            </div>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>Draft DMs ({allDrafts.length})</div>
+            <div style={{ fontSize: 12, color: COLORS.textDim, marginBottom: 16 }}>Each message asks 2–3 questions about the user's specific data before recommending changes.</div>
+            {allDrafts.map((d, i) => (
+              <div key={i} style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 10, padding: 16, marginBottom: 12 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                  <div>
+                    <span style={{ fontWeight: 600, color: COLORS.text, fontSize: 14 }}>{d.name}</span>
+                    <span style={{ color: COLORS.textDim, fontSize: 12, marginLeft: 8 }}>{d.email}</span>
+                  </div>
+                  <span style={{
+                    fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em",
+                    padding: "3px 8px", borderRadius: 6,
+                    background: d.flagType === "max-plan" ? COLORS.redGlow : d.flagType === "opus" ? COLORS.purpleGlow : d.flagType === "cowork-opus" ? COLORS.orangeGlow : d.flagType === "token" ? COLORS.orangeGlow : COLORS.orangeGlow,
+                    color: d.flagType === "max-plan" ? COLORS.red : d.flagType === "opus" ? COLORS.purple : d.flagType === "cowork-opus" ? COLORS.orange : COLORS.orange,
+                  }}>{d.flagType.replace("-", " ")}</span>
+                </div>
+                <div style={{ background: "#0d0d14", borderRadius: 8, padding: 14, fontSize: 13, lineHeight: 1.6, color: COLORS.textMuted, whiteSpace: "pre-wrap", fontFamily: "'JetBrains Mono', monospace", border: "1px solid " + COLORS.border }}>
+                  {d.message}
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [err, setErr] = useState(null);
+  useEffect(() => {
+    fetch("data.json").then(r => r.json()).then(setData).catch(e => setErr(e.message));
+  }, []);
+  if (err) return <div style={{ padding: 24, color: "#ef4444" }}>Error loading data.json: {err}</div>;
+  if (!data) return <div style={{ padding: 24, color: "#8888a0" }}>Loading…</div>;
+  return <Dashboard DATA={data} />;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
 </body>
 </html>
