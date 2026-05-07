@@ -100,10 +100,126 @@ function flagPillStyle(t) {
   return { background: bg, color: c };
 }
 
+function UserDetail({ user }) {
+  const familyColor = (fam) => fam === "opus" ? COLORS.red : fam === "sonnet" ? COLORS.accent : fam === "haiku" ? COLORS.green : COLORS.textMuted;
+  const cellSpend = (prod, fam) => {
+    const cell = user.productModelMatrix.find(c => c.product === prod && c.family === fam);
+    return cell ? cell.spend : 0;
+  };
+  const products = [...new Set(user.productModelMatrix.map(c => c.product))];
+  const families = ["opus", "sonnet", "haiku"].filter(f => user.productModelMatrix.some(c => c.family === f));
+  const otherFams = [...new Set(user.productModelMatrix.map(c => c.family))].filter(f => !["opus","sonnet","haiku"].includes(f));
+  const allFams = [...families, ...otherFams];
+
+  return (
+    <div style={{ background: "#0a0a10", padding: 20, borderTop: "1px solid " + COLORS.borderLight, borderBottom: "1px solid " + COLORS.borderLight }}>
+      <div style={{ display: "flex", gap: 24, marginBottom: 18, flexWrap: "wrap" }}>
+        <div>
+          <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textDim, marginBottom: 4 }}>Total Spend</div>
+          <div style={{ fontSize: 18, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: COLORS.text }}>{fmt(user.spend)}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textDim, marginBottom: 4 }}>Requests</div>
+          <div style={{ fontSize: 18, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: COLORS.text }}>{user.requests.toLocaleString()}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textDim, marginBottom: 4 }}>$/Request</div>
+          <div style={{ fontSize: 18, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: COLORS.text }}>{fmt(user.cpr)}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textDim, marginBottom: 4 }}>Avg Prompt Tokens</div>
+          <div style={{ fontSize: 18, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: user.avgPromptTokens > 500000 ? COLORS.orange : COLORS.text }}>{fmtK(user.avgPromptTokens)}</div>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 8, padding: 14 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted, marginBottom: 10 }}>Product Mix</div>
+          {user.productMix.map(p => (
+            <div key={p.name} style={{ marginBottom: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3, fontSize: 12 }}>
+                <span style={{ color: COLORS.text }}>{p.name}</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>
+                  {fmt(p.spend)} <span style={{ color: COLORS.textDim, fontSize: 10 }}>({p.pct}%)</span>
+                </span>
+              </div>
+              <Bar value={p.spend} max={user.productMix[0].spend} color={COLORS.cyan} />
+              <div style={{ fontSize: 10, color: COLORS.textDim, marginTop: 2 }}>{p.requests.toLocaleString()} requests</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 8, padding: 14 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted, marginBottom: 10 }}>Model Mix</div>
+          {user.modelMix.map(m => (
+            <div key={m.family} style={{ marginBottom: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3, fontSize: 12 }}>
+                <span style={{ color: COLORS.text, textTransform: "capitalize" }}>{m.family}</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>
+                  {fmt(m.spend)} <span style={{ color: COLORS.textDim, fontSize: 10 }}>({m.pct}%)</span>
+                </span>
+              </div>
+              <Bar value={m.spend} max={user.modelMix[0].spend} color={familyColor(m.family)} />
+              <div style={{ fontSize: 10, color: COLORS.textDim, marginTop: 2 }}>{m.requests.toLocaleString()} requests</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ background: COLORS.card, border: "1px solid " + COLORS.border, borderRadius: 8, padding: 14 }}>
+        <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted, marginBottom: 10 }}>Product × Model Matrix</div>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+          <thead>
+            <tr>
+              <th style={{ textAlign: "left", padding: "6px 10px", fontSize: 10, color: COLORS.textDim, fontWeight: 500, borderBottom: "1px solid " + COLORS.border }}>Product</th>
+              {allFams.map(fam => (
+                <th key={fam} style={{ textAlign: "right", padding: "6px 10px", fontSize: 10, color: familyColor(fam), fontWeight: 600, textTransform: "capitalize", borderBottom: "1px solid " + COLORS.border }}>{fam}</th>
+              ))}
+              <th style={{ textAlign: "right", padding: "6px 10px", fontSize: 10, color: COLORS.textDim, fontWeight: 600, borderBottom: "1px solid " + COLORS.border }}>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map(prod => {
+              const rowTotal = allFams.reduce((s, fam) => s + cellSpend(prod, fam), 0);
+              return (
+                <tr key={prod} style={{ borderBottom: "1px solid " + COLORS.border }}>
+                  <td style={{ padding: "6px 10px", color: COLORS.text }}>{prod}</td>
+                  {allFams.map(fam => {
+                    const v = cellSpend(prod, fam);
+                    return (
+                      <td key={fam} style={{ padding: "6px 10px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: v > 0 ? familyColor(fam) : COLORS.textDim }}>
+                        {v > 0 ? fmt(v) : "—"}
+                      </td>
+                    );
+                  })}
+                  <td style={{ padding: "6px 10px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, color: COLORS.text }}>{fmt(rowTotal)}</td>
+                </tr>
+              );
+            })}
+            <tr>
+              <td style={{ padding: "6px 10px", fontSize: 10, color: COLORS.textDim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Total</td>
+              {allFams.map(fam => {
+                const colTotal = products.reduce((s, prod) => s + cellSpend(prod, fam), 0);
+                return (
+                  <td key={fam} style={{ padding: "6px 10px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, color: familyColor(fam) }}>
+                    {colTotal > 0 ? fmt(colTotal) : "—"}
+                  </td>
+                );
+              })}
+              <td style={{ padding: "6px 10px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, color: COLORS.text }}>{fmt(user.spend)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 function AllUsersTab({ users }) {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState("spend");
   const [sortDir, setSortDir] = useState("desc");
+  const [expandedEmail, setExpandedEmail] = useState(null);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -147,7 +263,6 @@ function AllUsersTab({ users }) {
     { key: "topProduct", label: "Top Product", align: "left" },
     { key: "flags", label: "Flags", align: "left", noSort: true },
   ];
-
   const totalSpend = filtered.reduce((s, u) => s + u.spend, 0);
 
   return (
@@ -156,7 +271,7 @@ function AllUsersTab({ users }) {
         <div>
           <div style={{ fontSize: 13, fontWeight: 600 }}>All Users ({filtered.length} of {users.length})</div>
           <div style={{ fontSize: 11, color: COLORS.textDim, marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>
-            Filtered spend: {fmt(totalSpend)}
+            Filtered spend: {fmt(totalSpend)} · click any row for details
           </div>
         </div>
         <input type="text" value={search} onChange={e => setSearch(e.target.value)}
@@ -168,6 +283,7 @@ function AllUsersTab({ users }) {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
           <thead style={{ position: "sticky", top: 0, background: COLORS.card, zIndex: 1 }}>
             <tr style={{ borderBottom: "1px solid " + COLORS.border }}>
+              <th style={{ width: 24, padding: "10px 4px 10px 12px", background: COLORS.card, borderBottom: "1px solid " + COLORS.border }}></th>
               {cols.map(c => (
                 <th key={c.key} onClick={() => !c.noSort && handleSort(c.key)}
                   style={{ padding: "10px 12px", textAlign: c.align, fontSize: 10, color: COLORS.textDim, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", cursor: c.noSort ? "default" : "pointer", userSelect: "none", background: COLORS.card, borderBottom: "1px solid " + COLORS.border, whiteSpace: "nowrap" }}>
@@ -177,32 +293,55 @@ function AllUsersTab({ users }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((u, i) => (
-              <tr key={u.email} style={{ borderBottom: "1px solid " + COLORS.border, background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.01)" }}>
-                <td style={{ padding: "8px 12px" }}>
-                  <div style={{ fontWeight: 500, fontSize: 12 }}>{u.name}</div>
-                  <div style={{ fontSize: 10, color: COLORS.textDim }}>{u.email}</div>
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text }}>{fmt(u.spend)}</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>{u.requests.toLocaleString()}</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted }}>{fmt(u.cpr)}</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: u.avgPromptTokens > 500000 ? COLORS.orange : COLORS.textMuted }}>{fmtK(u.avgPromptTokens)}</td>
-                <td style={{ padding: "8px 12px", width: 120 }}>
-                  <ModelBar models={u.models} />
-                  {u.opusPct > 0 && <div style={{ fontSize: 9, color: COLORS.red, marginTop: 2 }}>{u.opusPct}% Opus</div>}
-                </td>
-                <td style={{ padding: "8px 12px", fontSize: 11, color: COLORS.textMuted }}>
-                  {u.topProduct === "—" ? "—" : (<span>{u.topProduct} <span style={{ color: COLORS.textDim, fontSize: 10 }}>({fmt(u.topProductSpend)})</span></span>)}
-                </td>
-                <td style={{ padding: "8px 12px" }}>
-                  {u.flags.length === 0 ? (<span style={{ color: COLORS.textDim, fontSize: 10 }}>—</span>) : (
-                    <div style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
-                      {u.flags.map(f => (<span key={f} style={{ fontSize: 9, fontWeight: 600, padding: "2px 6px", borderRadius: 4, whiteSpace: "nowrap", ...flagPillStyle(f) }}>{f.replace("-", " ")}</span>))}
-                    </div>
+            {filtered.map((u, i) => {
+              const isOpen = expandedEmail === u.email;
+              return (
+                <React.Fragment key={u.email}>
+                  <tr
+                    onClick={() => setExpandedEmail(isOpen ? null : u.email)}
+                    style={{
+                      borderBottom: "1px solid " + COLORS.border,
+                      background: isOpen ? COLORS.accentGlow : (i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.01)"),
+                      cursor: "pointer",
+                      transition: "background 0.15s",
+                    }}
+                  >
+                    <td style={{ padding: "8px 4px 8px 12px", textAlign: "center", color: isOpen ? COLORS.accent : COLORS.textDim, fontSize: 10, fontWeight: 600 }}>
+                      {isOpen ? "▼" : "▶"}
+                    </td>
+                    <td style={{ padding: "8px 12px" }}>
+                      <div style={{ fontWeight: 500, fontSize: 12 }}>{u.name}</div>
+                      <div style={{ fontSize: 10, color: COLORS.textDim }}>{u.email}</div>
+                    </td>
+                    <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text }}>{fmt(u.spend)}</td>
+                    <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: COLORS.textMuted }}>{u.requests.toLocaleString()}</td>
+                    <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted }}>{fmt(u.cpr)}</td>
+                    <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "'JetBrains Mono', monospace", color: u.avgPromptTokens > 500000 ? COLORS.orange : COLORS.textMuted }}>{fmtK(u.avgPromptTokens)}</td>
+                    <td style={{ padding: "8px 12px", width: 120 }}>
+                      <ModelBar models={u.models} />
+                      {u.opusPct > 0 && <div style={{ fontSize: 9, color: COLORS.red, marginTop: 2 }}>{u.opusPct}% Opus</div>}
+                    </td>
+                    <td style={{ padding: "8px 12px", fontSize: 11, color: COLORS.textMuted }}>
+                      {u.topProduct === "—" ? "—" : (<span>{u.topProduct} <span style={{ color: COLORS.textDim, fontSize: 10 }}>({fmt(u.topProductSpend)})</span></span>)}
+                    </td>
+                    <td style={{ padding: "8px 12px" }}>
+                      {u.flags.length === 0 ? (<span style={{ color: COLORS.textDim, fontSize: 10 }}>—</span>) : (
+                        <div style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+                          {u.flags.map(f => (<span key={f} style={{ fontSize: 9, fontWeight: 600, padding: "2px 6px", borderRadius: 4, whiteSpace: "nowrap", ...flagPillStyle(f) }}>{f.replace("-", " ")}</span>))}
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                  {isOpen && (
+                    <tr>
+                      <td colSpan={cols.length + 1} style={{ padding: 0 }}>
+                        <UserDetail user={u} />
+                      </td>
+                    </tr>
                   )}
-                </td>
-              </tr>
-            ))}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       </div>
