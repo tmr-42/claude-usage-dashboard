@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claude Usage Dashboard – Level Agency</title>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0a0a0f; color: #e4e4ef; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #111118; }
-    ::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 3px; }
-    #loading { display: flex; align-items: center; justify-content: center; height: 100vh; color: #555570; font-size: 14px; letter-spacing: 0.05em; }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Claude Usage Analysis — Weekly</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>html,body,#root{margin:0;padding:0;background:#0a0a0f;}</style>
 </head>
 <body>
-  <div id="root"><div id="loading">Loading…</div></div>
-  <script type="text/babel">
-    const { useState, useMemo, useEffect } = React;
-
-    // DATA is declared here so all component references resolve.
-    // Populated from data.json before Dashboard mounts.
-    let DATA = null;
-
-
-const SKIP_DM = new Set([
-  "matt.rose@level.agency",
-  "dave.brong@level.agency",
-  "bill.buchanan@level.agency",
-  "patrick.patterson@level.agency",
-]);
-
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useMemo } = React;
+let DATA = null;
 const COLORS = {
   bg: "#0a0a0f",
   card: "#111118",
@@ -271,149 +252,26 @@ function LineChart({ series, xLabels, height = 200, yFormat = fmt, showLegend = 
 // No questions. No "let me know." No "watch your spend."
 // =============================================================================
 
-function sectionCoworkOpus(c) {
-  return `*Cowork → Opus routing*
-Your Cowork usage routed ${c.requests} requests to ${formatModel(c.model)} this week (${fmt(c.spend)}). Cowork picks the model automatically, so this isn't a manual selection on your end.
-Try: in Cowork settings, set the default model to Sonnet 4.6 unless a specific workflow needs Opus. Sonnet handles automated tasks really well, and saving Opus for the workflows that genuinely benefit from it means you're matching the tool to the job.`;
-}
 
-function sectionOpus(o) {
-  return `*Opus usage in Chat*
-${fmt(o.opusSpend)} of your ${fmt(o.chatSpend)} Chat spend (${o.opusPct}%) was on Opus this week.
-Try: set Sonnet 4.6 as your default in Chat, and reach for Opus deliberately on hard reasoning, long-form analysis, or complex code review. Sonnet is genuinely strong for most day-to-day work, and Opus shines when the problem actually needs it, which is the right time to use it.`;
-}
 
-function sectionToken(t) {
-  return `*High prompt-token density*
-You averaged ${fmtK(t.avgPromptTokens)} prompt tokens per request across ${t.requests} requests this week. That's well above the org average and points to context-window growth, not model choice.
-Try: start a new conversation when you switch topics, and chunk large documents instead of pasting them whole. Focused prompts usually produce better, more relevant responses, since the model has less noise to work through.`;
-}
 
-function sectionLegacy(l) {
-  return `*Legacy model usage*
-You ran requests on deprecated versions this week (${l.models.map(formatModel).join(", ")}).
-Try: switch your default to the current versions, Sonnet 4.6 and Opus 4.7. They're a straight upgrade in capability, so you'll get better results out of the same workflows.`;
-}
+
+
+
+
 
 // Low Engagement DM — DRAFTED ONLY, NEVER auto-sent in bulk.
 // Distinct, softer opener. Acknowledges legitimate reasons for low usage up front.
 // One section, one DM (not consolidated with cost-flag DMs).
-function buildLowEngagementDM(u, totalSpend, consecutiveLowWeeks) {
-  const first = u.name.split(" ")[0];
-  const weeksText = consecutiveLowWeeks >= 2 ? `${consecutiveLowWeeks} consecutive weeks` : "this week";
-  const greeting = `Hey ${first}, this is an automated note from the weekly Claude usage review I run for the org. There are a lot of valid reasons your usage might look light right now — different workflows, other tools that fit better, time off, or a stretch of work that doesn't lean on AI. None of that is a problem, and this isn't a nudge to spend more.`;
-  const body = `*Light Claude usage pattern*
-Your Claude spend has been under $10/week for ${weeksText} (${fmt(totalSpend)} across ${u.requests} request${u.requests === 1 ? "" : "s"} this past week). Sharing this in case it's useful — not because it's a flag against you.
-If Claude isn't clicking for the work you're doing, I'd genuinely like to hear what's getting in the way. There might be a surface (Code, Cowork, Projects, Skills) or a workflow pattern that fits your role better, or it might just not be the right tool for this stretch of work. Both are fine answers.`;
-  const closer = `No reply needed. Reach out to me directly anytime if you want to talk through anything — otherwise carry on.`;
-  return [greeting, body, closer].join("\n\n");
-}
+
 
 // Build one consolidated DM per user across all cost-optimization flags.
 // Section order: cowork-opus → opus → token → legacy.
 // Max-plan excluded. Low engagement handled separately (returned in its own array).
 // Skip-list excluded. Users with <$100 total weekly spend excluded from COST DMs.
-function buildConsolidatedDMs(data) {
-  const MIN_SPEND_FOR_COST_DM = 100;
 
-  const spendLookup = new Map();
-  (data.allUsers || data.leaderboard || []).forEach(u => spendLookup.set(u.email, u.spend));
 
-  const eligibleForCostDM = email => {
-    if (SKIP_DM.has(email)) return false;
-    const totalSpend = spendLookup.get(email) || 0;
-    if (totalSpend < MIN_SPEND_FOR_COST_DM) return false;
-    return true;
-  };
 
-  const byUser = new Map();
-  const ensure = (email, name) => {
-    if (!byUser.has(email)) byUser.set(email, { email, name, sections: [], flags: [] });
-    return byUser.get(email);
-  };
-
-  data.coworkOpus?.forEach(u => {
-    if (!eligibleForCostDM(u.email)) return;
-    const e = ensure(u.email, u.name);
-    e.sections.push({ order: 1, type: "cowork-opus", text: sectionCoworkOpus(u) });
-    e.flags.push("cowork-opus");
-  });
-  data.opusHeavy?.filter(u => u.opusSpend >= 10).forEach(u => {
-    if (!eligibleForCostDM(u.email)) return;
-    const e = ensure(u.email, u.name);
-    e.sections.push({ order: 2, type: "opus", text: sectionOpus(u) });
-    e.flags.push("opus");
-  });
-  data.tokenDensity?.filter(u => u.spend >= 20).forEach(u => {
-    if (!eligibleForCostDM(u.email)) return;
-    const e = ensure(u.email, u.name);
-    e.sections.push({ order: 3, type: "token", text: sectionToken(u) });
-    e.flags.push("token");
-  });
-  data.legacyModels?.filter(u => u.spend >= 5).forEach(u => {
-    if (!eligibleForCostDM(u.email)) return;
-    const e = ensure(u.email, u.name);
-    e.sections.push({ order: 4, type: "legacy", text: sectionLegacy(u) });
-    e.flags.push("legacy");
-  });
-
-  const costDMs = Array.from(byUser.values()).map(u => {
-    u.sections.sort((a, b) => a.order - b.order);
-    const first = u.name.split(" ")[0];
-    const greeting = `Hey ${first}, this is an automated note from the weekly Claude usage review I run for the org. Nothing here is a restriction or a budget warning. Level wants people using Claude freely and responsibly. The point of these notes is just to share where a different model or surface might give you better results out of the same effort. Reach out to me directly anytime if you want to talk through any of it.`;
-    const closer = `That's the whole message. No reply needed, no action required back to me. This is about matching the right Claude tool to the job, not pulling back on usage. If any of this is useful, share it with your team.`;
-    const message = [greeting, ...u.sections.map(s => s.text), closer].join("\n\n");
-    return { email: u.email, name: u.name, flags: u.flags, message, kind: "cost" };
-  });
-
-  const lowDMs = (data.lowEngagement || [])
-    .filter(u => !SKIP_DM.has(u.email))
-    .filter(u => u.dmEligible === true)
-    .sort((a, b) => (b.consecutiveLowWeeks || 0) - (a.consecutiveLowWeeks || 0))
-    .map(u => ({
-      email: u.email,
-      name: u.name,
-      flags: ["low-engagement"],
-      consecutiveLowWeeks: u.consecutiveLowWeeks,
-      message: buildLowEngagementDM(u, u.spend, u.consecutiveLowWeeks),
-      kind: "low-engagement",
-    }));
-
-  return { costDMs, lowDMs };
-}
-
-function generateChannelSummary(d) {
-  const opusTotal = d.models.filter(m => m.name.includes("opus")).reduce((s, m) => s + m.spend, 0);
-  const sonnetTotal = d.models.filter(m => m.name.includes("sonnet")).reduce((s, m) => s + m.spend, 0);
-  const haikuTotal = d.models.filter(m => m.name.includes("haiku")).reduce((s, m) => s + m.spend, 0);
-  const total = d.summary.totalSpend || 1;
-
-  return `*Claude Utilization Report, ${d.summary.weekOf}*
-
-*Spend Summary*
-• Total org spend: ${fmt(d.summary.totalSpend)}
-• Active users: ${d.summary.activeUsers}
-• Avg spend/user: ${fmt(d.summary.avgSpend)}
-• Top 10 users = ${fmt(d.summary.top10Spend)} (${d.summary.top10Pct}% of total)
-
-*Model Mix*
-• Sonnet: ${fmt(sonnetTotal)} (${(sonnetTotal / total * 100).toFixed(0)}%)
-• Opus: ${fmt(opusTotal)} (${(opusTotal / total * 100).toFixed(0)}%)
-• Haiku: ${fmt(haikuTotal)} (${(haikuTotal / total * 100).toFixed(0)}%)
-
-*Flags This Week*
-• Max plan candidates: ${d.maxPlan.length}${d.maxPlan.length ? ` (${d.maxPlan.map(u => u.name).join(", ")})` : ""}
-• Opus-heavy Chat users (≥30%): ${d.opusHeavy.length} users totaling ${fmt(d.opusHeavy.reduce((s, u) => s + u.opusSpend, 0))} in Chat Opus
-• Cowork → Opus routing: ${d.coworkOpus.length} users, ${fmt(d.coworkOpus.reduce((s, u) => s + u.spend, 0))} (highest-priority automated cost)
-• High token density (>500K avg): ${d.tokenDensity.length} users
-• Legacy model users: ${d.legacyModels.length} users
-• Low engagement (<$10/wk): ${d.lowEngagement.length} users
-
-*Power Users (Efficient Benchmarks)*
-${d.powerUsers.slice(0, 5).map(u => `• ${u.name}: ${u.requests} reqs, ${fmt(u.cpr)}/req, ${u.opusPct}% Opus`).join("\n")}
-
-DMs sent to flagged users with educational guidance. No replies requested. Max-plan candidates and low-engagement users surfaced here only; low-engagement DMs are drafted but require manual send.`;
-}
 
 // =============================================================================
 // All Users tab — sortable, searchable, expandable rows with sparklines.
@@ -817,159 +675,8 @@ function TrendsTab({ history }) {
 // Slack DM card — used for both cost DMs and Low Engagement DMs.
 // =============================================================================
 
-function SlackDMCard({ dm, state = "idle", error, onSend, isLowEngagement = false }) {
-  const isSending = state === "sending";
-  const isSent = state === "sent";
-  const isError = state === "error";
-  const baseColor = isLowEngagement ? COLORS.blue : COLORS.accent;
-
-  const btnBg =
-    isSent ? COLORS.greenGlow :
-    isSending ? COLORS.textDim :
-    isError ? COLORS.redGlow : baseColor;
-  const btnColor =
-    isSent ? COLORS.green :
-    isError ? COLORS.red :
-    isSending ? COLORS.text : "#fff";
-  const btnLabel =
-    isSent ? "✓ Sent" :
-    isSending ? "Sending…" :
-    isError ? "Retry send" :
-    isLowEngagement ? "Send (manual review)" : "Send DM via Slack";
-
-  return (
-    <div style={{
-      background: COLORS.card,
-      border: `1px solid ${isLowEngagement ? COLORS.blue : COLORS.border}`,
-      borderRadius: 10, padding: 16, marginBottom: 12,
-      boxShadow: isLowEngagement ? `0 0 0 1px ${COLORS.blueGlow} inset` : "none",
-    }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, gap: 8 }}>
-        <div>
-          <span style={{ fontWeight: 600, color: COLORS.text, fontSize: 14 }}>{dm.name}</span>
-          <span style={{ color: COLORS.textDim, fontSize: 12, marginLeft: 8 }}>{dm.email}</span>
-        </div>
-        <div style={{ display: "flex", gap: 4 }}>
-          {dm.flags.map(f => <FlagPill key={f} type={f} />)}
-        </div>
-      </div>
-      {isLowEngagement && (
-        <div style={{ fontSize: 11, color: COLORS.blue, marginBottom: 10, padding: "6px 10px", background: COLORS.blueGlow, borderRadius: 6 }}>
-          Drafted only. Manual send required — never sent in bulk. {dm.consecutiveLowWeeks ? `Currently on a ${dm.consecutiveLowWeeks}-week low-engagement streak.` : ""}
-        </div>
-      )}
-      {isError && error && (
-        <div style={{ background: COLORS.redGlow, border: `1px solid ${COLORS.red}`, color: COLORS.red, fontSize: 11, padding: "6px 10px", borderRadius: 6, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace" }}>
-          <strong>Send failed:</strong> {error}
-        </div>
-      )}
-      <div style={{ background: "#0d0d14", borderRadius: 8, padding: 14, fontSize: 13, lineHeight: 1.6, color: COLORS.textMuted, whiteSpace: "pre-wrap", fontFamily: "'JetBrains Mono', monospace", border: `1px solid ${COLORS.border}` }}>
-        {dm.message}
-      </div>
-      <div style={{ marginTop: 10, display: "flex", justifyContent: "flex-end" }}>
-        <button
-          onClick={() => (state === "idle" || state === "error") && onSend(dm.email, dm.message)}
-          disabled={isSending || isSent}
-          style={{
-            background: btnBg, color: btnColor,
-            border: "none", borderRadius: 6, padding: "7px 16px", fontSize: 12, fontWeight: 600,
-            cursor: isSending || isSent ? "default" : "pointer",
-            opacity: isSent ? 0.85 : 1, transition: "all 0.2s",
-            minWidth: 140,
-          }}
-        >
-          {btnLabel}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// =============================================================================
-// Main dashboard
-// =============================================================================
-
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
-  // sendStates: { [key]: "idle" | "sending" | "sent" | "error", channel: same }
-  // sendErrors: { [key]: errorMessage }
-  const [sendStates, setSendStates] = useState({});
-  const [sendErrors, setSendErrors] = useState({});
-
-  // Call Anthropic API directly with the Slack MCP server attached.
-  // Claude resolves the user via slack_search_users, then sends via slack_send_message.
-  // No sendPrompt anywhere — this fires autonomously when the button is clicked.
-  const callSlackMCP = async (prompt) => {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }],
-        mcp_servers: [
-          { type: "url", url: "https://mcp.slack.com/mcp", name: "slack" },
-        ],
-      }),
-    });
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error(`API ${response.status}: ${text.slice(0, 200)}`);
-    }
-    const data = await response.json();
-    // Inspect tool-use results. If any mcp_tool_result block reports an error,
-    // surface it; otherwise treat success.
-    const toolResults = (data.content || []).filter(c => c.type === "mcp_tool_result");
-    const errorResult = toolResults.find(r => r.is_error);
-    if (errorResult) {
-      const msg = errorResult.content?.[0]?.text || "Slack tool call failed";
-      throw new Error(msg);
-    }
-    // Also catch top-level stop_reason indicating failure
-    if (data.stop_reason === "error") {
-      throw new Error("Anthropic API stopped with error");
-    }
-    return data;
-  };
-
-  const setSendState = (key, state, error = null) => {
-    setSendStates(prev => ({ ...prev, [key]: state }));
-    if (error) setSendErrors(prev => ({ ...prev, [key]: error }));
-    else setSendErrors(prev => { const next = { ...prev }; delete next[key]; return next; });
-  };
-
-  const handleSend = async (email, message) => {
-    const key = email + message.substring(0, 30);
-    if (sendStates[key] === "sending" || sendStates[key] === "sent") return;
-    setSendState(key, "sending");
-    try {
-      await callSlackMCP(
-        `Send a Slack direct message to the Level Agency user with email "${email}".\n\n` +
-        `First call slack_search_users with that exact email to resolve their user ID, then call slack_send_message with channel_id set to that user ID and the message text below.\n\n` +
-        `Message to send:\n\n${message}`
-      );
-      setSendState(key, "sent");
-    } catch (err) {
-      setSendState(key, "error", err.message);
-    }
-  };
-
-  const handleChannelSend = async () => {
-    if (sendStates.channel === "sending" || sendStates.channel === "sent") return;
-    setSendState("channel", "sending");
-    try {
-      const msg = generateChannelSummary(DATA);
-      await callSlackMCP(
-        `Send a Slack message to channel ID C0ANHN34VEC (the #claude-utilization channel) using slack_send_message. Use the message text below verbatim, preserving all line breaks and formatting.\n\n` +
-        `Message:\n\n${msg}`
-      );
-      setSendState("channel", "sent");
-    } catch (err) {
-      setSendState("channel", "error", err.message);
-    }
-  };
-
-  const { costDMs, lowDMs } = useMemo(() => buildConsolidatedDMs(DATA), []);
 
   const flagCount =
     (DATA.maxPlan?.length || 0) +
@@ -1042,7 +749,6 @@ function Dashboard() {
         {activeTab === "trends" && <TrendsTab history={DATA.history} />}
         {activeTab === "flags" && <FlagsTab />}
         {activeTab === "breakdown" && <BreakdownTab />}
-
       </div>
     </div>
   );
@@ -1321,117 +1027,10 @@ function BreakdownTab() {
   );
 }
 
-function ActionsTab({ costDMs, lowDMs, sendStates, sendErrors, onSend, onChannelSend }) {
-  const channelState = sendStates.channel || "idle";
-  const channelError = sendErrors.channel;
-
-  // Channel button visual states
-  const channelBtnStyle = {
-    background:
-      channelState === "sent" ? COLORS.greenGlow :
-      channelState === "sending" ? COLORS.textDim :
-      channelState === "error" ? COLORS.redGlow : COLORS.accent,
-    color:
-      channelState === "sent" ? COLORS.green :
-      channelState === "error" ? COLORS.red :
-      channelState === "sending" ? COLORS.text : "#fff",
-    border: "none", borderRadius: 6, padding: "8px 18px", fontSize: 13, fontWeight: 600,
-    cursor: channelState === "idle" || channelState === "error" ? "pointer" : "default",
-    transition: "all 0.2s",
-    minWidth: 160,
-  };
-  const channelBtnLabel =
-    channelState === "sent" ? "✓ Posted to Slack" :
-    channelState === "sending" ? "Posting…" :
-    channelState === "error" ? "Retry post" : "Post to Channel";
-
-  return (
-    <>
-      <div style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: 10, padding: 18, marginBottom: 20 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 600 }}>#claude-utilization Channel Summary</div>
-            <div style={{ fontSize: 12, color: COLORS.textDim }}>Ready-to-post weekly summary for C0ANHN34VEC</div>
-          </div>
-          <button
-            onClick={onChannelSend}
-            disabled={channelState === "sending" || channelState === "sent"}
-            style={channelBtnStyle}
-          >
-            {channelBtnLabel}
-          </button>
-        </div>
-        {channelState === "error" && channelError && (
-          <div style={{ background: COLORS.redGlow, border: `1px solid ${COLORS.red}`, color: COLORS.red, fontSize: 12, padding: "8px 12px", borderRadius: 6, marginBottom: 12, fontFamily: "'JetBrains Mono', monospace" }}>
-            <strong>Send failed:</strong> {channelError}
-          </div>
-        )}
-        <div style={{ background: "#0d0d14", borderRadius: 8, padding: 16, fontSize: 12, lineHeight: 1.7, color: COLORS.textMuted, whiteSpace: "pre-wrap", fontFamily: "'JetBrains Mono', monospace", border: `1px solid ${COLORS.border}`, maxHeight: 300, overflow: "auto" }}>
-          {generateChannelSummary(DATA)}
-        </div>
-      </div>
-
-      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>Cost-Optimization DMs ({costDMs.length})</div>
-      <div style={{ fontSize: 12, color: COLORS.textDim, marginBottom: 16 }}>
-        One DM per user, all cost flags consolidated. Each opens by identifying as automated. Educational, value-prop tone, never restrictive. Excluded: max-plan-only users, skip-list users, and anyone with total weekly spend under $100.
-      </div>
-      {costDMs.length === 0 && (
-        <div style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: 10, padding: 18, fontSize: 13, color: COLORS.textDim, marginBottom: 28 }}>
-          No cost-optimization DMs to send this week.
-        </div>
-      )}
-      {costDMs.map((dm, i) => {
-        const key = dm.email + dm.message.substring(0, 30);
-        return (
-          <SlackDMCard
-            key={i}
-            dm={dm}
-            state={sendStates[key] || "idle"}
-            error={sendErrors[key]}
-            onSend={onSend}
-          />
-        );
-      })}
-
-      {lowDMs.length > 0 && (
-        <>
-          <div style={{ marginTop: 28, paddingTop: 20, borderTop: `1px dashed ${COLORS.borderLight}` }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4, color: COLORS.blue }}>Low Engagement DMs ({lowDMs.length}) — Manual Send Only</div>
-            <div style={{ fontSize: 12, color: COLORS.textDim, marginBottom: 16 }}>
-              Drafted as a courtesy for users with <strong style={{ color: COLORS.text }}>2 or more consecutive weeks</strong> of low engagement (&lt;$10/wk with ≥1 request). Single-week dips are not drafted — they're surfaced in Flags & Alerts but excluded here to avoid noise from one-off slow weeks. Each DM still requires individual review and a manual click. Sort by streak length to prioritize chronic patterns.
-            </div>
-          </div>
-          {lowDMs.map((dm, i) => {
-            const key = dm.email + dm.message.substring(0, 30);
-            return (
-              <SlackDMCard
-                key={`low-${i}`}
-                dm={dm}
-                state={sendStates[key] || "idle"}
-                error={sendErrors[key]}
-                onSend={onSend}
-                isLowEngagement
-              />
-            );
-          })}
-        </>
-      )}
-    </>
-  );
-}
-
-
-    fetch('data.json')
-      .then(r => r.json())
-      .then(data => {
-        DATA = data;
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<Dashboard />);
-      })
-      .catch(err => {
-        document.getElementById('root').innerHTML =
-          '<div id="loading">Failed to load data.json: ' + err.message + '</div>';
-      });
-  </script>
+fetch('data.json')
+  .then(r => r.json())
+  .then(d => { DATA = d; ReactDOM.createRoot(document.getElementById('root')).render(<Dashboard />); })
+  .catch(e => { document.getElementById('root').innerHTML = '<div style="color:#e4e4ef;font-family:sans-serif;padding:40px">Failed to load data.json: '+e+'</div>'; });
+</script>
 </body>
 </html>
