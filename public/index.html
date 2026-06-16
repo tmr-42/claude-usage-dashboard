@@ -440,7 +440,7 @@ function UserDetailRow({ u, history }) {
                 series={[
                   { name: "Spend", color: COLORS.accent, values: userHistory.map(w => w.spend) },
                 ]}
-                xLabels={userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim())}
+                xLabels={userHistory.map(w => (w.weekOf || w.weekStartISO || "").split(",")[0].split("–")[0].trim())}
                 height={160}
                 yFormat={fmt}
                 showLegend={false}
@@ -450,7 +450,7 @@ function UserDetailRow({ u, history }) {
                   <div style={{ fontSize: 10, color: COLORS.textDim, marginBottom: 4 }}>Requests over time</div>
                   <LineChart
                     series={[{ name: "Requests", color: COLORS.cyan, values: userHistory.map(w => w.requests) }]}
-                    xLabels={userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim())}
+                    xLabels={userHistory.map(w => (w.weekOf || w.weekStartISO || "").split(",")[0].split("–")[0].trim())}
                     height={110}
                     yFormat={n => Math.round(n).toLocaleString()}
                     showLegend={false}
@@ -460,7 +460,7 @@ function UserDetailRow({ u, history }) {
                   <div style={{ fontSize: 10, color: COLORS.textDim, marginBottom: 4 }}>Opus % over time</div>
                   <LineChart
                     series={[{ name: "Opus %", color: COLORS.red, values: userHistory.map(w => w.opusPct || 0) }]}
-                    xLabels={userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim())}
+                    xLabels={userHistory.map(w => (w.weekOf || w.weekStartISO || "").split(",")[0].split("–")[0].trim())}
                     height={110}
                     yFormat={n => `${Math.round(n)}%`}
                     showLegend={false}

@@ -452,7 +452,8 @@
         "spend": 0.34,
         "requests": 9,
         "opusPct": 0,
-        "avgPromptTokens": 35059.0
+        "avgPromptTokens": 35059.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -565,7 +566,8 @@
         "spend": 100.3,
         "requests": 1448,
         "opusPct": 0.0,
-        "avgPromptTokens": 129740.0
+        "avgPromptTokens": 129740.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -678,7 +680,8 @@
         "spend": 114.3,
         "requests": 757,
         "opusPct": 0.926,
-        "avgPromptTokens": 111637.0
+        "avgPromptTokens": 111637.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -791,7 +794,8 @@
         "spend": 102.99,
         "requests": 577,
         "opusPct": 0.34,
-        "avgPromptTokens": 218365.0
+        "avgPromptTokens": 218365.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -904,7 +908,8 @@
         "spend": 31.79,
         "requests": 403,
         "opusPct": 0.0,
-        "avgPromptTokens": 145015.0
+        "avgPromptTokens": 145015.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1009,7 +1014,8 @@
         "spend": 9.71,
         "requests": 68,
         "opusPct": 0.611,
-        "avgPromptTokens": 132164.0
+        "avgPromptTokens": 132164.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1114,7 +1120,8 @@
         "spend": 35.73,
         "requests": 764,
         "opusPct": 0.0,
-        "avgPromptTokens": 90152.0
+        "avgPromptTokens": 90152.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1227,7 +1234,8 @@
         "spend": 101.44,
         "requests": 864,
         "opusPct": 0.726,
-        "avgPromptTokens": 122035.0
+        "avgPromptTokens": 122035.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1340,7 +1348,8 @@
         "spend": 51.11,
         "requests": 404,
         "opusPct": 0.617,
-        "avgPromptTokens": 118583.0
+        "avgPromptTokens": 118583.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1453,7 +1462,8 @@
         "spend": 60.24,
         "requests": 959,
         "opusPct": 0.0,
-        "avgPromptTokens": 90883.0
+        "avgPromptTokens": 90883.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1566,7 +1576,8 @@
         "spend": 5.32,
         "requests": 74,
         "opusPct": 0.0,
-        "avgPromptTokens": 73300.0
+        "avgPromptTokens": 73300.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1679,7 +1690,8 @@
         "spend": 95.76,
         "requests": 1705,
         "opusPct": 0.0,
-        "avgPromptTokens": 126734.0
+        "avgPromptTokens": 126734.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1792,7 +1804,8 @@
         "spend": 12.85,
         "requests": 136,
         "opusPct": 0.0,
-        "avgPromptTokens": 102288.0
+        "avgPromptTokens": 102288.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -1905,7 +1918,8 @@
         "spend": 17.91,
         "requests": 254,
         "opusPct": 0.0,
-        "avgPromptTokens": 110051.0
+        "avgPromptTokens": 110051.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2018,7 +2032,8 @@
         "spend": 73.19,
         "requests": 544,
         "opusPct": 0.0,
-        "avgPromptTokens": 218455.0
+        "avgPromptTokens": 218455.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2131,7 +2146,8 @@
         "spend": 6.64,
         "requests": 333,
         "opusPct": 0.0,
-        "avgPromptTokens": 101205.0
+        "avgPromptTokens": 101205.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2244,7 +2260,8 @@
         "spend": 73.73,
         "requests": 698,
         "opusPct": 0.338,
-        "avgPromptTokens": 134113.0
+        "avgPromptTokens": 134113.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2349,7 +2366,8 @@
         "spend": 161.73,
         "requests": 1040,
         "opusPct": 0.994,
-        "avgPromptTokens": 158870.0
+        "avgPromptTokens": 158870.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2454,7 +2472,8 @@
         "spend": 25.81,
         "requests": 228,
         "opusPct": 0.0,
-        "avgPromptTokens": 178264.0
+        "avgPromptTokens": 178264.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2567,7 +2586,8 @@
         "spend": 49.92,
         "requests": 430,
         "opusPct": 0.133,
-        "avgPromptTokens": 127162.0
+        "avgPromptTokens": 127162.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2680,7 +2700,8 @@
         "spend": 89.39,
         "requests": 553,
         "opusPct": 0.0,
-        "avgPromptTokens": 240141.0
+        "avgPromptTokens": 240141.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2793,7 +2814,8 @@
         "spend": 81.74,
         "requests": 1809,
         "opusPct": 0.0,
-        "avgPromptTokens": 90903.0
+        "avgPromptTokens": 90903.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -2906,7 +2928,8 @@
         "spend": 36.7,
         "requests": 755,
         "opusPct": 0,
-        "avgPromptTokens": 77775.0
+        "avgPromptTokens": 77775.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3019,7 +3042,8 @@
         "spend": 7.04,
         "requests": 73,
         "opusPct": 0.0,
-        "avgPromptTokens": 116382.0
+        "avgPromptTokens": 116382.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3132,7 +3156,8 @@
         "spend": 26.44,
         "requests": 203,
         "opusPct": 0.414,
-        "avgPromptTokens": 138741.0
+        "avgPromptTokens": 138741.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3245,7 +3270,8 @@
         "spend": 10.52,
         "requests": 421,
         "opusPct": 0.0,
-        "avgPromptTokens": 157285.0
+        "avgPromptTokens": 157285.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3350,7 +3376,8 @@
         "spend": 31.61,
         "requests": 403,
         "opusPct": 0.0,
-        "avgPromptTokens": 144761.0
+        "avgPromptTokens": 144761.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3463,7 +3490,8 @@
         "spend": 105.32,
         "requests": 782,
         "opusPct": 0.695,
-        "avgPromptTokens": 126980.0
+        "avgPromptTokens": 126980.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3576,7 +3604,8 @@
         "spend": 1.19,
         "requests": 18,
         "opusPct": 0.0,
-        "avgPromptTokens": 65642.0
+        "avgPromptTokens": 65642.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3689,7 +3718,8 @@
         "spend": 3.69,
         "requests": 121,
         "opusPct": 0.0,
-        "avgPromptTokens": 39232.0
+        "avgPromptTokens": 39232.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3802,7 +3832,8 @@
         "spend": 36.45,
         "requests": 258,
         "opusPct": 0.0,
-        "avgPromptTokens": 149708.0
+        "avgPromptTokens": 149708.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -3915,7 +3946,8 @@
         "spend": 108.21,
         "requests": 748,
         "opusPct": 0.0,
-        "avgPromptTokens": 178594.0
+        "avgPromptTokens": 178594.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4028,7 +4060,8 @@
         "spend": 35.73,
         "requests": 921,
         "opusPct": 0,
-        "avgPromptTokens": 56819.0
+        "avgPromptTokens": 56819.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4141,7 +4174,8 @@
         "spend": 215.04,
         "requests": 1229,
         "opusPct": 0.495,
-        "avgPromptTokens": 265635.0
+        "avgPromptTokens": 265635.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4254,7 +4288,8 @@
         "spend": 143.63,
         "requests": 2476,
         "opusPct": 0.0,
-        "avgPromptTokens": 100773.0
+        "avgPromptTokens": 100773.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4343,7 +4378,8 @@
         "spend": 6.72,
         "requests": 107,
         "opusPct": 0.0,
-        "avgPromptTokens": 95993.0
+        "avgPromptTokens": 95993.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4456,7 +4492,8 @@
         "spend": 145.45,
         "requests": 881,
         "opusPct": 0.0,
-        "avgPromptTokens": 218458.0
+        "avgPromptTokens": 218458.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4569,7 +4606,8 @@
         "spend": 8.71,
         "requests": 94,
         "opusPct": 0.0,
-        "avgPromptTokens": 64678.0
+        "avgPromptTokens": 64678.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4682,7 +4720,8 @@
         "spend": 172.84,
         "requests": 1128,
         "opusPct": 0.564,
-        "avgPromptTokens": 180520.0
+        "avgPromptTokens": 180520.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -4795,7 +4834,8 @@
         "spend": 11.21,
         "requests": 205,
         "opusPct": 0.752,
-        "avgPromptTokens": 52583.0
+        "avgPromptTokens": 52583.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5080,7 +5120,8 @@
         "spend": 15.09,
         "requests": 491,
         "opusPct": 0.0,
-        "avgPromptTokens": 54404.0
+        "avgPromptTokens": 54404.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5193,7 +5234,8 @@
         "spend": 53.25,
         "requests": 248,
         "opusPct": 0.898,
-        "avgPromptTokens": 146463.0
+        "avgPromptTokens": 146463.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5306,7 +5348,8 @@
         "spend": 10.38,
         "requests": 105,
         "opusPct": 0.882,
-        "avgPromptTokens": 89918.0
+        "avgPromptTokens": 89918.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5411,7 +5454,8 @@
         "spend": 20.41,
         "requests": 190,
         "opusPct": 0.444,
-        "avgPromptTokens": 110990.0
+        "avgPromptTokens": 110990.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5524,7 +5568,8 @@
         "spend": 28.17,
         "requests": 1347,
         "opusPct": 0.0,
-        "avgPromptTokens": 35328.0
+        "avgPromptTokens": 35328.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5637,7 +5682,8 @@
         "spend": 53.18,
         "requests": 527,
         "opusPct": 0.0,
-        "avgPromptTokens": 107612.0
+        "avgPromptTokens": 107612.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5750,7 +5796,8 @@
         "spend": 17.19,
         "requests": 193,
         "opusPct": 0.0,
-        "avgPromptTokens": 108610.0
+        "avgPromptTokens": 108610.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -5937,7 +5984,8 @@
         "spend": 7.45,
         "requests": 89,
         "opusPct": 0.699,
-        "avgPromptTokens": 66608.0
+        "avgPromptTokens": 66608.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6148,7 +6196,8 @@
         "spend": 10.71,
         "requests": 154,
         "opusPct": 0.0,
-        "avgPromptTokens": 130452.0
+        "avgPromptTokens": 130452.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6261,7 +6310,8 @@
         "spend": 43.68,
         "requests": 1049,
         "opusPct": 0.218,
-        "avgPromptTokens": 59595.0
+        "avgPromptTokens": 59595.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6374,7 +6424,8 @@
         "spend": 18.46,
         "requests": 237,
         "opusPct": 0.0,
-        "avgPromptTokens": 108953.0
+        "avgPromptTokens": 108953.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6487,7 +6538,8 @@
         "spend": 164.59,
         "requests": 876,
         "opusPct": 0.364,
-        "avgPromptTokens": 273622.0
+        "avgPromptTokens": 273622.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6600,7 +6652,8 @@
         "spend": 38.01,
         "requests": 314,
         "opusPct": 0.166,
-        "avgPromptTokens": 150774.0
+        "avgPromptTokens": 150774.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6713,7 +6766,8 @@
         "spend": 78.43,
         "requests": 838,
         "opusPct": 0.62,
-        "avgPromptTokens": 117974.0
+        "avgPromptTokens": 117974.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6826,7 +6880,8 @@
         "spend": 80.26,
         "requests": 798,
         "opusPct": 0.0,
-        "avgPromptTokens": 146362.0
+        "avgPromptTokens": 146362.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -6939,7 +6994,8 @@
         "spend": 46.59,
         "requests": 767,
         "opusPct": 0.108,
-        "avgPromptTokens": 94176.0
+        "avgPromptTokens": 94176.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7020,7 +7076,8 @@
         "spend": 4.49,
         "requests": 55,
         "opusPct": 0.0,
-        "avgPromptTokens": 92177.0
+        "avgPromptTokens": 92177.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7125,7 +7182,8 @@
         "spend": 13.14,
         "requests": 241,
         "opusPct": 0.0,
-        "avgPromptTokens": 58194.0
+        "avgPromptTokens": 58194.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7222,7 +7280,8 @@
         "spend": 20.89,
         "requests": 506,
         "opusPct": 0.0,
-        "avgPromptTokens": 58060.0
+        "avgPromptTokens": 58060.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7311,7 +7370,8 @@
         "spend": 22.39,
         "requests": 467,
         "opusPct": 0.386,
-        "avgPromptTokens": 66438.0
+        "avgPromptTokens": 66438.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7424,7 +7484,8 @@
         "spend": 6.67,
         "requests": 98,
         "opusPct": 0.0,
-        "avgPromptTokens": 70469.0
+        "avgPromptTokens": 70469.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7537,7 +7598,8 @@
         "spend": 19.57,
         "requests": 295,
         "opusPct": 0.0,
-        "avgPromptTokens": 121507.0
+        "avgPromptTokens": 121507.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7650,7 +7712,8 @@
         "spend": 25.74,
         "requests": 356,
         "opusPct": 0.0,
-        "avgPromptTokens": 112428.0
+        "avgPromptTokens": 112428.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7763,7 +7826,8 @@
         "spend": 28.21,
         "requests": 501,
         "opusPct": 0.0,
-        "avgPromptTokens": 111460.0
+        "avgPromptTokens": 111460.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7876,7 +7940,8 @@
         "spend": 74.62,
         "requests": 468,
         "opusPct": 1.0,
-        "avgPromptTokens": 155195.0
+        "avgPromptTokens": 155195.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -7925,7 +7990,8 @@
         "spend": 0.94,
         "requests": 9,
         "opusPct": 1.0,
-        "avgPromptTokens": 64247.0
+        "avgPromptTokens": 64247.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8038,7 +8104,8 @@
         "spend": 50.83,
         "requests": 391,
         "opusPct": 0.645,
-        "avgPromptTokens": 173317.0
+        "avgPromptTokens": 173317.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8135,7 +8202,8 @@
         "spend": 204.24,
         "requests": 2159,
         "opusPct": 0,
-        "avgPromptTokens": 68096.0
+        "avgPromptTokens": 68096.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8248,7 +8316,8 @@
         "spend": 2.9,
         "requests": 27,
         "opusPct": 0.0,
-        "avgPromptTokens": 91073.0
+        "avgPromptTokens": 91073.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8353,7 +8422,8 @@
         "spend": 23.58,
         "requests": 284,
         "opusPct": 0.422,
-        "avgPromptTokens": 141326.0
+        "avgPromptTokens": 141326.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8466,7 +8536,8 @@
         "spend": 3.36,
         "requests": 32,
         "opusPct": 0.0,
-        "avgPromptTokens": 130244.0
+        "avgPromptTokens": 130244.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8555,7 +8626,8 @@
         "spend": 18.69,
         "requests": 727,
         "opusPct": 0.0,
-        "avgPromptTokens": 60493.0
+        "avgPromptTokens": 60493.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8668,7 +8740,8 @@
         "spend": 15.04,
         "requests": 166,
         "opusPct": 0.0,
-        "avgPromptTokens": 80564.0
+        "avgPromptTokens": 80564.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8781,7 +8854,8 @@
         "spend": 2.4,
         "requests": 39,
         "opusPct": 0.0,
-        "avgPromptTokens": 62551.0
+        "avgPromptTokens": 62551.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8886,7 +8960,8 @@
         "spend": 20.14,
         "requests": 240,
         "opusPct": 0.0,
-        "avgPromptTokens": 88814.0
+        "avgPromptTokens": 88814.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -8999,7 +9074,8 @@
         "spend": 35.99,
         "requests": 577,
         "opusPct": 0.0,
-        "avgPromptTokens": 93403.0
+        "avgPromptTokens": 93403.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9112,7 +9188,8 @@
         "spend": 0.8,
         "requests": 16,
         "opusPct": 0.0,
-        "avgPromptTokens": 54062.0
+        "avgPromptTokens": 54062.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9225,7 +9302,8 @@
         "spend": 2.03,
         "requests": 19,
         "opusPct": 1.0,
-        "avgPromptTokens": 84412.0
+        "avgPromptTokens": 84412.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9338,7 +9416,8 @@
         "spend": 14.76,
         "requests": 154,
         "opusPct": 0.0,
-        "avgPromptTokens": 98607.0
+        "avgPromptTokens": 98607.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9451,7 +9530,8 @@
         "spend": 16.2,
         "requests": 117,
         "opusPct": 0.742,
-        "avgPromptTokens": 102065.0
+        "avgPromptTokens": 102065.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9564,7 +9644,8 @@
         "spend": 3.93,
         "requests": 63,
         "opusPct": 0.669,
-        "avgPromptTokens": 61658.0
+        "avgPromptTokens": 61658.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9677,7 +9758,8 @@
         "spend": 2.72,
         "requests": 50,
         "opusPct": 0.0,
-        "avgPromptTokens": 74961.0
+        "avgPromptTokens": 74961.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9790,7 +9872,8 @@
         "spend": 20.46,
         "requests": 253,
         "opusPct": 0.0,
-        "avgPromptTokens": 86555.0
+        "avgPromptTokens": 86555.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -9903,7 +9986,8 @@
         "spend": 17.88,
         "requests": 213,
         "opusPct": 0.0,
-        "avgPromptTokens": 72053.0
+        "avgPromptTokens": 72053.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10016,7 +10100,8 @@
         "spend": 12.99,
         "requests": 149,
         "opusPct": 0.0,
-        "avgPromptTokens": 103392.0
+        "avgPromptTokens": 103392.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10129,7 +10214,8 @@
         "spend": 13.86,
         "requests": 197,
         "opusPct": 0,
-        "avgPromptTokens": 11220.0
+        "avgPromptTokens": 11220.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10226,7 +10312,8 @@
         "spend": 4.86,
         "requests": 122,
         "opusPct": 0.0,
-        "avgPromptTokens": 58256.0
+        "avgPromptTokens": 58256.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10373,7 +10460,8 @@
         "spend": 30.2,
         "requests": 709,
         "opusPct": 0.0,
-        "avgPromptTokens": 57927.0
+        "avgPromptTokens": 57927.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10486,7 +10574,8 @@
         "spend": 47.54,
         "requests": 482,
         "opusPct": 0.0,
-        "avgPromptTokens": 126576.0
+        "avgPromptTokens": 126576.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10599,7 +10688,8 @@
         "spend": 39.82,
         "requests": 416,
         "opusPct": 0.0,
-        "avgPromptTokens": 150509.0
+        "avgPromptTokens": 150509.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10704,7 +10794,8 @@
         "spend": 9.66,
         "requests": 103,
         "opusPct": 0.908,
-        "avgPromptTokens": 77226.0
+        "avgPromptTokens": 77226.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10809,7 +10900,8 @@
         "spend": 41.04,
         "requests": 1058,
         "opusPct": 0.0,
-        "avgPromptTokens": 65791.0
+        "avgPromptTokens": 65791.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -10914,7 +11006,8 @@
         "spend": 72.9,
         "requests": 801,
         "opusPct": 1.0,
-        "avgPromptTokens": 86855.0
+        "avgPromptTokens": 86855.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11019,7 +11112,8 @@
         "spend": 48.79,
         "requests": 478,
         "opusPct": 0.0,
-        "avgPromptTokens": 106661.0
+        "avgPromptTokens": 106661.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11124,7 +11218,8 @@
         "spend": 5.31,
         "requests": 96,
         "opusPct": 0.0,
-        "avgPromptTokens": 67909.0
+        "avgPromptTokens": 67909.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11229,7 +11324,8 @@
         "spend": 116.41,
         "requests": 812,
         "opusPct": 0.0,
-        "avgPromptTokens": 212779.0
+        "avgPromptTokens": 212779.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11334,7 +11430,8 @@
         "spend": 4.64,
         "requests": 147,
         "opusPct": 0.0,
-        "avgPromptTokens": 46391.0
+        "avgPromptTokens": 46391.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11423,7 +11520,8 @@
         "spend": 1.66,
         "requests": 21,
         "opusPct": 0.0,
-        "avgPromptTokens": 63611.0
+        "avgPromptTokens": 63611.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11496,7 +11594,8 @@
         "spend": 2.06,
         "requests": 51,
         "opusPct": 0.0,
-        "avgPromptTokens": 56327.0
+        "avgPromptTokens": 56327.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11601,7 +11700,8 @@
         "spend": 21.92,
         "requests": 392,
         "opusPct": 0.0,
-        "avgPromptTokens": 88359.0
+        "avgPromptTokens": 88359.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11706,7 +11806,8 @@
         "spend": 8.27,
         "requests": 98,
         "opusPct": 0.0,
-        "avgPromptTokens": 84083.0
+        "avgPromptTokens": 84083.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11803,7 +11904,8 @@
         "spend": 21.27,
         "requests": 144,
         "opusPct": 0.0,
-        "avgPromptTokens": 106008.0
+        "avgPromptTokens": 106008.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -11908,7 +12010,8 @@
         "spend": 14.78,
         "requests": 345,
         "opusPct": 0.0,
-        "avgPromptTokens": 42052.0
+        "avgPromptTokens": 42052.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12013,7 +12116,8 @@
         "spend": 34.55,
         "requests": 716,
         "opusPct": 0.0,
-        "avgPromptTokens": 104842.0
+        "avgPromptTokens": 104842.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12094,7 +12198,8 @@
         "spend": 28.33,
         "requests": 343,
         "opusPct": 0.0,
-        "avgPromptTokens": 94757.0
+        "avgPromptTokens": 94757.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12199,7 +12304,8 @@
         "spend": 2.06,
         "requests": 37,
         "opusPct": 0.0,
-        "avgPromptTokens": 57520.0
+        "avgPromptTokens": 57520.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12304,7 +12410,8 @@
         "spend": 4.76,
         "requests": 115,
         "opusPct": 0.0,
-        "avgPromptTokens": 43357.0
+        "avgPromptTokens": 43357.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12409,7 +12516,8 @@
         "spend": 10.38,
         "requests": 121,
         "opusPct": 0.0,
-        "avgPromptTokens": 108860.0
+        "avgPromptTokens": 108860.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12514,7 +12622,8 @@
         "spend": 8.13,
         "requests": 116,
         "opusPct": 0.0,
-        "avgPromptTokens": 82195.0
+        "avgPromptTokens": 82195.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12603,7 +12712,8 @@
         "spend": 3.19,
         "requests": 43,
         "opusPct": 0.0,
-        "avgPromptTokens": 82105.0
+        "avgPromptTokens": 82105.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12676,7 +12786,8 @@
         "spend": 5.04,
         "requests": 74,
         "opusPct": 0.0,
-        "avgPromptTokens": 94209.0
+        "avgPromptTokens": 94209.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12781,7 +12892,8 @@
         "spend": 0.97,
         "requests": 31,
         "opusPct": 0.0,
-        "avgPromptTokens": 46701.0
+        "avgPromptTokens": 46701.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12878,7 +12990,8 @@
         "spend": 63.58,
         "requests": 228,
         "opusPct": 0,
-        "avgPromptTokens": 390216.0
+        "avgPromptTokens": 390216.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -12975,7 +13088,8 @@
         "spend": 6.23,
         "requests": 52,
         "opusPct": 0.0,
-        "avgPromptTokens": 127950.0
+        "avgPromptTokens": 127950.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13138,7 +13252,8 @@
         "spend": 7.3,
         "requests": 78,
         "opusPct": 0.0,
-        "avgPromptTokens": 100054.0
+        "avgPromptTokens": 100054.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13235,7 +13350,8 @@
         "spend": 73.89,
         "requests": 643,
         "opusPct": 0,
-        "avgPromptTokens": 162679.0
+        "avgPromptTokens": 162679.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13316,7 +13432,8 @@
         "spend": 0.65,
         "requests": 3,
         "opusPct": 0.0,
-        "avgPromptTokens": 147473.0
+        "avgPromptTokens": 147473.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13381,7 +13498,8 @@
         "spend": 5.49,
         "requests": 115,
         "opusPct": 0.0,
-        "avgPromptTokens": 75220.0
+        "avgPromptTokens": 75220.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13472,7 +13590,8 @@
         "spend": 1.34,
         "requests": 15,
         "opusPct": 0.0,
-        "avgPromptTokens": 120544.0
+        "avgPromptTokens": 120544.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13569,7 +13688,8 @@
         "spend": 8.34,
         "requests": 61,
         "opusPct": 0.0,
-        "avgPromptTokens": 99077.0
+        "avgPromptTokens": 99077.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13666,7 +13786,8 @@
         "spend": 3.59,
         "requests": 43,
         "opusPct": 0.0,
-        "avgPromptTokens": 119946.0
+        "avgPromptTokens": 119946.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13755,7 +13876,8 @@
         "spend": 5.04,
         "requests": 89,
         "opusPct": 0.0,
-        "avgPromptTokens": 94867.0
+        "avgPromptTokens": 94867.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -13926,7 +14048,8 @@
         "spend": 12.09,
         "requests": 401,
         "opusPct": 0.0,
-        "avgPromptTokens": 143737.0
+        "avgPromptTokens": 143737.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14023,7 +14146,8 @@
         "spend": 102.23,
         "requests": 875,
         "opusPct": 0.0,
-        "avgPromptTokens": 102920.0
+        "avgPromptTokens": 102920.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14120,7 +14244,8 @@
         "spend": 5.92,
         "requests": 101,
         "opusPct": 0.0,
-        "avgPromptTokens": 86693.0
+        "avgPromptTokens": 86693.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14177,7 +14302,8 @@
         "spend": 47.91,
         "requests": 232,
         "opusPct": 1.0,
-        "avgPromptTokens": 185070.0
+        "avgPromptTokens": 185070.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14274,7 +14400,8 @@
         "spend": 11.23,
         "requests": 181,
         "opusPct": 0.0,
-        "avgPromptTokens": 81341.0
+        "avgPromptTokens": 81341.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14363,7 +14490,8 @@
         "spend": 3.31,
         "requests": 14,
         "opusPct": 0.0,
-        "avgPromptTokens": 215776.0
+        "avgPromptTokens": 215776.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14460,7 +14588,8 @@
         "spend": 27.24,
         "requests": 200,
         "opusPct": 0.0,
-        "avgPromptTokens": 147186.0
+        "avgPromptTokens": 147186.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14557,7 +14686,8 @@
         "spend": 28.0,
         "requests": 285,
         "opusPct": 0.0,
-        "avgPromptTokens": 100890.0
+        "avgPromptTokens": 100890.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14654,7 +14784,8 @@
         "spend": 6.03,
         "requests": 106,
         "opusPct": 0.0,
-        "avgPromptTokens": 115605.0
+        "avgPromptTokens": 115605.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14727,7 +14858,8 @@
         "spend": 70.96,
         "requests": 620,
         "opusPct": 0,
-        "avgPromptTokens": 91546.0
+        "avgPromptTokens": 91546.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14808,7 +14940,8 @@
         "spend": 15.24,
         "requests": 372,
         "opusPct": 0.0,
-        "avgPromptTokens": 83002.0
+        "avgPromptTokens": 83002.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14905,7 +15038,8 @@
         "spend": 10.39,
         "requests": 45,
         "opusPct": 0.9,
-        "avgPromptTokens": 164555.0
+        "avgPromptTokens": 164555.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -14978,7 +15112,8 @@
         "spend": 21.56,
         "requests": 338,
         "opusPct": 0.0,
-        "avgPromptTokens": 88240.0
+        "avgPromptTokens": 88240.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15067,7 +15202,8 @@
         "spend": 351.24,
         "requests": 1736,
         "opusPct": 0.0,
-        "avgPromptTokens": 326283.0
+        "avgPromptTokens": 326283.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15156,7 +15292,8 @@
         "spend": 7.49,
         "requests": 113,
         "opusPct": 0.0,
-        "avgPromptTokens": 83821.0
+        "avgPromptTokens": 83821.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15303,7 +15440,8 @@
         "spend": 3.0,
         "requests": 60,
         "opusPct": 0.0,
-        "avgPromptTokens": 62766.0
+        "avgPromptTokens": 62766.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15376,7 +15514,8 @@
         "spend": 39.01,
         "requests": 842,
         "opusPct": 0.0,
-        "avgPromptTokens": 62826.0
+        "avgPromptTokens": 62826.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15465,7 +15604,8 @@
         "spend": 9.58,
         "requests": 163,
         "opusPct": 0.0,
-        "avgPromptTokens": 86376.0
+        "avgPromptTokens": 86376.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15546,7 +15686,8 @@
         "spend": 14.29,
         "requests": 183,
         "opusPct": 0.0,
-        "avgPromptTokens": 67993.0
+        "avgPromptTokens": 67993.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15635,7 +15776,8 @@
         "spend": 22.5,
         "requests": 351,
         "opusPct": 0.0,
-        "avgPromptTokens": 104110.0
+        "avgPromptTokens": 104110.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15724,7 +15866,8 @@
         "spend": 3.21,
         "requests": 51,
         "opusPct": 0.0,
-        "avgPromptTokens": 60660.0
+        "avgPromptTokens": 60660.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15813,7 +15956,8 @@
         "spend": 8.61,
         "requests": 109,
         "opusPct": 0.0,
-        "avgPromptTokens": 91002.0
+        "avgPromptTokens": 91002.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15902,7 +16046,8 @@
         "spend": 2.28,
         "requests": 14,
         "opusPct": 0.618,
-        "avgPromptTokens": 123104.0
+        "avgPromptTokens": 123104.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -15983,7 +16128,8 @@
         "spend": 0.63,
         "requests": 12,
         "opusPct": 0.0,
-        "avgPromptTokens": 42738.0
+        "avgPromptTokens": 42738.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16072,7 +16218,8 @@
         "spend": 9.92,
         "requests": 137,
         "opusPct": 0.0,
-        "avgPromptTokens": 76687.0
+        "avgPromptTokens": 76687.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16153,7 +16300,8 @@
         "spend": 13.89,
         "requests": 208,
         "opusPct": 0.0,
-        "avgPromptTokens": 85132.0
+        "avgPromptTokens": 85132.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16218,7 +16366,8 @@
         "spend": 2.22,
         "requests": 17,
         "opusPct": 0.0,
-        "avgPromptTokens": 218884.0
+        "avgPromptTokens": 218884.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16275,7 +16424,8 @@
         "spend": 3.31,
         "requests": 74,
         "opusPct": 0.0,
-        "avgPromptTokens": 65643.0
+        "avgPromptTokens": 65643.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16356,7 +16506,8 @@
         "spend": 42.51,
         "requests": 699,
         "opusPct": 0.0,
-        "avgPromptTokens": 127520.0
+        "avgPromptTokens": 127520.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16429,7 +16580,8 @@
         "spend": 2.63,
         "requests": 51,
         "opusPct": 0.0,
-        "avgPromptTokens": 53299.0
+        "avgPromptTokens": 53299.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16518,7 +16670,8 @@
         "spend": 0.72,
         "requests": 13,
         "opusPct": 0.0,
-        "avgPromptTokens": 53432.0
+        "avgPromptTokens": 53432.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16591,7 +16744,8 @@
         "spend": 3.43,
         "requests": 65,
         "opusPct": 0.0,
-        "avgPromptTokens": 79756.0
+        "avgPromptTokens": 79756.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16656,7 +16810,8 @@
         "spend": 0.37,
         "requests": 75,
         "opusPct": 0.0,
-        "avgPromptTokens": 113403.0
+        "avgPromptTokens": 113403.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16729,7 +16884,8 @@
         "spend": 18.53,
         "requests": 224,
         "opusPct": 0.0,
-        "avgPromptTokens": 131090.0
+        "avgPromptTokens": 131090.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16802,7 +16958,8 @@
         "spend": 13.9,
         "requests": 130,
         "opusPct": 0.0,
-        "avgPromptTokens": 110312.0
+        "avgPromptTokens": 110312.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16883,7 +17040,8 @@
         "spend": 0.62,
         "requests": 7,
         "opusPct": 0.0,
-        "avgPromptTokens": 60822.0
+        "avgPromptTokens": 60822.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -16956,7 +17114,8 @@
         "spend": 1.24,
         "requests": 178,
         "opusPct": 0.0,
-        "avgPromptTokens": 130925.0
+        "avgPromptTokens": 130925.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17037,7 +17196,8 @@
         "spend": 7.35,
         "requests": 118,
         "opusPct": 0.0,
-        "avgPromptTokens": 82625.0
+        "avgPromptTokens": 82625.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17110,7 +17270,8 @@
         "spend": 11.27,
         "requests": 230,
         "opusPct": 0.0,
-        "avgPromptTokens": 90164.0
+        "avgPromptTokens": 90164.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17183,7 +17344,8 @@
         "spend": 0.52,
         "requests": 9,
         "opusPct": 0.0,
-        "avgPromptTokens": 45351.0
+        "avgPromptTokens": 45351.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17256,7 +17418,8 @@
         "spend": 127.15,
         "requests": 850,
         "opusPct": 0.0,
-        "avgPromptTokens": 140236.0
+        "avgPromptTokens": 140236.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17329,7 +17492,8 @@
         "spend": 29.51,
         "requests": 273,
         "opusPct": 0.0,
-        "avgPromptTokens": 213456.0
+        "avgPromptTokens": 213456.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17410,7 +17574,8 @@
         "spend": 6.72,
         "requests": 88,
         "opusPct": 0.342,
-        "avgPromptTokens": 110842.0
+        "avgPromptTokens": 110842.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17467,7 +17632,8 @@
         "spend": 0.15,
         "requests": 5,
         "opusPct": 0.0,
-        "avgPromptTokens": 35383.0
+        "avgPromptTokens": 35383.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       }
     ],
     "renee.taillon@level.agency": [
@@ -17540,7 +17706,8 @@
         "spend": 8.04,
         "requests": 95,
         "opusPct": 0.0,
-        "avgPromptTokens": 51984.0
+        "avgPromptTokens": 51984.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17597,7 +17764,8 @@
         "spend": 0.2,
         "requests": 8,
         "opusPct": 0.0,
-        "avgPromptTokens": 40803.0
+        "avgPromptTokens": 40803.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17728,7 +17896,8 @@
         "spend": 0.25,
         "requests": 7,
         "opusPct": 0.0,
-        "avgPromptTokens": 55520.0
+        "avgPromptTokens": 55520.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       }
     ],
     "alessandro.carvalho@level.agency": [
@@ -17777,7 +17946,8 @@
         "spend": 8.87,
         "requests": 74,
         "opusPct": 0.563,
-        "avgPromptTokens": 81603.0
+        "avgPromptTokens": 81603.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17892,7 +18062,8 @@
         "spend": 17.53,
         "requests": 687,
         "opusPct": 0.0,
-        "avgPromptTokens": 42772.0
+        "avgPromptTokens": 42772.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -17941,7 +18112,8 @@
         "spend": 0.74,
         "requests": 41,
         "opusPct": 0.0,
-        "avgPromptTokens": 34429.0
+        "avgPromptTokens": 34429.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18014,7 +18186,8 @@
         "spend": 116.87,
         "requests": 833,
         "opusPct": 0.0,
-        "avgPromptTokens": 123629.0
+        "avgPromptTokens": 123629.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18071,7 +18244,8 @@
         "spend": 2.85,
         "requests": 18,
         "opusPct": 0.0,
-        "avgPromptTokens": 209847.0
+        "avgPromptTokens": 209847.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18144,7 +18318,8 @@
         "spend": 11.5,
         "requests": 124,
         "opusPct": 0.0,
-        "avgPromptTokens": 106299.0
+        "avgPromptTokens": 106299.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18209,7 +18384,8 @@
         "spend": 0.78,
         "requests": 26,
         "opusPct": 0.0,
-        "avgPromptTokens": 40375.0
+        "avgPromptTokens": 40375.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18274,7 +18450,8 @@
         "spend": 42.79,
         "requests": 806,
         "opusPct": 0.0,
-        "avgPromptTokens": 76431.0
+        "avgPromptTokens": 76431.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18323,7 +18500,8 @@
         "spend": 3.75,
         "requests": 33,
         "opusPct": 0.0,
-        "avgPromptTokens": 149049.0
+        "avgPromptTokens": 149049.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18438,7 +18616,8 @@
         "spend": 6.48,
         "requests": 86,
         "opusPct": 0.0,
-        "avgPromptTokens": 92280.0
+        "avgPromptTokens": 92280.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18503,7 +18682,8 @@
         "spend": 15.43,
         "requests": 278,
         "opusPct": 0.0,
-        "avgPromptTokens": 92479.0
+        "avgPromptTokens": 92479.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18568,7 +18748,8 @@
         "spend": 14.35,
         "requests": 183,
         "opusPct": 0.0,
-        "avgPromptTokens": 139995.0
+        "avgPromptTokens": 139995.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18675,7 +18856,8 @@
         "spend": 7.88,
         "requests": 44,
         "opusPct": 0.963,
-        "avgPromptTokens": 86913.0
+        "avgPromptTokens": 86913.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18732,7 +18914,8 @@
         "spend": 4.87,
         "requests": 93,
         "opusPct": 0.0,
-        "avgPromptTokens": 31224.0
+        "avgPromptTokens": 31224.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18797,7 +18980,8 @@
         "spend": 9.34,
         "requests": 258,
         "opusPct": 0.0,
-        "avgPromptTokens": 35175.0
+        "avgPromptTokens": 35175.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18862,7 +19046,8 @@
         "spend": 7.08,
         "requests": 129,
         "opusPct": 0.0,
-        "avgPromptTokens": 78724.0
+        "avgPromptTokens": 78724.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -18937,7 +19122,8 @@
         "spend": 7.95,
         "requests": 114,
         "opusPct": 0.0,
-        "avgPromptTokens": 92773.0
+        "avgPromptTokens": 92773.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19044,7 +19230,8 @@
         "spend": 51.38,
         "requests": 313,
         "opusPct": 0.0,
-        "avgPromptTokens": 143114.0
+        "avgPromptTokens": 143114.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19101,7 +19288,8 @@
         "spend": 28.62,
         "requests": 170,
         "opusPct": 0.0,
-        "avgPromptTokens": 230873.0
+        "avgPromptTokens": 230873.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       }
     ],
     "kelly.langley@level.agency": [
@@ -19150,7 +19338,8 @@
         "spend": 4.43,
         "requests": 48,
         "opusPct": 0.0,
-        "avgPromptTokens": 97380.0
+        "avgPromptTokens": 97380.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19257,7 +19446,8 @@
         "spend": 6.26,
         "requests": 158,
         "opusPct": 0.0,
-        "avgPromptTokens": 60552.0
+        "avgPromptTokens": 60552.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19314,7 +19504,8 @@
         "spend": 3.44,
         "requests": 48,
         "opusPct": 0.0,
-        "avgPromptTokens": 80541.0
+        "avgPromptTokens": 80541.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19355,7 +19546,8 @@
         "spend": 8.28,
         "requests": 124,
         "opusPct": 0.0,
-        "avgPromptTokens": 167104.0
+        "avgPromptTokens": 167104.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19412,7 +19604,8 @@
         "spend": 4.67,
         "requests": 95,
         "opusPct": 0.0,
-        "avgPromptTokens": 69789.0
+        "avgPromptTokens": 69789.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19531,7 +19724,8 @@
         "spend": 4.96,
         "requests": 72,
         "opusPct": 0.0,
-        "avgPromptTokens": 65712.0
+        "avgPromptTokens": 65712.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19580,7 +19774,8 @@
         "spend": 50.42,
         "requests": 107,
         "opusPct": 0.0,
-        "avgPromptTokens": 248914.0
+        "avgPromptTokens": 248914.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19629,7 +19824,8 @@
         "spend": 75.4,
         "requests": 243,
         "opusPct": 0.0,
-        "avgPromptTokens": 155455.0
+        "avgPromptTokens": 155455.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19678,7 +19874,8 @@
         "spend": 17.32,
         "requests": 257,
         "opusPct": 0.219,
-        "avgPromptTokens": 100133.0
+        "avgPromptTokens": 100133.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19727,7 +19924,8 @@
         "spend": 25.27,
         "requests": 273,
         "opusPct": 0.0,
-        "avgPromptTokens": 205762.0
+        "avgPromptTokens": 205762.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19776,7 +19974,8 @@
         "spend": 18.79,
         "requests": 331,
         "opusPct": 0.568,
-        "avgPromptTokens": 59904.0
+        "avgPromptTokens": 59904.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19825,7 +20024,8 @@
         "spend": 3.4,
         "requests": 51,
         "opusPct": 0.0,
-        "avgPromptTokens": 53285.0
+        "avgPromptTokens": 53285.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19874,7 +20074,8 @@
         "spend": 9.24,
         "requests": 153,
         "opusPct": 0.0,
-        "avgPromptTokens": 69810.0
+        "avgPromptTokens": 69810.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19923,7 +20124,8 @@
         "spend": 10.63,
         "requests": 171,
         "opusPct": 0.0,
-        "avgPromptTokens": 119389.0
+        "avgPromptTokens": 119389.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -19972,7 +20174,8 @@
         "spend": 6.37,
         "requests": 121,
         "opusPct": 0,
-        "avgPromptTokens": 49359.0
+        "avgPromptTokens": 49359.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20021,7 +20224,8 @@
         "spend": 4.41,
         "requests": 82,
         "opusPct": 0.0,
-        "avgPromptTokens": 72018.0
+        "avgPromptTokens": 72018.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20062,7 +20266,8 @@
         "spend": 2.22,
         "requests": 49,
         "opusPct": 0.0,
-        "avgPromptTokens": 64446.0
+        "avgPromptTokens": 64446.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20103,7 +20308,8 @@
         "spend": 8.83,
         "requests": 146,
         "opusPct": 0.0,
-        "avgPromptTokens": 102113.0
+        "avgPromptTokens": 102113.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20144,7 +20350,8 @@
         "spend": 1.25,
         "requests": 30,
         "opusPct": 0.0,
-        "avgPromptTokens": 55574.0
+        "avgPromptTokens": 55574.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20185,7 +20392,8 @@
         "spend": 9.65,
         "requests": 245,
         "opusPct": 0.0,
-        "avgPromptTokens": 27306.0
+        "avgPromptTokens": 27306.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20256,7 +20464,8 @@
         "spend": 0.91,
         "requests": 12,
         "opusPct": 0.0,
-        "avgPromptTokens": 77416.0
+        "avgPromptTokens": 77416.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20281,7 +20490,8 @@
         "spend": 1.45,
         "requests": 23,
         "opusPct": 0.0,
-        "avgPromptTokens": 81041.0
+        "avgPromptTokens": 81041.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20306,7 +20516,8 @@
         "spend": 3.38,
         "requests": 62,
         "opusPct": 0.0,
-        "avgPromptTokens": 60309.0
+        "avgPromptTokens": 60309.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20323,7 +20534,8 @@
         "spend": 3.62,
         "requests": 53,
         "opusPct": 0,
-        "avgPromptTokens": 84316.0
+        "avgPromptTokens": 84316.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       },
       {
         "weekOf": "Jun 4\u201310, 2026",
@@ -20340,7 +20552,8 @@
         "spend": 0.02,
         "requests": 1,
         "opusPct": 0.0,
-        "avgPromptTokens": 5331.0
+        "avgPromptTokens": 5331.0,
+        "weekOf": "May 28 \u2013 Jun 3, 2026"
       }
     ],
     "dan.bernard@level.agency": [
