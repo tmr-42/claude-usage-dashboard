@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Claude Usage Analysis — Weekly</title>
+<title>Claude Usage Analysis</title>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
 <style>html,body{margin:0;padding:0;background:#0a0a0f;}#err{color:#e4e4ef;font-family:-apple-system,sans-serif;padding:40px;line-height:1.6}#err code{color:#ef4444;font-family:monospace}</style>
 </head><body><div id="root"></div>
-<script>
-(function(){
-function showErr(m){var r=document.getElementById("root");if(r&&r.innerHTML.trim()==="")r.innerHTML='<div id="err"><b>Dashboard failed to render.</b><br/>This is a visible fallback so the page is never silently blank.<br/><br/><code>'+String(m)+'</code></div>';}
-window.addEventListener("error",function(e){showErr((e.error&&e.error.stack)||e.message);});
-if(!window.React||!window.ReactDOM){showErr("React UMD failed to load (check network/CDN).");return;}
+<script type="text/plain" id="appsrc">
 var useState=React.useState,useMemo=React.useMemo,useEffect=React.useEffect,useRef=React.useRef,useCallback=React.useCallback,useReducer=React.useReducer,Fragment=React.Fragment;
-window.__APP_DATA__={};
-try{
 const DATA = typeof window !== "undefined" && window.__APP_DATA__ ? window.__APP_DATA__ : {};
 const COLORS = {
   bg: "#0a0a0f",
@@ -2344,14 +2338,14 @@ function BreakdownTab() {
     }, "per request"));
   }))));
 }
-}catch(e){showErr((e&&e.stack)||e);return;}
-function EBClass(props){React.Component.call(this,props);this.state={err:null};}
-EBClass.prototype=Object.create(React.Component.prototype);
-EBClass.prototype.constructor=EBClass;
-EBClass.getDerivedStateFromError=function(err){return {err:err};};
-EBClass.prototype.componentDidCatch=function(err){showErr((err&&err.stack)||err);};
-EBClass.prototype.render=function(){if(this.state.err){return null;}return this.props.children;};
-function boot(data){try{window.__APP_DATA__=data;var root=ReactDOM.createRoot(document.getElementById("root"));root.render(React.createElement(EBClass,null,React.createElement(Dashboard)));}catch(e){showErr((e&&e.stack)||e);}}
-fetch("data.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("data.json HTTP "+r.status);return r.json();}).then(boot).catch(function(e){showErr("Could not load data.json: "+((e&&e.message)||e));});
-})();
+function EBClass(p){React.Component.call(this,p);this.state={err:null};}
+EBClass.prototype=Object.create(React.Component.prototype);EBClass.prototype.constructor=EBClass;
+EBClass.getDerivedStateFromError=function(e){return {err:e};};
+EBClass.prototype.componentDidCatch=function(e){window.__showErr((e&&e.stack)||e);};
+EBClass.prototype.render=function(){if(this.state.err)return null;return this.props.children;};
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(EBClass,null,React.createElement(Dashboard)));
+
+</script>
+<script>
+(function(){function showErr(m){var r=document.getElementById("root");if(r&&r.innerHTML.trim()==="")r.innerHTML='<div id="err"><b>Dashboard failed to render.</b><br/>Visible fallback so the page is never silently blank.<br/><br/><code>'+String(m)+'</code></div>';}window.__showErr=showErr;window.addEventListener("error",function(e){showErr((e.error&&e.error.stack)||e.message);});if(!window.React||!window.ReactDOM){showErr("React UMD failed to load (check network/CDN).");return;}window.__APP_DATA__={};function run(){var s=document.createElement("script");s.textContent=document.getElementById("appsrc").textContent;document.body.appendChild(s);setTimeout(function(){var r=document.getElementById("root");if(r&&(r.innerHTML.trim()===""||r.innerHTML.indexOf("No weekly data loaded")>-1)&&r.innerHTML.indexOf("id=\"err\"")===-1){showErr("Data loaded but dashboard rendered its empty state — DATA not populated before render.");}},0);}fetch("data.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("data.json HTTP "+r.status);return r.json();}).then(function(d){window.__APP_DATA__=d;run();}).catch(function(e){showErr("Could not load data.json: "+((e&&e.message)||e));});})();
 </script></body></html>
