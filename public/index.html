@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
+<html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Claude Usage Analysis — Weekly</title>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-<style>html,body{margin:0;padding:0;background:#0a0a0f;}</style>
-</head>
-<body>
-<div id="root"></div>
+<style>html,body{margin:0;padding:0;background:#0a0a0f;}#err{color:#e4e4ef;font-family:-apple-system,sans-serif;padding:40px;line-height:1.6}#err code{color:#ef4444;font-family:monospace}</style>
+</head><body><div id="root"></div>
 <script>
-var useState=React.useState,useEffect=React.useEffect,useMemo=React.useMemo,useRef=React.useRef,useCallback=React.useCallback,useReducer=React.useReducer,Fragment=React.Fragment;
-window.__APP_DATA__ = {};
-import { useState, useMemo } from "react";
-import { jsxDEV as _jsxDEV, Fragment as _Fragment } from "react/jsx-dev-runtime";
+(function(){
+function showErr(m){var r=document.getElementById("root");if(r&&r.innerHTML.trim()==="")r.innerHTML='<div id="err"><b>Dashboard failed to render.</b><br/>This is a visible fallback so the page is never silently blank.<br/><br/><code>'+String(m)+'</code></div>';}
+window.addEventListener("error",function(e){showErr((e.error&&e.error.stack)||e.message);});
+if(!window.React||!window.ReactDOM){showErr("React UMD failed to load (check network/CDN).");return;}
+var useState=React.useState,useMemo=React.useMemo,useEffect=React.useEffect,useRef=React.useRef,useCallback=React.useCallback,useReducer=React.useReducer,Fragment=React.Fragment;
+window.__APP_DATA__={};
+try{
 const DATA = typeof window !== "undefined" && window.__APP_DATA__ ? window.__APP_DATA__ : {};
 const COLORS = {
   bg: "#0a0a0f",
@@ -112,24 +111,23 @@ function Bar({
   color = COLORS.accent
 }) {
   const pct = max > 0 ? Math.min(value / max * 100, 100) : 0;
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       width: "100%",
       height: 6,
       borderRadius: 3,
       background: COLORS.border,
       overflow: "hidden"
-    },
-    children: _jsxDEV("div", {
-      style: {
-        width: `${pct}%`,
-        height: "100%",
-        borderRadius: 3,
-        background: color,
-        transition: "width 0.4s ease"
-      }
-    }, void 0, false)
-  }, void 0, false);
+    }
+  }, React.createElement("div", {
+    style: {
+      width: `${pct}%`,
+      height: "100%",
+      borderRadius: 3,
+      background: color,
+      transition: "width 0.4s ease"
+    }
+  }));
 }
 function ModelBar({
   models
@@ -139,7 +137,7 @@ function ModelBar({
   const opus = (models.opus || 0) / total * 100;
   const sonnet = (models.sonnet || 0) / total * 100;
   const haiku = (models.haiku || 0) / total * 100;
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       display: "flex",
       gap: 2,
@@ -147,30 +145,29 @@ function ModelBar({
       borderRadius: 4,
       overflow: "hidden",
       width: "100%"
+    }
+  }, opus > 0 && React.createElement("div", {
+    style: {
+      width: `${opus}%`,
+      background: COLORS.red,
+      minWidth: 2
     },
-    children: [opus > 0 && _jsxDEV("div", {
-      style: {
-        width: `${opus}%`,
-        background: COLORS.red,
-        minWidth: 2
-      },
-      title: `Opus ${opus.toFixed(0)}%`
-    }, void 0, false), sonnet > 0 && _jsxDEV("div", {
-      style: {
-        width: `${sonnet}%`,
-        background: COLORS.accent,
-        minWidth: 2
-      },
-      title: `Sonnet ${sonnet.toFixed(0)}%`
-    }, void 0, false), haiku > 0 && _jsxDEV("div", {
-      style: {
-        width: `${haiku}%`,
-        background: COLORS.green,
-        minWidth: 2
-      },
-      title: `Haiku ${haiku.toFixed(0)}%`
-    }, void 0, false)]
-  }, void 0, true);
+    title: `Opus ${opus.toFixed(0)}%`
+  }), sonnet > 0 && React.createElement("div", {
+    style: {
+      width: `${sonnet}%`,
+      background: COLORS.accent,
+      minWidth: 2
+    },
+    title: `Sonnet ${sonnet.toFixed(0)}%`
+  }), haiku > 0 && React.createElement("div", {
+    style: {
+      width: `${haiku}%`,
+      background: COLORS.green,
+      minWidth: 2
+    },
+    title: `Haiku ${haiku.toFixed(0)}%`
+  }));
 }
 function StatCard({
   label,
@@ -178,49 +175,45 @@ function StatCard({
   sub,
   color = COLORS.text
 }) {
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: "16px 20px",
       flex: "1 1 0"
-    },
-    children: [_jsxDEV("div", {
-      style: {
-        fontSize: 11,
-        textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        color: COLORS.textMuted,
-        marginBottom: 6,
-        fontWeight: 500
-      },
-      children: label
-    }, void 0, false), _jsxDEV("div", {
-      style: {
-        fontSize: 26,
-        fontWeight: 700,
-        color,
-        letterSpacing: "-0.02em",
-        fontFamily: "'JetBrains Mono', monospace"
-      },
-      children: value
-    }, void 0, false), sub && _jsxDEV("div", {
-      style: {
-        fontSize: 12,
-        color: COLORS.textDim,
-        marginTop: 4
-      },
-      children: sub
-    }, void 0, false)]
-  }, void 0, true);
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      fontWeight: 500
+    }
+  }, label), React.createElement("div", {
+    style: {
+      fontSize: 26,
+      fontWeight: 700,
+      color,
+      letterSpacing: "-0.02em",
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, value), sub && React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textDim,
+      marginTop: 4
+    }
+  }, sub));
 }
 function FlagPill({
   type
 }) {
   const m = FLAG_META[type];
   if (!m) return null;
-  return _jsxDEV("span", {
+  return React.createElement("span", {
     style: {
       fontSize: 10,
       fontWeight: 600,
@@ -230,9 +223,8 @@ function FlagPill({
       background: m.glow,
       color: m.color,
       marginRight: 4
-    },
-    children: m.label
-  }, void 0, false);
+    }
+  }, m.label);
 }
 function FlagCard({
   icon,
@@ -243,63 +235,56 @@ function FlagCard({
   children
 }) {
   const [open, setOpen] = useState(true);
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       overflow: "hidden",
       marginBottom: 16
-    },
-    children: [_jsxDEV("div", {
-      onClick: () => setOpen(!open),
-      style: {
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-        padding: "14px 18px",
-        cursor: "pointer",
-        borderBottom: open ? `1px solid ${COLORS.border}` : "none"
-      },
-      children: [_jsxDEV("span", {
-        style: {
-          fontSize: 18
-        },
-        children: icon
-      }, void 0, false), _jsxDEV("span", {
-        style: {
-          fontWeight: 600,
-          fontSize: 14,
-          color: COLORS.text,
-          flex: 1
-        },
-        children: title
-      }, void 0, false), _jsxDEV("span", {
-        style: {
-          background: glowColor,
-          color,
-          fontSize: 12,
-          fontWeight: 700,
-          padding: "3px 10px",
-          borderRadius: 12
-        },
-        children: count
-      }, void 0, false), _jsxDEV("span", {
-        style: {
-          color: COLORS.textDim,
-          fontSize: 14,
-          transform: open ? "rotate(180deg)" : "none",
-          transition: "transform 0.2s"
-        },
-        children: "▾"
-      }, void 0, false)]
-    }, void 0, true), open && _jsxDEV("div", {
-      style: {
-        padding: 0
-      },
-      children: children
-    }, void 0, false)]
-  }, void 0, true);
+    }
+  }, React.createElement("div", {
+    onClick: () => setOpen(!open),
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      padding: "14px 18px",
+      cursor: "pointer",
+      borderBottom: open ? `1px solid ${COLORS.border}` : "none"
+    }
+  }, React.createElement("span", {
+    style: {
+      fontSize: 18
+    }
+  }, icon), React.createElement("span", {
+    style: {
+      fontWeight: 600,
+      fontSize: 14,
+      color: COLORS.text,
+      flex: 1
+    }
+  }, title), React.createElement("span", {
+    style: {
+      background: glowColor,
+      color,
+      fontSize: 12,
+      fontWeight: 700,
+      padding: "3px 10px",
+      borderRadius: 12
+    }
+  }, count), React.createElement("span", {
+    style: {
+      color: COLORS.textDim,
+      fontSize: 14,
+      transform: open ? "rotate(180deg)" : "none",
+      transition: "transform 0.2s"
+    }
+  }, "▾")), open && React.createElement("div", {
+    style: {
+      padding: 0
+    }
+  }, children));
 }
 function Sparkline({
   values,
@@ -307,27 +292,25 @@ function Sparkline({
   width = 80,
   height = 22
 }) {
-  if (!values || values.length === 0) return _jsxDEV("span", {
+  if (!values || values.length === 0) return React.createElement("span", {
     style: {
       color: COLORS.textDim,
       fontSize: 11
-    },
-    children: "—"
-  }, void 0, false);
+    }
+  }, "—");
   if (values.length === 1) {
-    return _jsxDEV("svg", {
+    return React.createElement("svg", {
       width: width,
       height: height,
       style: {
         display: "block"
-      },
-      children: _jsxDEV("circle", {
-        cx: width / 2,
-        cy: height / 2,
-        r: 2,
-        fill: color
-      }, void 0, false)
-    }, void 0, false);
+      }
+    }, React.createElement("circle", {
+      cx: width / 2,
+      cy: height / 2,
+      r: 2,
+      fill: color
+    }));
   }
   const max = Math.max(...values, 0.01);
   const min = Math.min(...values);
@@ -340,26 +323,25 @@ function Sparkline({
   }).join(" ");
   const lastX = (values.length - 1) * stepX;
   const lastY = height - (values[values.length - 1] - min) / range * (height - 4) - 2;
-  return _jsxDEV("svg", {
+  return React.createElement("svg", {
     width: width,
     height: height,
     style: {
       display: "block"
-    },
-    children: [_jsxDEV("polyline", {
-      points: points,
-      fill: "none",
-      stroke: color,
-      strokeWidth: 1.4,
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    }, void 0, false), _jsxDEV("circle", {
-      cx: lastX,
-      cy: lastY,
-      r: 1.8,
-      fill: color
-    }, void 0, false)]
-  }, void 0, true);
+    }
+  }, React.createElement("polyline", {
+    points: points,
+    fill: "none",
+    stroke: color,
+    strokeWidth: 1.4,
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }), React.createElement("circle", {
+    cx: lastX,
+    cy: lastY,
+    r: 1.8,
+    fill: color
+  }));
 }
 function LineChart({
   series,
@@ -369,15 +351,14 @@ function LineChart({
   showLegend = true
 }) {
   if (!series || series.length === 0 || !xLabels || xLabels.length === 0) {
-    return _jsxDEV("div", {
+    return React.createElement("div", {
       style: {
         color: COLORS.textDim,
         fontSize: 12,
         padding: 20,
         textAlign: "center"
-      },
-      children: "No trend data yet — need at least one week of history."
-    }, void 0, false);
+      }
+    }, "No trend data yet — need at least one week of history.");
   }
   const allValues = series.flatMap(s => s.values);
   const max = Math.max(...allValues, 0.01);
@@ -392,108 +373,105 @@ function LineChart({
   const plotH = height - padT - padB;
   const stepX = xLabels.length > 1 ? plotW / (xLabels.length - 1) : 0;
   const yTicks = 4;
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       width: "100%",
       overflowX: "auto"
+    }
+  }, React.createElement("svg", {
+    viewBox: `0 0 ${width} ${height}`,
+    style: {
+      width: "100%",
+      minWidth: 480,
+      display: "block"
     },
-    children: [_jsxDEV("svg", {
-      viewBox: `0 0 ${width} ${height}`,
-      style: {
-        width: "100%",
-        minWidth: 480,
-        display: "block"
-      },
-      preserveAspectRatio: "xMidYMid meet",
-      children: [Array.from({
-        length: yTicks + 1
-      }).map((_, i) => {
-        const v = min + range * i / yTicks;
-        const y = padT + plotH - plotH * i / yTicks;
-        return _jsxDEV("g", {
-          children: [_jsxDEV("line", {
-            x1: padL,
-            y1: y,
-            x2: width - padR,
-            y2: y,
-            stroke: COLORS.border,
-            strokeWidth: 0.5
-          }, void 0, false), _jsxDEV("text", {
-            x: padL - 6,
-            y: y + 3,
-            fontSize: 10,
-            fill: COLORS.textDim,
-            textAnchor: "end",
-            fontFamily: "'JetBrains Mono', monospace",
-            children: yFormat(v).replace(".00", "")
-          }, void 0, false)]
-        }, i, true);
-      }), xLabels.map((lbl, i) => {
-        const x = padL + i * stepX;
-        const showLabel = xLabels.length <= 6 || i === 0 || i === xLabels.length - 1 || i % Math.ceil(xLabels.length / 6) === 0;
-        if (!showLabel) return null;
-        return _jsxDEV("text", {
-          x: x,
-          y: height - 8,
-          fontSize: 10,
-          fill: COLORS.textDim,
-          textAnchor: "middle",
-          fontFamily: "'JetBrains Mono', monospace",
-          children: lbl
-        }, i, false);
-      }), series.map((s, si) => {
-        const points = s.values.map((v, i) => {
-          const x = padL + i * stepX;
-          const y = padT + plotH - (v - min) / range * plotH;
-          return `${x},${y}`;
-        }).join(" ");
-        return _jsxDEV("g", {
-          children: [_jsxDEV("polyline", {
-            points: points,
-            fill: "none",
-            stroke: s.color,
-            strokeWidth: 1.8,
-            strokeLinecap: "round",
-            strokeLinejoin: "round"
-          }, void 0, false), s.values.map((v, i) => {
-            const x = padL + i * stepX;
-            const y = padT + plotH - (v - min) / range * plotH;
-            return _jsxDEV("circle", {
-              cx: x,
-              cy: y,
-              r: 2.4,
-              fill: s.color
-            }, i, false);
-          })]
-        }, si, true);
-      })]
-    }, void 0, true), showLegend && series.length > 1 && _jsxDEV("div", {
-      style: {
-        display: "flex",
-        gap: 14,
-        flexWrap: "wrap",
-        marginTop: 6,
-        paddingLeft: padL
-      },
-      children: series.map((s, i) => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          fontSize: 11,
-          color: COLORS.textMuted
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            width: 10,
-            height: 2,
-            background: s.color,
-            borderRadius: 1
-          }
-        }, void 0, false), s.name]
-      }, i, true))
-    }, void 0, false)]
-  }, void 0, true);
+    preserveAspectRatio: "xMidYMid meet"
+  }, Array.from({
+    length: yTicks + 1
+  }).map((_, i) => {
+    const v = min + range * i / yTicks;
+    const y = padT + plotH - plotH * i / yTicks;
+    return React.createElement("g", {
+      key: i
+    }, React.createElement("line", {
+      x1: padL,
+      y1: y,
+      x2: width - padR,
+      y2: y,
+      stroke: COLORS.border,
+      strokeWidth: 0.5
+    }), React.createElement("text", {
+      x: padL - 6,
+      y: y + 3,
+      fontSize: 10,
+      fill: COLORS.textDim,
+      textAnchor: "end",
+      fontFamily: "'JetBrains Mono', monospace"
+    }, yFormat(v).replace(".00", "")));
+  }), xLabels.map((lbl, i) => {
+    const x = padL + i * stepX;
+    const showLabel = xLabels.length <= 6 || i === 0 || i === xLabels.length - 1 || i % Math.ceil(xLabels.length / 6) === 0;
+    if (!showLabel) return null;
+    return React.createElement("text", {
+      key: i,
+      x: x,
+      y: height - 8,
+      fontSize: 10,
+      fill: COLORS.textDim,
+      textAnchor: "middle",
+      fontFamily: "'JetBrains Mono', monospace"
+    }, lbl);
+  }), series.map((s, si) => {
+    const points = s.values.map((v, i) => {
+      const x = padL + i * stepX;
+      const y = padT + plotH - (v - min) / range * plotH;
+      return `${x},${y}`;
+    }).join(" ");
+    return React.createElement("g", {
+      key: si
+    }, React.createElement("polyline", {
+      points: points,
+      fill: "none",
+      stroke: s.color,
+      strokeWidth: 1.8,
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }), s.values.map((v, i) => {
+      const x = padL + i * stepX;
+      const y = padT + plotH - (v - min) / range * plotH;
+      return React.createElement("circle", {
+        key: i,
+        cx: x,
+        cy: y,
+        r: 2.4,
+        fill: s.color
+      });
+    }));
+  })), showLegend && series.length > 1 && React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 14,
+      flexWrap: "wrap",
+      marginTop: 6,
+      paddingLeft: padL
+    }
+  }, series.map((s, i) => React.createElement("div", {
+    key: i,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+      fontSize: 11,
+      color: COLORS.textMuted
+    }
+  }, React.createElement("span", {
+    style: {
+      width: 10,
+      height: 2,
+      background: s.color,
+      borderRadius: 1
+    }
+  }), s.name))));
 }
 function AllUsersTab({
   users,
@@ -563,90 +541,81 @@ function AllUsersTab({
     label: "Flags",
     noSort: true
   }];
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       overflow: "hidden"
-    },
-    children: [_jsxDEV("div", {
-      style: {
-        padding: "14px 18px",
-        borderBottom: `1px solid ${COLORS.border}`,
-        display: "flex",
-        alignItems: "center",
-        gap: 12
-      },
-      children: [_jsxDEV("span", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600
-        },
-        children: ["All Active Users (", users.length, ")"]
-      }, void 0, true), _jsxDEV("input", {
-        value: search,
-        onChange: e => setSearch(e.target.value),
-        placeholder: "Search name, email, or product…",
-        style: {
-          marginLeft: "auto",
-          background: COLORS.bg,
-          border: `1px solid ${COLORS.border}`,
-          color: COLORS.text,
-          fontSize: 12,
-          padding: "6px 10px",
-          borderRadius: 6,
-          width: 260,
-          outline: "none"
-        }
-      }, void 0, false)]
-    }, void 0, true), _jsxDEV("div", {
-      style: {
-        overflowX: "auto"
-      },
-      children: _jsxDEV("table", {
-        style: {
-          width: "100%",
-          borderCollapse: "collapse",
-          fontSize: 13
-        },
-        children: [_jsxDEV("thead", {
-          children: _jsxDEV("tr", {
-            style: {
-              borderBottom: `1px solid ${COLORS.border}`
-            },
-            children: headers.map(h => _jsxDEV("th", {
-              onClick: () => !h.noSort && setSort(h.k),
-              style: {
-                padding: "10px 14px",
-                textAlign: "left",
-                fontSize: 11,
-                color: COLORS.textDim,
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                cursor: h.noSort ? "default" : "pointer",
-                userSelect: "none"
-              },
-              children: [h.label, !h.noSort && sortKey === h.k && (sortDir === "asc" ? " ↑" : " ↓")]
-            }, h.k, true))
-          }, void 0, false)
-        }, void 0, false), _jsxDEV("tbody", {
-          children: sorted.map(u => {
-            const isOpen = expanded === u.email;
-            const top = u.products ? Object.entries(u.products).sort((a, b) => b[1] - a[1])[0] : null;
-            return _jsxDEV(FragmentRow, {
-              u: u,
-              isOpen: isOpen,
-              onToggle: () => setExpanded(isOpen ? null : u.email),
-              top: top,
-              history: history
-            }, u.email, false);
-          })
-        }, void 0, false)]
-      }, void 0, true)
-    }, void 0, false)]
-  }, void 0, true);
+    }
+  }, React.createElement("div", {
+    style: {
+      padding: "14px 18px",
+      borderBottom: `1px solid ${COLORS.border}`,
+      display: "flex",
+      alignItems: "center",
+      gap: 12
+    }
+  }, React.createElement("span", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600
+    }
+  }, "All Active Users (", users.length, ")"), React.createElement("input", {
+    value: search,
+    onChange: e => setSearch(e.target.value),
+    placeholder: "Search name, email, or product…",
+    style: {
+      marginLeft: "auto",
+      background: COLORS.bg,
+      border: `1px solid ${COLORS.border}`,
+      color: COLORS.text,
+      fontSize: 12,
+      padding: "6px 10px",
+      borderRadius: 6,
+      width: 260,
+      outline: "none"
+    }
+  })), React.createElement("div", {
+    style: {
+      overflowX: "auto"
+    }
+  }, React.createElement("table", {
+    style: {
+      width: "100%",
+      borderCollapse: "collapse",
+      fontSize: 13
+    }
+  }, React.createElement("thead", null, React.createElement("tr", {
+    style: {
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, headers.map(h => React.createElement("th", {
+    key: h.k,
+    onClick: () => !h.noSort && setSort(h.k),
+    style: {
+      padding: "10px 14px",
+      textAlign: "left",
+      fontSize: 11,
+      color: COLORS.textDim,
+      fontWeight: 500,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      cursor: h.noSort ? "default" : "pointer",
+      userSelect: "none"
+    }
+  }, h.label, !h.noSort && sortKey === h.k && (sortDir === "asc" ? " ↑" : " ↓"))))), React.createElement("tbody", null, sorted.map(u => {
+    const isOpen = expanded === u.email;
+    const top = u.products ? Object.entries(u.products).sort((a, b) => b[1] - a[1])[0] : null;
+    return React.createElement(FragmentRow, {
+      key: u.email,
+      u: u,
+      isOpen: isOpen,
+      onToggle: () => setExpanded(isOpen ? null : u.email),
+      top: top,
+      history: history
+    });
+  })))));
 }
 function FragmentRow({
   u,
@@ -662,112 +631,97 @@ function FragmentRow({
     const prev = sparkVals[sparkVals.length - 2];
     sparkColor = last > prev ? COLORS.green : last < prev ? COLORS.orange : COLORS.textMuted;
   }
-  return _jsxDEV(_Fragment, {
-    children: [_jsxDEV("tr", {
-      onClick: onToggle,
-      style: {
-        borderBottom: `1px solid ${COLORS.border}`,
-        cursor: "pointer",
-        background: isOpen ? COLORS.cardHover : "transparent"
-      },
-      children: [_jsxDEV("td", {
-        style: {
-          padding: "10px 14px"
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            color: COLORS.textDim,
-            marginRight: 6,
-            display: "inline-block",
-            width: 10
-          },
-          children: isOpen ? "▾" : "▸"
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontWeight: 500
-          },
-          children: u.name
-        }, void 0, false)]
-      }, void 0, true), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          fontSize: 12,
-          color: COLORS.textDim
-        },
-        children: u.email.split("@")[0]
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          fontFamily: "'JetBrains Mono', monospace",
-          fontWeight: 600,
-          color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : u.spend < 10 ? COLORS.blue : COLORS.text
-        },
-        children: fmt(u.spend)
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          fontFamily: "'JetBrains Mono', monospace",
-          color: COLORS.textMuted
-        },
-        children: u.requests.toLocaleString()
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          fontFamily: "'JetBrains Mono', monospace",
-          color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted
-        },
-        children: fmt(u.cpr)
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          fontFamily: "'JetBrains Mono', monospace",
-          color: COLORS.textMuted
-        },
-        children: fmtK(u.avgPromptTokens || 0)
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          width: 130
-        },
-        children: [_jsxDEV(ModelBar, {
-          models: u.models || {}
-        }, void 0, false), u.opusPct > 0 && _jsxDEV("div", {
-          style: {
-            fontSize: 10,
-            color: COLORS.red,
-            marginTop: 3
-          },
-          children: [u.opusPct, "% Opus"]
-        }, void 0, true)]
-      }, void 0, true), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          width: 90
-        },
-        children: _jsxDEV(Sparkline, {
-          values: sparkVals,
-          color: sparkColor
-        }, void 0, false)
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px",
-          fontSize: 12,
-          color: COLORS.textMuted
-        },
-        children: top ? `${top[0]} (${fmt(top[1])})` : "–"
-      }, void 0, false), _jsxDEV("td", {
-        style: {
-          padding: "10px 14px"
-        },
-        children: (u.flags || []).map(f => _jsxDEV(FlagPill, {
-          type: f
-        }, f, false))
-      }, void 0, false)]
-    }, void 0, true), isOpen && _jsxDEV(UserDetailRow, {
-      u: u,
-      history: history
-    }, void 0, false)]
-  }, void 0, true);
+  return React.createElement(React.Fragment, null, React.createElement("tr", {
+    onClick: onToggle,
+    style: {
+      borderBottom: `1px solid ${COLORS.border}`,
+      cursor: "pointer",
+      background: isOpen ? COLORS.cardHover : "transparent"
+    }
+  }, React.createElement("td", {
+    style: {
+      padding: "10px 14px"
+    }
+  }, React.createElement("span", {
+    style: {
+      color: COLORS.textDim,
+      marginRight: 6,
+      display: "inline-block",
+      width: 10
+    }
+  }, isOpen ? "▾" : "▸"), React.createElement("span", {
+    style: {
+      fontWeight: 500
+    }
+  }, u.name)), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontSize: 12,
+      color: COLORS.textDim
+    }
+  }, u.email.split("@")[0]), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontFamily: "'JetBrains Mono', monospace",
+      fontWeight: 600,
+      color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : u.spend < 10 ? COLORS.blue : COLORS.text
+    }
+  }, fmt(u.spend)), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.textMuted
+    }
+  }, u.requests.toLocaleString()), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted
+    }
+  }, fmt(u.cpr)), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.textMuted
+    }
+  }, fmtK(u.avgPromptTokens || 0)), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      width: 130
+    }
+  }, React.createElement(ModelBar, {
+    models: u.models || {}
+  }), u.opusPct > 0 && React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: COLORS.red,
+      marginTop: 3
+    }
+  }, u.opusPct, "% Opus")), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      width: 90
+    }
+  }, React.createElement(Sparkline, {
+    values: sparkVals,
+    color: sparkColor
+  })), React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontSize: 12,
+      color: COLORS.textMuted
+    }
+  }, top ? `${top[0]} (${fmt(top[1])})` : "–"), React.createElement("td", {
+    style: {
+      padding: "10px 14px"
+    }
+  }, (u.flags || []).map(f => React.createElement(FlagPill, {
+    key: f,
+    type: f
+  })))), isOpen && React.createElement(UserDetailRow, {
+    u: u,
+    history: history
+  }));
 }
 function UserDetailRow({
   u,
@@ -775,408 +729,341 @@ function UserDetailRow({
 }) {
   const matrix = u.productModelMatrix;
   const userHistory = history?.userWeeks?.[u.email] || [];
-  return _jsxDEV("tr", {
-    children: _jsxDEV("td", {
-      colSpan: 10,
+  return React.createElement("tr", null, React.createElement("td", {
+    colSpan: 10,
+    style: {
+      padding: 0,
+      background: COLORS.bg,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("div", {
+    style: {
+      padding: "16px 24px",
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 20
+    }
+  }, React.createElement("div", {
+    style: {
+      gridColumn: "1 / -1",
+      display: "flex",
+      gap: 18,
+      fontSize: 12,
+      color: COLORS.textMuted,
+      paddingBottom: 8,
+      borderBottom: `1px solid ${COLORS.border}`,
+      flexWrap: "wrap"
+    }
+  }, React.createElement("div", null, React.createElement("span", {
+    style: {
+      color: COLORS.textDim
+    }
+  }, "Spend"), " ", React.createElement("strong", {
+    style: {
+      color: COLORS.text,
+      fontFamily: "'JetBrains Mono', monospace",
+      marginLeft: 4
+    }
+  }, fmt(u.spend))), React.createElement("div", null, React.createElement("span", {
+    style: {
+      color: COLORS.textDim
+    }
+  }, "Requests"), " ", React.createElement("strong", {
+    style: {
+      color: COLORS.text,
+      fontFamily: "'JetBrains Mono', monospace",
+      marginLeft: 4
+    }
+  }, u.requests.toLocaleString())), React.createElement("div", null, React.createElement("span", {
+    style: {
+      color: COLORS.textDim
+    }
+  }, "$/req"), " ", React.createElement("strong", {
+    style: {
+      color: COLORS.text,
+      fontFamily: "'JetBrains Mono', monospace",
+      marginLeft: 4
+    }
+  }, fmt(u.cpr))), React.createElement("div", null, React.createElement("span", {
+    style: {
+      color: COLORS.textDim
+    }
+  }, "Avg prompt tokens"), " ", React.createElement("strong", {
+    style: {
+      color: COLORS.text,
+      fontFamily: "'JetBrains Mono', monospace",
+      marginLeft: 4
+    }
+  }, fmtK(u.avgPromptTokens || 0))), React.createElement("div", null, React.createElement("span", {
+    style: {
+      color: COLORS.textDim
+    }
+  }, "Weeks tracked"), " ", React.createElement("strong", {
+    style: {
+      color: COLORS.text,
+      fontFamily: "'JetBrains Mono', monospace",
+      marginLeft: 4
+    }
+  }, userHistory.length))), userHistory.length >= 1 && React.createElement("div", {
+    style: {
+      gridColumn: "1 / -1"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textDim,
+      marginBottom: 8
+    }
+  }, "Weekly trend (", userHistory.length, " week", userHistory.length === 1 ? "" : "s", ")"), React.createElement(LineChart, {
+    series: [{
+      name: "Spend",
+      color: COLORS.accent,
+      values: userHistory.map(w => w.spend)
+    }],
+    xLabels: userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim()),
+    height: 160,
+    yFormat: fmt,
+    showLegend: false
+  }), React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 16,
+      marginTop: 12
+    }
+  }, React.createElement("div", null, React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: COLORS.textDim,
+      marginBottom: 4
+    }
+  }, "Requests over time"), React.createElement(LineChart, {
+    series: [{
+      name: "Requests",
+      color: COLORS.cyan,
+      values: userHistory.map(w => w.requests)
+    }],
+    xLabels: userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim()),
+    height: 110,
+    yFormat: n => Math.round(n).toLocaleString(),
+    showLegend: false
+  })), React.createElement("div", null, React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: COLORS.textDim,
+      marginBottom: 4
+    }
+  }, "Opus % over time"), React.createElement(LineChart, {
+    series: [{
+      name: "Opus %",
+      color: COLORS.red,
+      values: userHistory.map(w => w.opusPct || 0)
+    }],
+    xLabels: userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim()),
+    height: 110,
+    yFormat: n => `${Math.round(n)}%`,
+    showLegend: false
+  })))), React.createElement("div", null, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textDim,
+      marginBottom: 8
+    }
+  }, "Product mix (this week)"), (u.productMix || []).map(p => React.createElement("div", {
+    key: p.name,
+    style: {
+      marginBottom: 6
+    }
+  }, React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      marginBottom: 3
+    }
+  }, React.createElement("span", {
+    style: {
+      color: COLORS.textMuted
+    }
+  }, p.name), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.cyan
+    }
+  }, fmt(p.spend))), React.createElement(Bar, {
+    value: p.spend,
+    max: u.spend,
+    color: COLORS.cyan
+  })))), React.createElement("div", null, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textDim,
+      marginBottom: 8
+    }
+  }, "Model mix (this week)"), (u.modelMix || []).map(m => {
+    const c = m.bucket === "opus" ? COLORS.red : m.bucket === "sonnet" ? COLORS.accent : COLORS.green;
+    return React.createElement("div", {
+      key: m.name,
       style: {
-        padding: 0,
-        background: COLORS.bg,
-        borderBottom: `1px solid ${COLORS.border}`
-      },
-      children: _jsxDEV("div", {
-        style: {
-          padding: "16px 24px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 20
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            gridColumn: "1 / -1",
-            display: "flex",
-            gap: 18,
-            fontSize: 12,
-            color: COLORS.textMuted,
-            paddingBottom: 8,
-            borderBottom: `1px solid ${COLORS.border}`,
-            flexWrap: "wrap"
-          },
-          children: [_jsxDEV("div", {
-            children: [_jsxDEV("span", {
-              style: {
-                color: COLORS.textDim
-              },
-              children: "Spend"
-            }, void 0, false), " ", _jsxDEV("strong", {
-              style: {
-                color: COLORS.text,
-                fontFamily: "'JetBrains Mono', monospace",
-                marginLeft: 4
-              },
-              children: fmt(u.spend)
-            }, void 0, false)]
-          }, void 0, true), _jsxDEV("div", {
-            children: [_jsxDEV("span", {
-              style: {
-                color: COLORS.textDim
-              },
-              children: "Requests"
-            }, void 0, false), " ", _jsxDEV("strong", {
-              style: {
-                color: COLORS.text,
-                fontFamily: "'JetBrains Mono', monospace",
-                marginLeft: 4
-              },
-              children: u.requests.toLocaleString()
-            }, void 0, false)]
-          }, void 0, true), _jsxDEV("div", {
-            children: [_jsxDEV("span", {
-              style: {
-                color: COLORS.textDim
-              },
-              children: "$/req"
-            }, void 0, false), " ", _jsxDEV("strong", {
-              style: {
-                color: COLORS.text,
-                fontFamily: "'JetBrains Mono', monospace",
-                marginLeft: 4
-              },
-              children: fmt(u.cpr)
-            }, void 0, false)]
-          }, void 0, true), _jsxDEV("div", {
-            children: [_jsxDEV("span", {
-              style: {
-                color: COLORS.textDim
-              },
-              children: "Avg prompt tokens"
-            }, void 0, false), " ", _jsxDEV("strong", {
-              style: {
-                color: COLORS.text,
-                fontFamily: "'JetBrains Mono', monospace",
-                marginLeft: 4
-              },
-              children: fmtK(u.avgPromptTokens || 0)
-            }, void 0, false)]
-          }, void 0, true), _jsxDEV("div", {
-            children: [_jsxDEV("span", {
-              style: {
-                color: COLORS.textDim
-              },
-              children: "Weeks tracked"
-            }, void 0, false), " ", _jsxDEV("strong", {
-              style: {
-                color: COLORS.text,
-                fontFamily: "'JetBrains Mono', monospace",
-                marginLeft: 4
-              },
-              children: userHistory.length
-            }, void 0, false)]
-          }, void 0, true)]
-        }, void 0, true), userHistory.length >= 1 && _jsxDEV("div", {
-          style: {
-            gridColumn: "1 / -1"
-          },
-          children: [_jsxDEV("div", {
-            style: {
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              color: COLORS.textDim,
-              marginBottom: 8
-            },
-            children: ["Weekly trend (", userHistory.length, " week", userHistory.length === 1 ? "" : "s", ")"]
-          }, void 0, true), _jsxDEV(LineChart, {
-            series: [{
-              name: "Spend",
-              color: COLORS.accent,
-              values: userHistory.map(w => w.spend)
-            }],
-            xLabels: userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim()),
-            height: 160,
-            yFormat: fmt,
-            showLegend: false
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 16,
-              marginTop: 12
-            },
-            children: [_jsxDEV("div", {
-              children: [_jsxDEV("div", {
-                style: {
-                  fontSize: 10,
-                  color: COLORS.textDim,
-                  marginBottom: 4
-                },
-                children: "Requests over time"
-              }, void 0, false), _jsxDEV(LineChart, {
-                series: [{
-                  name: "Requests",
-                  color: COLORS.cyan,
-                  values: userHistory.map(w => w.requests)
-                }],
-                xLabels: userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim()),
-                height: 110,
-                yFormat: n => Math.round(n).toLocaleString(),
-                showLegend: false
-              }, void 0, false)]
-            }, void 0, true), _jsxDEV("div", {
-              children: [_jsxDEV("div", {
-                style: {
-                  fontSize: 10,
-                  color: COLORS.textDim,
-                  marginBottom: 4
-                },
-                children: "Opus % over time"
-              }, void 0, false), _jsxDEV(LineChart, {
-                series: [{
-                  name: "Opus %",
-                  color: COLORS.red,
-                  values: userHistory.map(w => w.opusPct || 0)
-                }],
-                xLabels: userHistory.map(w => w.weekOf.split(",")[0].split("–")[0].trim()),
-                height: 110,
-                yFormat: n => `${Math.round(n)}%`,
-                showLegend: false
-              }, void 0, false)]
-            }, void 0, true)]
-          }, void 0, true)]
-        }, void 0, true), _jsxDEV("div", {
-          children: [_jsxDEV("div", {
-            style: {
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              color: COLORS.textDim,
-              marginBottom: 8
-            },
-            children: "Product mix (this week)"
-          }, void 0, false), (u.productMix || []).map(p => _jsxDEV("div", {
-            style: {
-              marginBottom: 6
-            },
-            children: [_jsxDEV("div", {
-              style: {
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: 12,
-                marginBottom: 3
-              },
-              children: [_jsxDEV("span", {
-                style: {
-                  color: COLORS.textMuted
-                },
-                children: p.name
-              }, void 0, false), _jsxDEV("span", {
-                style: {
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: COLORS.cyan
-                },
-                children: fmt(p.spend)
-              }, void 0, false)]
-            }, void 0, true), _jsxDEV(Bar, {
-              value: p.spend,
-              max: u.spend,
-              color: COLORS.cyan
-            }, void 0, false)]
-          }, p.name, true))]
-        }, void 0, true), _jsxDEV("div", {
-          children: [_jsxDEV("div", {
-            style: {
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              color: COLORS.textDim,
-              marginBottom: 8
-            },
-            children: "Model mix (this week)"
-          }, void 0, false), (u.modelMix || []).map(m => {
-            const c = m.bucket === "opus" ? COLORS.red : m.bucket === "sonnet" ? COLORS.accent : COLORS.green;
-            return _jsxDEV("div", {
-              style: {
-                marginBottom: 6
-              },
-              children: [_jsxDEV("div", {
-                style: {
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: 12,
-                  marginBottom: 3
-                },
-                children: [_jsxDEV("span", {
-                  style: {
-                    color: COLORS.textMuted,
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 11
-                  },
-                  children: formatModel(m.name)
-                }, void 0, false), _jsxDEV("span", {
-                  style: {
-                    fontFamily: "'JetBrains Mono', monospace",
-                    color: c
-                  },
-                  children: fmt(m.spend)
-                }, void 0, false)]
-              }, void 0, true), _jsxDEV(Bar, {
-                value: m.spend,
-                max: u.spend,
-                color: c
-              }, void 0, false)]
-            }, m.name, true);
-          })]
-        }, void 0, true), matrix && matrix.products?.length > 0 && _jsxDEV("div", {
-          style: {
-            gridColumn: "1 / -1"
-          },
-          children: [_jsxDEV("div", {
-            style: {
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              color: COLORS.textDim,
-              marginBottom: 8
-            },
-            children: "Product × Model (this week)"
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              overflowX: "auto"
-            },
-            children: _jsxDEV("table", {
-              style: {
-                width: "100%",
-                borderCollapse: "collapse",
-                fontSize: 12
-              },
-              children: [_jsxDEV("thead", {
-                children: _jsxDEV("tr", {
-                  children: [_jsxDEV("th", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "left",
-                      color: COLORS.textDim,
-                      fontWeight: 500,
-                      borderBottom: `1px solid ${COLORS.border}`
-                    },
-                    children: "Product"
-                  }, void 0, false), matrix.models.map(m => _jsxDEV("th", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "right",
-                      color: COLORS.textDim,
-                      fontWeight: 500,
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: 11,
-                      borderBottom: `1px solid ${COLORS.border}`
-                    },
-                    children: formatModel(m)
-                  }, m, false)), _jsxDEV("th", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "right",
-                      color: COLORS.text,
-                      fontWeight: 600,
-                      borderBottom: `1px solid ${COLORS.border}`
-                    },
-                    children: "Total"
-                  }, void 0, false)]
-                }, void 0, true)
-              }, void 0, false), _jsxDEV("tbody", {
-                children: [matrix.products.map((p, i) => _jsxDEV("tr", {
-                  children: [_jsxDEV("td", {
-                    style: {
-                      padding: "6px 10px",
-                      color: COLORS.textMuted,
-                      borderBottom: `1px solid ${COLORS.border}`
-                    },
-                    children: p
-                  }, void 0, false), matrix.rows[i].map((v, j) => _jsxDEV("td", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "right",
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: v > 0 ? COLORS.text : COLORS.textDim,
-                      borderBottom: `1px solid ${COLORS.border}`
-                    },
-                    children: v > 0 ? fmt(v) : "–"
-                  }, j, false)), _jsxDEV("td", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "right",
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: COLORS.text,
-                      fontWeight: 600,
-                      borderBottom: `1px solid ${COLORS.border}`
-                    },
-                    children: fmt(matrix.rowTotals[i])
-                  }, void 0, false)]
-                }, p, true)), _jsxDEV("tr", {
-                  children: [_jsxDEV("td", {
-                    style: {
-                      padding: "6px 10px",
-                      color: COLORS.text,
-                      fontWeight: 600
-                    },
-                    children: "Total"
-                  }, void 0, false), matrix.colTotals.map((v, j) => _jsxDEV("td", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "right",
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: COLORS.text,
-                      fontWeight: 600
-                    },
-                    children: fmt(v)
-                  }, j, false)), _jsxDEV("td", {
-                    style: {
-                      padding: "6px 10px",
-                      textAlign: "right",
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: COLORS.accent,
-                      fontWeight: 700
-                    },
-                    children: fmt(u.spend)
-                  }, void 0, false)]
-                }, void 0, true)]
-              }, void 0, true)]
-            }, void 0, true)
-          }, void 0, false)]
-        }, void 0, true)]
-      }, void 0, true)
-    }, void 0, false)
-  }, void 0, false);
+        marginBottom: 6
+      }
+    }, React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        fontSize: 12,
+        marginBottom: 3
+      }
+    }, React.createElement("span", {
+      style: {
+        color: COLORS.textMuted,
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 11
+      }
+    }, formatModel(m.name)), React.createElement("span", {
+      style: {
+        fontFamily: "'JetBrains Mono', monospace",
+        color: c
+      }
+    }, fmt(m.spend))), React.createElement(Bar, {
+      value: m.spend,
+      max: u.spend,
+      color: c
+    }));
+  })), matrix && matrix.products?.length > 0 && React.createElement("div", {
+    style: {
+      gridColumn: "1 / -1"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textDim,
+      marginBottom: 8
+    }
+  }, "Product × Model (this week)"), React.createElement("div", {
+    style: {
+      overflowX: "auto"
+    }
+  }, React.createElement("table", {
+    style: {
+      width: "100%",
+      borderCollapse: "collapse",
+      fontSize: 12
+    }
+  }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {
+    style: {
+      padding: "6px 10px",
+      textAlign: "left",
+      color: COLORS.textDim,
+      fontWeight: 500,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Product"), matrix.models.map(m => React.createElement("th", {
+    key: m,
+    style: {
+      padding: "6px 10px",
+      textAlign: "right",
+      color: COLORS.textDim,
+      fontWeight: 500,
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 11,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, formatModel(m))), React.createElement("th", {
+    style: {
+      padding: "6px 10px",
+      textAlign: "right",
+      color: COLORS.text,
+      fontWeight: 600,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Total"))), React.createElement("tbody", null, matrix.products.map((p, i) => React.createElement("tr", {
+    key: p
+  }, React.createElement("td", {
+    style: {
+      padding: "6px 10px",
+      color: COLORS.textMuted,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, p), matrix.rows[i].map((v, j) => React.createElement("td", {
+    key: j,
+    style: {
+      padding: "6px 10px",
+      textAlign: "right",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: v > 0 ? COLORS.text : COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, v > 0 ? fmt(v) : "–")), React.createElement("td", {
+    style: {
+      padding: "6px 10px",
+      textAlign: "right",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.text,
+      fontWeight: 600,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, fmt(matrix.rowTotals[i])))), React.createElement("tr", null, React.createElement("td", {
+    style: {
+      padding: "6px 10px",
+      color: COLORS.text,
+      fontWeight: 600
+    }
+  }, "Total"), matrix.colTotals.map((v, j) => React.createElement("td", {
+    key: j,
+    style: {
+      padding: "6px 10px",
+      textAlign: "right",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.text,
+      fontWeight: 600
+    }
+  }, fmt(v))), React.createElement("td", {
+    style: {
+      padding: "6px 10px",
+      textAlign: "right",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.accent,
+      fontWeight: 700
+    }
+  }, fmt(u.spend))))))))));
 }
 function TrendsTab({
   history
 }) {
   const weeks = history?.weeks || [];
   if (weeks.length === 0) {
-    return _jsxDEV("div", {
+    return React.createElement("div", {
       style: {
         background: COLORS.card,
         border: `1px solid ${COLORS.border}`,
         borderRadius: 10,
         padding: 32,
         textAlign: "center"
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 14,
-          color: COLORS.textMuted,
-          marginBottom: 8
-        },
-        children: "No historical data yet"
-      }, void 0, false), _jsxDEV("div", {
-        style: {
-          fontSize: 12,
-          color: COLORS.textDim,
-          lineHeight: 1.6,
-          maxWidth: 480,
-          margin: "0 auto"
-        },
-        children: "Trends populate after at least one week is loaded into history. Upload one or more weekly CSVs to populate the history layer — multiple weeks can be batched on the first run."
-      }, void 0, false)]
-    }, void 0, true);
+      }
+    }, React.createElement("div", {
+      style: {
+        fontSize: 14,
+        color: COLORS.textMuted,
+        marginBottom: 8
+      }
+    }, "No historical data yet"), React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: COLORS.textDim,
+        lineHeight: 1.6,
+        maxWidth: 480,
+        margin: "0 auto"
+      }
+    }, "Trends populate after at least one week is loaded into history. Upload one or more weekly CSVs to populate the history layer — multiple weeks can be batched on the first run."));
   }
   const xLabels = weeks.map(w => {
     const m = w.weekOf.match(/([A-Z][a-z]+ \d+)/);
@@ -1252,289 +1139,257 @@ function TrendsTab({
     value,
     invertColors = false
   }) => {
-    if (value == null) return _jsxDEV("span", {
+    if (value == null) return React.createElement("span", {
       style: {
         color: COLORS.textDim,
         fontSize: 11
-      },
-      children: "—"
-    }, void 0, false);
+      }
+    }, "—");
     const up = value > 0;
     const isGood = invertColors ? !up : up;
     const c = Math.abs(value) < 1 ? COLORS.textMuted : isGood ? COLORS.green : COLORS.red;
-    return _jsxDEV("span", {
+    return React.createElement("span", {
       style: {
         color: c,
         fontSize: 12,
         fontFamily: "'JetBrains Mono', monospace",
         fontWeight: 600
-      },
-      children: [up ? "↑" : value < 0 ? "↓" : "→", " ", Math.abs(value).toFixed(1), "%"]
-    }, void 0, true);
+      }
+    }, up ? "↑" : value < 0 ? "↓" : "→", " ", Math.abs(value).toFixed(1), "%");
   };
-  return _jsxDEV(_Fragment, {
-    children: [_jsxDEV("div", {
-      style: {
-        display: "flex",
-        gap: 12,
-        marginBottom: 20,
-        flexWrap: "wrap"
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: "16px 20px",
-          flex: "1 1 0"
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: COLORS.textMuted,
-            marginBottom: 6,
-            fontWeight: 500
-          },
-          children: "Weeks tracked"
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            fontSize: 26,
-            fontWeight: 700,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: weeks.length
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            fontSize: 12,
-            color: COLORS.textDim,
-            marginTop: 4
-          },
-          children: [weeks[0].weekOf, " → ", latest.weekOf]
-        }, void 0, true)]
-      }, void 0, true), _jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: "16px 20px",
-          flex: "1 1 0"
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: COLORS.textMuted,
-            marginBottom: 6,
-            fontWeight: 500
-          },
-          children: "Spend WoW"
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            fontSize: 26,
-            fontWeight: 700,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: fmt(latest.totalSpend)
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            marginTop: 4
-          },
-          children: _jsxDEV(DeltaPill, {
-            value: spendDelta
-          }, void 0, false)
-        }, void 0, false)]
-      }, void 0, true), _jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: "16px 20px",
-          flex: "1 1 0"
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: COLORS.textMuted,
-            marginBottom: 6,
-            fontWeight: 500
-          },
-          children: "Active Users WoW"
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            fontSize: 26,
-            fontWeight: 700,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: latest.activeUsers
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            marginTop: 4
-          },
-          children: _jsxDEV(DeltaPill, {
-            value: usersDelta
-          }, void 0, false)
-        }, void 0, false)]
-      }, void 0, true), _jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: "16px 20px",
-          flex: "1 1 0"
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: COLORS.textMuted,
-            marginBottom: 6,
-            fontWeight: 500
-          },
-          children: "Opus Spend WoW"
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            fontSize: 26,
-            fontWeight: 700,
-            fontFamily: "'JetBrains Mono', monospace",
-            color: COLORS.red
-          },
-          children: fmt(latest.opusSpend || 0)
-        }, void 0, false), _jsxDEV("div", {
-          style: {
-            marginTop: 4
-          },
-          children: _jsxDEV(DeltaPill, {
-            value: opusDelta,
-            invertColors: true
-          }, void 0, false)
-        }, void 0, false)]
-      }, void 0, true)]
-    }, void 0, true), _jsxDEV("div", {
-      style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18,
-        marginBottom: 16
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 14
-        },
-        children: "Total Org Spend Over Time"
-      }, void 0, false), _jsxDEV(LineChart, {
-        series: totalSpendSeries,
-        xLabels: xLabels,
-        height: 200,
-        yFormat: fmt
-      }, void 0, false)]
-    }, void 0, true), _jsxDEV("div", {
-      style: {
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 16,
-        marginBottom: 16
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: 18
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 13,
-            fontWeight: 600,
-            marginBottom: 14
-          },
-          children: "Active Users"
-        }, void 0, false), _jsxDEV(LineChart, {
-          series: usersSeries,
-          xLabels: xLabels,
-          height: 180,
-          yFormat: n => Math.round(n).toString(),
-          showLegend: false
-        }, void 0, false)]
-      }, void 0, true), _jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: 18
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 13,
-            fontWeight: 600,
-            marginBottom: 14
-          },
-          children: "Model Mix Spend"
-        }, void 0, false), _jsxDEV(LineChart, {
-          series: modelMixSeries,
-          xLabels: xLabels,
-          height: 180,
-          yFormat: fmt
-        }, void 0, false)]
-      }, void 0, true)]
-    }, void 0, true), _jsxDEV("div", {
-      style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18,
-        marginBottom: 16
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 14
-        },
-        children: "Flag Counts Over Time"
-      }, void 0, false), _jsxDEV(LineChart, {
-        series: flagSeries,
-        xLabels: xLabels,
-        height: 220,
-        yFormat: n => Math.round(n).toString()
-      }, void 0, false)]
-    }, void 0, true), productSeries.length > 0 && _jsxDEV("div", {
-      style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 14
-        },
-        children: "Product Surface Spend Over Time"
-      }, void 0, false), _jsxDEV(LineChart, {
-        series: productSeries,
-        xLabels: xLabels,
-        height: 220,
-        yFormat: fmt
-      }, void 0, false)]
-    }, void 0, true)]
-  }, void 0, true);
+  return React.createElement(React.Fragment, null, React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 12,
+      marginBottom: 20,
+      flexWrap: "wrap"
+    }
+  }, React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: "16px 20px",
+      flex: "1 1 0"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      fontWeight: 500
+    }
+  }, "Weeks tracked"), React.createElement("div", {
+    style: {
+      fontSize: 26,
+      fontWeight: 700,
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, weeks.length), React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textDim,
+      marginTop: 4
+    }
+  }, weeks[0].weekOf, " → ", latest.weekOf)), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: "16px 20px",
+      flex: "1 1 0"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      fontWeight: 500
+    }
+  }, "Spend WoW"), React.createElement("div", {
+    style: {
+      fontSize: 26,
+      fontWeight: 700,
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, fmt(latest.totalSpend)), React.createElement("div", {
+    style: {
+      marginTop: 4
+    }
+  }, React.createElement(DeltaPill, {
+    value: spendDelta
+  }))), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: "16px 20px",
+      flex: "1 1 0"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      fontWeight: 500
+    }
+  }, "Active Users WoW"), React.createElement("div", {
+    style: {
+      fontSize: 26,
+      fontWeight: 700,
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, latest.activeUsers), React.createElement("div", {
+    style: {
+      marginTop: 4
+    }
+  }, React.createElement(DeltaPill, {
+    value: usersDelta
+  }))), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: "16px 20px",
+      flex: "1 1 0"
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      fontWeight: 500
+    }
+  }, "Opus Spend WoW"), React.createElement("div", {
+    style: {
+      fontSize: 26,
+      fontWeight: 700,
+      fontFamily: "'JetBrains Mono', monospace",
+      color: COLORS.red
+    }
+  }, fmt(latest.opusSpend || 0)), React.createElement("div", {
+    style: {
+      marginTop: 4
+    }
+  }, React.createElement(DeltaPill, {
+    value: opusDelta,
+    invertColors: true
+  })))), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18,
+      marginBottom: 16
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Total Org Spend Over Time"), React.createElement(LineChart, {
+    series: totalSpendSeries,
+    xLabels: xLabels,
+    height: 200,
+    yFormat: fmt
+  })), React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 16,
+      marginBottom: 16
+    }
+  }, React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Active Users"), React.createElement(LineChart, {
+    series: usersSeries,
+    xLabels: xLabels,
+    height: 180,
+    yFormat: n => Math.round(n).toString(),
+    showLegend: false
+  })), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Model Mix Spend"), React.createElement(LineChart, {
+    series: modelMixSeries,
+    xLabels: xLabels,
+    height: 180,
+    yFormat: fmt
+  }))), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18,
+      marginBottom: 16
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Flag Counts Over Time"), React.createElement(LineChart, {
+    series: flagSeries,
+    xLabels: xLabels,
+    height: 220,
+    yFormat: n => Math.round(n).toString()
+  })), productSeries.length > 0 && React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Product Surface Spend Over Time"), React.createElement(LineChart, {
+    series: productSeries,
+    xLabels: xLabels,
+    height: 220,
+    yFormat: fmt
+  })));
 }
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const flagCount = (DATA.maxPlan?.length || 0) + (DATA.coworkOpus?.length || 0) + (DATA.opusHeavy?.filter(u => u.opusSpend >= 10).length || 0) + (DATA.tokenDensity?.filter(u => u.spend >= 20).length || 0) + (DATA.legacyModels?.filter(u => u.spend >= 5).length || 0) + (DATA.lowEngagement?.length || 0);
   const hasData = DATA.summary?.activeUsers > 0;
   if (!hasData) {
-    return _jsxDEV("div", {
+    return React.createElement("div", {
       style: {
         background: COLORS.bg,
         color: COLORS.text,
@@ -1544,1083 +1399,959 @@ function Dashboard() {
         alignItems: "center",
         justifyContent: "center",
         padding: 40
-      },
-      children: [_jsxDEV("link", {
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
-        rel: "stylesheet"
-      }, void 0, false), _jsxDEV("div", {
-        style: {
-          maxWidth: 560,
-          textAlign: "center"
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.12em",
-            color: COLORS.textDim,
-            marginBottom: 12,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: "Claude Usage Analysis"
-        }, void 0, false), _jsxDEV("h1", {
-          style: {
-            fontSize: 24,
-            fontWeight: 800,
-            margin: "0 0 12px",
-            letterSpacing: "-0.02em"
-          },
-          children: "No weekly data loaded"
-        }, void 0, false), _jsxDEV("p", {
-          style: {
-            fontSize: 14,
-            color: COLORS.textMuted,
-            lineHeight: 1.6,
-            margin: "0 0 20px"
-          },
-          children: ["This is the dashboard template. To render a real report, replace the ", _jsxDEV("code", {
-            style: {
-              background: COLORS.card,
-              padding: "2px 6px",
-              borderRadius: 4,
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 12,
-              color: COLORS.accent
-            },
-            children: "DATA"
-          }, void 0, false), " object near the top of the file with the computed weekly data, including a populated ", _jsxDEV("code", {
-            style: {
-              background: COLORS.card,
-              padding: "2px 6px",
-              borderRadius: 4,
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 12,
-              color: COLORS.accent
-            },
-            children: "history"
-          }, void 0, false), " block of all weeks tracked."]
-        }, void 0, true), _jsxDEV("div", {
-          style: {
-            background: COLORS.card,
-            border: `1px solid ${COLORS.border}`,
-            borderRadius: 8,
-            padding: 16,
-            fontSize: 12,
-            color: COLORS.textMuted,
-            fontFamily: "'JetBrains Mono', monospace",
-            textAlign: "left",
-            lineHeight: 1.6
-          },
-          children: ["Required keys: ", _jsxDEV("span", {
-            style: {
-              color: COLORS.text
-            },
-            children: "summary, leaderboard, allUsers, maxPlan, opusHeavy, coworkOpus, tokenDensity, powerUsers, legacyModels, lowEngagement, products, models, history"
-          }, void 0, false)]
-        }, void 0, true)]
-      }, void 0, true)]
-    }, void 0, true);
+      }
+    }, React.createElement("link", {
+      href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+      rel: "stylesheet"
+    }), React.createElement("div", {
+      style: {
+        maxWidth: 560,
+        textAlign: "center"
+      }
+    }, React.createElement("div", {
+      style: {
+        fontSize: 11,
+        textTransform: "uppercase",
+        letterSpacing: "0.12em",
+        color: COLORS.textDim,
+        marginBottom: 12,
+        fontFamily: "'JetBrains Mono', monospace"
+      }
+    }, "Claude Usage Analysis"), React.createElement("h1", {
+      style: {
+        fontSize: 24,
+        fontWeight: 800,
+        margin: "0 0 12px",
+        letterSpacing: "-0.02em"
+      }
+    }, "No weekly data loaded"), React.createElement("p", {
+      style: {
+        fontSize: 14,
+        color: COLORS.textMuted,
+        lineHeight: 1.6,
+        margin: "0 0 20px"
+      }
+    }, "This is the dashboard template. To render a real report, replace the ", React.createElement("code", {
+      style: {
+        background: COLORS.card,
+        padding: "2px 6px",
+        borderRadius: 4,
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 12,
+        color: COLORS.accent
+      }
+    }, "DATA"), " object near the top of the file with the computed weekly data, including a populated ", React.createElement("code", {
+      style: {
+        background: COLORS.card,
+        padding: "2px 6px",
+        borderRadius: 4,
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 12,
+        color: COLORS.accent
+      }
+    }, "history"), " block of all weeks tracked."), React.createElement("div", {
+      style: {
+        background: COLORS.card,
+        border: `1px solid ${COLORS.border}`,
+        borderRadius: 8,
+        padding: 16,
+        fontSize: 12,
+        color: COLORS.textMuted,
+        fontFamily: "'JetBrains Mono', monospace",
+        textAlign: "left",
+        lineHeight: 1.6
+      }
+    }, "Required keys: ", React.createElement("span", {
+      style: {
+        color: COLORS.text
+      }
+    }, "summary, leaderboard, allUsers, maxPlan, opusHeavy, coworkOpus, tokenDensity, powerUsers, legacyModels, lowEngagement, products, models, history"))));
   }
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       background: COLORS.bg,
       color: COLORS.text,
       minHeight: "100vh",
       fontFamily: "'Inter', -apple-system, sans-serif",
       padding: 0
-    },
-    children: [_jsxDEV("link", {
-      href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
-      rel: "stylesheet"
-    }, void 0, false), _jsxDEV("div", {
-      style: {
-        padding: "24px 24px 0",
-        borderBottom: `1px solid ${COLORS.border}`
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "baseline",
-          gap: 12,
-          marginBottom: 4,
-          flexWrap: "wrap"
-        },
-        children: [_jsxDEV("h1", {
-          style: {
-            fontSize: 22,
-            fontWeight: 800,
-            margin: 0,
-            letterSpacing: "-0.03em"
-          },
-          children: "Claude Usage Analysis"
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontSize: 13,
-            color: COLORS.textMuted,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: DATA.summary?.weekOf
-        }, void 0, false), DATA.history?.weeks?.length > 0 && _jsxDEV("span", {
-          style: {
-            fontSize: 11,
-            color: COLORS.textDim,
-            fontFamily: "'JetBrains Mono', monospace",
-            marginLeft: "auto"
-          },
-          children: [DATA.history.weeks.length, " week", DATA.history.weeks.length === 1 ? "" : "s", " in history"]
-        }, void 0, true)]
-      }, void 0, true), _jsxDEV("div", {
-        style: {
-          display: "flex",
-          gap: 0,
-          marginTop: 16,
-          flexWrap: "wrap"
-        },
-        children: TABS.map(t => _jsxDEV("button", {
-          onClick: () => setActiveTab(t.id),
-          style: {
-            background: "none",
-            border: "none",
-            color: activeTab === t.id ? COLORS.accent : COLORS.textDim,
-            fontSize: 13,
-            fontWeight: 600,
-            padding: "8px 16px",
-            cursor: "pointer",
-            borderBottom: activeTab === t.id ? `2px solid ${COLORS.accent}` : "2px solid transparent",
-            transition: "all 0.2s",
-            marginBottom: -1
-          },
-          children: [t.label, t.id === "flags" && flagCount > 0 && _jsxDEV("span", {
-            style: {
-              background: COLORS.redGlow,
-              color: COLORS.red,
-              fontSize: 10,
-              fontWeight: 700,
-              padding: "1px 6px",
-              borderRadius: 8,
-              marginLeft: 6
-            },
-            children: flagCount
-          }, void 0, false)]
-        }, t.id, true))
-      }, void 0, false)]
-    }, void 0, true), _jsxDEV("div", {
-      style: {
-        padding: 24,
-        maxWidth: 1200
-      },
-      children: [activeTab === "overview" && _jsxDEV(OverviewTab, {}, void 0, false), activeTab === "leaderboard" && _jsxDEV(LeaderboardTab, {}, void 0, false), activeTab === "allusers" && _jsxDEV(AllUsersTab, {
-        users: DATA.allUsers || [],
-        history: DATA.history
-      }, void 0, false), activeTab === "trends" && _jsxDEV(TrendsTab, {
-        history: DATA.history
-      }, void 0, false), activeTab === "flags" && _jsxDEV(FlagsTab, {}, void 0, false), activeTab === "breakdown" && _jsxDEV(BreakdownTab, {}, void 0, false)]
-    }, void 0, true)]
-  }, void 0, true);
+    }
+  }, React.createElement("link", {
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+    rel: "stylesheet"
+  }), React.createElement("div", {
+    style: {
+      padding: "24px 24px 0",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "baseline",
+      gap: 12,
+      marginBottom: 4,
+      flexWrap: "wrap"
+    }
+  }, React.createElement("h1", {
+    style: {
+      fontSize: 22,
+      fontWeight: 800,
+      margin: 0,
+      letterSpacing: "-0.03em"
+    }
+  }, "Claude Usage Analysis"), React.createElement("span", {
+    style: {
+      fontSize: 13,
+      color: COLORS.textMuted,
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, DATA.summary?.weekOf), DATA.history?.weeks?.length > 0 && React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim,
+      fontFamily: "'JetBrains Mono', monospace",
+      marginLeft: "auto"
+    }
+  }, DATA.history.weeks.length, " week", DATA.history.weeks.length === 1 ? "" : "s", " in history")), React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 0,
+      marginTop: 16,
+      flexWrap: "wrap"
+    }
+  }, TABS.map(t => React.createElement("button", {
+    key: t.id,
+    onClick: () => setActiveTab(t.id),
+    style: {
+      background: "none",
+      border: "none",
+      color: activeTab === t.id ? COLORS.accent : COLORS.textDim,
+      fontSize: 13,
+      fontWeight: 600,
+      padding: "8px 16px",
+      cursor: "pointer",
+      borderBottom: activeTab === t.id ? `2px solid ${COLORS.accent}` : "2px solid transparent",
+      transition: "all 0.2s",
+      marginBottom: -1
+    }
+  }, t.label, t.id === "flags" && flagCount > 0 && React.createElement("span", {
+    style: {
+      background: COLORS.redGlow,
+      color: COLORS.red,
+      fontSize: 10,
+      fontWeight: 700,
+      padding: "1px 6px",
+      borderRadius: 8,
+      marginLeft: 6
+    }
+  }, flagCount))))), React.createElement("div", {
+    style: {
+      padding: 24,
+      maxWidth: 1200
+    }
+  }, activeTab === "overview" && React.createElement(OverviewTab, null), activeTab === "leaderboard" && React.createElement(LeaderboardTab, null), activeTab === "allusers" && React.createElement(AllUsersTab, {
+    users: DATA.allUsers || [],
+    history: DATA.history
+  }), activeTab === "trends" && React.createElement(TrendsTab, {
+    history: DATA.history
+  }), activeTab === "flags" && React.createElement(FlagsTab, null), activeTab === "breakdown" && React.createElement(BreakdownTab, null)));
 }
 function OverviewTab() {
   const flagCount = (DATA.maxPlan?.length || 0) + (DATA.coworkOpus?.length || 0) + (DATA.opusHeavy?.filter(u => u.opusSpend >= 10).length || 0) + (DATA.tokenDensity?.filter(u => u.spend >= 20).length || 0) + (DATA.legacyModels?.filter(u => u.spend >= 5).length || 0) + (DATA.lowEngagement?.length || 0);
-  return _jsxDEV(_Fragment, {
-    children: [_jsxDEV("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 12,
+      marginBottom: 20,
+      flexWrap: "wrap"
+    }
+  }, React.createElement(StatCard, {
+    label: "Total Org Spend",
+    value: fmt(DATA.summary.totalSpend),
+    sub: "1-week period"
+  }), React.createElement(StatCard, {
+    label: "Active Users",
+    value: DATA.summary.activeUsers,
+    sub: `${fmt(DATA.summary.avgSpend)} avg/user`
+  }), React.createElement(StatCard, {
+    label: "Top 10 Concentration",
+    value: `${DATA.summary.top10Pct}%`,
+    sub: fmt(DATA.summary.top10Spend),
+    color: COLORS.orange
+  }), React.createElement(StatCard, {
+    label: "Flags Raised",
+    value: flagCount,
+    sub: "Action items",
+    color: COLORS.red
+  })), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18,
+      marginBottom: 20
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, "Model Spend Distribution"), DATA.models.map(m => {
+    const pct = m.spend / DATA.summary.totalSpend * 100;
+    const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
+    const label = formatModel(m.name);
+    return React.createElement("div", {
+      key: m.name,
       style: {
         display: "flex",
+        alignItems: "center",
         gap: 12,
-        marginBottom: 20,
-        flexWrap: "wrap"
-      },
-      children: [_jsxDEV(StatCard, {
-        label: "Total Org Spend",
-        value: fmt(DATA.summary.totalSpend),
-        sub: "1-week period"
-      }, void 0, false), _jsxDEV(StatCard, {
-        label: "Active Users",
-        value: DATA.summary.activeUsers,
-        sub: `${fmt(DATA.summary.avgSpend)} avg/user`
-      }, void 0, false), _jsxDEV(StatCard, {
-        label: "Top 10 Concentration",
-        value: `${DATA.summary.top10Pct}%`,
-        sub: fmt(DATA.summary.top10Spend),
-        color: COLORS.orange
-      }, void 0, false), _jsxDEV(StatCard, {
-        label: "Flags Raised",
-        value: flagCount,
-        sub: "Action items",
-        color: COLORS.red
-      }, void 0, false)]
-    }, void 0, true), _jsxDEV("div", {
+        marginBottom: 8
+      }
+    }, React.createElement("div", {
       style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18,
-        marginBottom: 20
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 12
-        },
-        children: "Model Spend Distribution"
-      }, void 0, false), DATA.models.map(m => {
-        const pct = m.spend / DATA.summary.totalSpend * 100;
-        const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
-        const label = formatModel(m.name);
-        return _jsxDEV("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            marginBottom: 8
-          },
-          children: [_jsxDEV("div", {
-            style: {
-              width: 140,
-              fontSize: 12,
-              fontFamily: "'JetBrains Mono', monospace",
-              color: COLORS.textMuted
-            },
-            children: label
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              flex: 1
-            },
-            children: _jsxDEV(Bar, {
-              value: m.spend,
-              max: DATA.models[0].spend,
-              color: color
-            }, void 0, false)
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              width: 70,
-              textAlign: "right",
-              fontSize: 12,
-              fontFamily: "'JetBrains Mono', monospace",
-              color
-            },
-            children: fmt(m.spend)
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              width: 40,
-              textAlign: "right",
-              fontSize: 11,
-              color: COLORS.textDim
-            },
-            children: [pct.toFixed(0), "%"]
-          }, void 0, true)]
-        }, m.name, true);
-      })]
-    }, void 0, true), _jsxDEV("div", {
+        width: 140,
+        fontSize: 12,
+        fontFamily: "'JetBrains Mono', monospace",
+        color: COLORS.textMuted
+      }
+    }, label), React.createElement("div", {
       style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18,
-        marginBottom: 20
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 12
-        },
-        children: "Product Surface Breakdown"
-      }, void 0, false), DATA.products.map(p => {
-        const pct = p.spend / DATA.summary.totalSpend * 100;
-        return _jsxDEV("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            marginBottom: 8
-          },
-          children: [_jsxDEV("div", {
-            style: {
-              width: 140,
-              fontSize: 12,
-              color: COLORS.textMuted
-            },
-            children: p.name
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              flex: 1
-            },
-            children: _jsxDEV(Bar, {
-              value: p.spend,
-              max: DATA.products[0].spend,
-              color: COLORS.cyan
-            }, void 0, false)
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              width: 70,
-              textAlign: "right",
-              fontSize: 12,
-              fontFamily: "'JetBrains Mono', monospace"
-            },
-            children: fmt(p.spend)
-          }, void 0, false), _jsxDEV("div", {
-            style: {
-              width: 60,
-              textAlign: "right",
-              fontSize: 11,
-              color: COLORS.textDim
-            },
-            children: [p.requests.toLocaleString(), " reqs"]
-          }, void 0, true), _jsxDEV("div", {
-            style: {
-              width: 40,
-              textAlign: "right",
-              fontSize: 11,
-              color: COLORS.textDim
-            },
-            children: [pct.toFixed(0), "%"]
-          }, void 0, true)]
-        }, p.name, true);
-      })]
-    }, void 0, true), _jsxDEV("div", {
+        flex: 1
+      }
+    }, React.createElement(Bar, {
+      value: m.spend,
+      max: DATA.models[0].spend,
+      color: color
+    })), React.createElement("div", {
       style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 4,
-          color: COLORS.green
-        },
-        children: "⚡ Power Users: Org Efficiency Benchmarks"
-      }, void 0, false), _jsxDEV("div", {
-        style: {
-          fontSize: 11,
-          color: COLORS.textDim,
-          marginBottom: 14
-        },
-        children: "High volume, Sonnet/Haiku dominant, low cost-per-request"
-      }, void 0, false), DATA.powerUsers.map((u, i) => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "8px 0",
-          borderBottom: i < DATA.powerUsers.length - 1 ? `1px solid ${COLORS.border}` : "none"
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            width: 22,
-            fontSize: 12,
-            color: COLORS.textDim,
-            textAlign: "center"
-          },
-          children: i + 1
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            flex: 1,
-            fontSize: 13,
-            fontWeight: 500
-          },
-          children: u.name
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontSize: 12,
-            color: COLORS.green,
-            fontFamily: "'JetBrains Mono', monospace",
-            width: 60,
-            textAlign: "right"
-          },
-          children: [u.requests, " reqs"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            fontSize: 12,
-            color: COLORS.textMuted,
-            fontFamily: "'JetBrains Mono', monospace",
-            width: 70,
-            textAlign: "right"
-          },
-          children: fmt(u.spend)
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontSize: 12,
-            color: COLORS.green,
-            fontFamily: "'JetBrains Mono', monospace",
-            width: 65,
-            textAlign: "right"
-          },
-          children: [fmt(u.cpr), "/req"]
-        }, void 0, true)]
-      }, u.email, true))]
-    }, void 0, true)]
-  }, void 0, true);
+        width: 70,
+        textAlign: "right",
+        fontSize: 12,
+        fontFamily: "'JetBrains Mono', monospace",
+        color
+      }
+    }, fmt(m.spend)), React.createElement("div", {
+      style: {
+        width: 40,
+        textAlign: "right",
+        fontSize: 11,
+        color: COLORS.textDim
+      }
+    }, pct.toFixed(0), "%"));
+  })), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18,
+      marginBottom: 20
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 12
+    }
+  }, "Product Surface Breakdown"), DATA.products.map(p => {
+    const pct = p.spend / DATA.summary.totalSpend * 100;
+    return React.createElement("div", {
+      key: p.name,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        marginBottom: 8
+      }
+    }, React.createElement("div", {
+      style: {
+        width: 140,
+        fontSize: 12,
+        color: COLORS.textMuted
+      }
+    }, p.name), React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, React.createElement(Bar, {
+      value: p.spend,
+      max: DATA.products[0].spend,
+      color: COLORS.cyan
+    })), React.createElement("div", {
+      style: {
+        width: 70,
+        textAlign: "right",
+        fontSize: 12,
+        fontFamily: "'JetBrains Mono', monospace"
+      }
+    }, fmt(p.spend)), React.createElement("div", {
+      style: {
+        width: 60,
+        textAlign: "right",
+        fontSize: 11,
+        color: COLORS.textDim
+      }
+    }, p.requests.toLocaleString(), " reqs"), React.createElement("div", {
+      style: {
+        width: 40,
+        textAlign: "right",
+        fontSize: 11,
+        color: COLORS.textDim
+      }
+    }, pct.toFixed(0), "%"));
+  })), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 4,
+      color: COLORS.green
+    }
+  }, "⚡ Power Users: Org Efficiency Benchmarks"), React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim,
+      marginBottom: 14
+    }
+  }, "High volume, Sonnet/Haiku dominant, low cost-per-request"), DATA.powerUsers.map((u, i) => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "8px 0",
+      borderBottom: i < DATA.powerUsers.length - 1 ? `1px solid ${COLORS.border}` : "none"
+    }
+  }, React.createElement("span", {
+    style: {
+      width: 22,
+      fontSize: 12,
+      color: COLORS.textDim,
+      textAlign: "center"
+    }
+  }, i + 1), React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 13,
+      fontWeight: 500
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: COLORS.green,
+      fontFamily: "'JetBrains Mono', monospace",
+      width: 60,
+      textAlign: "right"
+    }
+  }, u.requests, " reqs"), React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      fontFamily: "'JetBrains Mono', monospace",
+      width: 70,
+      textAlign: "right"
+    }
+  }, fmt(u.spend)), React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: COLORS.green,
+      fontFamily: "'JetBrains Mono', monospace",
+      width: 65,
+      textAlign: "right"
+    }
+  }, fmt(u.cpr), "/req")))));
 }
 function LeaderboardTab() {
-  return _jsxDEV("div", {
+  return React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       overflow: "hidden"
-    },
-    children: [_jsxDEV("div", {
+    }
+  }, React.createElement("div", {
+    style: {
+      padding: "14px 18px",
+      borderBottom: `1px solid ${COLORS.border}`,
+      fontSize: 13,
+      fontWeight: 600
+    }
+  }, "Top 30 Spenders"), React.createElement("div", {
+    style: {
+      overflowX: "auto"
+    }
+  }, React.createElement("table", {
+    style: {
+      width: "100%",
+      borderCollapse: "collapse",
+      fontSize: 13
+    }
+  }, React.createElement("thead", null, React.createElement("tr", {
+    style: {
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, ["#", "User", "Spend", "Requests", "$/Req", "Model Mix", "Top Product"].map(h => React.createElement("th", {
+    key: h,
+    style: {
+      padding: "10px 14px",
+      textAlign: "left",
+      fontSize: 11,
+      color: COLORS.textDim,
+      fontWeight: 500,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em"
+    }
+  }, h)))), React.createElement("tbody", null, DATA.leaderboard.map((u, i) => {
+    const topProduct = Object.entries(u.products).sort((a, b) => b[1] - a[1])[0];
+    const isMaxCandidate = u.spend > 200;
+    return React.createElement("tr", {
+      key: u.email,
       style: {
-        padding: "14px 18px",
         borderBottom: `1px solid ${COLORS.border}`,
-        fontSize: 13,
-        fontWeight: 600
-      },
-      children: "Top 30 Spenders"
-    }, void 0, false), _jsxDEV("div", {
+        background: isMaxCandidate ? COLORS.redGlow : "transparent"
+      }
+    }, React.createElement("td", {
       style: {
-        overflowX: "auto"
-      },
-      children: _jsxDEV("table", {
-        style: {
-          width: "100%",
-          borderCollapse: "collapse",
-          fontSize: 13
-        },
-        children: [_jsxDEV("thead", {
-          children: _jsxDEV("tr", {
-            style: {
-              borderBottom: `1px solid ${COLORS.border}`
-            },
-            children: ["#", "User", "Spend", "Requests", "$/Req", "Model Mix", "Top Product"].map(h => _jsxDEV("th", {
-              style: {
-                padding: "10px 14px",
-                textAlign: "left",
-                fontSize: 11,
-                color: COLORS.textDim,
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: "0.06em"
-              },
-              children: h
-            }, h, false))
-          }, void 0, false)
-        }, void 0, false), _jsxDEV("tbody", {
-          children: DATA.leaderboard.map((u, i) => {
-            const topProduct = Object.entries(u.products).sort((a, b) => b[1] - a[1])[0];
-            const isMaxCandidate = u.spend > 200;
-            return _jsxDEV("tr", {
-              style: {
-                borderBottom: `1px solid ${COLORS.border}`,
-                background: isMaxCandidate ? COLORS.redGlow : "transparent"
-              },
-              children: [_jsxDEV("td", {
-                style: {
-                  padding: "10px 14px",
-                  color: COLORS.textDim,
-                  width: 30
-                },
-                children: i + 1
-              }, void 0, false), _jsxDEV("td", {
-                style: {
-                  padding: "10px 14px"
-                },
-                children: [_jsxDEV("div", {
-                  style: {
-                    fontWeight: 500
-                  },
-                  children: u.name
-                }, void 0, false), _jsxDEV("div", {
-                  style: {
-                    fontSize: 11,
-                    color: COLORS.textDim
-                  },
-                  children: u.email.split("@")[0]
-                }, void 0, false)]
-              }, void 0, true), _jsxDEV("td", {
-                style: {
-                  padding: "10px 14px",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontWeight: 600,
-                  color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text
-                },
-                children: fmt(u.spend)
-              }, void 0, false), _jsxDEV("td", {
-                style: {
-                  padding: "10px 14px",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: COLORS.textMuted
-                },
-                children: u.requests.toLocaleString()
-              }, void 0, false), _jsxDEV("td", {
-                style: {
-                  padding: "10px 14px",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted
-                },
-                children: fmt(u.cpr)
-              }, void 0, false), _jsxDEV("td", {
-                style: {
-                  padding: "10px 14px",
-                  width: 120
-                },
-                children: [_jsxDEV(ModelBar, {
-                  models: u.models
-                }, void 0, false), _jsxDEV("div", {
-                  style: {
-                    fontSize: 10,
-                    color: COLORS.textDim,
-                    marginTop: 3
-                  },
-                  children: u.opusPct > 0 && _jsxDEV("span", {
-                    style: {
-                      color: COLORS.red
-                    },
-                    children: [u.opusPct, "% Opus"]
-                  }, void 0, true)
-                }, void 0, false)]
-              }, void 0, true), _jsxDEV("td", {
-                style: {
-                  padding: "10px 14px",
-                  fontSize: 12,
-                  color: COLORS.textMuted
-                },
-                children: topProduct ? `${topProduct[0]} (${fmt(topProduct[1])})` : "–"
-              }, void 0, false)]
-            }, u.email, true);
-          })
-        }, void 0, false)]
-      }, void 0, true)
-    }, void 0, false)]
-  }, void 0, true);
+        padding: "10px 14px",
+        color: COLORS.textDim,
+        width: 30
+      }
+    }, i + 1), React.createElement("td", {
+      style: {
+        padding: "10px 14px"
+      }
+    }, React.createElement("div", {
+      style: {
+        fontWeight: 500
+      }
+    }, u.name), React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: COLORS.textDim
+      }
+    }, u.email.split("@")[0])), React.createElement("td", {
+      style: {
+        padding: "10px 14px",
+        fontFamily: "'JetBrains Mono', monospace",
+        fontWeight: 600,
+        color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text
+      }
+    }, fmt(u.spend)), React.createElement("td", {
+      style: {
+        padding: "10px 14px",
+        fontFamily: "'JetBrains Mono', monospace",
+        color: COLORS.textMuted
+      }
+    }, u.requests.toLocaleString()), React.createElement("td", {
+      style: {
+        padding: "10px 14px",
+        fontFamily: "'JetBrains Mono', monospace",
+        color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted
+      }
+    }, fmt(u.cpr)), React.createElement("td", {
+      style: {
+        padding: "10px 14px",
+        width: 120
+      }
+    }, React.createElement(ModelBar, {
+      models: u.models
+    }), React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: COLORS.textDim,
+        marginTop: 3
+      }
+    }, u.opusPct > 0 && React.createElement("span", {
+      style: {
+        color: COLORS.red
+      }
+    }, u.opusPct, "% Opus"))), React.createElement("td", {
+      style: {
+        padding: "10px 14px",
+        fontSize: 12,
+        color: COLORS.textMuted
+      }
+    }, topProduct ? `${topProduct[0]} (${fmt(topProduct[1])})` : "–"));
+  })))));
 }
 function FlagsTab() {
-  return _jsxDEV(_Fragment, {
-    children: [_jsxDEV(FlagCard, {
-      icon: "🔴",
-      title: "Max Plan Candidates (surfaced, not DM'd)",
-      count: DATA.maxPlan.length,
+  return React.createElement(React.Fragment, null, React.createElement(FlagCard, {
+    icon: "🔴",
+    title: "Max Plan Candidates (surfaced, not DM'd)",
+    count: DATA.maxPlan.length,
+    color: COLORS.red,
+    glowColor: COLORS.redGlow
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      fontSize: 12,
+      color: COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Weekly spend >$200 (projected $800+/mo). Reviewed manually; users are NOT DM'd about max-plan eligibility."), DATA.maxPlan.map(u => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "12px 18px",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("span", {
+    style: {
+      flex: 1,
+      fontWeight: 500,
+      fontSize: 13
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 13,
       color: COLORS.red,
-      glowColor: COLORS.redGlow,
-      children: [_jsxDEV("div", {
-        style: {
-          padding: 14,
-          fontSize: 12,
-          color: COLORS.textDim,
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: "Weekly spend >$200 (projected $800+/mo). Reviewed manually; users are NOT DM'd about max-plan eligibility."
-      }, void 0, false), DATA.maxPlan.map(u => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "12px 18px",
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            flex: 1,
-            fontWeight: 500,
-            fontSize: 13
-          },
-          children: u.name
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 13,
-            color: COLORS.red,
-            fontWeight: 600
-          },
-          children: [fmt(u.weeklySpend), "/wk"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            color: COLORS.textDim
-          },
-          children: ["→ ~", fmt(u.projectedMonthly), "/mo"]
-        }, void 0, true)]
-      }, u.email, true))]
-    }, void 0, true), _jsxDEV(FlagCard, {
-      icon: "🟠",
-      title: "Cowork → Opus (Automated Routing)",
-      count: DATA.coworkOpus.length,
+      fontWeight: 600
+    }
+  }, fmt(u.weeklySpend), "/wk"), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 12,
+      color: COLORS.textDim
+    }
+  }, "→ ~", fmt(u.projectedMonthly), "/mo")))), React.createElement(FlagCard, {
+    icon: "🟠",
+    title: "Cowork → Opus (Automated Routing)",
+    count: DATA.coworkOpus.length,
+    color: COLORS.orange,
+    glowColor: COLORS.orangeGlow
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      fontSize: 12,
+      color: COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Highest-priority cost control. No human selected Opus. Cowork routed automatically."), DATA.coworkOpus.map(u => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "12px 18px",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("span", {
+    style: {
+      flex: 1,
+      fontWeight: 500,
+      fontSize: 13
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 13,
       color: COLORS.orange,
-      glowColor: COLORS.orangeGlow,
-      children: [_jsxDEV("div", {
-        style: {
-          padding: 14,
-          fontSize: 12,
-          color: COLORS.textDim,
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: "Highest-priority cost control. No human selected Opus. Cowork routed automatically."
-      }, void 0, false), DATA.coworkOpus.map(u => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "12px 18px",
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            flex: 1,
-            fontWeight: 500,
-            fontSize: 13
-          },
-          children: u.name
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 13,
-            color: COLORS.orange,
-            fontWeight: 600
-          },
-          children: fmt(u.spend)
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontSize: 12,
-            color: COLORS.textDim
-          },
-          children: [u.requests, " reqs"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            fontSize: 11,
-            color: COLORS.textDim,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: formatModel(u.model)
-        }, void 0, false)]
-      }, u.email, true))]
-    }, void 0, true), _jsxDEV(FlagCard, {
-      icon: "🟣",
-      title: "Opus-Heavy Chat Users (≥30%)",
-      count: DATA.opusHeavy.filter(u => u.opusSpend >= 10).length,
+      fontWeight: 600
+    }
+  }, fmt(u.spend)), React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textDim
+    }
+  }, u.requests, " reqs"), React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim,
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, formatModel(u.model))))), React.createElement(FlagCard, {
+    icon: "🟣",
+    title: "Opus-Heavy Chat Users (≥30%)",
+    count: DATA.opusHeavy.filter(u => u.opusSpend >= 10).length,
+    color: COLORS.purple,
+    glowColor: COLORS.purpleGlow
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      fontSize: 12,
+      color: COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend."), DATA.opusHeavy.filter(u => u.opusSpend >= 10).map(u => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "10px 18px",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("span", {
+    style: {
+      flex: 1,
+      fontWeight: 500,
+      fontSize: 13
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 12,
+      color: COLORS.purple
+    }
+  }, fmt(u.opusSpend), " Opus"), React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim
+    }
+  }, "/ ", fmt(u.chatSpend), " Chat"), React.createElement("span", {
+    style: {
+      background: COLORS.purpleGlow,
       color: COLORS.purple,
-      glowColor: COLORS.purpleGlow,
-      children: [_jsxDEV("div", {
-        style: {
-          padding: 14,
-          fontSize: 12,
-          color: COLORS.textDim,
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: "≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend."
-      }, void 0, false), DATA.opusHeavy.filter(u => u.opusSpend >= 10).map(u => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "10px 18px",
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            flex: 1,
-            fontWeight: 500,
-            fontSize: 13
-          },
-          children: u.name
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            color: COLORS.purple
-          },
-          children: [fmt(u.opusSpend), " Opus"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            fontSize: 11,
-            color: COLORS.textDim
-          },
-          children: ["/ ", fmt(u.chatSpend), " Chat"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            background: COLORS.purpleGlow,
-            color: COLORS.purple,
-            fontSize: 11,
-            fontWeight: 700,
-            padding: "2px 8px",
-            borderRadius: 8
-          },
-          children: [u.opusPct, "%"]
-        }, void 0, true)]
-      }, u.email, true))]
-    }, void 0, true), _jsxDEV(FlagCard, {
-      icon: "📐",
-      title: "High Token Density (>500K avg prompt)",
-      count: DATA.tokenDensity.length,
-      color: COLORS.orange,
-      glowColor: COLORS.orangeGlow,
-      children: [_jsxDEV("div", {
-        style: {
-          padding: 14,
-          fontSize: 12,
-          color: COLORS.textDim,
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: "Prompt architecture issue, not a model problem. Large context windows driving cost."
-      }, void 0, false), DATA.tokenDensity.slice(0, 15).map(u => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "10px 18px",
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            flex: 1,
-            fontWeight: 500,
-            fontSize: 13
-          },
-          children: u.name
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            color: COLORS.orange
-          },
-          children: [fmtK(u.avgPromptTokens), " avg"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            fontSize: 11,
-            color: COLORS.textDim
-          },
-          children: [u.requests, " reqs"]
-        }, void 0, true), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            color: COLORS.textMuted
-          },
-          children: fmt(u.spend)
-        }, void 0, false)]
-      }, u.email, true))]
-    }, void 0, true), _jsxDEV(FlagCard, {
-      icon: "⚠️",
-      title: "Legacy Model Usage",
-      count: DATA.legacyModels.length,
-      color: COLORS.orange,
-      glowColor: COLORS.orangeGlow,
-      children: [_jsxDEV("div", {
-        style: {
-          padding: 14,
-          fontSize: 12,
-          color: COLORS.textDim,
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: "Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7."
-      }, void 0, false), DATA.legacyModels.map(u => _jsxDEV("div", {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "10px 18px",
-          borderBottom: `1px solid ${COLORS.border}`
-        },
-        children: [_jsxDEV("span", {
-          style: {
-            flex: 1,
-            fontWeight: 500,
-            fontSize: 13
-          },
-          children: u.name
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontSize: 11,
-            color: COLORS.textDim,
-            fontFamily: "'JetBrains Mono', monospace"
-          },
-          children: u.models.map(formatModel).join(", ")
-        }, void 0, false), _jsxDEV("span", {
-          style: {
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            color: COLORS.textMuted
-          },
-          children: fmt(u.spend)
-        }, void 0, false)]
-      }, u.email, true))]
-    }, void 0, true), _jsxDEV("div", {
-      style: {
-        marginTop: 28,
-        paddingTop: 20,
-        borderTop: `1px dashed ${COLORS.borderLight}`
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 11,
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-          color: COLORS.blue,
-          marginBottom: 12,
-          fontWeight: 600
-        },
-        children: "Separate category — Engagement, not cost"
-      }, void 0, false), _jsxDEV(FlagCard, {
-        icon: "💧",
-        title: `Low Engagement Users (<$10/week — ${DATA.lowEngagement.filter(u => u.dmEligible).length} of ${DATA.lowEngagement.length} DM-eligible)`,
-        count: DATA.lowEngagement.length,
-        color: COLORS.blue,
-        glowColor: COLORS.blueGlow,
-        children: [_jsxDEV("div", {
-          style: {
-            padding: 14,
-            fontSize: 12,
-            color: COLORS.textDim,
-            borderBottom: `1px solid ${COLORS.border}`
-          },
-          children: "Active in the period (≥1 request) but spent under $10. Many valid reasons for this — other tools, different workflows, time off, role mismatch. DMs are drafted ONLY for users with 2+ consecutive low-engagement weeks, to filter out one-off slow weeks. All low-engagement users are shown below; the DM-eligible column shows which ones meet the threshold."
-        }, void 0, false), DATA.lowEngagement.map(u => _jsxDEV("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            padding: "10px 18px",
-            borderBottom: `1px solid ${COLORS.border}`
-          },
-          children: [_jsxDEV("span", {
-            style: {
-              flex: 1,
-              fontWeight: 500,
-              fontSize: 13
-            },
-            children: u.name
-          }, void 0, false), _jsxDEV("span", {
-            style: {
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 12,
-              color: COLORS.blue,
-              width: 70,
-              textAlign: "right"
-            },
-            children: fmt(u.spend)
-          }, void 0, false), _jsxDEV("span", {
-            style: {
-              fontSize: 11,
-              color: COLORS.textDim,
-              width: 70,
-              textAlign: "right"
-            },
-            children: [u.requests, " req", u.requests === 1 ? "" : "s"]
-          }, void 0, true), _jsxDEV("span", {
-            style: {
-              fontSize: 11,
-              color: u.consecutiveLowWeeks >= 4 ? COLORS.orange : u.consecutiveLowWeeks >= 2 ? COLORS.blue : COLORS.textDim,
-              width: 90,
-              textAlign: "right",
-              fontFamily: "'JetBrains Mono', monospace"
-            },
-            children: [u.consecutiveLowWeeks, "w streak"]
-          }, void 0, true), _jsxDEV("span", {
-            style: {
-              width: 90,
-              textAlign: "right"
-            },
-            children: u.dmEligible ? _jsxDEV("span", {
-              style: {
-                fontSize: 10,
-                fontWeight: 600,
-                padding: "2px 7px",
-                borderRadius: 6,
-                background: COLORS.blueGlow,
-                color: COLORS.blue
-              },
-              children: "DM eligible"
-            }, void 0, false) : _jsxDEV("span", {
-              style: {
-                fontSize: 10,
-                color: COLORS.textDim
-              },
-              children: "first low week"
-            }, void 0, false)
-          }, void 0, false)]
-        }, u.email, true))]
-      }, void 0, true)]
-    }, void 0, true)]
-  }, void 0, true);
+      fontSize: 11,
+      fontWeight: 700,
+      padding: "2px 8px",
+      borderRadius: 8
+    }
+  }, u.opusPct, "%")))), React.createElement(FlagCard, {
+    icon: "📐",
+    title: "High Token Density (>500K avg prompt)",
+    count: DATA.tokenDensity.length,
+    color: COLORS.orange,
+    glowColor: COLORS.orangeGlow
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      fontSize: 12,
+      color: COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Prompt architecture issue, not a model problem. Large context windows driving cost."), DATA.tokenDensity.slice(0, 15).map(u => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "10px 18px",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("span", {
+    style: {
+      flex: 1,
+      fontWeight: 500,
+      fontSize: 13
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 12,
+      color: COLORS.orange
+    }
+  }, fmtK(u.avgPromptTokens), " avg"), React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim
+    }
+  }, u.requests, " reqs"), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 12,
+      color: COLORS.textMuted
+    }
+  }, fmt(u.spend))))), React.createElement(FlagCard, {
+    icon: "⚠️",
+    title: "Legacy Model Usage",
+    count: DATA.legacyModels.length,
+    color: COLORS.orange,
+    glowColor: COLORS.orangeGlow
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      fontSize: 12,
+      color: COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7."), DATA.legacyModels.map(u => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "10px 18px",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("span", {
+    style: {
+      flex: 1,
+      fontWeight: 500,
+      fontSize: 13
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim,
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, u.models.map(formatModel).join(", ")), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 12,
+      color: COLORS.textMuted
+    }
+  }, fmt(u.spend))))), React.createElement("div", {
+    style: {
+      marginTop: 28,
+      paddingTop: 20,
+      borderTop: `1px dashed ${COLORS.borderLight}`
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.1em",
+      color: COLORS.blue,
+      marginBottom: 12,
+      fontWeight: 600
+    }
+  }, "Separate category — Engagement, not cost"), React.createElement(FlagCard, {
+    icon: "💧",
+    title: `Low Engagement Users (<$10/week — ${DATA.lowEngagement.filter(u => u.dmEligible).length} of ${DATA.lowEngagement.length} DM-eligible)`,
+    count: DATA.lowEngagement.length,
+    color: COLORS.blue,
+    glowColor: COLORS.blueGlow
+  }, React.createElement("div", {
+    style: {
+      padding: 14,
+      fontSize: 12,
+      color: COLORS.textDim,
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, "Active in the period (≥1 request) but spent under $10. Many valid reasons for this — other tools, different workflows, time off, role mismatch. DMs are drafted ONLY for users with 2+ consecutive low-engagement weeks, to filter out one-off slow weeks. All low-engagement users are shown below; the DM-eligible column shows which ones meet the threshold."), DATA.lowEngagement.map(u => React.createElement("div", {
+    key: u.email,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: "10px 18px",
+      borderBottom: `1px solid ${COLORS.border}`
+    }
+  }, React.createElement("span", {
+    style: {
+      flex: 1,
+      fontWeight: 500,
+      fontSize: 13
+    }
+  }, u.name), React.createElement("span", {
+    style: {
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: 12,
+      color: COLORS.blue,
+      width: 70,
+      textAlign: "right"
+    }
+  }, fmt(u.spend)), React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textDim,
+      width: 70,
+      textAlign: "right"
+    }
+  }, u.requests, " req", u.requests === 1 ? "" : "s"), React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: u.consecutiveLowWeeks >= 4 ? COLORS.orange : u.consecutiveLowWeeks >= 2 ? COLORS.blue : COLORS.textDim,
+      width: 90,
+      textAlign: "right",
+      fontFamily: "'JetBrains Mono', monospace"
+    }
+  }, u.consecutiveLowWeeks, "w streak"), React.createElement("span", {
+    style: {
+      width: 90,
+      textAlign: "right"
+    }
+  }, u.dmEligible ? React.createElement("span", {
+    style: {
+      fontSize: 10,
+      fontWeight: 600,
+      padding: "2px 7px",
+      borderRadius: 6,
+      background: COLORS.blueGlow,
+      color: COLORS.blue
+    }
+  }, "DM eligible") : React.createElement("span", {
+    style: {
+      fontSize: 10,
+      color: COLORS.textDim
+    }
+  }, "first low week")))))));
 }
 function BreakdownTab() {
-  return _jsxDEV(_Fragment, {
-    children: [_jsxDEV("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 16,
+      marginBottom: 20
+    }
+  }, React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Model Breakdown"), DATA.models.map(m => {
+    const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
+    const label = formatModel(m.name);
+    const pct = m.spend / DATA.summary.totalSpend * 100;
+    return React.createElement("div", {
+      key: m.name,
       style: {
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 16,
-        marginBottom: 20
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: 18
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 13,
-            fontWeight: 600,
-            marginBottom: 14
-          },
-          children: "Model Breakdown"
-        }, void 0, false), DATA.models.map(m => {
-          const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
-          const label = formatModel(m.name);
-          const pct = m.spend / DATA.summary.totalSpend * 100;
-          return _jsxDEV("div", {
-            style: {
-              marginBottom: 12
-            },
-            children: [_jsxDEV("div", {
-              style: {
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: 4
-              },
-              children: [_jsxDEV("span", {
-                style: {
-                  fontSize: 12,
-                  color: COLORS.textMuted
-                },
-                children: label
-              }, void 0, false), _jsxDEV("span", {
-                style: {
-                  fontSize: 12,
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color
-                },
-                children: [fmt(m.spend), " (", pct.toFixed(1), "%)"]
-              }, void 0, true)]
-            }, void 0, true), _jsxDEV(Bar, {
-              value: m.spend,
-              max: DATA.models[0].spend,
-              color: color
-            }, void 0, false), _jsxDEV("div", {
-              style: {
-                fontSize: 11,
-                color: COLORS.textDim,
-                marginTop: 2
-              },
-              children: [m.requests.toLocaleString(), " requests"]
-            }, void 0, true)]
-          }, m.name, true);
-        })]
-      }, void 0, true), _jsxDEV("div", {
-        style: {
-          background: COLORS.card,
-          border: `1px solid ${COLORS.border}`,
-          borderRadius: 10,
-          padding: 18
-        },
-        children: [_jsxDEV("div", {
-          style: {
-            fontSize: 13,
-            fontWeight: 600,
-            marginBottom: 14
-          },
-          children: "Product Surface Breakdown"
-        }, void 0, false), DATA.products.map(p => {
-          const pct = p.spend / DATA.summary.totalSpend * 100;
-          return _jsxDEV("div", {
-            style: {
-              marginBottom: 12
-            },
-            children: [_jsxDEV("div", {
-              style: {
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: 4
-              },
-              children: [_jsxDEV("span", {
-                style: {
-                  fontSize: 12,
-                  color: COLORS.textMuted
-                },
-                children: p.name
-              }, void 0, false), _jsxDEV("span", {
-                style: {
-                  fontSize: 12,
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: COLORS.cyan
-                },
-                children: [fmt(p.spend), " (", pct.toFixed(1), "%)"]
-              }, void 0, true)]
-            }, void 0, true), _jsxDEV(Bar, {
-              value: p.spend,
-              max: DATA.products[0].spend,
-              color: COLORS.cyan
-            }, void 0, false), _jsxDEV("div", {
-              style: {
-                fontSize: 11,
-                color: COLORS.textDim,
-                marginTop: 2
-              },
-              children: [p.requests.toLocaleString(), " requests • ", fmt(p.spend / p.requests), "/req avg"]
-            }, void 0, true)]
-          }, p.name, true);
-        })]
-      }, void 0, true)]
-    }, void 0, true), _jsxDEV("div", {
+        marginBottom: 12
+      }
+    }, React.createElement("div", {
       style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: 18
-      },
-      children: [_jsxDEV("div", {
-        style: {
-          fontSize: 13,
-          fontWeight: 600,
-          marginBottom: 14
-        },
-        children: "Cost Per Request by Product"
-      }, void 0, false), _jsxDEV("div", {
-        style: {
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-          gap: 12
-        },
-        children: DATA.products.map(p => {
-          const cpr = p.spend / p.requests;
-          return _jsxDEV("div", {
-            style: {
-              background: COLORS.bg,
-              borderRadius: 8,
-              padding: 14,
-              textAlign: "center"
-            },
-            children: [_jsxDEV("div", {
-              style: {
-                fontSize: 11,
-                color: COLORS.textDim,
-                marginBottom: 6
-              },
-              children: p.name
-            }, void 0, false), _jsxDEV("div", {
-              style: {
-                fontSize: 20,
-                fontWeight: 700,
-                fontFamily: "'JetBrains Mono', monospace",
-                color: cpr > 0.3 ? COLORS.orange : COLORS.text
-              },
-              children: fmt(cpr)
-            }, void 0, false), _jsxDEV("div", {
-              style: {
-                fontSize: 10,
-                color: COLORS.textDim
-              },
-              children: "per request"
-            }, void 0, false)]
-          }, p.name, true);
-        })
-      }, void 0, false)]
-    }, void 0, true)]
-  }, void 0, true);
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 4
+      }
+    }, React.createElement("span", {
+      style: {
+        fontSize: 12,
+        color: COLORS.textMuted
+      }
+    }, label), React.createElement("span", {
+      style: {
+        fontSize: 12,
+        fontFamily: "'JetBrains Mono', monospace",
+        color
+      }
+    }, fmt(m.spend), " (", pct.toFixed(1), "%)")), React.createElement(Bar, {
+      value: m.spend,
+      max: DATA.models[0].spend,
+      color: color
+    }), React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: COLORS.textDim,
+        marginTop: 2
+      }
+    }, m.requests.toLocaleString(), " requests"));
+  })), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Product Surface Breakdown"), DATA.products.map(p => {
+    const pct = p.spend / DATA.summary.totalSpend * 100;
+    return React.createElement("div", {
+      key: p.name,
+      style: {
+        marginBottom: 12
+      }
+    }, React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 4
+      }
+    }, React.createElement("span", {
+      style: {
+        fontSize: 12,
+        color: COLORS.textMuted
+      }
+    }, p.name), React.createElement("span", {
+      style: {
+        fontSize: 12,
+        fontFamily: "'JetBrains Mono', monospace",
+        color: COLORS.cyan
+      }
+    }, fmt(p.spend), " (", pct.toFixed(1), "%)")), React.createElement(Bar, {
+      value: p.spend,
+      max: DATA.products[0].spend,
+      color: COLORS.cyan
+    }), React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: COLORS.textDim,
+        marginTop: 2
+      }
+    }, p.requests.toLocaleString(), " requests • ", fmt(p.spend / p.requests), "/req avg"));
+  }))), React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: 10,
+      padding: 18
+    }
+  }, React.createElement("div", {
+    style: {
+      fontSize: 13,
+      fontWeight: 600,
+      marginBottom: 14
+    }
+  }, "Cost Per Request by Product"), React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+      gap: 12
+    }
+  }, DATA.products.map(p => {
+    const cpr = p.spend / p.requests;
+    return React.createElement("div", {
+      key: p.name,
+      style: {
+        background: COLORS.bg,
+        borderRadius: 8,
+        padding: 14,
+        textAlign: "center"
+      }
+    }, React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: COLORS.textDim,
+        marginBottom: 6
+      }
+    }, p.name), React.createElement("div", {
+      style: {
+        fontSize: 20,
+        fontWeight: 700,
+        fontFamily: "'JetBrains Mono', monospace",
+        color: cpr > 0.3 ? COLORS.orange : COLORS.text
+      }
+    }, fmt(cpr)), React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: COLORS.textDim
+      }
+    }, "per request"));
+  }))));
 }
-(function(){
-  var root=ReactDOM.createRoot(document.getElementById('root'));
-  function boot(data){ window.__APP_DATA__=data; root.render(React.createElement(Dashboard)); }
-  fetch('data.json',{cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw new Error('data.json '+r.status); return r.json(); })
-    .then(boot)
-    .catch(function(e){ document.getElementById('root').innerHTML='<div style="color:#e4e4ef;font-family:sans-serif;padding:40px">Failed to load data.json: '+e.message+'</div>'; });
+}catch(e){showErr((e&&e.stack)||e);return;}
+function EBClass(props){React.Component.call(this,props);this.state={err:null};}
+EBClass.prototype=Object.create(React.Component.prototype);
+EBClass.prototype.constructor=EBClass;
+EBClass.getDerivedStateFromError=function(err){return {err:err};};
+EBClass.prototype.componentDidCatch=function(err){showErr((err&&err.stack)||err);};
+EBClass.prototype.render=function(){if(this.state.err){return null;}return this.props.children;};
+function boot(data){try{window.__APP_DATA__=data;var root=ReactDOM.createRoot(document.getElementById("root"));root.render(React.createElement(EBClass,null,React.createElement(Dashboard)));}catch(e){showErr((e&&e.stack)||e);}}
+fetch("data.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("data.json HTTP "+r.status);return r.json();}).then(boot).catch(function(e){showErr("Could not load data.json: "+((e&&e.message)||e));});
 })();
-</script>
-</body>
-</html>
+</script></body></html>
