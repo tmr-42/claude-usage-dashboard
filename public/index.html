@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Claude Usage Analysis — Jun 25 – Jul 1, 2026</title>
+<title>Claude Usage Analysis — Jul 2–8, 2026</title>
 <style>html,body{margin:0;padding:0;background:#0a0a0f}#root{min-height:100vh}</style>
 </head><body>
 <div id="root"></div>
@@ -2375,11 +2375,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(
   function showErr(m){document.getElementById('root').innerHTML='<pre style="color:#e4e4ef;font-family:monospace;padding:24px;white-space:pre-wrap">Dashboard failed to load.\n\n'+m+'</pre>';}
   window.addEventListener('error',function(e){showErr((e.error&&e.error.stack)||e.message);});
   fetch('./data.json').then(function(r){if(!r.ok)throw new Error('data.json HTTP '+r.status);return r.json();})
-  .then(function(d){
-    window.__APP_DATA__=d;
-    var src=document.getElementById('appsrc').textContent;
-    var s=document.createElement('script'); s.textContent=src; document.body.appendChild(s);
-  })
+  .then(function(d){window.__APP_DATA__=d;var src=document.getElementById('appsrc').textContent;var s=document.createElement('script');s.textContent=src;document.body.appendChild(s);})
   .catch(function(e){showErr(e.message);});
 })();
 </script>
