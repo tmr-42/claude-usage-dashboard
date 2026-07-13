@@ -4639,30 +4639,30 @@
      "claude_sonnet_5",
      "claude_opus_4_8",
      "claude_sonnet_4_6",
-     "claude_haiku_4_5",
-     "claude_opus_4_7"
+     "claude_opus_4_7",
+     "claude_haiku_4_5"
     ],
     "rows": [
      [
       24.88,
       10.71,
       0,
-      0.0,
-      0
+      0,
+      0.0
      ],
      [
       22.51,
       0,
       4.3,
-      0.0,
-      0
+      0,
+      0.0
      ],
      [
       0,
       0.0,
       0,
-      0,
-      0.0
+      0.0,
+      0
      ]
     ],
     "rowTotals": [
@@ -11267,24 +11267,24 @@
     "models": [
      "claude_sonnet_5",
      "claude_sonnet_4_6",
+     "claude_opus_4_7",
      "claude_opus_4_8",
-     "claude_haiku_4_5",
-     "claude_opus_4_7"
+     "claude_haiku_4_5"
     ],
     "rows": [
      [
       13.34,
       1.98,
       0,
-      0.0,
-      0
+      0,
+      0.0
      ],
      [
       0,
       0,
       0.0,
-      0,
-      0.0
+      0.0,
+      0
      ]
     ],
     "rowTotals": [
@@ -11767,25 +11767,25 @@
     ],
     "models": [
      "claude_opus_4_8",
-     "claude_haiku_4_5",
      "claude_opus_4_7",
      "claude_sonnet_5",
-     "claude_sonnet_4_6"
+     "claude_sonnet_4_6",
+     "claude_haiku_4_5"
     ],
     "rows": [
      [
       14.18,
+      0,
+      0,
       0.0,
-      0,
-      0,
       0.0
      ],
      [
       0.0,
       0.0,
       0.0,
-      0.0,
-      0
+      0,
+      0.0
      ]
     ],
     "rowTotals": [
@@ -21245,8 +21245,8 @@
     "models": [
      "claude_opus_4_8",
      "claude_sonnet_4_6",
-     "claude_sonnet_5",
-     "claude_haiku_4_5"
+     "claude_haiku_4_5",
+     "claude_sonnet_5"
     ],
     "rows": [
      [
@@ -21317,8 +21317,8 @@
     ],
     "models": [
      "claude_fable_5",
-     "claude_sonnet_5",
-     "claude_sonnet_4_6"
+     "claude_sonnet_4_6",
+     "claude_sonnet_5"
     ],
     "rows": [
      [
@@ -22186,9 +22186,9 @@
    "name": "Eric Sichak",
    "spend": 0.62,
    "requests": 8,
-   "models": {
-    "claude_sonnet_4_5": 0.62
-   }
+   "models": [
+    "claude_sonnet_4_5"
+   ]
   }
  ],
  "lowEngagement": [
