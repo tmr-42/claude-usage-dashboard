@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Claude Usage Analysis</title>
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-<style>html,body{margin:0;padding:0;background:#0a0a0f;}#err{color:#e4e4ef;font-family:-apple-system,sans-serif;padding:40px;line-height:1.6}#err code{color:#ef4444;font-family:monospace}</style>
-</head><body><div id="root"></div>
+<title>Claude Usage Analysis — Jun 25 – Jul 1, 2026</title>
+<style>html,body{margin:0;padding:0;background:#0a0a0f}#root{min-height:100vh}</style>
+</head><body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
 <script type="text/plain" id="appsrc">
-var useState=React.useState,useMemo=React.useMemo,useEffect=React.useEffect,useRef=React.useRef,useCallback=React.useCallback,useReducer=React.useReducer,Fragment=React.Fragment;
-const DATA = typeof window !== "undefined" && window.__APP_DATA__ ? window.__APP_DATA__ : {};
+const {
+  useState,
+  useMemo
+} = React;
+const DATA = window.__APP_DATA__ || {};
 const COLORS = {
   bg: "#0a0a0f",
   card: "#111118",
@@ -32,6 +36,8 @@ const COLORS = {
   blue: "#3b82f6",
   blueGlow: "rgba(59,130,246,0.12)"
 };
+
+// Tab order is strict — must match Vercel build (Vercel omits "actions").
 const TABS = [{
   id: "overview",
   label: "Overview"
@@ -99,13 +105,18 @@ function formatModel(raw) {
   const family = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
   return `${family} ${parts.slice(1).join(".")}`;
 }
+
+// =============================================================================
+// Primitives
+// =============================================================================
+
 function Bar({
   value,
   max,
   color = COLORS.accent
 }) {
   const pct = max > 0 ? Math.min(value / max * 100, 100) : 0;
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       width: "100%",
       height: 6,
@@ -113,7 +124,7 @@ function Bar({
       background: COLORS.border,
       overflow: "hidden"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       width: `${pct}%`,
       height: "100%",
@@ -131,7 +142,7 @@ function ModelBar({
   const opus = (models.opus || 0) / total * 100;
   const sonnet = (models.sonnet || 0) / total * 100;
   const haiku = (models.haiku || 0) / total * 100;
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 2,
@@ -140,21 +151,21 @@ function ModelBar({
       overflow: "hidden",
       width: "100%"
     }
-  }, opus > 0 && React.createElement("div", {
+  }, opus > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       width: `${opus}%`,
       background: COLORS.red,
       minWidth: 2
     },
     title: `Opus ${opus.toFixed(0)}%`
-  }), sonnet > 0 && React.createElement("div", {
+  }), sonnet > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       width: `${sonnet}%`,
       background: COLORS.accent,
       minWidth: 2
     },
     title: `Sonnet ${sonnet.toFixed(0)}%`
-  }), haiku > 0 && React.createElement("div", {
+  }), haiku > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       width: `${haiku}%`,
       background: COLORS.green,
@@ -169,7 +180,7 @@ function StatCard({
   sub,
   color = COLORS.text
 }) {
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -177,7 +188,7 @@ function StatCard({
       padding: "16px 20px",
       flex: "1 1 0"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -186,7 +197,7 @@ function StatCard({
       marginBottom: 6,
       fontWeight: 500
     }
-  }, label), React.createElement("div", {
+  }, label), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 26,
       fontWeight: 700,
@@ -194,7 +205,7 @@ function StatCard({
       letterSpacing: "-0.02em",
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, value), sub && React.createElement("div", {
+  }, value), sub && /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
       color: COLORS.textDim,
@@ -207,7 +218,7 @@ function FlagPill({
 }) {
   const m = FLAG_META[type];
   if (!m) return null;
-  return React.createElement("span", {
+  return /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 10,
       fontWeight: 600,
@@ -229,7 +240,7 @@ function FlagCard({
   children
 }) {
   const [open, setOpen] = useState(true);
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -237,7 +248,7 @@ function FlagCard({
       overflow: "hidden",
       marginBottom: 16
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     onClick: () => setOpen(!open),
     style: {
       display: "flex",
@@ -247,18 +258,18 @@ function FlagCard({
       cursor: "pointer",
       borderBottom: open ? `1px solid ${COLORS.border}` : "none"
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 18
     }
-  }, icon), React.createElement("span", {
+  }, icon), /*#__PURE__*/React.createElement("span", {
     style: {
       fontWeight: 600,
       fontSize: 14,
       color: COLORS.text,
       flex: 1
     }
-  }, title), React.createElement("span", {
+  }, title), /*#__PURE__*/React.createElement("span", {
     style: {
       background: glowColor,
       color,
@@ -267,39 +278,44 @@ function FlagCard({
       padding: "3px 10px",
       borderRadius: 12
     }
-  }, count), React.createElement("span", {
+  }, count), /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim,
       fontSize: 14,
       transform: open ? "rotate(180deg)" : "none",
       transition: "transform 0.2s"
     }
-  }, "▾")), open && React.createElement("div", {
+  }, "▾")), open && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 0
     }
   }, children));
 }
+
+// =============================================================================
+// Sparkline — tiny inline trend chart for the All Users table.
+// =============================================================================
+
 function Sparkline({
   values,
   color = COLORS.accent,
   width = 80,
   height = 22
 }) {
-  if (!values || values.length === 0) return React.createElement("span", {
+  if (!values || values.length === 0) return /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim,
       fontSize: 11
     }
   }, "—");
   if (values.length === 1) {
-    return React.createElement("svg", {
+    return /*#__PURE__*/React.createElement("svg", {
       width: width,
       height: height,
       style: {
         display: "block"
       }
-    }, React.createElement("circle", {
+    }, /*#__PURE__*/React.createElement("circle", {
       cx: width / 2,
       cy: height / 2,
       r: 2,
@@ -317,26 +333,34 @@ function Sparkline({
   }).join(" ");
   const lastX = (values.length - 1) * stepX;
   const lastY = height - (values[values.length - 1] - min) / range * (height - 4) - 2;
-  return React.createElement("svg", {
+  return /*#__PURE__*/React.createElement("svg", {
     width: width,
     height: height,
     style: {
       display: "block"
     }
-  }, React.createElement("polyline", {
+  }, /*#__PURE__*/React.createElement("polyline", {
     points: points,
     fill: "none",
     stroke: color,
     strokeWidth: 1.4,
     strokeLinecap: "round",
     strokeLinejoin: "round"
-  }), React.createElement("circle", {
+  }), /*#__PURE__*/React.createElement("circle", {
     cx: lastX,
     cy: lastY,
     r: 1.8,
     fill: color
   }));
 }
+
+// =============================================================================
+// LineChart — proper trend chart for org-level and per-user detail views.
+// SVG-only, no chart library. Multiple series supported.
+// series: [{ name, color, values: [n, ...] }, ...]
+// xLabels: ["May 1", "May 8", ...]
+// =============================================================================
+
 function LineChart({
   series,
   xLabels,
@@ -345,7 +369,7 @@ function LineChart({
   showLegend = true
 }) {
   if (!series || series.length === 0 || !xLabels || xLabels.length === 0) {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         color: COLORS.textDim,
         fontSize: 12,
@@ -367,12 +391,12 @@ function LineChart({
   const plotH = height - padT - padB;
   const stepX = xLabels.length > 1 ? plotW / (xLabels.length - 1) : 0;
   const yTicks = 4;
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       width: "100%",
       overflowX: "auto"
     }
-  }, React.createElement("svg", {
+  }, /*#__PURE__*/React.createElement("svg", {
     viewBox: `0 0 ${width} ${height}`,
     style: {
       width: "100%",
@@ -385,16 +409,16 @@ function LineChart({
   }).map((_, i) => {
     const v = min + range * i / yTicks;
     const y = padT + plotH - plotH * i / yTicks;
-    return React.createElement("g", {
+    return /*#__PURE__*/React.createElement("g", {
       key: i
-    }, React.createElement("line", {
+    }, /*#__PURE__*/React.createElement("line", {
       x1: padL,
       y1: y,
       x2: width - padR,
       y2: y,
       stroke: COLORS.border,
       strokeWidth: 0.5
-    }), React.createElement("text", {
+    }), /*#__PURE__*/React.createElement("text", {
       x: padL - 6,
       y: y + 3,
       fontSize: 10,
@@ -404,9 +428,10 @@ function LineChart({
     }, yFormat(v).replace(".00", "")));
   }), xLabels.map((lbl, i) => {
     const x = padL + i * stepX;
+    // Only label first, last, and every other for crowded charts
     const showLabel = xLabels.length <= 6 || i === 0 || i === xLabels.length - 1 || i % Math.ceil(xLabels.length / 6) === 0;
     if (!showLabel) return null;
-    return React.createElement("text", {
+    return /*#__PURE__*/React.createElement("text", {
       key: i,
       x: x,
       y: height - 8,
@@ -421,9 +446,9 @@ function LineChart({
       const y = padT + plotH - (v - min) / range * plotH;
       return `${x},${y}`;
     }).join(" ");
-    return React.createElement("g", {
+    return /*#__PURE__*/React.createElement("g", {
       key: si
-    }, React.createElement("polyline", {
+    }, /*#__PURE__*/React.createElement("polyline", {
       points: points,
       fill: "none",
       stroke: s.color,
@@ -433,7 +458,7 @@ function LineChart({
     }), s.values.map((v, i) => {
       const x = padL + i * stepX;
       const y = padT + plotH - (v - min) / range * plotH;
-      return React.createElement("circle", {
+      return /*#__PURE__*/React.createElement("circle", {
         key: i,
         cx: x,
         cy: y,
@@ -441,7 +466,7 @@ function LineChart({
         fill: s.color
       });
     }));
-  })), showLegend && series.length > 1 && React.createElement("div", {
+  })), showLegend && series.length > 1 && /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 14,
@@ -449,7 +474,7 @@ function LineChart({
       marginTop: 6,
       paddingLeft: padL
     }
-  }, series.map((s, i) => React.createElement("div", {
+  }, series.map((s, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
       display: "flex",
@@ -458,7 +483,7 @@ function LineChart({
       fontSize: 11,
       color: COLORS.textMuted
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       width: 10,
       height: 2,
@@ -467,6 +492,23 @@ function LineChart({
     }
   }), s.name))));
 }
+
+// =============================================================================
+// DM section generators — EDUCATIONAL, NEVER RESTRICTIVE.
+// No questions. No "let me know." No "watch your spend."
+// =============================================================================
+
+// Low Engagement DM — DRAFTED ONLY, NEVER auto-sent in bulk.
+// Distinct, softer opener. Acknowledges legitimate reasons for low usage up front.
+// One section, one DM (not consolidated with cost-flag DMs).
+// Build one consolidated DM per user across all cost-optimization flags.
+// Section order: cowork-opus → opus → token → legacy.
+// Max-plan excluded. Low engagement handled separately (returned in its own array).
+// Skip-list excluded. Users with <$100 total weekly spend excluded from COST DMs.
+// =============================================================================
+// All Users tab — sortable, searchable, expandable rows with sparklines.
+// =============================================================================
+
 function AllUsersTab({
   users,
   history
@@ -520,6 +562,9 @@ function AllUsersTab({
     k: "avgPromptTokens",
     label: "Avg Tokens"
   }, {
+    k: "cacheHitRate",
+    label: "Cache"
+  }, {
     k: "modelMix",
     label: "Model Mix",
     noSort: true
@@ -535,14 +580,14 @@ function AllUsersTab({
     label: "Flags",
     noSort: true
   }];
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       overflow: "hidden"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "14px 18px",
       borderBottom: `1px solid ${COLORS.border}`,
@@ -550,12 +595,12 @@ function AllUsersTab({
       alignItems: "center",
       gap: 12
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       fontWeight: 600
     }
-  }, "All Active Users (", users.length, ")"), React.createElement("input", {
+  }, "All Active Users (", users.length, ")"), /*#__PURE__*/React.createElement("input", {
     value: search,
     onChange: e => setSearch(e.target.value),
     placeholder: "Search name, email, or product…",
@@ -570,21 +615,21 @@ function AllUsersTab({
       width: 260,
       outline: "none"
     }
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       overflowX: "auto"
     }
-  }, React.createElement("table", {
+  }, /*#__PURE__*/React.createElement("table", {
     style: {
       width: "100%",
       borderCollapse: "collapse",
       fontSize: 13
     }
-  }, React.createElement("thead", null, React.createElement("tr", {
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
     style: {
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, headers.map(h => React.createElement("th", {
+  }, headers.map(h => /*#__PURE__*/React.createElement("th", {
     key: h.k,
     onClick: () => !h.noSort && setSort(h.k),
     style: {
@@ -598,10 +643,10 @@ function AllUsersTab({
       cursor: h.noSort ? "default" : "pointer",
       userSelect: "none"
     }
-  }, h.label, !h.noSort && sortKey === h.k && (sortDir === "asc" ? " ↑" : " ↓"))))), React.createElement("tbody", null, sorted.map(u => {
+  }, h.label, !h.noSort && sortKey === h.k && (sortDir === "asc" ? " ↑" : " ↓"))))), /*#__PURE__*/React.createElement("tbody", null, sorted.map(u => {
     const isOpen = expanded === u.email;
     const top = u.products ? Object.entries(u.products).sort((a, b) => b[1] - a[1])[0] : null;
-    return React.createElement(FragmentRow, {
+    return /*#__PURE__*/React.createElement(FragmentRow, {
       key: u.email,
       u: u,
       isOpen: isOpen,
@@ -618,6 +663,7 @@ function FragmentRow({
   top,
   history
 }) {
+  // Determine sparkline color by trend direction
   const sparkVals = u.sparkline || [];
   let sparkColor = COLORS.textMuted;
   if (sparkVals.length >= 2) {
@@ -625,94 +671,100 @@ function FragmentRow({
     const prev = sparkVals[sparkVals.length - 2];
     sparkColor = last > prev ? COLORS.green : last < prev ? COLORS.orange : COLORS.textMuted;
   }
-  return React.createElement(React.Fragment, null, React.createElement("tr", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", {
     onClick: onToggle,
     style: {
       borderBottom: `1px solid ${COLORS.border}`,
       cursor: "pointer",
       background: isOpen ? COLORS.cardHover : "transparent"
     }
-  }, React.createElement("td", {
+  }, /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px"
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim,
       marginRight: 6,
       display: "inline-block",
       width: 10
     }
-  }, isOpen ? "▾" : "▸"), React.createElement("span", {
+  }, isOpen ? "▾" : "▸"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontWeight: 500
     }
-  }, u.name)), React.createElement("td", {
+  }, u.name)), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       fontSize: 12,
       color: COLORS.textDim
     }
-  }, u.email.split("@")[0]), React.createElement("td", {
+  }, u.email.split("@")[0]), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       fontFamily: "'JetBrains Mono', monospace",
       fontWeight: 600,
       color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : u.spend < 10 ? COLORS.blue : COLORS.text
     }
-  }, fmt(u.spend)), React.createElement("td", {
+  }, fmt(u.spend)), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       fontFamily: "'JetBrains Mono', monospace",
       color: COLORS.textMuted
     }
-  }, u.requests.toLocaleString()), React.createElement("td", {
+  }, u.requests.toLocaleString()), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       fontFamily: "'JetBrains Mono', monospace",
       color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted
     }
-  }, fmt(u.cpr)), React.createElement("td", {
+  }, fmt(u.cpr)), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       fontFamily: "'JetBrains Mono', monospace",
       color: COLORS.textMuted
     }
-  }, fmtK(u.avgPromptTokens || 0)), React.createElement("td", {
+  }, fmtK(u.avgPromptTokens || 0)), /*#__PURE__*/React.createElement("td", {
+    style: {
+      padding: "10px 14px",
+      fontFamily: "'JetBrains Mono', monospace",
+      color: (u.cacheHitRate ?? 0) >= 80 ? COLORS.green : COLORS.textMuted
+    }
+  }, u.cacheHitRate != null ? u.cacheHitRate + "%" : "–"), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       width: 130
     }
-  }, React.createElement(ModelBar, {
+  }, /*#__PURE__*/React.createElement(ModelBar, {
     models: u.models || {}
-  }), u.opusPct > 0 && React.createElement("div", {
+  }), u.opusPct > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10,
       color: COLORS.red,
       marginTop: 3
     }
-  }, u.opusPct, "% Opus")), React.createElement("td", {
+  }, u.opusPct, "% Opus")), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       width: 90
     }
-  }, React.createElement(Sparkline, {
+  }, /*#__PURE__*/React.createElement(Sparkline, {
     values: sparkVals,
     color: sparkColor
-  })), React.createElement("td", {
+  })), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px",
       fontSize: 12,
       color: COLORS.textMuted
     }
-  }, top ? `${top[0]} (${fmt(top[1])})` : "–"), React.createElement("td", {
+  }, top ? `${top[0]} (${fmt(top[1])})` : "–"), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "10px 14px"
     }
-  }, (u.flags || []).map(f => React.createElement(FlagPill, {
+  }, (u.flags || []).map(f => /*#__PURE__*/React.createElement(FlagPill, {
     key: f,
     type: f
-  })))), isOpen && React.createElement(UserDetailRow, {
+  })))), isOpen && /*#__PURE__*/React.createElement(UserDetailRow, {
     u: u,
     history: history
   }));
@@ -723,21 +775,21 @@ function UserDetailRow({
 }) {
   const matrix = u.productModelMatrix;
   const userHistory = history?.userWeeks?.[u.email] || [];
-  return React.createElement("tr", null, React.createElement("td", {
+  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
     colSpan: 10,
     style: {
       padding: 0,
       background: COLORS.bg,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "16px 24px",
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: 20
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: "1 / -1",
       display: "flex",
@@ -748,61 +800,61 @@ function UserDetailRow({
       borderBottom: `1px solid ${COLORS.border}`,
       flexWrap: "wrap"
     }
-  }, React.createElement("div", null, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim
     }
-  }, "Spend"), " ", React.createElement("strong", {
+  }, "Spend"), " ", /*#__PURE__*/React.createElement("strong", {
     style: {
       color: COLORS.text,
       fontFamily: "'JetBrains Mono', monospace",
       marginLeft: 4
     }
-  }, fmt(u.spend))), React.createElement("div", null, React.createElement("span", {
+  }, fmt(u.spend))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim
     }
-  }, "Requests"), " ", React.createElement("strong", {
+  }, "Requests"), " ", /*#__PURE__*/React.createElement("strong", {
     style: {
       color: COLORS.text,
       fontFamily: "'JetBrains Mono', monospace",
       marginLeft: 4
     }
-  }, u.requests.toLocaleString())), React.createElement("div", null, React.createElement("span", {
+  }, u.requests.toLocaleString())), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim
     }
-  }, "$/req"), " ", React.createElement("strong", {
+  }, "$/req"), " ", /*#__PURE__*/React.createElement("strong", {
     style: {
       color: COLORS.text,
       fontFamily: "'JetBrains Mono', monospace",
       marginLeft: 4
     }
-  }, fmt(u.cpr))), React.createElement("div", null, React.createElement("span", {
+  }, fmt(u.cpr))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim
     }
-  }, "Avg prompt tokens"), " ", React.createElement("strong", {
+  }, "Avg prompt tokens"), " ", /*#__PURE__*/React.createElement("strong", {
     style: {
       color: COLORS.text,
       fontFamily: "'JetBrains Mono', monospace",
       marginLeft: 4
     }
-  }, fmtK(u.avgPromptTokens || 0))), React.createElement("div", null, React.createElement("span", {
+  }, fmtK(u.avgPromptTokens || 0))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textDim
     }
-  }, "Weeks tracked"), " ", React.createElement("strong", {
+  }, "Weeks tracked"), " ", /*#__PURE__*/React.createElement("strong", {
     style: {
       color: COLORS.text,
       fontFamily: "'JetBrains Mono', monospace",
       marginLeft: 4
     }
-  }, userHistory.length))), userHistory.length >= 1 && React.createElement("div", {
+  }, userHistory.length))), userHistory.length >= 1 && /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: "1 / -1"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -810,7 +862,7 @@ function UserDetailRow({
       color: COLORS.textDim,
       marginBottom: 8
     }
-  }, "Weekly trend (", userHistory.length, " week", userHistory.length === 1 ? "" : "s", ")"), React.createElement(LineChart, {
+  }, "Weekly trend (", userHistory.length, " week", userHistory.length === 1 ? "" : "s", ")"), /*#__PURE__*/React.createElement(LineChart, {
     series: [{
       name: "Spend",
       color: COLORS.accent,
@@ -820,20 +872,20 @@ function UserDetailRow({
     height: 160,
     yFormat: fmt,
     showLegend: false
-  }), React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: 16,
       marginTop: 12
     }
-  }, React.createElement("div", null, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10,
       color: COLORS.textDim,
       marginBottom: 4
     }
-  }, "Requests over time"), React.createElement(LineChart, {
+  }, "Requests over time"), /*#__PURE__*/React.createElement(LineChart, {
     series: [{
       name: "Requests",
       color: COLORS.cyan,
@@ -843,13 +895,13 @@ function UserDetailRow({
     height: 110,
     yFormat: n => Math.round(n).toLocaleString(),
     showLegend: false
-  })), React.createElement("div", null, React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10,
       color: COLORS.textDim,
       marginBottom: 4
     }
-  }, "Opus % over time"), React.createElement(LineChart, {
+  }, "Opus % over time"), /*#__PURE__*/React.createElement(LineChart, {
     series: [{
       name: "Opus %",
       color: COLORS.red,
@@ -859,7 +911,7 @@ function UserDetailRow({
     height: 110,
     yFormat: n => `${Math.round(n)}%`,
     showLegend: false
-  })))), React.createElement("div", null, React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -867,32 +919,32 @@ function UserDetailRow({
       color: COLORS.textDim,
       marginBottom: 8
     }
-  }, "Product mix (this week)"), (u.productMix || []).map(p => React.createElement("div", {
+  }, "Product mix (this week)"), (u.productMix || []).map(p => /*#__PURE__*/React.createElement("div", {
     key: p.name,
     style: {
       marginBottom: 6
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       justifyContent: "space-between",
       fontSize: 12,
       marginBottom: 3
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       color: COLORS.textMuted
     }
-  }, p.name), React.createElement("span", {
+  }, p.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       color: COLORS.cyan
     }
-  }, fmt(p.spend))), React.createElement(Bar, {
+  }, fmt(p.spend))), /*#__PURE__*/React.createElement(Bar, {
     value: p.spend,
     max: u.spend,
     color: COLORS.cyan
-  })))), React.createElement("div", null, React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -902,39 +954,39 @@ function UserDetailRow({
     }
   }, "Model mix (this week)"), (u.modelMix || []).map(m => {
     const c = m.bucket === "opus" ? COLORS.red : m.bucket === "sonnet" ? COLORS.accent : COLORS.green;
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: m.name,
       style: {
         marginBottom: 6
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         justifyContent: "space-between",
         fontSize: 12,
         marginBottom: 3
       }
-    }, React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
       style: {
         color: COLORS.textMuted,
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 11
       }
-    }, formatModel(m.name)), React.createElement("span", {
+    }, formatModel(m.name)), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: "'JetBrains Mono', monospace",
         color: c
       }
-    }, fmt(m.spend))), React.createElement(Bar, {
+    }, fmt(m.spend))), /*#__PURE__*/React.createElement(Bar, {
       value: m.spend,
       max: u.spend,
       color: c
     }));
-  })), matrix && matrix.products?.length > 0 && React.createElement("div", {
+  })), matrix && matrix.products?.length > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: "1 / -1"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -942,17 +994,17 @@ function UserDetailRow({
       color: COLORS.textDim,
       marginBottom: 8
     }
-  }, "Product × Model (this week)"), React.createElement("div", {
+  }, "Product × Model (this week)"), /*#__PURE__*/React.createElement("div", {
     style: {
       overflowX: "auto"
     }
-  }, React.createElement("table", {
+  }, /*#__PURE__*/React.createElement("table", {
     style: {
       width: "100%",
       borderCollapse: "collapse",
       fontSize: 12
     }
-  }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
     style: {
       padding: "6px 10px",
       textAlign: "left",
@@ -960,7 +1012,7 @@ function UserDetailRow({
       fontWeight: 500,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Product"), matrix.models.map(m => React.createElement("th", {
+  }, "Product"), matrix.models.map(m => /*#__PURE__*/React.createElement("th", {
     key: m,
     style: {
       padding: "6px 10px",
@@ -971,7 +1023,7 @@ function UserDetailRow({
       fontSize: 11,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, formatModel(m))), React.createElement("th", {
+  }, formatModel(m))), /*#__PURE__*/React.createElement("th", {
     style: {
       padding: "6px 10px",
       textAlign: "right",
@@ -979,15 +1031,15 @@ function UserDetailRow({
       fontWeight: 600,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Total"))), React.createElement("tbody", null, matrix.products.map((p, i) => React.createElement("tr", {
+  }, "Total"))), /*#__PURE__*/React.createElement("tbody", null, matrix.products.map((p, i) => /*#__PURE__*/React.createElement("tr", {
     key: p
-  }, React.createElement("td", {
+  }, /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "6px 10px",
       color: COLORS.textMuted,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, p), matrix.rows[i].map((v, j) => React.createElement("td", {
+  }, p), matrix.rows[i].map((v, j) => /*#__PURE__*/React.createElement("td", {
     key: j,
     style: {
       padding: "6px 10px",
@@ -996,7 +1048,7 @@ function UserDetailRow({
       color: v > 0 ? COLORS.text : COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, v > 0 ? fmt(v) : "–")), React.createElement("td", {
+  }, v > 0 ? fmt(v) : "–")), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "6px 10px",
       textAlign: "right",
@@ -1005,13 +1057,13 @@ function UserDetailRow({
       fontWeight: 600,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, fmt(matrix.rowTotals[i])))), React.createElement("tr", null, React.createElement("td", {
+  }, fmt(matrix.rowTotals[i])))), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "6px 10px",
       color: COLORS.text,
       fontWeight: 600
     }
-  }, "Total"), matrix.colTotals.map((v, j) => React.createElement("td", {
+  }, "Total"), matrix.colTotals.map((v, j) => /*#__PURE__*/React.createElement("td", {
     key: j,
     style: {
       padding: "6px 10px",
@@ -1020,7 +1072,7 @@ function UserDetailRow({
       color: COLORS.text,
       fontWeight: 600
     }
-  }, fmt(v))), React.createElement("td", {
+  }, fmt(v))), /*#__PURE__*/React.createElement("td", {
     style: {
       padding: "6px 10px",
       textAlign: "right",
@@ -1030,12 +1082,17 @@ function UserDetailRow({
     }
   }, fmt(u.spend))))))))));
 }
+
+// =============================================================================
+// Trends tab — org-level historical views.
+// =============================================================================
+
 function TrendsTab({
   history
 }) {
   const weeks = history?.weeks || [];
   if (weeks.length === 0) {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         background: COLORS.card,
         border: `1px solid ${COLORS.border}`,
@@ -1043,13 +1100,13 @@ function TrendsTab({
         padding: 32,
         textAlign: "center"
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 14,
         color: COLORS.textMuted,
         marginBottom: 8
       }
-    }, "No historical data yet"), React.createElement("div", {
+    }, "No historical data yet"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
         color: COLORS.textDim,
@@ -1060,6 +1117,7 @@ function TrendsTab({
     }, "Trends populate after at least one week is loaded into history. Upload one or more weekly CSVs to populate the history layer — multiple weeks can be batched on the first run."));
   }
   const xLabels = weeks.map(w => {
+    // Show short date — "May 8" not "May 8–14, 2026"
     const m = w.weekOf.match(/([A-Z][a-z]+ \d+)/);
     return m ? m[1] : w.weekOf;
   });
@@ -1111,6 +1169,8 @@ function TrendsTab({
     color: COLORS.red,
     values: weeks.map(w => w.flagCounts?.maxPlan || 0)
   }];
+
+  // Top product surfaces across history
   const allProducts = new Set();
   weeks.forEach(w => Object.keys(w.productSpend || {}).forEach(p => allProducts.add(p)));
   const productList = Array.from(allProducts);
@@ -1120,6 +1180,8 @@ function TrendsTab({
     color: productColors[i % productColors.length],
     values: weeks.map(w => w.productSpend?.[p] || 0)
   }));
+
+  // Week-over-week deltas for the most recent week
   const latest = weeks[weeks.length - 1];
   const prev = weeks.length > 1 ? weeks[weeks.length - 2] : null;
   const delta = (a, b) => {
@@ -1133,7 +1195,7 @@ function TrendsTab({
     value,
     invertColors = false
   }) => {
-    if (value == null) return React.createElement("span", {
+    if (value == null) return /*#__PURE__*/React.createElement("span", {
       style: {
         color: COLORS.textDim,
         fontSize: 11
@@ -1142,7 +1204,7 @@ function TrendsTab({
     const up = value > 0;
     const isGood = invertColors ? !up : up;
     const c = Math.abs(value) < 1 ? COLORS.textMuted : isGood ? COLORS.green : COLORS.red;
-    return React.createElement("span", {
+    return /*#__PURE__*/React.createElement("span", {
       style: {
         color: c,
         fontSize: 12,
@@ -1151,14 +1213,14 @@ function TrendsTab({
       }
     }, up ? "↑" : value < 0 ? "↓" : "→", " ", Math.abs(value).toFixed(1), "%");
   };
-  return React.createElement(React.Fragment, null, React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 12,
       marginBottom: 20,
       flexWrap: "wrap"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1166,7 +1228,7 @@ function TrendsTab({
       padding: "16px 20px",
       flex: "1 1 0"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -1175,19 +1237,19 @@ function TrendsTab({
       marginBottom: 6,
       fontWeight: 500
     }
-  }, "Weeks tracked"), React.createElement("div", {
+  }, "Weeks tracked"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 26,
       fontWeight: 700,
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, weeks.length), React.createElement("div", {
+  }, weeks.length), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
       color: COLORS.textDim,
       marginTop: 4
     }
-  }, weeks[0].weekOf, " → ", latest.weekOf)), React.createElement("div", {
+  }, weeks[0].weekOf, " → ", latest.weekOf)), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1195,7 +1257,7 @@ function TrendsTab({
       padding: "16px 20px",
       flex: "1 1 0"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -1204,19 +1266,19 @@ function TrendsTab({
       marginBottom: 6,
       fontWeight: 500
     }
-  }, "Spend WoW"), React.createElement("div", {
+  }, "Spend WoW"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 26,
       fontWeight: 700,
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, fmt(latest.totalSpend)), React.createElement("div", {
+  }, fmt(latest.totalSpend)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 4
     }
-  }, React.createElement(DeltaPill, {
+  }, /*#__PURE__*/React.createElement(DeltaPill, {
     value: spendDelta
-  }))), React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1224,7 +1286,7 @@ function TrendsTab({
       padding: "16px 20px",
       flex: "1 1 0"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -1233,19 +1295,19 @@ function TrendsTab({
       marginBottom: 6,
       fontWeight: 500
     }
-  }, "Active Users WoW"), React.createElement("div", {
+  }, "Active Users WoW"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 26,
       fontWeight: 700,
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, latest.activeUsers), React.createElement("div", {
+  }, latest.activeUsers), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 4
     }
-  }, React.createElement(DeltaPill, {
+  }, /*#__PURE__*/React.createElement(DeltaPill, {
     value: usersDelta
-  }))), React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1253,7 +1315,7 @@ function TrendsTab({
       padding: "16px 20px",
       flex: "1 1 0"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -1262,21 +1324,21 @@ function TrendsTab({
       marginBottom: 6,
       fontWeight: 500
     }
-  }, "Opus Spend WoW"), React.createElement("div", {
+  }, "Opus Spend WoW"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 26,
       fontWeight: 700,
       fontFamily: "'JetBrains Mono', monospace",
       color: COLORS.red
     }
-  }, fmt(latest.opusSpend || 0)), React.createElement("div", {
+  }, fmt(latest.opusSpend || 0)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 4
     }
-  }, React.createElement(DeltaPill, {
+  }, /*#__PURE__*/React.createElement(DeltaPill, {
     value: opusDelta,
     invertColors: true
-  })))), React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1284,62 +1346,62 @@ function TrendsTab({
       padding: 18,
       marginBottom: 16
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 14
     }
-  }, "Total Org Spend Over Time"), React.createElement(LineChart, {
+  }, "Total Org Spend Over Time"), /*#__PURE__*/React.createElement(LineChart, {
     series: totalSpendSeries,
     xLabels: xLabels,
     height: 200,
     yFormat: fmt
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: 16,
       marginBottom: 16
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 14
     }
-  }, "Active Users"), React.createElement(LineChart, {
+  }, "Active Users"), /*#__PURE__*/React.createElement(LineChart, {
     series: usersSeries,
     xLabels: xLabels,
     height: 180,
     yFormat: n => Math.round(n).toString(),
     showLegend: false
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 14
     }
-  }, "Model Mix Spend"), React.createElement(LineChart, {
+  }, "Model Mix Spend"), /*#__PURE__*/React.createElement(LineChart, {
     series: modelMixSeries,
     xLabels: xLabels,
     height: 180,
     yFormat: fmt
-  }))), React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1347,43 +1409,51 @@ function TrendsTab({
       padding: 18,
       marginBottom: 16
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 14
     }
-  }, "Flag Counts Over Time"), React.createElement(LineChart, {
+  }, "Flag Counts Over Time"), /*#__PURE__*/React.createElement(LineChart, {
     series: flagSeries,
     xLabels: xLabels,
     height: 220,
     yFormat: n => Math.round(n).toString()
-  })), productSeries.length > 0 && React.createElement("div", {
+  })), productSeries.length > 0 && /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 14
     }
-  }, "Product Surface Spend Over Time"), React.createElement(LineChart, {
+  }, "Product Surface Spend Over Time"), /*#__PURE__*/React.createElement(LineChart, {
     series: productSeries,
     xLabels: xLabels,
     height: 220,
     yFormat: fmt
   })));
 }
+
+// =============================================================================
+// =============================================================================
+
+// =============================================================================
+// Main dashboard
+// =============================================================================
+
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
-  const flagCount = (DATA.maxPlan?.length || 0) + (DATA.coworkOpus?.length || 0) + (DATA.opusHeavy?.filter(u => u.opusSpend >= 10).length || 0) + (DATA.tokenDensity?.filter(u => u.spend >= 20).length || 0) + (DATA.legacyModels?.filter(u => u.spend >= 5).length || 0) + (DATA.lowEngagement?.length || 0);
+  const flagCount = (DATA.maxPlan?.length || 0) + (DATA.coworkOpus?.length || 0) + (DATA.opusHeavy?.filter(u => u.opusSpend >= 10).length || 0) + (DATA.legacyModels?.filter(u => u.spend >= 5).length || 0) + (DATA.lowEngagement?.length || 0);
   const hasData = DATA.summary?.activeUsers > 0;
   if (!hasData) {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         background: COLORS.bg,
         color: COLORS.text,
@@ -1394,15 +1464,15 @@ function Dashboard() {
         justifyContent: "center",
         padding: 40
       }
-    }, React.createElement("link", {
+    }, /*#__PURE__*/React.createElement("link", {
       href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
       rel: "stylesheet"
-    }), React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         maxWidth: 560,
         textAlign: "center"
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
         textTransform: "uppercase",
@@ -1411,21 +1481,21 @@ function Dashboard() {
         marginBottom: 12,
         fontFamily: "'JetBrains Mono', monospace"
       }
-    }, "Claude Usage Analysis"), React.createElement("h1", {
+    }, "Claude Usage Analysis"), /*#__PURE__*/React.createElement("h1", {
       style: {
         fontSize: 24,
         fontWeight: 800,
         margin: "0 0 12px",
         letterSpacing: "-0.02em"
       }
-    }, "No weekly data loaded"), React.createElement("p", {
+    }, "No weekly data loaded"), /*#__PURE__*/React.createElement("p", {
       style: {
         fontSize: 14,
         color: COLORS.textMuted,
         lineHeight: 1.6,
         margin: "0 0 20px"
       }
-    }, "This is the dashboard template. To render a real report, replace the ", React.createElement("code", {
+    }, "This is the dashboard template. To render a real report, replace the ", /*#__PURE__*/React.createElement("code", {
       style: {
         background: COLORS.card,
         padding: "2px 6px",
@@ -1434,7 +1504,7 @@ function Dashboard() {
         fontSize: 12,
         color: COLORS.accent
       }
-    }, "DATA"), " object near the top of the file with the computed weekly data, including a populated ", React.createElement("code", {
+    }, "DATA"), " object near the top of the file with the computed weekly data, including a populated ", /*#__PURE__*/React.createElement("code", {
       style: {
         background: COLORS.card,
         padding: "2px 6px",
@@ -1443,7 +1513,7 @@ function Dashboard() {
         fontSize: 12,
         color: COLORS.accent
       }
-    }, "history"), " block of all weeks tracked."), React.createElement("div", {
+    }, "history"), " block of all weeks tracked."), /*#__PURE__*/React.createElement("div", {
       style: {
         background: COLORS.card,
         border: `1px solid ${COLORS.border}`,
@@ -1455,13 +1525,13 @@ function Dashboard() {
         textAlign: "left",
         lineHeight: 1.6
       }
-    }, "Required keys: ", React.createElement("span", {
+    }, "Required keys: ", /*#__PURE__*/React.createElement("span", {
       style: {
         color: COLORS.text
       }
-    }, "summary, leaderboard, allUsers, maxPlan, opusHeavy, coworkOpus, tokenDensity, powerUsers, legacyModels, lowEngagement, products, models, history"))));
+    }, "summary, leaderboard, allUsers, maxPlan, opusHeavy, coworkOpus, powerUsers, legacyModels, lowEngagement, products, models, history"))));
   }
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.bg,
       color: COLORS.text,
@@ -1469,15 +1539,15 @@ function Dashboard() {
       fontFamily: "'Inter', -apple-system, sans-serif",
       padding: 0
     }
-  }, React.createElement("link", {
+  }, /*#__PURE__*/React.createElement("link", {
     href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
     rel: "stylesheet"
-  }), React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "24px 24px 0",
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       alignItems: "baseline",
@@ -1485,34 +1555,34 @@ function Dashboard() {
       marginBottom: 4,
       flexWrap: "wrap"
     }
-  }, React.createElement("h1", {
+  }, /*#__PURE__*/React.createElement("h1", {
     style: {
       fontSize: 22,
       fontWeight: 800,
       margin: 0,
       letterSpacing: "-0.03em"
     }
-  }, "Claude Usage Analysis"), React.createElement("span", {
+  }, "Claude Usage Analysis"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       color: COLORS.textMuted,
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, DATA.summary?.weekOf), DATA.history?.weeks?.length > 0 && React.createElement("span", {
+  }, DATA.summary?.weekOf), DATA.history?.weeks?.length > 0 && /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: COLORS.textDim,
       fontFamily: "'JetBrains Mono', monospace",
       marginLeft: "auto"
     }
-  }, DATA.history.weeks.length, " week", DATA.history.weeks.length === 1 ? "" : "s", " in history")), React.createElement("div", {
+  }, DATA.history.weeks.length, " week", DATA.history.weeks.length === 1 ? "" : "s", " in history")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 0,
       marginTop: 16,
       flexWrap: "wrap"
     }
-  }, TABS.map(t => React.createElement("button", {
+  }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
     key: t.id,
     onClick: () => setActiveTab(t.id),
     style: {
@@ -1527,7 +1597,7 @@ function Dashboard() {
       transition: "all 0.2s",
       marginBottom: -1
     }
-  }, t.label, t.id === "flags" && flagCount > 0 && React.createElement("span", {
+  }, t.label, t.id === "flags" && flagCount > 0 && /*#__PURE__*/React.createElement("span", {
     style: {
       background: COLORS.redGlow,
       color: COLORS.red,
@@ -1537,46 +1607,51 @@ function Dashboard() {
       borderRadius: 8,
       marginLeft: 6
     }
-  }, flagCount))))), React.createElement("div", {
+  }, flagCount))))), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 24,
       maxWidth: 1200
     }
-  }, activeTab === "overview" && React.createElement(OverviewTab, null), activeTab === "leaderboard" && React.createElement(LeaderboardTab, null), activeTab === "allusers" && React.createElement(AllUsersTab, {
+  }, activeTab === "overview" && /*#__PURE__*/React.createElement(OverviewTab, null), activeTab === "leaderboard" && /*#__PURE__*/React.createElement(LeaderboardTab, null), activeTab === "allusers" && /*#__PURE__*/React.createElement(AllUsersTab, {
     users: DATA.allUsers || [],
     history: DATA.history
-  }), activeTab === "trends" && React.createElement(TrendsTab, {
+  }), activeTab === "trends" && /*#__PURE__*/React.createElement(TrendsTab, {
     history: DATA.history
-  }), activeTab === "flags" && React.createElement(FlagsTab, null), activeTab === "breakdown" && React.createElement(BreakdownTab, null)));
+  }), activeTab === "flags" && /*#__PURE__*/React.createElement(FlagsTab, null), activeTab === "breakdown" && /*#__PURE__*/React.createElement(BreakdownTab, null)));
 }
 function OverviewTab() {
-  const flagCount = (DATA.maxPlan?.length || 0) + (DATA.coworkOpus?.length || 0) + (DATA.opusHeavy?.filter(u => u.opusSpend >= 10).length || 0) + (DATA.tokenDensity?.filter(u => u.spend >= 20).length || 0) + (DATA.legacyModels?.filter(u => u.spend >= 5).length || 0) + (DATA.lowEngagement?.length || 0);
-  return React.createElement(React.Fragment, null, React.createElement("div", {
+  const flagCount = (DATA.maxPlan?.length || 0) + (DATA.coworkOpus?.length || 0) + (DATA.opusHeavy?.filter(u => u.opusSpend >= 10).length || 0) + (DATA.legacyModels?.filter(u => u.spend >= 5).length || 0) + (DATA.lowEngagement?.length || 0);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 12,
       marginBottom: 20,
       flexWrap: "wrap"
     }
-  }, React.createElement(StatCard, {
+  }, /*#__PURE__*/React.createElement(StatCard, {
     label: "Total Org Spend",
     value: fmt(DATA.summary.totalSpend),
     sub: "1-week period"
-  }), React.createElement(StatCard, {
+  }), /*#__PURE__*/React.createElement(StatCard, {
     label: "Active Users",
     value: DATA.summary.activeUsers,
     sub: `${fmt(DATA.summary.avgSpend)} avg/user`
-  }), React.createElement(StatCard, {
+  }), /*#__PURE__*/React.createElement(StatCard, {
     label: "Top 10 Concentration",
     value: `${DATA.summary.top10Pct}%`,
     sub: fmt(DATA.summary.top10Spend),
     color: COLORS.orange
-  }), React.createElement(StatCard, {
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    label: "Cache Hit Rate",
+    value: `${DATA.summary.orgCacheHitRate}%`,
+    sub: "org prompt-cache",
+    color: COLORS.green
+  }), /*#__PURE__*/React.createElement(StatCard, {
     label: "Flags Raised",
     value: flagCount,
     sub: "Action items",
     color: COLORS.red
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1584,7 +1659,7 @@ function OverviewTab() {
       padding: 18,
       marginBottom: 20
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
@@ -1594,7 +1669,7 @@ function OverviewTab() {
     const pct = m.spend / DATA.summary.totalSpend * 100;
     const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
     const label = formatModel(m.name);
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: m.name,
       style: {
         display: "flex",
@@ -1602,22 +1677,22 @@ function OverviewTab() {
         gap: 12,
         marginBottom: 8
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         width: 140,
         fontSize: 12,
         fontFamily: "'JetBrains Mono', monospace",
         color: COLORS.textMuted
       }
-    }, label), React.createElement("div", {
+    }, label), /*#__PURE__*/React.createElement("div", {
       style: {
         flex: 1
       }
-    }, React.createElement(Bar, {
+    }, /*#__PURE__*/React.createElement(Bar, {
       value: m.spend,
       max: DATA.models[0].spend,
       color: color
-    })), React.createElement("div", {
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         width: 70,
         textAlign: "right",
@@ -1625,7 +1700,7 @@ function OverviewTab() {
         fontFamily: "'JetBrains Mono', monospace",
         color
       }
-    }, fmt(m.spend)), React.createElement("div", {
+    }, fmt(m.spend)), /*#__PURE__*/React.createElement("div", {
       style: {
         width: 40,
         textAlign: "right",
@@ -1633,7 +1708,7 @@ function OverviewTab() {
         color: COLORS.textDim
       }
     }, pct.toFixed(0), "%"));
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
@@ -1641,7 +1716,7 @@ function OverviewTab() {
       padding: 18,
       marginBottom: 20
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
@@ -1649,7 +1724,7 @@ function OverviewTab() {
     }
   }, "Product Surface Breakdown"), DATA.products.map(p => {
     const pct = p.spend / DATA.summary.totalSpend * 100;
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: p.name,
       style: {
         display: "flex",
@@ -1657,35 +1732,35 @@ function OverviewTab() {
         gap: 12,
         marginBottom: 8
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         width: 140,
         fontSize: 12,
         color: COLORS.textMuted
       }
-    }, p.name), React.createElement("div", {
+    }, p.name), /*#__PURE__*/React.createElement("div", {
       style: {
         flex: 1
       }
-    }, React.createElement(Bar, {
+    }, /*#__PURE__*/React.createElement(Bar, {
       value: p.spend,
       max: DATA.products[0].spend,
       color: COLORS.cyan
-    })), React.createElement("div", {
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         width: 70,
         textAlign: "right",
         fontSize: 12,
         fontFamily: "'JetBrains Mono', monospace"
       }
-    }, fmt(p.spend)), React.createElement("div", {
+    }, fmt(p.spend)), /*#__PURE__*/React.createElement("div", {
       style: {
         width: 60,
         textAlign: "right",
         fontSize: 11,
         color: COLORS.textDim
       }
-    }, p.requests.toLocaleString(), " reqs"), React.createElement("div", {
+    }, p.requests.toLocaleString(), " reqs"), /*#__PURE__*/React.createElement("div", {
       style: {
         width: 40,
         textAlign: "right",
@@ -1693,27 +1768,27 @@ function OverviewTab() {
         color: COLORS.textDim
       }
     }, pct.toFixed(0), "%"));
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 4,
       color: COLORS.green
     }
-  }, "⚡ Power Users: Org Efficiency Benchmarks"), React.createElement("div", {
+  }, "⚡ Power Users: Org Efficiency Benchmarks"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       color: COLORS.textDim,
       marginBottom: 14
     }
-  }, "High volume, Sonnet/Haiku dominant, low cost-per-request"), DATA.powerUsers.map((u, i) => React.createElement("div", {
+  }, "High volume, Sonnet/Haiku dominant, low cost-per-request"), DATA.powerUsers.map((u, i) => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -1722,20 +1797,20 @@ function OverviewTab() {
       padding: "8px 0",
       borderBottom: i < DATA.powerUsers.length - 1 ? `1px solid ${COLORS.border}` : "none"
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       width: 22,
       fontSize: 12,
       color: COLORS.textDim,
       textAlign: "center"
     }
-  }, i + 1), React.createElement("span", {
+  }, i + 1), /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
       fontSize: 13,
       fontWeight: 500
     }
-  }, u.name), React.createElement("span", {
+  }, u.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
       color: COLORS.green,
@@ -1743,7 +1818,7 @@ function OverviewTab() {
       width: 60,
       textAlign: "right"
     }
-  }, u.requests, " reqs"), React.createElement("span", {
+  }, u.requests, " reqs"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
       color: COLORS.textMuted,
@@ -1751,7 +1826,7 @@ function OverviewTab() {
       width: 70,
       textAlign: "right"
     }
-  }, fmt(u.spend)), React.createElement("span", {
+  }, fmt(u.spend)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
       color: COLORS.green,
@@ -1762,35 +1837,35 @@ function OverviewTab() {
   }, fmt(u.cpr), "/req")))));
 }
 function LeaderboardTab() {
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       overflow: "hidden"
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "14px 18px",
       borderBottom: `1px solid ${COLORS.border}`,
       fontSize: 13,
       fontWeight: 600
     }
-  }, "Top 30 Spenders"), React.createElement("div", {
+  }, "Top 30 Spenders"), /*#__PURE__*/React.createElement("div", {
     style: {
       overflowX: "auto"
     }
-  }, React.createElement("table", {
+  }, /*#__PURE__*/React.createElement("table", {
     style: {
       width: "100%",
       borderCollapse: "collapse",
       fontSize: 13
     }
-  }, React.createElement("thead", null, React.createElement("tr", {
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
     style: {
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, ["#", "User", "Spend", "Requests", "$/Req", "Model Mix", "Top Product"].map(h => React.createElement("th", {
+  }, ["#", "User", "Spend", "Requests", "$/Req", "Model Mix", "Top Product"].map(h => /*#__PURE__*/React.createElement("th", {
     key: h,
     style: {
       padding: "10px 14px",
@@ -1801,71 +1876,71 @@ function LeaderboardTab() {
       textTransform: "uppercase",
       letterSpacing: "0.06em"
     }
-  }, h)))), React.createElement("tbody", null, DATA.leaderboard.map((u, i) => {
+  }, h)))), /*#__PURE__*/React.createElement("tbody", null, DATA.leaderboard.map((u, i) => {
     const topProduct = Object.entries(u.products).sort((a, b) => b[1] - a[1])[0];
     const isMaxCandidate = u.spend > 200;
-    return React.createElement("tr", {
+    return /*#__PURE__*/React.createElement("tr", {
       key: u.email,
       style: {
         borderBottom: `1px solid ${COLORS.border}`,
         background: isMaxCandidate ? COLORS.redGlow : "transparent"
       }
-    }, React.createElement("td", {
+    }, /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px",
         color: COLORS.textDim,
         width: 30
       }
-    }, i + 1), React.createElement("td", {
+    }, i + 1), /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px"
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontWeight: 500
       }
-    }, u.name), React.createElement("div", {
+    }, u.name), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
         color: COLORS.textDim
       }
-    }, u.email.split("@")[0])), React.createElement("td", {
+    }, u.email.split("@")[0])), /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px",
         fontFamily: "'JetBrains Mono', monospace",
         fontWeight: 600,
         color: u.spend > 200 ? COLORS.red : u.spend > 100 ? COLORS.orange : COLORS.text
       }
-    }, fmt(u.spend)), React.createElement("td", {
+    }, fmt(u.spend)), /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px",
         fontFamily: "'JetBrains Mono', monospace",
         color: COLORS.textMuted
       }
-    }, u.requests.toLocaleString()), React.createElement("td", {
+    }, u.requests.toLocaleString()), /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px",
         fontFamily: "'JetBrains Mono', monospace",
         color: u.cpr > 0.5 ? COLORS.orange : COLORS.textMuted
       }
-    }, fmt(u.cpr)), React.createElement("td", {
+    }, fmt(u.cpr)), /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px",
         width: 120
       }
-    }, React.createElement(ModelBar, {
+    }, /*#__PURE__*/React.createElement(ModelBar, {
       models: u.models
-    }), React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 10,
         color: COLORS.textDim,
         marginTop: 3
       }
-    }, u.opusPct > 0 && React.createElement("span", {
+    }, u.opusPct > 0 && /*#__PURE__*/React.createElement("span", {
       style: {
         color: COLORS.red
       }
-    }, u.opusPct, "% Opus"))), React.createElement("td", {
+    }, u.opusPct, "% Opus"))), /*#__PURE__*/React.createElement("td", {
       style: {
         padding: "10px 14px",
         fontSize: 12,
@@ -1875,20 +1950,20 @@ function LeaderboardTab() {
   })))));
 }
 function FlagsTab() {
-  return React.createElement(React.Fragment, null, React.createElement(FlagCard, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FlagCard, {
     icon: "🔴",
     title: "Max Plan Candidates (surfaced, not DM'd)",
     count: DATA.maxPlan.length,
     color: COLORS.red,
     glowColor: COLORS.redGlow
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 14,
       fontSize: 12,
       color: COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Weekly spend >$200 (projected $800+/mo). Reviewed manually; users are NOT DM'd about max-plan eligibility."), DATA.maxPlan.map(u => React.createElement("div", {
+  }, "Weekly spend >$200 (projected $800+/mo). Reviewed manually; users are NOT DM'd about max-plan eligibility."), DATA.maxPlan.map(u => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -1897,39 +1972,39 @@ function FlagsTab() {
       padding: "12px 18px",
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
       fontWeight: 500,
       fontSize: 13
     }
-  }, u.name), React.createElement("span", {
+  }, u.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: 13,
       color: COLORS.red,
       fontWeight: 600
     }
-  }, fmt(u.weeklySpend), "/wk"), React.createElement("span", {
+  }, fmt(u.weeklySpend), "/wk"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: 12,
       color: COLORS.textDim
     }
-  }, "→ ~", fmt(u.projectedMonthly), "/mo")))), React.createElement(FlagCard, {
+  }, "→ ~", fmt(u.projectedMonthly), "/mo")))), /*#__PURE__*/React.createElement(FlagCard, {
     icon: "🟠",
     title: "Cowork → Opus (Automated Routing)",
     count: DATA.coworkOpus.length,
     color: COLORS.orange,
     glowColor: COLORS.orangeGlow
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 14,
       fontSize: 12,
       color: COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Highest-priority cost control. No human selected Opus. Cowork routed automatically."), DATA.coworkOpus.map(u => React.createElement("div", {
+  }, "Highest-priority cost control. No human selected Opus. Cowork routed automatically."), DATA.coworkOpus.map(u => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -1938,44 +2013,44 @@ function FlagsTab() {
       padding: "12px 18px",
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
       fontWeight: 500,
       fontSize: 13
     }
-  }, u.name), React.createElement("span", {
+  }, u.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: 13,
       color: COLORS.orange,
       fontWeight: 600
     }
-  }, fmt(u.spend)), React.createElement("span", {
+  }, fmt(u.spend)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 12,
       color: COLORS.textDim
     }
-  }, u.requests, " reqs"), React.createElement("span", {
+  }, u.requests, " reqs"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: COLORS.textDim,
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, formatModel(u.model))))), React.createElement(FlagCard, {
+  }, formatModel(u.model))))), /*#__PURE__*/React.createElement(FlagCard, {
     icon: "🟣",
     title: "Opus-Heavy Chat Users (≥30%)",
     count: DATA.opusHeavy.filter(u => u.opusSpend >= 10).length,
     color: COLORS.purple,
     glowColor: COLORS.purpleGlow
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 14,
       fontSize: 12,
       color: COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend."), DATA.opusHeavy.filter(u => u.opusSpend >= 10).map(u => React.createElement("div", {
+  }, "≥30% of Chat spend on Opus models. Excludes Code (separate conversation). Showing users with ≥$10 Opus Chat spend."), DATA.opusHeavy.filter(u => u.opusSpend >= 10).map(u => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -1984,24 +2059,24 @@ function FlagsTab() {
       padding: "10px 18px",
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
       fontWeight: 500,
       fontSize: 13
     }
-  }, u.name), React.createElement("span", {
+  }, u.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: 12,
       color: COLORS.purple
     }
-  }, fmt(u.opusSpend), " Opus"), React.createElement("span", {
+  }, fmt(u.opusSpend), " Opus"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: COLORS.textDim
     }
-  }, "/ ", fmt(u.chatSpend), " Chat"), React.createElement("span", {
+  }, "/ ", fmt(u.chatSpend), " Chat"), /*#__PURE__*/React.createElement("span", {
     style: {
       background: COLORS.purpleGlow,
       color: COLORS.purple,
@@ -2010,65 +2085,20 @@ function FlagsTab() {
       padding: "2px 8px",
       borderRadius: 8
     }
-  }, u.opusPct, "%")))), React.createElement(FlagCard, {
-    icon: "📐",
-    title: "High Token Density (>500K avg prompt)",
-    count: DATA.tokenDensity.length,
-    color: COLORS.orange,
-    glowColor: COLORS.orangeGlow
-  }, React.createElement("div", {
-    style: {
-      padding: 14,
-      fontSize: 12,
-      color: COLORS.textDim,
-      borderBottom: `1px solid ${COLORS.border}`
-    }
-  }, "Prompt architecture issue, not a model problem. Large context windows driving cost."), DATA.tokenDensity.slice(0, 15).map(u => React.createElement("div", {
-    key: u.email,
-    style: {
-      display: "flex",
-      alignItems: "center",
-      gap: 12,
-      padding: "10px 18px",
-      borderBottom: `1px solid ${COLORS.border}`
-    }
-  }, React.createElement("span", {
-    style: {
-      flex: 1,
-      fontWeight: 500,
-      fontSize: 13
-    }
-  }, u.name), React.createElement("span", {
-    style: {
-      fontFamily: "'JetBrains Mono', monospace",
-      fontSize: 12,
-      color: COLORS.orange
-    }
-  }, fmtK(u.avgPromptTokens), " avg"), React.createElement("span", {
-    style: {
-      fontSize: 11,
-      color: COLORS.textDim
-    }
-  }, u.requests, " reqs"), React.createElement("span", {
-    style: {
-      fontFamily: "'JetBrains Mono', monospace",
-      fontSize: 12,
-      color: COLORS.textMuted
-    }
-  }, fmt(u.spend))))), React.createElement(FlagCard, {
+  }, u.opusPct, "%")))), /*#__PURE__*/React.createElement(FlagCard, {
     icon: "⚠️",
     title: "Legacy Model Usage",
     count: DATA.legacyModels.length,
     color: COLORS.orange,
     glowColor: COLORS.orangeGlow
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 14,
       fontSize: 12,
       color: COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7."), DATA.legacyModels.map(u => React.createElement("div", {
+  }, "Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7."), DATA.legacyModels.map(u => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -2077,31 +2107,31 @@ function FlagsTab() {
       padding: "10px 18px",
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
       fontWeight: 500,
       fontSize: 13
     }
-  }, u.name), React.createElement("span", {
+  }, u.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: COLORS.textDim,
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, u.models.map(formatModel).join(", ")), React.createElement("span", {
+  }, u.models.map(formatModel).join(", ")), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: 12,
       color: COLORS.textMuted
     }
-  }, fmt(u.spend))))), React.createElement("div", {
+  }, fmt(u.spend))))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 28,
       paddingTop: 20,
       borderTop: `1px dashed ${COLORS.borderLight}`
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 11,
       textTransform: "uppercase",
@@ -2110,20 +2140,20 @@ function FlagsTab() {
       marginBottom: 12,
       fontWeight: 600
     }
-  }, "Separate category — Engagement, not cost"), React.createElement(FlagCard, {
+  }, "Separate category — Engagement, not cost"), /*#__PURE__*/React.createElement(FlagCard, {
     icon: "💧",
     title: `Low Engagement Users (<$10/week — ${DATA.lowEngagement.filter(u => u.dmEligible).length} of ${DATA.lowEngagement.length} DM-eligible)`,
     count: DATA.lowEngagement.length,
     color: COLORS.blue,
     glowColor: COLORS.blueGlow
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 14,
       fontSize: 12,
       color: COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Active in the period (≥1 request) but spent under $10. Many valid reasons for this — other tools, different workflows, time off, role mismatch. DMs are drafted ONLY for users with 2+ consecutive low-engagement weeks, to filter out one-off slow weeks. All low-engagement users are shown below; the DM-eligible column shows which ones meet the threshold."), DATA.lowEngagement.map(u => React.createElement("div", {
+  }, "Active in the period (≥1 request) but spent under $10. Many valid reasons for this — other tools, different workflows, time off, role mismatch. DMs are drafted ONLY for users with 2+ consecutive low-engagement weeks, to filter out one-off slow weeks. All low-engagement users are shown below; the DM-eligible column shows which ones meet the threshold."), DATA.lowEngagement.map(u => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -2132,13 +2162,13 @@ function FlagsTab() {
       padding: "10px 18px",
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       flex: 1,
       fontWeight: 500,
       fontSize: 13
     }
-  }, u.name), React.createElement("span", {
+  }, u.name), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: 12,
@@ -2146,14 +2176,14 @@ function FlagsTab() {
       width: 70,
       textAlign: "right"
     }
-  }, fmt(u.spend)), React.createElement("span", {
+  }, fmt(u.spend)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: COLORS.textDim,
       width: 70,
       textAlign: "right"
     }
-  }, u.requests, " req", u.requests === 1 ? "" : "s"), React.createElement("span", {
+  }, u.requests, " req", u.requests === 1 ? "" : "s"), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 11,
       color: u.consecutiveLowWeeks >= 4 ? COLORS.orange : u.consecutiveLowWeeks >= 2 ? COLORS.blue : COLORS.textDim,
@@ -2161,12 +2191,12 @@ function FlagsTab() {
       textAlign: "right",
       fontFamily: "'JetBrains Mono', monospace"
     }
-  }, u.consecutiveLowWeeks, "w streak"), React.createElement("span", {
+  }, u.consecutiveLowWeeks, "w streak"), /*#__PURE__*/React.createElement("span", {
     style: {
       width: 90,
       textAlign: "right"
     }
-  }, u.dmEligible ? React.createElement("span", {
+  }, u.dmEligible ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 10,
       fontWeight: 600,
@@ -2175,7 +2205,7 @@ function FlagsTab() {
       background: COLORS.blueGlow,
       color: COLORS.blue
     }
-  }, "DM eligible") : React.createElement("span", {
+  }, "DM eligible") : /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 10,
       color: COLORS.textDim
@@ -2183,21 +2213,21 @@ function FlagsTab() {
   }, "first low week")))))));
 }
 function BreakdownTab() {
-  return React.createElement(React.Fragment, null, React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: 16,
       marginBottom: 20
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
@@ -2207,47 +2237,47 @@ function BreakdownTab() {
     const color = m.name.includes("opus") ? COLORS.red : m.name.includes("sonnet") ? COLORS.accent : COLORS.green;
     const label = formatModel(m.name);
     const pct = m.spend / DATA.summary.totalSpend * 100;
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: m.name,
       style: {
         marginBottom: 12
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         justifyContent: "space-between",
         marginBottom: 4
       }
-    }, React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 12,
         color: COLORS.textMuted
       }
-    }, label), React.createElement("span", {
+    }, label), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 12,
         fontFamily: "'JetBrains Mono', monospace",
         color
       }
-    }, fmt(m.spend), " (", pct.toFixed(1), "%)")), React.createElement(Bar, {
+    }, fmt(m.spend), " (", pct.toFixed(1), "%)")), /*#__PURE__*/React.createElement(Bar, {
       value: m.spend,
       max: DATA.models[0].spend,
       color: color
-    }), React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
         color: COLORS.textDim,
         marginTop: 2
       }
     }, m.requests.toLocaleString(), " requests"));
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
@@ -2255,53 +2285,53 @@ function BreakdownTab() {
     }
   }, "Product Surface Breakdown"), DATA.products.map(p => {
     const pct = p.spend / DATA.summary.totalSpend * 100;
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: p.name,
       style: {
         marginBottom: 12
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         justifyContent: "space-between",
         marginBottom: 4
       }
-    }, React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 12,
         color: COLORS.textMuted
       }
-    }, p.name), React.createElement("span", {
+    }, p.name), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 12,
         fontFamily: "'JetBrains Mono', monospace",
         color: COLORS.cyan
       }
-    }, fmt(p.spend), " (", pct.toFixed(1), "%)")), React.createElement(Bar, {
+    }, fmt(p.spend), " (", pct.toFixed(1), "%)")), /*#__PURE__*/React.createElement(Bar, {
       value: p.spend,
       max: DATA.products[0].spend,
       color: COLORS.cyan
-    }), React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
         color: COLORS.textDim,
         marginTop: 2
       }
     }, p.requests.toLocaleString(), " requests • ", fmt(p.spend / p.requests), "/req avg"));
-  }))), React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       border: `1px solid ${COLORS.border}`,
       borderRadius: 10,
       padding: 18
     }
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       fontWeight: 600,
       marginBottom: 14
     }
-  }, "Cost Per Request by Product"), React.createElement("div", {
+  }, "Cost Per Request by Product"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
@@ -2309,7 +2339,7 @@ function BreakdownTab() {
     }
   }, DATA.products.map(p => {
     const cpr = p.spend / p.requests;
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: p.name,
       style: {
         background: COLORS.bg,
@@ -2317,20 +2347,20 @@ function BreakdownTab() {
         padding: 14,
         textAlign: "center"
       }
-    }, React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 11,
         color: COLORS.textDim,
         marginBottom: 6
       }
-    }, p.name), React.createElement("div", {
+    }, p.name), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 20,
         fontWeight: 700,
         fontFamily: "'JetBrains Mono', monospace",
         color: cpr > 0.3 ? COLORS.orange : COLORS.text
       }
-    }, fmt(cpr)), React.createElement("div", {
+    }, fmt(cpr)), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 10,
         color: COLORS.textDim
@@ -2338,14 +2368,19 @@ function BreakdownTab() {
     }, "per request"));
   }))));
 }
-function EBClass(p){React.Component.call(this,p);this.state={err:null};}
-EBClass.prototype=Object.create(React.Component.prototype);EBClass.prototype.constructor=EBClass;
-EBClass.getDerivedStateFromError=function(e){return {err:e};};
-EBClass.prototype.componentDidCatch=function(e){window.__showErr((e&&e.stack)||e);};
-EBClass.prototype.render=function(){if(this.state.err)return null;return this.props.children;};
-ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(EBClass,null,React.createElement(Dashboard)));
-
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Dashboard));
 </script>
 <script>
-(function(){function showErr(m){var r=document.getElementById("root");if(r&&r.innerHTML.trim()==="")r.innerHTML='<div id="err"><b>Dashboard failed to render.</b><br/>Visible fallback so the page is never silently blank.<br/><br/><code>'+String(m)+'</code></div>';}window.__showErr=showErr;window.addEventListener("error",function(e){showErr((e.error&&e.error.stack)||e.message);});if(!window.React||!window.ReactDOM){showErr("React UMD failed to load (check network/CDN).");return;}window.__APP_DATA__={};function run(){var s=document.createElement("script");s.textContent=document.getElementById("appsrc").textContent;document.body.appendChild(s);setTimeout(function(){var r=document.getElementById("root");if(r&&(r.innerHTML.trim()===""||r.innerHTML.indexOf("No weekly data loaded")>-1)&&r.innerHTML.indexOf("id=\"err\"")===-1){showErr("Data loaded but dashboard rendered its empty state — DATA not populated before render.");}},0);}fetch("data.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("data.json HTTP "+r.status);return r.json();}).then(function(d){window.__APP_DATA__=d;run();}).catch(function(e){showErr("Could not load data.json: "+((e&&e.message)||e));});})();
-</script></body></html>
+(function(){
+  function showErr(m){document.getElementById('root').innerHTML='<pre style="color:#e4e4ef;font-family:monospace;padding:24px;white-space:pre-wrap">Dashboard failed to load.\n\n'+m+'</pre>';}
+  window.addEventListener('error',function(e){showErr((e.error&&e.error.stack)||e.message);});
+  fetch('./data.json').then(function(r){if(!r.ok)throw new Error('data.json HTTP '+r.status);return r.json();})
+  .then(function(d){
+    window.__APP_DATA__=d;
+    var src=document.getElementById('appsrc').textContent;
+    var s=document.createElement('script'); s.textContent=src; document.body.appendChild(s);
+  })
+  .catch(function(e){showErr(e.message);});
+})();
+</script>
+</body></html>
