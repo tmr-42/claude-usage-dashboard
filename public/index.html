@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Claude Usage Analysis — Jul 2–8, 2026</title>
-<style>html,body{margin:0;padding:0;background:#0a0a0f}#root{min-height:100vh}</style>
-</head><body>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Usage Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<style>html,body{margin:0;padding:0;background:#0a0a0f;}</style>
+</head>
+<body>
 <div id="root"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
 <script type="text/plain" id="appsrc">
-const {
-  useState,
-  useMemo
-} = React;
-const DATA = window.__APP_DATA__ || {};
+var useState=React.useState,useMemo=React.useMemo,useEffect=React.useEffect;
 const COLORS = {
   bg: "#0a0a0f",
   card: "#111118",
@@ -72,11 +72,6 @@ const FLAG_META = {
     label: "Opus heavy",
     color: COLORS.purple,
     glow: COLORS.purpleGlow
-  },
-  "token": {
-    label: "Tokens",
-    color: COLORS.orange,
-    glow: COLORS.orangeGlow
   },
   "legacy": {
     label: "Legacy",
@@ -493,19 +488,6 @@ function LineChart({
   }), s.name))));
 }
 
-// =============================================================================
-// DM section generators — EDUCATIONAL, NEVER RESTRICTIVE.
-// No questions. No "let me know." No "watch your spend."
-// =============================================================================
-
-// Low Engagement DM — DRAFTED ONLY, NEVER auto-sent in bulk.
-// Distinct, softer opener. Acknowledges legitimate reasons for low usage up front.
-// One section, one DM (not consolidated with cost-flag DMs).
-// Build one consolidated DM per user across all cost-optimization flags.
-// Section order: cowork-opus → opus → token → legacy.
-// Max-plan excluded. Low engagement handled separately (returned in its own array).
-// Skip-list excluded. Users with <$100 total weekly spend excluded from COST DMs.
-// =============================================================================
 // All Users tab — sortable, searchable, expandable rows with sparklines.
 // =============================================================================
 
@@ -728,7 +710,7 @@ function FragmentRow({
     style: {
       padding: "10px 14px",
       fontFamily: "'JetBrains Mono', monospace",
-      color: (u.cacheHitRate ?? 0) >= 80 ? COLORS.green : COLORS.textMuted
+      color: (u.cacheHitRate || 0) >= 85 ? COLORS.green : (u.cacheHitRate || 0) >= 50 ? COLORS.textMuted : COLORS.textDim
     }
   }, u.cacheHitRate != null ? u.cacheHitRate + "%" : "–"), /*#__PURE__*/React.createElement("td", {
     style: {
@@ -776,7 +758,7 @@ function UserDetailRow({
   const matrix = u.productModelMatrix;
   const userHistory = history?.userWeeks?.[u.email] || [];
   return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
-    colSpan: 10,
+    colSpan: 11,
     style: {
       padding: 0,
       background: COLORS.bg,
@@ -1153,10 +1135,6 @@ function TrendsTab({
     color: COLORS.purple,
     values: weeks.map(w => w.flagCounts?.opusHeavy || 0)
   }, {
-    name: "High tokens",
-    color: COLORS.orange,
-    values: weeks.map(w => w.flagCounts?.tokenDensity || 0)
-  }, {
     name: "Legacy",
     color: COLORS.textMuted,
     values: weeks.map(w => w.flagCounts?.legacy || 0)
@@ -1464,10 +1442,7 @@ function Dashboard() {
         justifyContent: "center",
         padding: 40
       }
-    }, /*#__PURE__*/React.createElement("link", {
-      href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
-      rel: "stylesheet"
-    }), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       style: {
         maxWidth: 560,
         textAlign: "center"
@@ -1492,44 +1467,9 @@ function Dashboard() {
       style: {
         fontSize: 14,
         color: COLORS.textMuted,
-        lineHeight: 1.6,
-        margin: "0 0 20px"
-      }
-    }, "This is the dashboard template. To render a real report, replace the ", /*#__PURE__*/React.createElement("code", {
-      style: {
-        background: COLORS.card,
-        padding: "2px 6px",
-        borderRadius: 4,
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 12,
-        color: COLORS.accent
-      }
-    }, "DATA"), " object near the top of the file with the computed weekly data, including a populated ", /*#__PURE__*/React.createElement("code", {
-      style: {
-        background: COLORS.card,
-        padding: "2px 6px",
-        borderRadius: 4,
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 12,
-        color: COLORS.accent
-      }
-    }, "history"), " block of all weeks tracked."), /*#__PURE__*/React.createElement("div", {
-      style: {
-        background: COLORS.card,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 8,
-        padding: 16,
-        fontSize: 12,
-        color: COLORS.textMuted,
-        fontFamily: "'JetBrains Mono', monospace",
-        textAlign: "left",
         lineHeight: 1.6
       }
-    }, "Required keys: ", /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: COLORS.text
-      }
-    }, "summary, leaderboard, allUsers, maxPlan, opusHeavy, coworkOpus, powerUsers, legacyModels, lowEngagement, products, models, history"))));
+    }, "data.json did not contain a populated summary.")));
   }
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1539,10 +1479,7 @@ function Dashboard() {
       fontFamily: "'Inter', -apple-system, sans-serif",
       padding: 0
     }
-  }, /*#__PURE__*/React.createElement("link", {
-    href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
-    rel: "stylesheet"
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "24px 24px 0",
       borderBottom: `1px solid ${COLORS.border}`
@@ -1644,7 +1581,7 @@ function OverviewTab() {
   }), /*#__PURE__*/React.createElement(StatCard, {
     label: "Cache Hit Rate",
     value: `${DATA.summary.orgCacheHitRate}%`,
-    sub: "org prompt-cache",
+    sub: "Org-wide efficiency",
     color: COLORS.green
   }), /*#__PURE__*/React.createElement(StatCard, {
     label: "Flags Raised",
@@ -2098,7 +2035,7 @@ function FlagsTab() {
       color: COLORS.textDim,
       borderBottom: `1px solid ${COLORS.border}`
     }
-  }, "Deprecated model versions (4.5 and older). Should migrate to current Sonnet 4.6 / Opus 4.7."), DATA.legacyModels.map(u => /*#__PURE__*/React.createElement("div", {
+  }, "Family-aware: Sonnet ≤4.5, Opus ≤4.5, Haiku ≤4.4, or any gen-3-or-older. Migrate to current Sonnet 5 / Opus 4.8. (Opus 4.6/4.7 are not legacy pending reclassification.)"), DATA.legacyModels.map(u => /*#__PURE__*/React.createElement("div", {
     key: u.email,
     style: {
       display: "flex",
@@ -2368,15 +2305,19 @@ function BreakdownTab() {
     }, "per request"));
   }))));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Dashboard));
 </script>
 <script>
 (function(){
-  function showErr(m){document.getElementById('root').innerHTML='<pre style="color:#e4e4ef;font-family:monospace;padding:24px;white-space:pre-wrap">Dashboard failed to load.\n\n'+m+'</pre>';}
-  window.addEventListener('error',function(e){showErr((e.error&&e.error.stack)||e.message);});
-  fetch('./data.json').then(function(r){if(!r.ok)throw new Error('data.json HTTP '+r.status);return r.json();})
-  .then(function(d){window.__APP_DATA__=d;var src=document.getElementById('appsrc').textContent;var s=document.createElement('script');s.textContent=src;document.body.appendChild(s);})
-  .catch(function(e){showErr(e.message);});
+  fetch("data.json").then(function(r){return r.json();}).then(function(d){
+    window.__APP_DATA__ = d;
+    var code = document.getElementById("appsrc").textContent;
+    var wrapped = "var DATA = window.__APP_DATA__;\n" + code + "\nwindow.__Dashboard__ = Dashboard;";
+    (0, eval)(wrapped);
+    ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(window.__Dashboard__));
+  }).catch(function(err){
+    document.getElementById("root").innerHTML='<div style="color:#e4e4ef;font-family:sans-serif;padding:40px">Failed to load data.json: '+err.message+'</div>';
+  });
 })();
 </script>
-</body></html>
+</body>
+</html>
