@@ -1,0 +1,857 @@
+// =============================================================================
+// Level Agency — Claude usage dashboard (weekly) · brand-aligned core · v3
+// Shared by BOTH surfaces. Contains ZERO messaging/outreach code — the artifact
+// appends an actions module; the Vercel build ships this core only.
+// Brand: Inter Tight headings (sentence case) · DM Sans body · black/white/grey
+// primary · secondary colors (#86D5F4 #FD6EF8 #8EE34D #FFAA53) as accents only,
+// never as font colors and never under white text (black text on them is ok).
+// =============================================================================
+const DATA = window.__APP_DATA__; // __DATA_BINDING__
+
+const C = {
+  bg: "#000000",
+  card: "#0b0b0d",
+  cardHover: "#141417",
+  border: "rgba(217,222,240,0.16)",
+  borderLight: "rgba(217,222,240,0.30)",
+  text: "#ffffff",
+  muted: "rgba(217,222,240,0.62)",
+  dim: "rgba(217,222,240,0.38)",
+  grey: "#D9DEF0",
+  blue: "#86D5F4", pink: "#FD6EF8", green: "#8EE34D", orange: "#FFAA53",
+  blueT: "rgba(134,213,244,0.13)", pinkT: "rgba(253,110,248,0.13)",
+  greenT: "rgba(142,227,77,0.13)", orangeT: "rgba(255,170,83,0.13)",
+};
+const HEAD = "'Inter Tight','Inter',system-ui,sans-serif";
+const BODY = "'DM Sans',system-ui,sans-serif";
+const SERIES = [C.blue, C.pink, C.green, C.orange, C.grey, "#ffffff"];
+const MODEL_COLORS = { opus: C.pink, sonnet: C.blue, haiku: C.green, other: C.orange };
+const FLAG_META = {
+  "max-plan":       { label: "Max plan",       color: C.orange },
+  "cowork-opus":    { label: "Cowork Opus",    color: C.orange },
+  "opus":           { label: "Opus heavy",     color: C.pink },
+  "legacy":         { label: "Legacy",         color: C.orange },
+  "low-engagement": { label: "Low engagement", color: C.blue },
+};
+const FONT_CSS = "@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap');" +
+  "body{margin:0;background:#000;} ::selection{background:rgba(134,213,244,0.35);}" +
+  "select,input{font-family:'DM Sans',system-ui,sans-serif;} " +
+  "select option{background:#0b0b0d;color:#fff;}";
+
+function fmt(n) { return "$" + (n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmt0(n) { return "$" + Math.round(n || 0).toLocaleString("en-US"); }
+function fmtK(n) { return n >= 1e6 ? (n/1e6).toFixed(1)+"M" : n >= 1e3 ? (n/1e3).toFixed(0)+"K" : String(n || 0); }
+function formatModel(raw) {
+  const parts = raw.replace(/^claude_/, "").split("_");
+  if (parts.length < 2) return parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+  return parts[0].charAt(0).toUpperCase() + parts[0].slice(1) + " " + parts.slice(1).join(".");
+}
+function firstNameOf(email) {
+  const r = DATA.roster[email];
+  return r ? r.name : email;
+}
+
+// ---------------------------------------------------------------- primitives
+function Head({ children, size = 22, style }) {
+  return <div style={{ fontFamily: HEAD, fontWeight: 800, fontSize: size, color: C.text, letterSpacing: -0.3, ...style }}>{children}</div>;
+}
+function Sub({ children, style }) {
+  return <div style={{ fontFamily: BODY, fontSize: 13, color: C.muted, ...style }}>{children}</div>;
+}
+function Card({ children, style }) {
+  return <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: 18, ...style }}>{children}</div>;
+}
+function StatCard({ label, value, sub, accent }) {
+  return (
+    <Card style={{ flex: 1, minWidth: 150, borderTop: accent ? `3px solid ${accent}` : `1px solid ${C.border}` }}>
+      <Sub>{label}</Sub>
+      <div style={{ fontFamily: HEAD, fontWeight: 900, fontSize: 26, color: C.text, margin: "4px 0 2px" }}>{value}</div>
+      {sub && <div style={{ fontSize: 12, color: C.dim, fontFamily: BODY }}>{sub}</div>}
+    </Card>
+  );
+}
+function Bar({ value, max, color = C.blue }) {
+  const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0;
+  return (
+    <div style={{ width: "100%", height: 6, borderRadius: 3, background: "rgba(217,222,240,0.10)", overflow: "hidden" }}>
+      <div style={{ width: pct + "%", height: "100%", borderRadius: 3, background: color, transition: "width .3s" }} />
+    </div>
+  );
+}
+function ModelBar({ models }) {
+  const keys = ["opus","sonnet","haiku","other"];
+  const total = keys.reduce((a,k)=>a+(models[k]||0),0);
+  if (!total) return <div style={{ height: 8 }} />;
+  return (
+    <div style={{ display: "flex", height: 8, borderRadius: 4, overflow: "hidden", width: "100%" }}>
+      {keys.map(k => (models[k]||0) > 0 && (
+        <div key={k} style={{ width: (100*(models[k]||0)/total)+"%", background: MODEL_COLORS[k] }} title={k} />
+      ))}
+    </div>
+  );
+}
+function FlagPill({ type }) {
+  const m = FLAG_META[type]; if (!m) return null;
+  return (
+    <span style={{ display: "inline-block", background: m.color, color: "#000", fontFamily: BODY,
+      fontWeight: 700, fontSize: 10, borderRadius: 4, padding: "2px 7px", marginRight: 4, whiteSpace: "nowrap" }}>
+      {m.label}
+    </span>
+  );
+}
+function Sparkline({ values, color = C.blue, width = 80, height = 22 }) {
+  if (!values || !values.length) return null;
+  if (values.length === 1) return <svg width={width} height={height}><circle cx={width/2} cy={height/2} r={2.5} fill={color} /></svg>;
+  const max = Math.max(...values, 0.01), min = Math.min(...values, 0);
+  const stepX = width / (values.length - 1);
+  const y = v => height - 3 - ((v - min) / (max - min || 1)) * (height - 6);
+  const pts = values.map((v,i)=>`${(i*stepX).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  return (
+    <svg width={width} height={height}>
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="1.5" />
+      <circle cx={(values.length-1)*stepX} cy={y(values[values.length-1])} r={2.4} fill={color} />
+    </svg>
+  );
+}
+function LineChart({ series, xLabels, height = 210, yFormat = fmt0, sharedMax = null }) {
+  const W = 720, P = { l: 54, r: 14, t: 12, b: 26 };
+  const all = series.flatMap(s => s.values);
+  const max = sharedMax != null ? sharedMax : Math.max(...all, 0.01);
+  const iw = W - P.l - P.r, ih = height - P.t - P.b;
+  const n = Math.max(...series.map(s => s.values.length), 2);
+  const x = i => P.l + (i / (n - 1)) * iw;
+  const y = v => P.t + ih - (v / (max || 1)) * ih;
+  const ticks = [0, .25, .5, .75, 1].map(f => f * max);
+  const step = Math.max(1, Math.ceil(n / 8));
+  return (
+    <div>
+      <svg viewBox={`0 0 ${W} ${height}`} style={{ width: "100%", height: "auto", display: "block" }}>
+        {ticks.map((t,i)=>(
+          <g key={i}>
+            <line x1={P.l} x2={W-P.r} y1={y(t)} y2={y(t)} stroke="rgba(217,222,240,0.10)" />
+            <text x={P.l-6} y={y(t)+3} fontSize="9" fill={C.dim} textAnchor="end" fontFamily={BODY}>{yFormat(t)}</text>
+          </g>
+        ))}
+        {xLabels.map((l,i)=> i % step === 0 && (
+          <text key={i} x={x(i)} y={height-8} fontSize="9" fill={C.dim} textAnchor="middle" fontFamily={BODY}>{l}</text>
+        ))}
+        {series.map((s,si)=>{
+          const pts = s.values.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+          return <polyline key={si} points={pts} fill="none" stroke={s.color} strokeWidth="2" strokeLinejoin="round" />;
+        })}
+      </svg>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 6 }}>
+        {series.map((s,i)=>(
+          <span key={i} style={{ fontSize: 11, color: C.muted, fontFamily: BODY, display: "inline-flex", alignItems: "center", gap: 5 }}>
+            <span style={{ width: 10, height: 3, background: s.color, display: "inline-block", borderRadius: 2 }} />{s.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+function Select({ value, onChange, options, placeholder, width = 180 }) {
+  return (
+    <select value={value} onChange={e=>onChange(e.target.value)}
+      style={{ background: C.card, color: C.text, border: `1px solid ${C.borderLight}`, borderRadius: 7,
+        padding: "7px 10px", fontSize: 12.5, width, fontFamily: BODY }}>
+      <option value="">{placeholder}</option>
+      {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+    </select>
+  );
+}
+function DeltaPill({ value }) {
+  if (value == null) return null;
+  const up = value >= 0;
+  const col = up ? C.orange : C.green; // spend up = attention, down = efficient
+  return (
+    <span style={{ background: col, color: "#000", fontFamily: BODY, fontWeight: 700, fontSize: 10,
+      borderRadius: 4, padding: "2px 6px", marginLeft: 8 }}>{up ? "▲" : "▼"} {Math.abs(value).toFixed(0)}%</span>
+  );
+}
+
+// ------------------------------------------------------------------ overview
+function OverviewTab() {
+  const s = DATA.summary;
+  const w = DATA.history.weeks[DATA.history.weeks.length - 1];
+  const modelSplit = [
+    { k: "sonnet", v: w.sonnetSpend }, { k: "opus", v: w.opusSpend },
+    { k: "haiku", v: w.haikuSpend }, { k: "other", v: w.otherSpend || 0 },
+  ].filter(m => m.v > 0);
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
+        <StatCard label="Total spend" value={fmt(s.totalSpend)} sub={s.weekOf} accent={C.blue} />
+        <StatCard label="Active users" value={s.activeUsers} sub={`avg ${fmt(s.avgSpend)}/user`} />
+        <StatCard label="Top 10 share" value={s.top10Pct + "%"} sub={fmt(s.top10Spend)} />
+        <StatCard label="Cache hit rate" value={s.cacheHitRate + "%"} sub="org-wide prompt cache" accent={C.green} />
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        <Card>
+          <Head size={15} style={{ marginBottom: 12 }}>Model mix</Head>
+          {modelSplit.map(m => (
+            <div key={m.k} style={{ marginBottom: 10 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: C.muted, fontFamily: BODY, marginBottom: 4 }}>
+                <span style={{ textTransform: "capitalize" }}>{m.k}</span>
+                <span>{fmt(m.v)} · {(100 * m.v / s.totalSpend).toFixed(0)}%</span>
+              </div>
+              <Bar value={m.v} max={s.totalSpend} color={MODEL_COLORS[m.k]} />
+            </div>
+          ))}
+        </Card>
+        <Card>
+          <Head size={15} style={{ marginBottom: 12 }}>Product mix</Head>
+          {DATA.products.slice(0, 6).map((p, i) => (
+            <div key={p.name} style={{ marginBottom: 10 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: C.muted, fontFamily: BODY, marginBottom: 4 }}>
+                <span>{p.name}</span><span>{fmt(p.spend)} · {(100 * p.spend / s.totalSpend).toFixed(0)}%</span>
+              </div>
+              <Bar value={p.spend} max={s.totalSpend} color={SERIES[i % SERIES.length]} />
+            </div>
+          ))}
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+// --------------------------------------------------------------- leaderboard
+function LeaderboardTab() {
+  const th = { textAlign: "left", padding: "8px 10px", fontSize: 10.5, color: C.dim, fontFamily: BODY, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.6, borderBottom: `1px solid ${C.border}` };
+  const td = { padding: "9px 10px", fontSize: 12.5, color: C.text, fontFamily: BODY, borderBottom: `1px solid ${C.border}` };
+  return (
+    <Card style={{ padding: 0, overflow: "hidden" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead><tr>
+          <th style={th}>#</th><th style={th}>Name</th><th style={th}>Dept</th><th style={th}>Spend</th>
+          <th style={th}>Requests</th><th style={th}>$/req</th><th style={th}>Model mix</th><th style={th}>Top product</th>
+        </tr></thead>
+        <tbody>
+          {DATA.leaderboard.map((u, i) => {
+            const top = Object.entries(u.products).sort((a,b)=>b[1]-a[1])[0];
+            return (
+              <tr key={u.email}>
+                <td style={{ ...td, color: C.dim }}>{i + 1}</td>
+                <td style={td}><div>{u.name}</div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
+                <td style={{ ...td, color: C.muted }}>{u.org && u.org.department || "—"}</td>
+                <td style={{ ...td, fontWeight: 700 }}>{fmt(u.spend)}</td>
+                <td style={td}>{u.requests.toLocaleString()}</td>
+                <td style={td}>{"$" + u.cpr.toFixed(3)}</td>
+                <td style={{ ...td, width: 110 }}><ModelBar models={u.models} /></td>
+                <td style={{ ...td, color: C.muted }}>{top ? `${top[0]} (${fmt(top[1])})` : "—"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </Card>
+  );
+}
+
+// ----------------------------------------------------------------- all users
+function UserDetailRow({ u }) {
+  const box = { background: "rgba(217,222,240,0.04)", border: `1px solid ${C.border}`, borderRadius: 8, padding: 14 };
+  const mm = u.productModelMatrix;
+  const cellS = { padding: "5px 9px", fontSize: 11.5, fontFamily: BODY, color: C.muted, borderBottom: `1px solid ${C.border}`, textAlign: "right" };
+  return (
+    <div style={{ padding: 14, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div style={{ ...box, gridColumn: "1 / -1", display: "flex", gap: 26, flexWrap: "wrap" }}>
+        {[["Spend", fmt(u.spend)], ["Requests", u.requests.toLocaleString()], ["$/request", "$" + u.cpr.toFixed(3)],
+          ["Avg prompt tokens", fmtK(u.avgPromptTokens)], ["Cache hit", u.cacheHitRate + "%"]].map(([l, v]) => (
+          <div key={l}><Sub>{l}</Sub><div style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 17, color: C.text }}>{v}</div></div>
+        ))}
+      </div>
+      <div style={box}>
+        <Sub style={{ marginBottom: 8, fontWeight: 700 }}>Product mix</Sub>
+        {u.productMix.map((p, i) => (
+          <div key={p.name} style={{ marginBottom: 7 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: C.muted, fontFamily: BODY }}>
+              <span>{p.name}</span><span>{fmt(p.spend)} · {p.pct}%</span></div>
+            <Bar value={p.spend} max={u.spend} color={SERIES[i % SERIES.length]} />
+          </div>
+        ))}
+      </div>
+      <div style={box}>
+        <Sub style={{ marginBottom: 8, fontWeight: 700 }}>Model mix</Sub>
+        {u.modelMix.map(m => (
+          <div key={m.name} style={{ marginBottom: 7 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: C.muted, fontFamily: BODY }}>
+              <span style={{ textTransform: "capitalize" }}>{m.name}</span><span>{fmt(m.spend)} · {m.pct}%</span></div>
+            <Bar value={m.spend} max={u.spend} color={MODEL_COLORS[m.name] || C.grey} />
+          </div>
+        ))}
+      </div>
+      <div style={{ ...box, gridColumn: "1 / -1", overflowX: "auto" }}>
+        <Sub style={{ marginBottom: 8, fontWeight: 700 }}>Product × model</Sub>
+        <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <thead><tr>
+            <th style={{ ...cellS, textAlign: "left", color: C.dim }}></th>
+            {mm.models.map(m => <th key={m} style={{ ...cellS, color: C.dim, textTransform: "capitalize" }}>{m}</th>)}
+            <th style={{ ...cellS, color: C.text, fontWeight: 700 }}>Total</th>
+          </tr></thead>
+          <tbody>
+            {mm.products.map((p, ri) => (
+              <tr key={p}>
+                <td style={{ ...cellS, textAlign: "left", color: C.text }}>{p}</td>
+                {mm.models.map((m, ci) => <td key={m} style={cellS}>{mm.cells[ri][ci] ? fmt(mm.cells[ri][ci]) : "—"}</td>)}
+                <td style={{ ...cellS, color: C.text, fontWeight: 700 }}>{fmt(mm.rowTotals[ri])}</td>
+              </tr>
+            ))}
+            <tr>
+              <td style={{ ...cellS, textAlign: "left", color: C.text, fontWeight: 700 }}>Total</td>
+              {mm.colTotals.map((v, i) => <td key={i} style={{ ...cellS, fontWeight: 700, color: C.text }}>{v ? fmt(v) : "—"}</td>)}
+              <td style={{ ...cellS, color: C.text, fontWeight: 700 }}>{fmt(u.spend)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function AllUsersTab() {
+  const [q, setQ] = useState("");
+  const [sortK, setSortK] = useState("spend");
+  const [dir, setDir] = useState(-1);
+  const [open, setOpen] = useState(null);
+  const rows = useMemo(() => {
+    const f = DATA.allUsers.filter(u => {
+      if (!q) return true;
+      const top = Object.entries(u.products).sort((a,b)=>b[1]-a[1])[0];
+      const hay = (u.name + " " + u.email + " " + (top ? top[0] : "") + " " + (u.org && u.org.department || "")).toLowerCase();
+      return hay.includes(q.toLowerCase());
+    });
+    const get = u => sortK === "name" ? u.name : sortK === "dept" ? (u.org && u.org.department || "") :
+      sortK === "cache" ? u.cacheHitRate : u[sortK];
+    return [...f].sort((a,b)=>{ const A=get(a), B=get(b); return (A<B?-1:A>B?1:0) * dir; });
+  }, [q, sortK, dir]);
+  const setSort = k => { if (k === sortK) setDir(-dir); else { setSortK(k); setDir(-1); } };
+  const th = k => ({ textAlign: "left", padding: "8px 10px", fontSize: 10.5, color: sortK===k ? C.text : C.dim,
+    cursor: "pointer", fontFamily: BODY, fontWeight: 700, textTransform: "uppercase", letterSpacing: .6,
+    borderBottom: `1px solid ${C.border}`, userSelect: "none", whiteSpace: "nowrap" });
+  const td = { padding: "9px 10px", fontSize: 12.5, color: C.text, fontFamily: BODY, borderBottom: `1px solid ${C.border}` };
+  const arrow = k => sortK === k ? (dir === -1 ? " ↓" : " ↑") : "";
+  return (
+    <div>
+      <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search name, email, department, or top product…"
+        style={{ width: "100%", boxSizing: "border-box", background: C.card, color: C.text, border: `1px solid ${C.borderLight}`,
+          borderRadius: 8, padding: "10px 13px", fontSize: 13, marginBottom: 12, fontFamily: BODY }} />
+      <Card style={{ padding: 0, overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead><tr>
+            <th style={th("name")} onClick={()=>setSort("name")}>Name{arrow("name")}</th>
+            <th style={th("dept")} onClick={()=>setSort("dept")}>Dept{arrow("dept")}</th>
+            <th style={th("spend")} onClick={()=>setSort("spend")}>Spend{arrow("spend")}</th>
+            <th style={th("requests")} onClick={()=>setSort("requests")}>Req{arrow("requests")}</th>
+            <th style={th("cpr")} onClick={()=>setSort("cpr")}>$/req{arrow("cpr")}</th>
+            <th style={th("cache")} onClick={()=>setSort("cache")}>Cache{arrow("cache")}</th>
+            <th style={th("_m")}>Model mix</th>
+            <th style={th("_t")}>Trend</th>
+            <th style={th("_f")}>Flags</th>
+          </tr></thead>
+          <tbody>
+            {rows.map(u => (
+              <FragmentRow key={u.email} u={u} isOpen={open === u.email}
+                onToggle={() => setOpen(open === u.email ? null : u.email)} td={td} />
+            ))}
+          </tbody>
+        </table>
+      </Card>
+      <Sub style={{ marginTop: 8 }}>{rows.length} of {DATA.allUsers.length} users · click any row for detail</Sub>
+    </div>
+  );
+}
+function FragmentRow({ u, isOpen, onToggle, td }) {
+  return (
+    <React.Fragment>
+      <tr onClick={onToggle} style={{ cursor: "pointer", background: isOpen ? C.cardHover : "transparent" }}>
+        <td style={td}><div>{u.name}</div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
+        <td style={{ ...td, color: C.muted }}>{u.org && u.org.department || "—"}</td>
+        <td style={{ ...td, fontWeight: 700 }}>{fmt(u.spend)}</td>
+        <td style={td}>{u.requests.toLocaleString()}</td>
+        <td style={td}>{"$" + u.cpr.toFixed(3)}</td>
+        <td style={{ ...td, color: u.cacheHitRate >= 90 ? C.text : C.muted }}>{u.cacheHitRate}%</td>
+        <td style={{ ...td, width: 100 }}><ModelBar models={u.models} /></td>
+        <td style={td}><Sparkline values={u.sparkline} /></td>
+        <td style={td}>{u.flags.map(f => <FlagPill key={f} type={f} />)}</td>
+      </tr>
+      {isOpen && <tr><td colSpan={9} style={{ padding: 0, borderBottom: `1px solid ${C.border}` }}><UserDetailRow u={u} /></td></tr>}
+    </React.Fragment>
+  );
+}
+
+// -------------------------------------------------------------------- trends
+function TrendsTab() {
+  const H = DATA.history.weeks;
+  const xL = H.map(w => w.weekStartISO.slice(5).replace("-", "/"));
+  const last = H[H.length - 1], prev = H.length > 1 ? H[H.length - 2] : null;
+  const d = (a, b) => (prev && b > 0) ? (100 * (a - b) / b) : null;
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
+        <StatCard label="Spend WoW" value={<span>{fmt(last.totalSpend)}<DeltaPill value={prev && d(last.totalSpend, prev.totalSpend)} /></span>} />
+        <StatCard label="Active users WoW" value={<span>{last.activeUsers}<DeltaPill value={prev && d(last.activeUsers, prev.activeUsers)} /></span>} />
+        <StatCard label="Cache hit" value={(last.cacheHitRate || 0) + "%"} accent={C.green} />
+      </div>
+      <Card style={{ marginBottom: 12 }}>
+        <Head size={15} style={{ marginBottom: 12 }}>Org spend by model family</Head>
+        <LineChart xLabels={xL} series={[
+          { name: "Total", color: "#ffffff", values: H.map(w => w.totalSpend) },
+          { name: "Sonnet", color: C.blue, values: H.map(w => w.sonnetSpend) },
+          { name: "Opus", color: C.pink, values: H.map(w => w.opusSpend) },
+          { name: "Haiku", color: C.green, values: H.map(w => w.haikuSpend) },
+        ]} />
+      </Card>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        <Card>
+          <Head size={15} style={{ marginBottom: 12 }}>Active users</Head>
+          <LineChart height={170} yFormat={v => Math.round(v)} xLabels={xL}
+            series={[{ name: "Active users", color: C.grey, values: H.map(w => w.activeUsers) }]} />
+        </Card>
+        <Card>
+          <Head size={15} style={{ marginBottom: 12 }}>Spend by surface</Head>
+          <LineChart height={170} xLabels={xL} series={
+            Object.keys(last.productSpend).slice(0, 4).map((p, i) => ({
+              name: p, color: SERIES[i], values: H.map(w => (w.productSpend && w.productSpend[p]) || 0)
+            }))} />
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+// --------------------------------------------------- enablement shared logic
+const DIM_LABELS = { department: "Department", team: "Team", manager: "Manager", mor: "Manager once removed", subDeptLead: "Sub-dept (lead)" };
+function unitLabel(dim, key) {
+  const u = DATA.enablement.dimensions[dim][key];
+  return u ? u.label : key;
+}
+function useWeekRange() {
+  const weeks = DATA.enablement.weeks;
+  const [from, setFrom] = useState(0);
+  const [to, setTo] = useState(weeks.length - 1);
+  const opts = weeks.map((w, i) => ({ value: String(i), label: w.weekOf }));
+  return { weeks, from, to, setFrom: v => setFrom(Math.min(+v, to)), setTo: v => setTo(Math.max(+v, from)), opts };
+}
+function spendSeriesFor(emails, from, to) {
+  const weeks = DATA.enablement.weeks; const uw = DATA.history.userWeeks;
+  const out = [];
+  for (let i = from; i <= to; i++) {
+    const iso = weeks[i].weekStartISO; let sp = 0, rq = 0, act = 0;
+    emails.forEach(e => { const arr = uw[e] || []; for (const w of arr) if (w.weekStartISO === iso) { sp += w.spend; rq += w.requests; act++; break; } });
+    out.push({ iso, label: iso.slice(5).replace("-", "/"), spend: Math.round(sp * 100) / 100, requests: rq, activeUsers: act });
+  }
+  return out;
+}
+function clientNarrative(label, emails, from, to) {
+  const s = spendSeriesFor(emails, from, to);
+  const total = s.reduce((a, w) => a + w.spend, 0);
+  const first = s[0], last = s[s.length - 1];
+  const dir = s.length > 1 && first.spend > 0 ? (last.spend >= first.spend ?
+    `up ${(100 * (last.spend - first.spend) / first.spend).toFixed(0)}%` :
+    `down ${(100 * (first.spend - last.spend) / first.spend).toFixed(0)}%`) + " across the range" : null;
+  const peak = s.reduce((a, w) => w.spend > a.spend ? w : a, s[0]);
+  const active = new Set(); emails.forEach(e => { (DATA.history.userWeeks[e] || []).some(w => { const i = DATA.enablement.weeks.findIndex(x => x.weekStartISO === w.weekStartISO); return i >= from && i <= to; }) && active.add(e); });
+  const cur = DATA.allUsers.filter(u => emails.includes(u.email));
+  const curSpend = cur.reduce((a, u) => a + u.spend, 0);
+  const topUser = cur.sort((a, b) => b.spend - a.spend)[0];
+  const parts = [
+    `${label}: ${fmt(total)} total spend over ${s.length} week${s.length > 1 ? "s" : ""} (${active.size} of ${emails.length} people active in range).`
+  ];
+  if (dir) parts.push(`Weekly spend is ${dir}, peaking at ${fmt(peak.spend)} the week of ${peak.iso}.`);
+  if (cur.length) parts.push(`Latest week: ${fmt(curSpend)} across ${cur.length} active users${topUser ? `, led by ${topUser.name} (${fmt(topUser.spend)})` : ""}.`);
+  const non = emails.filter(e => !DATA.allUsers.some(u => u.email === e));
+  if (non.length) parts.push(`${non.length} group member${non.length > 1 ? "s" : ""} had no usage in the latest week.`);
+  return parts.join(" ");
+}
+
+// ---------------------------------------------------------------- enablement
+function EnablementTab() {
+  const [dept, setDept] = useState("");
+  const [team, setTeam] = useState("");
+  const [sub, setSub] = useState("");
+  const [mgr, setMgr] = useState("");
+  const [mor, setMor] = useState("");
+  const [people, setPeople] = useState([]); // custom group emails
+  const [pq, setPq] = useState("");
+  const R = useWeekRange();
+  const roster = DATA.roster;
+
+  const optsFor = (dim, filterFn) => Object.keys(DATA.enablement.dimensions[dim])
+    .filter(k => k !== "Unmapped" && (!filterFn || filterFn(k)))
+    .map(k => ({ value: k, label: unitLabel(dim, k) }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  const teamsInDept = k => !dept || Object.values(roster).some(r => r.team === k && r.department === dept);
+  const mgrsInScope = k => Object.entries(roster).some(([e, r]) => r.managerEmail === k &&
+    (!dept || r.department === dept) && (!team || r.team === team));
+
+  const customMode = people.length > 0;
+  const members = useMemo(() => {
+    if (customMode) return people;
+    return Object.keys(roster).filter(e => {
+      const r = roster[e];
+      return (!dept || r.department === dept) && (!team || r.team === team) &&
+        (!sub || r.subDeptLeadEmail === sub) && (!mgr || r.managerEmail === mgr) && (!mor || r.morEmail === mor);
+    });
+  }, [dept, team, sub, mgr, mor, people]);
+
+  const series = useMemo(() => spendSeriesFor(members, R.from, R.to), [members, R.from, R.to]);
+  const totalRange = series.reduce((a, w) => a + w.spend, 0);
+  const activeCur = DATA.allUsers.filter(u => members.includes(u.email));
+  const curSpend = activeCur.reduce((a, u) => a + u.spend, 0);
+  const nonAdopters = members.filter(e => !DATA.allUsers.some(u => u.email === e));
+  const pt = activeCur.reduce((a, u) => a + u.avgPromptTokens * u.requests, 0);
+  const cacheW = activeCur.length ? (activeCur.reduce((a, u) => a + u.cacheHitRate * u.avgPromptTokens * u.requests, 0) / (pt || 1)).toFixed(1) : "—";
+
+  const groupLabel = customMode ? `Custom group (${people.length})` :
+    [dept, team && team !== dept ? team : null, sub ? "sub-dept: " + unitLabel("subDeptLead", sub) : null,
+     mgr ? "mgr: " + unitLabel("manager", mgr) : null, mor ? "MOR: " + unitLabel("mor", mor) : null]
+      .filter(Boolean).join(" · ") || "Whole org";
+  const narrative = (!customMode && dept && !team && !sub && !mgr && !mor && R.from === 0 && R.to === DATA.enablement.weeks.length - 1)
+    ? DATA.enablement.narratives[dept] : clientNarrative(groupLabel, members, R.from, R.to);
+
+  const matches = pq.length >= 2 ? Object.entries(roster)
+    .filter(([e, r]) => !people.includes(e) && (r.name.toLowerCase().includes(pq.toLowerCase()) || e.includes(pq.toLowerCase())))
+    .slice(0, 6) : [];
+  const canAI = typeof window !== "undefined" && !!window.__AI_NARRATIVE__;
+  const [ai, setAi] = useState(null);
+  const [aiBusy, setAiBusy] = useState(false);
+
+  const th = { textAlign: "left", padding: "7px 10px", fontSize: 10.5, color: C.dim, fontFamily: BODY, fontWeight: 700, textTransform: "uppercase", letterSpacing: .6, borderBottom: `1px solid ${C.border}` };
+  const td = { padding: "8px 10px", fontSize: 12.5, color: C.text, fontFamily: BODY, borderBottom: `1px solid ${C.border}` };
+
+  return (
+    <div>
+      <Card style={{ marginBottom: 12 }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+          <Select value={dept} onChange={v => { setDept(v); setTeam(""); setMgr(""); }} placeholder="All departments" width={170} options={optsFor("department")} />
+          <Select value={team} onChange={setTeam} placeholder="All teams" width={150} options={optsFor("team", teamsInDept)} />
+          <Select value={sub} onChange={setSub} placeholder="Any sub-dept" width={160} options={optsFor("subDeptLead")} />
+          <Select value={mgr} onChange={setMgr} placeholder="Any manager" width={170} options={optsFor("manager", mgrsInScope)} />
+          <Select value={mor} onChange={setMor} placeholder="Any MOR" width={160} options={optsFor("mor")} />
+          <span style={{ color: C.dim, fontSize: 12, fontFamily: BODY }}>Weeks</span>
+          <Select value={String(R.from)} onChange={R.setFrom} placeholder="From" width={150} options={R.opts} />
+          <Select value={String(R.to)} onChange={R.setTo} placeholder="To" width={150} options={R.opts} />
+        </div>
+        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+          <input value={pq} onChange={e => setPq(e.target.value)} placeholder="Add specific people to build a custom group…"
+            style={{ background: C.bg, color: C.text, border: `1px solid ${C.borderLight}`, borderRadius: 7, padding: "7px 10px", fontSize: 12.5, width: 280, fontFamily: BODY }} />
+          {matches.map(([e, r]) => (
+            <button key={e} onClick={() => { setPeople([...people, e]); setPq(""); }}
+              style={{ background: C.cardHover, color: C.text, border: `1px solid ${C.borderLight}`, borderRadius: 6, padding: "5px 9px", fontSize: 11.5, cursor: "pointer", fontFamily: BODY }}>
+              + {r.name}
+            </button>
+          ))}
+          {people.map(e => (
+            <span key={e} style={{ background: C.blue, color: "#000", borderRadius: 6, padding: "4px 9px", fontSize: 11.5, fontFamily: BODY, fontWeight: 700 }}>
+              {roster[e] ? roster[e].name : e}
+              <span onClick={() => setPeople(people.filter(x => x !== e))} style={{ marginLeft: 6, cursor: "pointer" }}>×</span>
+            </span>
+          ))}
+          {customMode && <Sub>(custom group overrides org filters)</Sub>}
+        </div>
+      </Card>
+
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
+        <StatCard label="Group" value={<span style={{ fontSize: 18 }}>{groupLabel}</span>} sub={`${members.length} people`} accent={C.blue} />
+        <StatCard label="Spend (range)" value={fmt(totalRange)} sub={`${series.length} weeks`} />
+        <StatCard label="Latest week" value={fmt(curSpend)} sub={`${activeCur.length} active`} />
+        <StatCard label="Non-adopters" value={nonAdopters.length} sub="no usage latest week" accent={nonAdopters.length ? C.orange : C.green} />
+        <StatCard label="Cache hit" value={cacheW + (cacheW === "—" ? "" : "%")} sub="weighted, latest week" />
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 12, marginBottom: 12 }}>
+        <Card>
+          <Head size={15} style={{ marginBottom: 12 }}>Group spend trend</Head>
+          <LineChart xLabels={series.map(s => s.label)} series={[
+            { name: "Spend", color: C.blue, values: series.map(s => s.spend) },
+          ]} />
+        </Card>
+        <Card>
+          <Head size={15} style={{ marginBottom: 8 }}>Narrative</Head>
+          <div style={{ fontSize: 13, color: C.text, fontFamily: BODY, lineHeight: 1.65 }}>{ai || narrative}</div>
+          {canAI && (
+            <button disabled={aiBusy} onClick={async () => {
+              setAiBusy(true);
+              try { setAi(await window.__AI_NARRATIVE__({ groupLabel, series, members: members.length, active: activeCur.length, nonAdopters: nonAdopters.length, topUsers: activeCur.slice(0, 5).map(u => ({ name: u.name, spend: u.spend })) })); }
+              catch (e) { setAi("AI narrative unavailable: " + e.message); }
+              setAiBusy(false);
+            }} style={{ marginTop: 10, background: C.green, color: "#000", border: "none", borderRadius: 7, padding: "8px 13px", fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: BODY }}>
+              {aiBusy ? "Generating…" : "Generate AI narrative"}
+            </button>
+          )}
+        </Card>
+      </div>
+
+      <Card style={{ padding: 0, overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead><tr><th style={th}>Member</th><th style={th}>Dept / team</th><th style={th}>Manager</th>
+            <th style={th}>Spend (latest)</th><th style={th}>Requests</th><th style={th}>Cache</th><th style={th}>Flags</th></tr></thead>
+          <tbody>
+            {members.map(e => {
+              const r = roster[e]; const u = DATA.allUsers.find(x => x.email === e);
+              return (
+                <tr key={e} style={{ opacity: u ? 1 : 0.55 }}>
+                  <td style={td}><div>{r ? r.name : e}</div><div style={{ fontSize: 10.5, color: C.dim }}>{e}</div></td>
+                  <td style={{ ...td, color: C.muted }}>{r ? r.department + (r.team !== r.department ? " / " + r.team : "") : "—"}</td>
+                  <td style={{ ...td, color: C.muted }}>{r && r.managerEmail ? firstNameOf(r.managerEmail) : "—"}</td>
+                  <td style={{ ...td, fontWeight: 700 }}>{u ? fmt(u.spend) : <span style={{ color: C.dim }}>no usage</span>}</td>
+                  <td style={td}>{u ? u.requests.toLocaleString() : "—"}</td>
+                  <td style={td}>{u ? u.cacheHitRate + "%" : "—"}</td>
+                  <td style={td}>{u ? u.flags.map(f => <FlagPill key={f} type={f} />) : null}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </Card>
+    </div>
+  );
+}
+
+// --------------------------------------------------------------- team trends
+function TeamTrendsTab() {
+  const [dim, setDim] = useState("department");
+  const [mode, setMode] = useState("small"); // small | overlay | heat
+  const [sharedY, setSharedY] = useState(true);
+  const R = useWeekRange();
+  const units = DATA.enablement.dimensions[dim];
+  const ranked = Object.keys(units).filter(k => k !== "Unmapped").sort((a, b) => units[b].spend - units[a].spend);
+  const [sel, setSel] = useState(null);
+  const selected = sel && sel.dim === dim ? sel.keys : ranked.slice(0, 6);
+  const setSelected = keys => setSel({ dim, keys });
+
+  const seriesFor = k => units[k].series.slice(R.from, R.to + 1).map(w => w.spend);
+  const xL = DATA.enablement.weeks.slice(R.from, R.to + 1).map(w => w.weekStartISO.slice(5).replace("-", "/"));
+  const maxAll = Math.max(...selected.flatMap(seriesFor), 0.01);
+  const modeBtn = m => ({ background: mode === m ? C.grey : "transparent", color: mode === m ? "#000" : C.muted,
+    border: `1px solid ${C.borderLight}`, borderRadius: 6, padding: "6px 11px", fontSize: 12, cursor: "pointer", fontFamily: BODY, fontWeight: 700 });
+
+  return (
+    <div>
+      <Card style={{ marginBottom: 12 }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+          <Select value={dim} onChange={v => { setDim(v); setSel(null); }} placeholder="" width={190}
+            options={Object.keys(DIM_LABELS).map(d => ({ value: d, label: DIM_LABELS[d] }))} />
+          <button style={modeBtn("small")} onClick={() => setMode("small")}>Small multiples</button>
+          <button style={modeBtn("overlay")} onClick={() => setMode("overlay")}>Overlay</button>
+          <button style={modeBtn("heat")} onClick={() => setMode("heat")}>Heatmap</button>
+          {mode === "small" && (
+            <label style={{ fontSize: 12, color: C.muted, fontFamily: BODY, display: "flex", alignItems: "center", gap: 5 }}>
+              <input type="checkbox" checked={sharedY} onChange={e => setSharedY(e.target.checked)} /> shared y-axis
+            </label>
+          )}
+          <span style={{ color: C.dim, fontSize: 12, fontFamily: BODY }}>Weeks</span>
+          <Select value={String(R.from)} onChange={R.setFrom} placeholder="From" width={145} options={R.opts} />
+          <Select value={String(R.to)} onChange={R.setTo} placeholder="To" width={145} options={R.opts} />
+        </div>
+        <div style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}>
+          {ranked.map(k => {
+            const on = selected.includes(k);
+            return (
+              <button key={k} onClick={() => setSelected(on ? selected.filter(x => x !== k) : [...selected, k])}
+                style={{ background: on ? C.blue : "transparent", color: on ? "#000" : C.muted,
+                  border: `1px solid ${on ? C.blue : C.borderLight}`, borderRadius: 6, padding: "4px 9px",
+                  fontSize: 11.5, cursor: "pointer", fontFamily: BODY, fontWeight: on ? 700 : 400 }}>
+                {unitLabel(dim, k)} · {fmt0(units[k].spend)}
+              </button>
+            );
+          })}
+        </div>
+      </Card>
+
+      {mode === "small" && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(310px, 1fr))", gap: 12 }}>
+          {selected.map((k, i) => {
+            const u = units[k]; const vals = seriesFor(k);
+            const cur = vals[vals.length - 1] || 0; const prev = vals.length > 1 ? vals[vals.length - 2] : null;
+            return (
+              <Card key={k}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
+                  <Head size={14}>{unitLabel(dim, k)}</Head>
+                  <span style={{ fontFamily: BODY, fontSize: 12, color: C.muted }}>
+                    {fmt(cur)}{prev != null && prev > 0 && <DeltaPill value={100 * (cur - prev) / prev} />}
+                  </span>
+                </div>
+                <Sub style={{ marginBottom: 8 }}>{u.activeUsers} active / {u.rosterCount || u.activeUsers} people{u.nonAdopters ? ` · ${u.nonAdopters} non-adopters` : ""} · cache {u.cacheHitRate}%</Sub>
+                <LineChart height={130} xLabels={xL} sharedMax={sharedY ? maxAll : null}
+                  series={[{ name: "Spend", color: SERIES[i % SERIES.length], values: vals }]} />
+              </Card>
+            );
+          })}
+        </div>
+      )}
+
+      {mode === "overlay" && (
+        <Card>
+          <Head size={15} style={{ marginBottom: 12 }}>Spend overlay — {DIM_LABELS[dim].toLowerCase()}</Head>
+          <LineChart height={300} xLabels={xL}
+            series={selected.map((k, i) => ({ name: unitLabel(dim, k), color: SERIES[i % SERIES.length], values: seriesFor(k) }))} />
+          {selected.length > 6 && <Sub style={{ marginTop: 8 }}>Tip: overlay reads best with 6 or fewer units — try the heatmap for wider comparisons.</Sub>}
+        </Card>
+      )}
+
+      {mode === "heat" && (
+        <Card style={{ overflowX: "auto" }}>
+          <Head size={15} style={{ marginBottom: 12 }}>Weekly spend heatmap</Head>
+          <table style={{ borderCollapse: "collapse" }}>
+            <thead><tr>
+              <th style={{ padding: "5px 9px", fontSize: 10.5, color: C.dim, fontFamily: BODY, textAlign: "left" }}>{DIM_LABELS[dim]}</th>
+              {xL.map(l => <th key={l} style={{ padding: "5px 7px", fontSize: 9.5, color: C.dim, fontFamily: BODY }}>{l}</th>)}
+            </tr></thead>
+            <tbody>
+              {selected.map(k => {
+                const vals = seriesFor(k); const mx = Math.max(...(sharedY ? selected.flatMap(seriesFor) : vals), 0.01);
+                return (
+                  <tr key={k}>
+                    <td style={{ padding: "5px 9px", fontSize: 12, color: C.text, fontFamily: BODY, whiteSpace: "nowrap" }}>{unitLabel(dim, k)}</td>
+                    {vals.map((v, i) => {
+                      const a = v / mx;
+                      return (
+                        <td key={i} title={fmt(v)} style={{ padding: 0 }}>
+                          <div style={{ width: 46, height: 26, display: "flex", alignItems: "center", justifyContent: "center",
+                            background: `rgba(134,213,244,${(0.06 + a * 0.94).toFixed(2)})`,
+                            color: a > 0.45 ? "#000" : C.muted, fontSize: 9.5, fontFamily: BODY, fontWeight: a > 0.45 ? 700 : 400,
+                            border: "1px solid rgba(0,0,0,0.5)" }}>{v >= 1000 ? (v/1000).toFixed(1)+"k" : Math.round(v)}</div>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+// --------------------------------------------------------------------- flags
+function FlagCard({ title, count, color, children }) {
+  return (
+    <Card style={{ borderTop: `3px solid ${color}`, marginBottom: 12 }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10 }}>
+        <Head size={15}>{title}</Head>
+        <span style={{ background: color, color: "#000", fontFamily: BODY, fontWeight: 700, fontSize: 11, borderRadius: 5, padding: "2px 8px" }}>{count}</span>
+      </div>
+      {children}
+    </Card>
+  );
+}
+function MiniTable({ cols, rows }) {
+  const th = { textAlign: "left", padding: "6px 9px", fontSize: 10.5, color: C.dim, fontFamily: BODY, fontWeight: 700, textTransform: "uppercase", letterSpacing: .5, borderBottom: `1px solid ${C.border}` };
+  const td = { padding: "7px 9px", fontSize: 12, color: C.text, fontFamily: BODY, borderBottom: `1px solid ${C.border}` };
+  return (
+    <table style={{ width: "100%", borderCollapse: "collapse" }}>
+      <thead><tr>{cols.map(c => <th key={c} style={th}>{c}</th>)}</tr></thead>
+      <tbody>{rows.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j} style={td}>{c}</td>)}</tr>)}</tbody>
+    </table>
+  );
+}
+function FlagsTab() {
+  const d = DATA;
+  return (
+    <div>
+      <FlagCard title="Cowork routing to Opus" count={d.coworkOpus.length} color={C.orange}>
+        <Sub style={{ marginBottom: 8 }}>Highest-priority cost item — automated Cowork traffic on Opus pricing.</Sub>
+        <MiniTable cols={["Name", "Cowork Opus spend", "Requests"]}
+          rows={d.coworkOpus.map(u => [u.name, fmt(u.spend), u.requests.toLocaleString()])} />
+      </FlagCard>
+      <FlagCard title="Opus-heavy Chat" count={d.opusHeavy.length} color={C.pink}>
+        <Sub style={{ marginBottom: 8 }}>≥30% of personal Chat spend on Opus models.</Sub>
+        <MiniTable cols={["Name", "Opus Chat spend", "Chat spend", "Opus %"]}
+          rows={d.opusHeavy.slice(0, 20).map(u => [u.name, fmt(u.opusSpend), fmt(u.chatSpend), u.opusPct + "%"])} />
+        {d.opusHeavy.length > 20 && <Sub style={{ marginTop: 6 }}>+ {d.opusHeavy.length - 20} more in All Users (filter by flag)</Sub>}
+      </FlagCard>
+      <FlagCard title="Max plan candidates" count={d.maxPlan.length} color={C.orange}>
+        <Sub style={{ marginBottom: 8 }}>Weekly spend over $200 (projected $800+/month).</Sub>
+        <MiniTable cols={["Name", "Weekly spend", "Projected monthly"]}
+          rows={d.maxPlan.map(u => [u.name, fmt(u.weeklySpend), fmt(u.projectedMonthly)])} />
+      </FlagCard>
+      <FlagCard title="Legacy models" count={d.legacyModels.length} color={C.orange}>
+        {d.legacyModels.length === 0
+          ? <Sub>No legacy-model usage this week — org is fully on current model families.</Sub>
+          : <MiniTable cols={["Name", "Legacy spend", "Models"]}
+              rows={d.legacyModels.map(u => [u.name, fmt(u.spend), u.models.map(formatModel).join(", ")])} />}
+      </FlagCard>
+      <FlagCard title="Power users — efficiency benchmarks" count={d.powerUsers.length} color={C.green}>
+        <MiniTable cols={["Name", "Requests", "Spend", "$/request", "Opus %"]}
+          rows={d.powerUsers.map(u => [u.name, u.requests.toLocaleString(), fmt(u.spend), "$" + u.cpr.toFixed(3), u.opusPct + "%"])} />
+      </FlagCard>
+      <div style={{ borderTop: `1px dashed ${C.borderLight}`, margin: "20px 0 14px", paddingTop: 14 }}>
+        <Head size={16} style={{ marginBottom: 2 }}>Engagement, not cost</Head>
+        <Sub style={{ marginBottom: 12 }}>Users under $10 this week — an adoption signal, not a spend problem.</Sub>
+      </div>
+      <FlagCard title="Low engagement" count={d.lowEngagement.length} color={C.blue}>
+        <MiniTable cols={["Name", "Spend", "Requests", "Consecutive low weeks"]}
+          rows={d.lowEngagement.slice(0, 30).map(u => [u.name, fmt(u.spend), u.requests.toLocaleString(), u.consecutiveLowWeeks])} />
+        {d.lowEngagement.length > 30 && <Sub style={{ marginTop: 6 }}>+ {d.lowEngagement.length - 30} more in All Users (low-engagement flag)</Sub>}
+      </FlagCard>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------- breakdowns
+function BreakdownTab() {
+  const total = DATA.summary.totalSpend;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <Card>
+        <Head size={15} style={{ marginBottom: 12 }}>By model</Head>
+        <MiniTable cols={["Model", "Spend", "%", "Requests"]}
+          rows={DATA.models.map(m => [formatModel(m.name), fmt(m.spend), (100 * m.spend / total).toFixed(1) + "%", m.requests.toLocaleString()])} />
+      </Card>
+      <Card>
+        <Head size={15} style={{ marginBottom: 12 }}>By surface</Head>
+        <MiniTable cols={["Product", "Spend", "%"]}
+          rows={DATA.products.map(p => [p.name, fmt(p.spend), (100 * p.spend / total).toFixed(1) + "%"])} />
+      </Card>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------- root
+const CORE_TABS = [
+  { id: "overview", label: "Overview", C: OverviewTab },
+  { id: "leaderboard", label: "Leaderboard", C: LeaderboardTab },
+  { id: "allusers", label: "All Users", C: AllUsersTab },
+  { id: "trends", label: "Trends", C: TrendsTab },
+  { id: "enablement", label: "Enablement", C: EnablementTab },
+  { id: "teamtrends", label: "Team Trends", C: TeamTrendsTab },
+  { id: "flags", label: "Flags & Alerts", C: FlagsTab },
+  { id: "breakdown", label: "Breakdowns", C: BreakdownTab },
+];
+function Dashboard() {
+  const [tab, setTab] = useState("overview");
+  const tabs = CORE_TABS.concat((typeof window !== "undefined" && window.__EXTRA_TABS__) || []);
+  const Active = (tabs.find(t => t.id === tab) || tabs[0]).C;
+  return (
+    <div style={{ background: C.bg, minHeight: "100vh", padding: "26px 28px", fontFamily: BODY }}>
+      <style>{FONT_CSS}</style>
+      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 4 }}>
+          <div style={{ fontFamily: HEAD, fontWeight: 900, fontSize: 15, letterSpacing: 3.5, color: C.text }}>LEVEL</div>
+          <Head size={24}>Claude usage</Head>
+          <span style={{ background: C.grey, color: "#000", fontFamily: BODY, fontWeight: 700, fontSize: 10.5, borderRadius: 4, padding: "3px 8px" }}>Weekly</span>
+        </div>
+        <Sub style={{ marginBottom: 18 }}>{DATA.summary.weekOf} · Thursday–Wednesday cycle · net spend</Sub>
+        <div style={{ display: "flex", gap: 4, flexWrap: "wrap", borderBottom: `1px solid ${C.border}`, marginBottom: 18 }}>
+          {tabs.map(t => (
+            <button key={t.id} onClick={() => setTab(t.id)}
+              style={{ background: "transparent", border: "none", cursor: "pointer", fontFamily: HEAD, fontWeight: 700,
+                fontSize: 13.5, padding: "9px 13px", color: tab === t.id ? C.text : C.dim,
+                borderBottom: tab === t.id ? `2px solid ${C.blue}` : "2px solid transparent" }}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <Active />
+        <Sub style={{ marginTop: 26, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
+          Level Agency · Claude Enterprise reporting · data as of {DATA.summary.weekStartISO}
+        </Sub>
+      </div>
+    </div>
+  );
+}
