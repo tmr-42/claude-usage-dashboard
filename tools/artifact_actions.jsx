@@ -14,11 +14,11 @@ function dmFirstName(email) {
 }
 function sectionCowork(c) {
   return "*Cowork \u2192 Opus routing*\nYour Cowork automations ran " + fmt(c.spend) +
-    " on Opus models this week. Try setting your Cowork default model to Sonnet 4.6 for routine automated tasks \u2014 it delivers the same outcomes on most workflows at a fraction of the cost, and Opus stays available for runs that genuinely need deeper reasoning. One default-model change usually covers it.";
+    " on Opus models this week. Try setting your Cowork default model to Sonnet 5 for routine automated tasks \u2014 it delivers the same outcomes on most workflows at a fraction of the cost, and Opus stays available for runs that genuinely need deeper reasoning. One default-model change usually covers it.";
 }
 function sectionOpus(o) {
   return "*Opus in Chat*\n" + o.opusPct + "% of your Chat spend this week (" + fmt(o.opusSpend) + " of " + fmt(o.chatSpend) +
-    ") ran on Opus models. For everyday drafting, research, and analysis, Sonnet 4.6 is tuned to deliver the same quality faster and at much lower cost \u2014 the model picker in the chat composer switches it per conversation. Opus earns its premium on long, multi-step reasoning work.";
+    ") ran on Opus models. For everyday drafting, research, and analysis, Sonnet 5 is tuned to deliver the same quality faster and at much lower cost \u2014 the model picker in the chat composer switches it per conversation. Opus earns its premium on long, multi-step reasoning work.";
 }
 function sectionLegacy(l) {
   return "*Legacy models*\nYou spent " + fmt(l.spend) + " on deprecated model versions (" + l.models.map(formatModel).join(", ") +

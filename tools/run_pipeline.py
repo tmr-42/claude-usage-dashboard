@@ -101,7 +101,8 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     legacyU   = [u for u in users.values() if u["legacySpend"] > 0]
     lowEng    = [u for u in users.values() if u["spend"] < 10]
     power     = sorted([u for u in users.values()
-                        if u["requests"] >= 500 and u["models"].get("opus",0)/max(u["spend"],1e-9) < 0.15
+                        if u["spend"] > 0 and u["requests"] >= 500
+                        and u["models"].get("opus",0)/max(u["spend"],1e-9) < 0.15
                         and u["spend"]/max(u["requests"],1) < 0.10],
                        key=lambda x: -x["requests"])[:10]
 

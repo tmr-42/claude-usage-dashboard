@@ -6,7 +6,7 @@ const fs = require("fs"), vm = require("vm");
 const React = require("react");
 const RDS = require("react-dom/server");
 const babel = require("@babel/standalone");
-let src = fs.readFileSync("claude-usage-dashboard-2026-07-09-enablement.jsx", "utf8")
+let src = fs.readFileSync("claude-usage-dashboard-2026-07-16-enablement.jsx", "utf8")
   .replace(/^import[^\n]*\n/, "")
   .replace("export default Dashboard;", "");
 const compiled = babel.transform(src, { presets: [["react", { runtime: "classic", development: false }]] }).code;
