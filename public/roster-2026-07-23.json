@@ -1,0 +1,1918 @@
+{
+ "pulledAt": "2026-07-23",
+ "source": "airtable appIiNgRw8PojBJ51/tblykviXbbb0cVdag Status=Active",
+ "employees": {
+  "bill.buchanan@level.agency": {
+   "name": "Bill Buchanan",
+   "department": "Exec Office",
+   "team": "Exec",
+   "managerEmail": "ppatterson@level.agency",
+   "morEmail": "ppatterson@level.agency",
+   "subDeptLeadEmail": "bill.buchanan@level.agency"
+  },
+  "deangelica.rose@level.agency": {
+   "name": "DeAngelica Rose",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "stacey.heubeck@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "stefanie.mcginnis@level.agency": {
+   "name": "Stefanie McGinnis",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "geoff.roebuck@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "justin.glass@level.agency": {
+   "name": "Justin Glass",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.woolf@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "rico.galassi@level.agency": {
+   "name": "Rico Galassi",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "brittany.jones@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "claire.beaudry@level.agency": {
+   "name": "Claire Beaudry",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "geoff.roebuck@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "jess.kuhn@level.agency": {
+   "name": "Jess Kuhn",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "brent.davis@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "ppatterson@level.agency": {
+   "name": "Patrick Patterson",
+   "department": "Exec Office",
+   "team": "Exec",
+   "managerEmail": null,
+   "morEmail": "ppatterson@level.agency",
+   "subDeptLeadEmail": "bill.buchanan@level.agency"
+  },
+  "jarrod.miller-dean@level.agency": {
+   "name": "Jarrod Miller-Dean",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "matt.korman@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "miguel.sanchez@level.agency": {
+   "name": "Miguel Sanchez",
+   "department": "People",
+   "team": "FPA",
+   "managerEmail": "thiago.wehbe@level.agency",
+   "morEmail": "thiago.wehbe@level.agency",
+   "subDeptLeadEmail": "thiago.wehbe@level.agency"
+  },
+  "sara.trivisonno@level.agency": {
+   "name": "Sara Trivisonno",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.woolf@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "tanner.medina@level.agency": {
+   "name": "Tanner Medina",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "stacey.heubeck@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "shirley.tian@level.agency": {
+   "name": "Shirley Tian",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "kristine.english@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "carly.fridhandler@level.agency": {
+   "name": "Carly Fridhandler",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "nancy.guiragossian@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "lisa-marie.faria@level.agency": {
+   "name": "Lisa-Marie Faria",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "spencer.emmerson@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "jeremy.king@level.agency": {
+   "name": "Jeremy King",
+   "department": "Delivery",
+   "team": "AI",
+   "managerEmail": "dave.brong@level.agency",
+   "morEmail": "krish.sailam@level.agency",
+   "subDeptLeadEmail": "krish.sailam@level.agency"
+  },
+  "bogdan.cioanta@level.agency": {
+   "name": "Bogdan Cioanta",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "giordan.tobia@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "jessa.jacobs@level.agency": {
+   "name": "Jessa Jacobs",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "madison.fellner@level.agency": {
+   "name": "Madison Fellner",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sara.siebert@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "lisa.hurst@level.agency": {
+   "name": "Lisa Hurst",
+   "department": "Client Services",
+   "team": "Exec",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "lisa.hurst@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "sohaib.umar@level.agency": {
+   "name": "Sohaib Umar",
+   "department": "Client Services",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "lindsey.newman@level.agency": {
+   "name": "Lindsey Newman",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "luke.gracie@level.agency": {
+   "name": "Luke Gracie",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "justin.schultz@level.agency": {
+   "name": "Justin Schultz",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "sara.siebert@level.agency": {
+   "name": "Sara Siebert",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "marie.karasseferian@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "savannah.juel@level.agency": {
+   "name": "Savannah Juel",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "mike.kedzorski@level.agency": {
+   "name": "Mike Kedzorski",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "michael.imbasciani@level.agency": {
+   "name": "Michael Imbasciani",
+   "department": "Delivery",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "rachel.stockwell@level.agency": {
+   "name": "Rachel Stockwell",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "ryan.kempema@level.agency": {
+   "name": "Ryan Kempema",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "giordan.tobia@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "cornelius.mwalwanda@level.agency": {
+   "name": "Cornelius Mwalwanda",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "marie.karasseferian@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "cassie.carney@level.agency": {
+   "name": "Cassie Carney",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "julia.berry@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "kelly.shelton@level.agency": {
+   "name": "Kelly Shelton",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "geoff.roebuck@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "ernie.decoite@level.agency": {
+   "name": "Ernie DeCoite",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "nicole.jennings@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "roland.tetteh@level.agency": {
+   "name": "Roland Tetteh",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "erin.patterson@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "carrie.little@level.agency": {
+   "name": "Carrie Little",
+   "department": "People",
+   "team": "Exec",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "carrie.little@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "jon.krasnoff@level.agency": {
+   "name": "Jon Krasnoff",
+   "department": "Client Services",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "brad.stephenson@level.agency": {
+   "name": "Brad Stephenson",
+   "department": "Growth",
+   "team": "Marketing",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "brad.stephenson@level.agency",
+   "subDeptLeadEmail": "brad.stephenson@level.agency"
+  },
+  "dan.bernard@level.agency": {
+   "name": "Dan Bernard",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "brook.johnston@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "matt.parquette@level.agency": {
+   "name": "Matt Parquette",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "alicia.levey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "andrew.mucha@level.agency": {
+   "name": "Andrew Mucha",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "lonn.shulkin@level.agency",
+   "morEmail": "myles.biggs@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "renee.taillon@level.agency": {
+   "name": "Ren\u00e9e Taillon",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "carly.fridhandler@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "roel.torres@level.agency": {
+   "name": "Roel Torres",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "shiv.harrilal@level.agency": {
+   "name": "Shiv Harrilal",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "mike.rubino@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "matty.alburger@level.agency": {
+   "name": "Matty Alburger",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "brook.johnston@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "cael.hancock@level.agency": {
+   "name": "Cael Hancock",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "spencer.emmerson@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "gloria.oh@level.agency": {
+   "name": "Gloria Oh",
+   "department": "People",
+   "team": "Other",
+   "managerEmail": "jt.smith@level.agency",
+   "morEmail": "jt.smith@level.agency",
+   "subDeptLeadEmail": "jt.smith@level.agency"
+  },
+  "eddie.aja@level.agency": {
+   "name": "Eddie Aja",
+   "department": "Finance",
+   "team": "Exec",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "eddie.aja@level.agency",
+   "subDeptLeadEmail": "eddie.aja@level.agency"
+  },
+  "jt.smith@level.agency": {
+   "name": "JT Smith",
+   "department": "Exec Office",
+   "team": "Other",
+   "managerEmail": "ppatterson@level.agency",
+   "morEmail": "jt.smith@level.agency",
+   "subDeptLeadEmail": "jt.smith@level.agency"
+  },
+  "jasmine.ehrich@level.agency": {
+   "name": "Jasmine Ehrich",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "keefer.kopco@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "julia.berry@level.agency": {
+   "name": "Julia Berry",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "mike.criswell@level.agency": {
+   "name": "Mike Criswell",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "joanna.nagle@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "justin.starnes@level.agency": {
+   "name": "Justin Starnes",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "clyde.dsouza@level.agency": {
+   "name": "Clyde Dsouza",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "angie.johnson@level.agency": {
+   "name": "Angie Johnson",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "dennis.zechman@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "xavier.picquerey@level.agency": {
+   "name": "Xavier Picquerey",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "viktoria.denkova@level.agency": {
+   "name": "Viktoria Denkova",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "paul.forrest@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "sara.smith@level.agency": {
+   "name": "Sara Smith",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "matt.beaulieu@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "dennis.zechman@level.agency": {
+   "name": "Dennis Zechman",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "nancy.guiragossian@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "timbre.wolf@level.agency": {
+   "name": "Timbre Wolf",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "kyle.taljan@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "miriam.valls@level.agency": {
+   "name": "Miriam Valls",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "matt.miller@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "quinn.ohearn@level.agency": {
+   "name": "Quinn O'Hearn",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "lonn.shulkin@level.agency": {
+   "name": "Lonn Shulkin",
+   "department": "People",
+   "team": "Exec",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "lonn.shulkin@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "kristine.english@level.agency": {
+   "name": "Kristine English",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "walt.irby@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "seth.tongchinsub@level.agency": {
+   "name": "Seth Tongchinsub",
+   "department": "People",
+   "team": "Other",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "jt.smith@level.agency",
+   "subDeptLeadEmail": "jt.smith@level.agency"
+  },
+  "alex.palermo@level.agency": {
+   "name": "Alex Palermo",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "jordan.grace@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "julianne.avolio@level.agency": {
+   "name": "Julianne Avolio",
+   "department": "People",
+   "team": "Integration",
+   "managerEmail": "mike.smith@level.agency",
+   "morEmail": "mike.smith@level.agency",
+   "subDeptLeadEmail": "mike.smith@level.agency"
+  },
+  "logan.yovetich@level.agency": {
+   "name": "Logan Yovetich",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "abby.kelley@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "aakriti.aakriti@level.agency": {
+   "name": "Aakriti Aakriti",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "miriam.valls@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "grant.denton@level.agency": {
+   "name": "Grant Denton",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "taylor.kressley@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "jenna.kerr@level.agency": {
+   "name": "Jenna Kerr",
+   "department": "Finance",
+   "team": "Controller",
+   "managerEmail": "eddie.aja@level.agency",
+   "morEmail": "jenna.kerr@level.agency",
+   "subDeptLeadEmail": "jenna.kerr@level.agency"
+  },
+  "nathan.zoob@level.agency": {
+   "name": "Nathan Zoob",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "abby.kelley@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "evan.burr@level.agency": {
+   "name": "Evan Burr",
+   "department": "Growth",
+   "team": "Marketing",
+   "managerEmail": "jarrett.fleagle@level.agency",
+   "morEmail": "brad.stephenson@level.agency",
+   "subDeptLeadEmail": "brad.stephenson@level.agency"
+  },
+  "nancy.guiragossian@level.agency": {
+   "name": "Nancy Guiragossian",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "nicole.jennings@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "julida.celaj@level.agency": {
+   "name": "Julida Celaj",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "anne.matzke@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "kristine.serrano@level.agency": {
+   "name": "Kristine Serrano",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "taylor.kressley@level.agency": {
+   "name": "Taylor Kressley",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "amel.marei@level.agency": {
+   "name": "Amel Marei",
+   "department": "People",
+   "team": "Revenue",
+   "managerEmail": "katie.blomberg@level.agency",
+   "morEmail": "katie.blomberg@level.agency",
+   "subDeptLeadEmail": "jenna.kerr@level.agency"
+  },
+  "rhea.sabatine@level.agency": {
+   "name": "Rhea Sabatine",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "carly.fridhandler@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "anjlee.majmudar@level.agency": {
+   "name": "Anjlee Majmudar",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "taylor.lanier@level.agency": {
+   "name": "Taylor Lanier",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "veda.shah@level.agency": {
+   "name": "Veda Shah",
+   "department": "Client Services",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "kallan.carter@level.agency": {
+   "name": "Kallan Carter",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "brian.marko@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "nick.kao@level.agency": {
+   "name": "Nick Kao",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "jordan.grace@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "clarisa.gimenez-comas@level.agency": {
+   "name": "Clarisa Gim\u00e9nez Comas",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "elspeth.baird@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "myles.biggs@level.agency": {
+   "name": "Myles Biggs",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "lonn.shulkin@level.agency",
+   "morEmail": "myles.biggs@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "jay.li@level.agency": {
+   "name": "Jay Li",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "miriam.valls@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "krish.sailam@level.agency": {
+   "name": "Krish Sailam",
+   "department": "People",
+   "team": "AI",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "krish.sailam@level.agency",
+   "subDeptLeadEmail": "krish.sailam@level.agency"
+  },
+  "fahmi.messaoudi@level.agency": {
+   "name": "Fahmi Mess.",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "kara.turcotte@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "trinity.foster@level.agency": {
+   "name": "Trinity Foster",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "taylor.kressley@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "nicole.jennings@level.agency": {
+   "name": "Nicole Jennings",
+   "department": "Delivery",
+   "team": "Exec",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "nicole.jennings@level.agency",
+   "subDeptLeadEmail": "nicole.jennings@level.agency"
+  },
+  "mackenzie.nowak@level.agency": {
+   "name": "Mackenzie Nowak",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "katie.blomberg@level.agency": {
+   "name": "Katie Blomberg",
+   "department": "Finance",
+   "team": "Revenue",
+   "managerEmail": "jenna.kerr@level.agency",
+   "morEmail": "katie.blomberg@level.agency",
+   "subDeptLeadEmail": "jenna.kerr@level.agency"
+  },
+  "sarah.breitschwerdt@level.agency": {
+   "name": "Sarah Breitschwerdt",
+   "department": "Client Services",
+   "team": "Dev",
+   "managerEmail": "kristine.english@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "matt.korman@level.agency": {
+   "name": "Matt Korman",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "stacey.heubeck@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "tejas.chaudhary@level.agency": {
+   "name": "Tejas Chaudhary",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "melissa.guliakearns@level.agency": {
+   "name": "Melissa Gulia Kearns",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "taylor.kressley@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "marissa.martin@level.agency": {
+   "name": "Marissa Martin",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "brent.davis@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "alex.cattabiani@level.agency": {
+   "name": "Alex Cattabiani",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "giordan.tobia@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "maricca.magdalera@level.agency": {
+   "name": "Maricca Magdalera",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "myles.biggs@level.agency",
+   "morEmail": "myles.biggs@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "paul.forrest@level.agency": {
+   "name": "Paul Forrest",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "katie.kaul@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "pvangorder@level.agency": {
+   "name": "Pat Van Gorder",
+   "department": "Growth",
+   "team": "Partnership",
+   "managerEmail": "ppatterson@level.agency",
+   "morEmail": "pvangorder@level.agency",
+   "subDeptLeadEmail": "pvangorder@level.agency"
+  },
+  "michael.michniuk@level.agency": {
+   "name": "Michael Michniuk",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "jordan.grace@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "alex.swope@level.agency": {
+   "name": "Alex Swope",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "bryan.marrero@level.agency": {
+   "name": "Bryan Marrero",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "julia.berry@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "jonathan.gaugler@level.agency": {
+   "name": "Jonathan Gaugler",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "brook.johnston@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "brian.mcleod@level.agency": {
+   "name": "Brian McLeod",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "stacey.heubeck@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "lin.wang@level.agency": {
+   "name": "Lin Wang",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "matt.miller@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "jill.bartlett@level.agency": {
+   "name": "Jill Bartlett",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "xavier.picquerey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "brandon.bulzak@level.agency": {
+   "name": "Brandon Bulzak",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "cornelius.mwalwanda@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "whitney.miracle@level.agency": {
+   "name": "Whitney Miracle",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "mike.rubino@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "stacey.heubeck@level.agency": {
+   "name": "Stacey Heubeck",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "nicole.jennings@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "kelly.langley@level.agency": {
+   "name": "Kelly Langley",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "alicia.levey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "alessandro.carvalho@level.agency": {
+   "name": "Alessandro Carvalho",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "ashley.gordon@level.agency": {
+   "name": "Ashley Gordon",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "kristine.english@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "george.landsly@level.agency": {
+   "name": "George Landsly",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "jordan.grace@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "allie.stclair@level.agency": {
+   "name": "Allie St. Clair",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "julia.berry@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "danielle.biggs@level.agency": {
+   "name": "Danielle Biggs",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "keefer.kopco@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "spencer.emmerson@level.agency": {
+   "name": "Spencer Emmerson",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "nancy.guiragossian@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "adam.leech@level.agency": {
+   "name": "Adam Leech",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "joanna.nagle@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "tina.lee@level.agency": {
+   "name": "Tina Lee",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "justine.letarte@level.agency": {
+   "name": "Justine Letarte",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "spencer.emmerson@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "greta.scheing@level.agency": {
+   "name": "Greta Scheing",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "dennis.zechman@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "caitlin.hachman@level.agency": {
+   "name": "Caitlin Hachman",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "whitney.miracle@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "alysse.schultze@level.agency": {
+   "name": "Alysse Schultze",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "lucy.bellissimo@level.agency": {
+   "name": "Lucy Bellissimo",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "marissa.martin@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "miguel.pino-poma@level.agency": {
+   "name": "Miguel Pino",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "gustavo.morantes@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "shawn.wang@level.agency": {
+   "name": "Shawn Wang",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "erin.patterson@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "rahil.shah@level.agency": {
+   "name": "Rahil Shah",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "sydney.roberts@level.agency": {
+   "name": "Sydney Roberts",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "kyle.taljan@level.agency": {
+   "name": "Kyle Taljan",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "matt.miller@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "jessica.lovett@level.agency": {
+   "name": "Jessica Lovett",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "michelle.eatough@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "giordan.tobia@level.agency": {
+   "name": "Giordan Tobia",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "erin.scheel@level.agency": {
+   "name": "Erin Scheel",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "brook.johnston@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "tracy.velazquez@level.agency": {
+   "name": "Tracy Velazquez",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "maria.cataldi@level.agency",
+   "morEmail": "maria.cataldi@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "adam.muscott@level.agency": {
+   "name": "Adam Muscott",
+   "department": "Delivery",
+   "team": "Strategy",
+   "managerEmail": "xavier.picquerey@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "jessy.yi-ting.lin@level.agency": {
+   "name": "Jessy Lin",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "cornelius.mwalwanda@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "dior.carley@level.agency": {
+   "name": "Dior Carley",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "cornelius.mwalwanda@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "eric.sichak@level.agency": {
+   "name": "Eric Sichak",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "giordan.tobia@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "andrew.interisano@level.agency": {
+   "name": "Andrew Interisano",
+   "department": "Delivery",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "joanna.nagle@level.agency": {
+   "name": "Joanna Nagle",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "jacinthe.levesque@level.agency": {
+   "name": "Jacinthe Levesque",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "maria.cataldi@level.agency",
+   "morEmail": "maria.cataldi@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "traci.gibbs@level.agency": {
+   "name": "Traci Gibbs",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "brian.ryback@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "sarah.mckinney@level.agency": {
+   "name": "Sarah McKinney",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "maria.cataldi@level.agency",
+   "morEmail": "maria.cataldi@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "victoria.gillis@level.agency": {
+   "name": "Victoria Gillis",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "brian.mcleod@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "dan.dix@level.agency": {
+   "name": "Dan Dix",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "kristine.english@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "lydia.tallarini@level.agency": {
+   "name": "Lydia Tallarini",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "erin.scheel@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "sarah.vader@level.agency": {
+   "name": "Sarah Vader",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "bryan.bonham@level.agency": {
+   "name": "Bryan Bonham",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "julia.berry@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "lucy.puglisi@level.agency": {
+   "name": "Lucy Puglisi",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "keefer.kopco@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "hayley.schultz@level.agency": {
+   "name": "Hayley Schultz",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "darren.chow@level.agency": {
+   "name": "Darren Chow",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "jeremy.bochenek@level.agency": {
+   "name": "Jeremy Bochenek",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "matt.beaulieu@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "felix.strater@level.agency": {
+   "name": "Felix Strater",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "abby.kelley@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "kellie.kaufman@level.agency": {
+   "name": "Kellie Kaufman",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "jordan.smith@level.agency": {
+   "name": "Jordan Smith",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "traci.gibbs@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "marie.karasseferian@level.agency": {
+   "name": "Marie Karasseferian",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "xavier.picquerey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "dave.brong@level.agency": {
+   "name": "Dave Brong",
+   "department": "People",
+   "team": "AI",
+   "managerEmail": "krish.sailam@level.agency",
+   "morEmail": "krish.sailam@level.agency",
+   "subDeptLeadEmail": "krish.sailam@level.agency"
+  },
+  "elspeth.baird@level.agency": {
+   "name": "Elspeth Baird",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "katie.kaul@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "maria.cataldi@level.agency": {
+   "name": "Maria Cataldi",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "lonn.shulkin@level.agency",
+   "morEmail": "maria.cataldi@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "emily.rupert@level.agency": {
+   "name": "Emily Rupert",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "jill.bartlett@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "erin.patterson@level.agency": {
+   "name": "Erin Patterson",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "lin.wang@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "rashi.thakur@level.agency": {
+   "name": "Rashi Thakur",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "brittany.jones@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "kara.turcotte@level.agency": {
+   "name": "Kara Turcotte",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "carly.fridhandler@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "abby.baker@level.agency": {
+   "name": "Abby Baker",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "alicia.levey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "josh.muskin@level.agency": {
+   "name": "Josh Muskin",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "brittany.jones@level.agency": {
+   "name": "Brittany Jones",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "walt.irby@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "maria.sukey@level.agency": {
+   "name": "Maria Sukey",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "carly.fridhandler@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "eric.znamirowski@level.agency": {
+   "name": "Eric Znamirowski",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "dennis.zechman@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "olivia.labella@level.agency": {
+   "name": "Olivia LaBella",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "whitney.miracle@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "anthony.turco@level.agency": {
+   "name": "Anthony Turco",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "gia.monteleone@level.agency": {
+   "name": "Gia Monteleone",
+   "department": "Finance",
+   "team": "Controller",
+   "managerEmail": "jenna.kerr@level.agency",
+   "morEmail": "jenna.kerr@level.agency",
+   "subDeptLeadEmail": "jenna.kerr@level.agency"
+  },
+  "mary.hopkins@level.agency": {
+   "name": "Mary Hopkins",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "taylor.kressley@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "lisa.woolf@level.agency": {
+   "name": "Lisa Woolf",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "siera.willner@level.agency": {
+   "name": "Siera Willner",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "spencer.emmerson@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "bettina.young@level.agency": {
+   "name": "Bettina Young",
+   "department": "Client Services",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "matthieu.hakim@level.agency": {
+   "name": "Matthieu Hakim",
+   "department": "Other",
+   "team": "AI",
+   "managerEmail": "dave.brong@level.agency",
+   "morEmail": "krish.sailam@level.agency",
+   "subDeptLeadEmail": "krish.sailam@level.agency"
+  },
+  "jim.crimella@level.agency": {
+   "name": "Jim Crimella",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "brook.johnston@level.agency": {
+   "name": "Brook Johnston",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "nancy.guiragossian@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "mike.hennessie@level.agency": {
+   "name": "Mike Hennessie",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "walt.irby@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "sam.clark@level.agency": {
+   "name": "Samuel Clark",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "gustavo.morantes@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "connor.thorpe@level.agency": {
+   "name": "Connor Thorpe",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "giordan.tobia@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "brent.davis@level.agency": {
+   "name": "Brent Davis",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "jordan.grace@level.agency": {
+   "name": "Jordan Grace",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "matt.miller@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "brandon.grimes@level.agency": {
+   "name": "Brandon Grimes",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "tanner.medina@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "camille.bosley@level.agency": {
+   "name": "Camille Bosley",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "will.gray@level.agency": {
+   "name": "Will Gray",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "justin.schultz@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "brandon.carlson@level.agency": {
+   "name": "Brandon Carlson",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "miriam.valls@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "michelle.eatough@level.agency": {
+   "name": "Michelle Eatough",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "mike.rubino@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "justin.zanelli@level.agency": {
+   "name": "Justin Zanelli",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "luke.gracie@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "geoff.roebuck@level.agency": {
+   "name": "Geoff Roebuck",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "brent.davis@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "steven.hines@level.agency": {
+   "name": "Steven Hines",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.woolf@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "dale.blignaut@level.agency": {
+   "name": "Dale Blignaut",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sara.siebert@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "rj.smith@level.agency": {
+   "name": "RJ Smith",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "joanna.nagle@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "abby.kelley@level.agency": {
+   "name": "Abby Kelley",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "ernie.decoite@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "emily.george@level.agency": {
+   "name": "Emily George",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "taylor.kressley@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "jarrett.fleagle@level.agency": {
+   "name": "Jarrett Fleagle",
+   "department": "Growth",
+   "team": "Marketing",
+   "managerEmail": "brad.stephenson@level.agency",
+   "morEmail": "brad.stephenson@level.agency",
+   "subDeptLeadEmail": "brad.stephenson@level.agency"
+  },
+  "howard.diamond@level.agency": {
+   "name": "Howard Diamond",
+   "department": "Growth",
+   "team": "Exec",
+   "managerEmail": "bill.buchanan@level.agency",
+   "morEmail": "howard.diamond@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "tanya.true@level.agency": {
+   "name": "Tanya Halkyard True",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "alicia.levey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "natasha.warenycia@level.agency": {
+   "name": "Natasha Warenycia",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sara.siebert@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "cassie.myers@level.agency": {
+   "name": "Cassie Myers",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "michelle.eatough@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "pete.meyers@level.agency": {
+   "name": "Pete Meyers",
+   "department": "Growth",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "pete.meyers@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "anne.matzke@level.agency": {
+   "name": "Anne Matzke",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "julia.berry@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "patrick.bonsu@level.agency": {
+   "name": "Patrick Bonsu",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "dennis.zechman@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "kaylei.sadler@level.agency": {
+   "name": "Kaylei Sadler",
+   "department": "Growth",
+   "team": "Marketing",
+   "managerEmail": "jarrett.fleagle@level.agency",
+   "morEmail": "brad.stephenson@level.agency",
+   "subDeptLeadEmail": "brad.stephenson@level.agency"
+  },
+  "kylie.vandendool@level.agency": {
+   "name": "Kylie Vandendool",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "jill.bartlett@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "merari.cipriano@level.agency": {
+   "name": "Merari Gonzalez Cipriano",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "mike.rubino@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "keefer.kopco@level.agency": {
+   "name": "Keefer Kopco",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "brent.davis@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "shubhi.priya@level.agency": {
+   "name": "Shubhi Priya",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "miriam.valls@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "brittany.wroblewski@level.agency": {
+   "name": "Brittany Wroblewski",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.woolf@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "alicia.levey@level.agency": {
+   "name": "Alicia Levey",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "lisa.hurst@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "brian.ryback@level.agency": {
+   "name": "Brian Ryback",
+   "department": "Growth",
+   "team": "Sales",
+   "managerEmail": "howard.diamond@level.agency",
+   "morEmail": "brian.ryback@level.agency",
+   "subDeptLeadEmail": "howard.diamond@level.agency"
+  },
+  "mike.rubino@level.agency": {
+   "name": "Mike Rubino",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "nancy.guiragossian@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "sage.mittal@level.agency": {
+   "name": "Sage Mittal",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "karma.grindl@level.agency": {
+   "name": "Karma Grindl",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "emily.rupert@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "karl.chaker@level.agency": {
+   "name": "Karl Chaker",
+   "department": "Other",
+   "team": "AI",
+   "managerEmail": "dave.brong@level.agency",
+   "morEmail": "krish.sailam@level.agency",
+   "subDeptLeadEmail": "krish.sailam@level.agency"
+  },
+  "erik.intrevado@level.agency": {
+   "name": "Erik Intrevado",
+   "department": "Client Services",
+   "team": "Strategy",
+   "managerEmail": "adam.muscott@level.agency",
+   "morEmail": "adam.muscott@level.agency",
+   "subDeptLeadEmail": "adam.muscott@level.agency"
+  },
+  "katie.woods@level.agency": {
+   "name": "Katie Woods",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "erin.ferranto@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "brian.marko@level.agency": {
+   "name": "Brian Marko",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "matt.miller@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "abbey.schuyler@level.agency": {
+   "name": "Abbey Schuyler",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "dennis.zechman@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "joel.macdonald@level.agency": {
+   "name": "Joel MacDonald",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "stacey.heubeck@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "elena.della-fazia@level.agency": {
+   "name": "Elena Della Fazia",
+   "department": "Finance",
+   "team": "Controller",
+   "managerEmail": "jenna.kerr@level.agency",
+   "morEmail": "jenna.kerr@level.agency",
+   "subDeptLeadEmail": "jenna.kerr@level.agency"
+  },
+  "anika.knowles@level.agency": {
+   "name": "Anika Knowles",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "marissa.martin@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "gustavo.morantes@level.agency": {
+   "name": "Gustavo Morantes Taccetti",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "walt.irby@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "walt.irby@level.agency": {
+   "name": "Walt Irby",
+   "department": "Delivery",
+   "team": "Dev",
+   "managerEmail": "nicole.jennings@level.agency",
+   "morEmail": "walt.irby@level.agency",
+   "subDeptLeadEmail": "walt.irby@level.agency"
+  },
+  "michelle.nihls@level.agency": {
+   "name": "Michelle Nihls",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "spencer.emmerson@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "tim.fitzgerald@level.agency": {
+   "name": "Tim Fitzgerald",
+   "department": "Delivery",
+   "team": "Media",
+   "managerEmail": "krish.sailam@level.agency",
+   "morEmail": "ernie.decoite@level.agency",
+   "subDeptLeadEmail": "ernie.decoite@level.agency"
+  },
+  "matt.miller@level.agency": {
+   "name": "Matt Miller",
+   "department": "Client Services",
+   "team": "Martech & Analytics",
+   "managerEmail": "nicole.jennings@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "derek.cavaliero@level.agency": {
+   "name": "Derek Cavaliero",
+   "department": "Delivery",
+   "team": "Martech & Analytics",
+   "managerEmail": "matt.miller@level.agency",
+   "morEmail": "matt.miller@level.agency",
+   "subDeptLeadEmail": "matt.miller@level.agency"
+  },
+  "tina.tweyman@level.agency": {
+   "name": "Tina Tweyman",
+   "department": "Finance",
+   "team": "Controller",
+   "managerEmail": "jenna.kerr@level.agency",
+   "morEmail": "jenna.kerr@level.agency",
+   "subDeptLeadEmail": "jenna.kerr@level.agency"
+  },
+  "mike.smith@level.agency": {
+   "name": "Mike Smith",
+   "department": "People",
+   "team": "Integration",
+   "managerEmail": "lonn.shulkin@level.agency",
+   "morEmail": "mike.smith@level.agency",
+   "subDeptLeadEmail": "mike.smith@level.agency"
+  },
+  "amy.lampitt@level.agency": {
+   "name": "Amy Lampitt",
+   "department": "People",
+   "team": "People",
+   "managerEmail": "andrew.mucha@level.agency",
+   "morEmail": "myles.biggs@level.agency",
+   "subDeptLeadEmail": "lonn.shulkin@level.agency"
+  },
+  "kacey.holifield@level.agency": {
+   "name": "Kacey Holifield",
+   "department": "Delivery",
+   "team": "Creative",
+   "managerEmail": "whitney.miracle@level.agency",
+   "morEmail": "nancy.guiragossian@level.agency",
+   "subDeptLeadEmail": "nancy.guiragossian@level.agency"
+  },
+  "katie.kaul@level.agency": {
+   "name": "Katie Kaul",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "xavier.picquerey@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "tyler.robinson@level.agency": {
+   "name": "Tyler Robinson",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "taylor.kressley@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "matt.beaulieu@level.agency": {
+   "name": "Matt Beaulieu",
+   "department": "Delivery",
+   "team": "SEO",
+   "managerEmail": "stacey.heubeck@level.agency",
+   "morEmail": "stacey.heubeck@level.agency",
+   "subDeptLeadEmail": "stacey.heubeck@level.agency"
+  },
+  "thiago.wehbe@level.agency": {
+   "name": "Thiago Wehbe",
+   "department": "Finance",
+   "team": "FPA",
+   "managerEmail": "eddie.aja@level.agency",
+   "morEmail": "thiago.wehbe@level.agency",
+   "subDeptLeadEmail": "thiago.wehbe@level.agency"
+  },
+  "jennifer.martin@level.agency": {
+   "name": "Jennifer Martin",
+   "department": "Client Services",
+   "team": "Clients",
+   "managerEmail": "sarah.vader@level.agency",
+   "morEmail": "xavier.picquerey@level.agency",
+   "subDeptLeadEmail": "lisa.hurst@level.agency"
+  },
+  "matt.rose@level.agency": {
+   "name": "Matt Rose",
+   "department": "People",
+   "team": "Technology",
+   "managerEmail": "mike.smith@level.agency",
+   "morEmail": "matt.rose@level.agency",
+   "subDeptLeadEmail": "mike.smith@level.agency"
+  }
+ }
+}
