@@ -525,6 +525,34 @@
     "Research": 0.0,
     "Claude Tag": 0.0
    }
+  },
+  {
+   "weekOf": "July 23\u201329, 2026",
+   "weekStartISO": "2026-07-23",
+   "totalSpend": 12261.12,
+   "activeUsers": 229,
+   "avgSpend": 53.54,
+   "opusSpend": 3446.4,
+   "sonnetSpend": 7439.68,
+   "haikuSpend": 27.66,
+   "otherSpend": 1347.38,
+   "cacheHitRate": 93.9,
+   "flagCounts": {
+    "maxPlan": 13,
+    "coworkOpus": 12,
+    "opusHeavy": 39,
+    "legacy": 2,
+    "lowEngagement": 82
+   },
+   "productSpend": {
+    "Chat": 6689.59,
+    "Cowork": 2849.84,
+    "Claude Code": 2205.02,
+    "Claude Design": 323.37,
+    "Claude in Chrome": 193.3,
+    "Research": 0.0,
+    "Claude Tag": 0.0
+   }
   }
  ],
  "userWeeks": {
@@ -972,6 +1000,14 @@
     "requests": 138,
     "opusPct": 100,
     "avgPromptTokens": 172378
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 22.56,
+    "requests": 101,
+    "opusPct": 100,
+    "avgPromptTokens": 140465
    }
   ],
   "matt.beaulieu@level.agency": [
@@ -1134,6 +1170,14 @@
     "requests": 527,
     "opusPct": 32,
     "avgPromptTokens": 259262
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 247.06,
+    "requests": 837,
+    "opusPct": 19,
+    "avgPromptTokens": 320917
    }
   ],
   "matt.miller@level.agency": [
@@ -1296,6 +1340,14 @@
     "requests": 331,
     "opusPct": 24,
     "avgPromptTokens": 123514
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 44.56,
+    "requests": 885,
+    "opusPct": 4,
+    "avgPromptTokens": 119285
    }
   ],
   "andrew.interisano@level.agency": [
@@ -1450,6 +1502,14 @@
     "requests": 509,
     "opusPct": 0,
     "avgPromptTokens": 111450
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.0,
+    "requests": 555,
+    "opusPct": 0,
+    "avgPromptTokens": 134593
    }
   ],
   "anthony.turco@level.agency": [
@@ -1604,6 +1664,14 @@
     "requests": 651,
     "opusPct": 0,
     "avgPromptTokens": 159161
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 68.86,
+    "requests": 866,
+    "opusPct": 0,
+    "avgPromptTokens": 194838
    }
   ],
   "jordan.grace@level.agency": [
@@ -1766,6 +1834,14 @@
     "requests": 1394,
     "opusPct": 41,
     "avgPromptTokens": 364898
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 229.12,
+    "requests": 1359,
+    "opusPct": 51,
+    "avgPromptTokens": 292637
    }
   ],
   "krish.sailam@level.agency": [
@@ -1928,6 +2004,14 @@
     "requests": 560,
     "opusPct": 57,
     "avgPromptTokens": 200501
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 351.86,
+    "requests": 1742,
+    "opusPct": 27,
+    "avgPromptTokens": 142177
    }
   ],
   "claire.beaudry@level.agency": [
@@ -2090,6 +2174,14 @@
     "requests": 1135,
     "opusPct": 0,
     "avgPromptTokens": 168253
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 260.85,
+    "requests": 3591,
+    "opusPct": 0,
+    "avgPromptTokens": 218850
    }
   ],
   "josh.muskin@level.agency": [
@@ -2252,6 +2344,14 @@
     "requests": 100,
     "opusPct": 0,
     "avgPromptTokens": 155693
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.02,
+    "requests": 285,
+    "opusPct": 0,
+    "avgPromptTokens": 100874
    }
   ],
   "tanya.true@level.agency": [
@@ -2414,6 +2514,14 @@
     "requests": 2901,
     "opusPct": 32,
     "avgPromptTokens": 240628
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 378.99,
+    "requests": 3428,
+    "opusPct": 5,
+    "avgPromptTokens": 278440
    }
   ],
   "kaylei.sadler@level.agency": [
@@ -2576,6 +2684,14 @@
     "requests": 574,
     "opusPct": 10,
     "avgPromptTokens": 146826
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 35.74,
+    "requests": 494,
+    "opusPct": 5,
+    "avgPromptTokens": 128445
    }
   ],
   "howard.diamond@level.agency": [
@@ -2738,6 +2854,14 @@
     "requests": 93,
     "opusPct": 0,
     "avgPromptTokens": 83762
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 10.88,
+    "requests": 185,
+    "opusPct": 0,
+    "avgPromptTokens": 108680
    }
   ],
   "brian.ryback@level.agency": [
@@ -2900,6 +3024,14 @@
     "requests": 1446,
     "opusPct": 0,
     "avgPromptTokens": 360186
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 328.0,
+    "requests": 687,
+    "opusPct": 0,
+    "avgPromptTokens": 228098
    }
   ],
   "tyler.robinson@level.agency": [
@@ -3062,6 +3194,14 @@
     "requests": 212,
     "opusPct": 55,
     "avgPromptTokens": 110385
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 50.77,
+    "requests": 993,
+    "opusPct": 29,
+    "avgPromptTokens": 138627
    }
   ],
   "jarrett.fleagle@level.agency": [
@@ -3224,6 +3364,14 @@
     "requests": 309,
     "opusPct": 82,
     "avgPromptTokens": 142168
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 252.39,
+    "requests": 920,
+    "opusPct": 94,
+    "avgPromptTokens": 222997
    }
   ],
   "walt.irby@level.agency": [
@@ -3378,6 +3526,14 @@
     "requests": 936,
     "opusPct": 95,
     "avgPromptTokens": 170747
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 672.61,
+    "requests": 4553,
+    "opusPct": 85,
+    "avgPromptTokens": 204215
    }
   ],
   "mike.smith@level.agency": [
@@ -3532,6 +3688,14 @@
     "requests": 213,
     "opusPct": 89,
     "avgPromptTokens": 204965
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.4,
+    "requests": 109,
+    "opusPct": 72,
+    "avgPromptTokens": 168028
    }
   ],
   "evan.burr@level.agency": [
@@ -3694,6 +3858,14 @@
     "requests": 542,
     "opusPct": 47,
     "avgPromptTokens": 190714
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 142.16,
+    "requests": 652,
+    "opusPct": 62,
+    "avgPromptTokens": 177619
    }
   ],
   "eddie.aja@level.agency": [
@@ -3856,6 +4028,14 @@
     "requests": 695,
     "opusPct": 0,
     "avgPromptTokens": 90829
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 167.85,
+    "requests": 2944,
+    "opusPct": 0,
+    "avgPromptTokens": 66119
    }
   ],
   "stacey.heubeck@level.agency": [
@@ -4018,6 +4198,14 @@
     "requests": 1181,
     "opusPct": 90,
     "avgPromptTokens": 183024
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 626.41,
+    "requests": 3007,
+    "opusPct": 68,
+    "avgPromptTokens": 288023
    }
   ],
   "kyle.taljan@level.agency": [
@@ -4172,6 +4360,14 @@
     "requests": 452,
     "opusPct": 50,
     "avgPromptTokens": 267913
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 43.63,
+    "requests": 222,
+    "opusPct": 86,
+    "avgPromptTokens": 197556
    }
   ],
   "anjlee.majmudar@level.agency": [
@@ -4334,6 +4530,14 @@
     "requests": 475,
     "opusPct": 0,
     "avgPromptTokens": 284923
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 46.57,
+    "requests": 562,
+    "opusPct": 0,
+    "avgPromptTokens": 253277
    }
   ],
   "eric.sichak@level.agency": [
@@ -4496,6 +4700,14 @@
     "requests": 912,
     "opusPct": 9,
     "avgPromptTokens": 144989
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 163.28,
+    "requests": 2490,
+    "opusPct": 43,
+    "avgPromptTokens": 107464
    }
   ],
   "taylor.mathauer@level.agency": [
@@ -4658,6 +4870,14 @@
     "requests": 455,
     "opusPct": 0,
     "avgPromptTokens": 93974
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 78.13,
+    "requests": 869,
+    "opusPct": 7,
+    "avgPromptTokens": 225964
    }
   ],
   "abby.kelley@level.agency": [
@@ -4812,6 +5032,14 @@
     "requests": 576,
     "opusPct": 0,
     "avgPromptTokens": 382205
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 104.59,
+    "requests": 1007,
+    "opusPct": 0,
+    "avgPromptTokens": 303276
    }
   ],
   "alex.palermo@level.agency": [
@@ -4974,6 +5202,14 @@
     "requests": 859,
     "opusPct": 16,
     "avgPromptTokens": 197854
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 121.5,
+    "requests": 1722,
+    "opusPct": 38,
+    "avgPromptTokens": 106808
    }
   ],
   "jess.kuhn@level.agency": [
@@ -5136,6 +5372,14 @@
     "requests": 109,
     "opusPct": 0,
     "avgPromptTokens": 115175
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 1.28,
+    "requests": 14,
+    "opusPct": 0,
+    "avgPromptTokens": 246003
    }
   ],
   "derek.cavaliero@level.agency": [
@@ -5298,6 +5542,14 @@
     "requests": 21,
     "opusPct": 100,
     "avgPromptTokens": 110146
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.63,
+    "requests": 31,
+    "opusPct": 100,
+    "avgPromptTokens": 106167
    }
   ],
   "tanner.medina@level.agency": [
@@ -5460,6 +5712,14 @@
     "requests": 1547,
     "opusPct": 0,
     "avgPromptTokens": 329317
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 194.19,
+    "requests": 1482,
+    "opusPct": 0,
+    "avgPromptTokens": 425889
    }
   ],
   "mary.hopkins@level.agency": [
@@ -5622,6 +5882,14 @@
     "requests": 1565,
     "opusPct": 0,
     "avgPromptTokens": 128114
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 30.84,
+    "requests": 549,
+    "opusPct": 0,
+    "avgPromptTokens": 127448
    }
   ],
   "miguel.pino-poma@level.agency": [
@@ -5784,6 +6052,14 @@
     "requests": 1677,
     "opusPct": 0,
     "avgPromptTokens": 152405
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 47.11,
+    "requests": 1109,
+    "opusPct": 0,
+    "avgPromptTokens": 140739
    }
   ],
   "ernie.decoite@level.agency": [
@@ -5946,6 +6222,14 @@
     "requests": 101,
     "opusPct": 69,
     "avgPromptTokens": 208677
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 8.57,
+    "requests": 112,
+    "opusPct": 0,
+    "avgPromptTokens": 212567
    }
   ],
   "eric.znamirowski@level.agency": [
@@ -6108,6 +6392,14 @@
     "requests": 1004,
     "opusPct": 57,
     "avgPromptTokens": 159737
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 138.98,
+    "requests": 671,
+    "opusPct": 75,
+    "avgPromptTokens": 288931
    }
   ],
   "karl.chaker@level.agency": [
@@ -6246,6 +6538,14 @@
     "requests": 588,
     "opusPct": 87,
     "avgPromptTokens": 226593
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 25.49,
+    "requests": 121,
+    "opusPct": 83,
+    "avgPromptTokens": 174424
    }
   ],
   "jarrod.miller-dean@level.agency": [
@@ -6408,6 +6708,14 @@
     "requests": 777,
     "opusPct": 0,
     "avgPromptTokens": 232294
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 289.8,
+    "requests": 928,
+    "opusPct": 7,
+    "avgPromptTokens": 209472
    }
   ],
   "seth.tongchinsub@level.agency": [
@@ -6570,6 +6878,14 @@
     "requests": 501,
     "opusPct": 53,
     "avgPromptTokens": 140856
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 46.66,
+    "requests": 688,
+    "opusPct": 18,
+    "avgPromptTokens": 166892
    }
   ],
   "sara.smith@level.agency": [
@@ -6732,6 +7048,14 @@
     "requests": 1120,
     "opusPct": 45,
     "avgPromptTokens": 239253
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 106.53,
+    "requests": 936,
+    "opusPct": 83,
+    "avgPromptTokens": 119122
    }
   ],
   "brittany.jones@level.agency": [
@@ -6894,6 +7218,14 @@
     "requests": 42,
     "opusPct": 100,
     "avgPromptTokens": 59770
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.53,
+    "requests": 46,
+    "opusPct": 100,
+    "avgPromptTokens": 61423
    }
   ],
   "sydney.roberts@level.agency": [
@@ -7048,6 +7380,14 @@
     "requests": 1746,
     "opusPct": 0,
     "avgPromptTokens": 221044
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 45.49,
+    "requests": 614,
+    "opusPct": 0,
+    "avgPromptTokens": 187373
    }
   ],
   "rudy.grahn@level.agency": [
@@ -7276,6 +7616,14 @@
     "requests": 456,
     "opusPct": 0,
     "avgPromptTokens": 108564
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 19.09,
+    "requests": 636,
+    "opusPct": 0,
+    "avgPromptTokens": 76897
    }
   ],
   "michael.michniuk@level.agency": [
@@ -7438,6 +7786,14 @@
     "requests": 394,
     "opusPct": 92,
     "avgPromptTokens": 198387
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 27.42,
+    "requests": 175,
+    "opusPct": 50,
+    "avgPromptTokens": 100019
    }
   ],
   "gustavo.morantes@level.agency": [
@@ -7592,6 +7948,14 @@
     "requests": 399,
     "opusPct": 71,
     "avgPromptTokens": 148201
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 107.67,
+    "requests": 447,
+    "opusPct": 58,
+    "avgPromptTokens": 151838
    }
   ],
   "pete.meyers@level.agency": [
@@ -7746,6 +8110,14 @@
     "requests": 275,
     "opusPct": 100,
     "avgPromptTokens": 200664
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 91.91,
+    "requests": 391,
+    "opusPct": 71,
+    "avgPromptTokens": 152093
    }
   ],
   "rashi.thakur@level.agency": [
@@ -7908,6 +8280,14 @@
     "requests": 817,
     "opusPct": 0,
     "avgPromptTokens": 102397
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 6.98,
+    "requests": 97,
+    "opusPct": 0,
+    "avgPromptTokens": 208395
    }
   ],
   "carly.fridhandler@level.agency": [
@@ -8070,6 +8450,14 @@
     "requests": 1130,
     "opusPct": 43,
     "avgPromptTokens": 188000
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 101.31,
+    "requests": 679,
+    "opusPct": 91,
+    "avgPromptTokens": 169622
    }
   ],
   "stefanie.mcginnis@level.agency": [
@@ -8232,6 +8620,14 @@
     "requests": 167,
     "opusPct": 0,
     "avgPromptTokens": 96621
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 76.79,
+    "requests": 546,
+    "opusPct": 0,
+    "avgPromptTokens": 353936
    }
   ],
   "julian.shenoy@level.agency": [
@@ -8468,6 +8864,14 @@
     "requests": 147,
     "opusPct": 93,
     "avgPromptTokens": 99348
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.65,
+    "requests": 39,
+    "opusPct": 89,
+    "avgPromptTokens": 126779
    }
   ],
   "robert.daitch@level.agency": [
@@ -8728,6 +9132,14 @@
     "requests": 1599,
     "opusPct": 0,
     "avgPromptTokens": 235168
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 28.25,
+    "requests": 343,
+    "opusPct": 0,
+    "avgPromptTokens": 211702
    }
   ],
   "sam.clark@level.agency": [
@@ -8890,6 +9302,14 @@
     "requests": 241,
     "opusPct": 0,
     "avgPromptTokens": 73925
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 11.87,
+    "requests": 267,
+    "opusPct": 0,
+    "avgPromptTokens": 75354
    }
   ],
   "traci.gibbs@level.agency": [
@@ -9052,6 +9472,14 @@
     "requests": 188,
     "opusPct": 0,
     "avgPromptTokens": 115216
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.98,
+    "requests": 508,
+    "opusPct": 0,
+    "avgPromptTokens": 162222
    }
   ],
   "justin.schultz@level.agency": [
@@ -9214,6 +9642,14 @@
     "requests": 68,
     "opusPct": 0,
     "avgPromptTokens": 198141
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 16.99,
+    "requests": 289,
+    "opusPct": 0,
+    "avgPromptTokens": 148200
    }
   ],
   "alicia.levey@level.agency": [
@@ -9376,6 +9812,14 @@
     "requests": 10,
     "opusPct": 0,
     "avgPromptTokens": 77214
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 55.39,
+    "requests": 731,
+    "opusPct": 0,
+    "avgPromptTokens": 215894
    }
   ],
   "matt.rose@level.agency": [
@@ -9538,6 +9982,14 @@
     "requests": 490,
     "opusPct": 31,
     "avgPromptTokens": 129367
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 50.32,
+    "requests": 176,
+    "opusPct": 23,
+    "avgPromptTokens": 145904
    }
   ],
   "jeremy.bochenek@level.agency": [
@@ -9700,6 +10152,14 @@
     "requests": 911,
     "opusPct": 7,
     "avgPromptTokens": 245988
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 186.53,
+    "requests": 1255,
+    "opusPct": 0,
+    "avgPromptTokens": 324843
    }
   ],
   "kelly.shelton@level.agency": [
@@ -9862,6 +10322,14 @@
     "requests": 1017,
     "opusPct": 0,
     "avgPromptTokens": 165817
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 118.2,
+    "requests": 1422,
+    "opusPct": 20,
+    "avgPromptTokens": 159878
    }
   ],
   "miriam.valls@level.agency": [
@@ -10138,6 +10606,14 @@
     "requests": 174,
     "opusPct": 0,
     "avgPromptTokens": 85001
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 17.38,
+    "requests": 177,
+    "opusPct": 0,
+    "avgPromptTokens": 126262
    }
   ],
   "mike.hennessie@level.agency": [
@@ -10284,6 +10760,14 @@
     "requests": 1531,
     "opusPct": 0,
     "avgPromptTokens": 281375
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 42.86,
+    "requests": 438,
+    "opusPct": 0,
+    "avgPromptTokens": 222181
    }
   ],
   "matthieu.hakim@level.agency": [
@@ -10422,6 +10906,14 @@
     "requests": 504,
     "opusPct": 62,
     "avgPromptTokens": 117291
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 68.15,
+    "requests": 609,
+    "opusPct": 80,
+    "avgPromptTokens": 153206
    }
   ],
   "jacinthe.levesque@level.agency": [
@@ -10584,6 +11076,14 @@
     "requests": 164,
     "opusPct": 0,
     "avgPromptTokens": 194806
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.95,
+    "requests": 63,
+    "opusPct": 0,
+    "avgPromptTokens": 73178
    }
   ],
   "logan.yovetich@level.agency": [
@@ -10746,6 +11246,14 @@
     "requests": 312,
     "opusPct": 0,
     "avgPromptTokens": 146841
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 12.58,
+    "requests": 287,
+    "opusPct": 0,
+    "avgPromptTokens": 117206
    }
   ],
   "matt.korman@level.agency": [
@@ -10908,6 +11416,14 @@
     "requests": 738,
     "opusPct": 11,
     "avgPromptTokens": 217494
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 88.91,
+    "requests": 818,
+    "opusPct": 12,
+    "avgPromptTokens": 251282
    }
   ],
   "maria.cataldi@level.agency": [
@@ -11070,6 +11586,14 @@
     "requests": 312,
     "opusPct": 0,
     "avgPromptTokens": 135421
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 101.72,
+    "requests": 362,
+    "opusPct": 0,
+    "avgPromptTokens": 203606
    }
   ],
   "bill.buchanan@level.agency": [
@@ -11232,6 +11756,14 @@
     "requests": 28,
     "opusPct": 35,
     "avgPromptTokens": 100341
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 7.28,
+    "requests": 33,
+    "opusPct": 0,
+    "avgPromptTokens": 98615
    }
   ],
   "pvangorder@level.agency": [
@@ -11330,6 +11862,14 @@
     "requests": 174,
     "opusPct": 34,
     "avgPromptTokens": 51435
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 17.69,
+    "requests": 183,
+    "opusPct": 8,
+    "avgPromptTokens": 82946
    }
   ],
   "brian.marko@level.agency": [
@@ -11492,6 +12032,14 @@
     "requests": 176,
     "opusPct": 100,
     "avgPromptTokens": 193023
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 54.39,
+    "requests": 350,
+    "opusPct": 99,
+    "avgPromptTokens": 133669
    }
   ],
   "brent.davis@level.agency": [
@@ -11638,6 +12186,14 @@
     "requests": 123,
     "opusPct": 0,
     "avgPromptTokens": 73190
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.86,
+    "requests": 120,
+    "opusPct": 0,
+    "avgPromptTokens": 78092
    }
   ],
   "tyler.carson@level.agency": [
@@ -11800,6 +12356,14 @@
     "requests": 11,
     "opusPct": 0,
     "avgPromptTokens": 146806
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 52.58,
+    "requests": 274,
+    "opusPct": 0,
+    "avgPromptTokens": 376434
    }
   ],
   "connor.thorpe@level.agency": [
@@ -11954,6 +12518,14 @@
     "requests": 995,
     "opusPct": 0,
     "avgPromptTokens": 340972
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 36.95,
+    "requests": 201,
+    "opusPct": 0,
+    "avgPromptTokens": 559629
    }
   ],
   "miguel.sanchez@level.agency": [
@@ -12116,6 +12688,14 @@
     "requests": 97,
     "opusPct": 0,
     "avgPromptTokens": 101247
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 13.54,
+    "requests": 207,
+    "opusPct": 0,
+    "avgPromptTokens": 177789
    }
   ],
   "michael.imbasciani@level.agency": [
@@ -12254,6 +12834,14 @@
     "requests": 75,
     "opusPct": 0,
     "avgPromptTokens": 147330
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 20.58,
+    "requests": 224,
+    "opusPct": 0,
+    "avgPromptTokens": 212760
    }
   ],
   "darren.chow@level.agency": [
@@ -12416,6 +13004,14 @@
     "requests": 103,
     "opusPct": 0,
     "avgPromptTokens": 79504
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.81,
+    "requests": 204,
+    "opusPct": 0,
+    "avgPromptTokens": 114671
    }
   ],
   "trinity.foster@level.agency": [
@@ -12578,6 +13174,14 @@
     "requests": 234,
     "opusPct": 0,
     "avgPromptTokens": 105365
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.44,
+    "requests": 92,
+    "opusPct": 0,
+    "avgPromptTokens": 96448
    }
   ],
   "erin.patterson@level.agency": [
@@ -12732,6 +13336,14 @@
     "requests": 1237,
     "opusPct": 0,
     "avgPromptTokens": 336508
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 83.05,
+    "requests": 390,
+    "opusPct": 68,
+    "avgPromptTokens": 228635
    }
   ],
   "lisa.hurst@level.agency": [
@@ -12894,6 +13506,14 @@
     "requests": 1793,
     "opusPct": 0,
     "avgPromptTokens": 196830
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 22.44,
+    "requests": 328,
+    "opusPct": 0,
+    "avgPromptTokens": 110896
    }
   ],
   "stephen.bell@level.agency": [
@@ -13154,6 +13774,14 @@
     "requests": 52,
     "opusPct": 100,
     "avgPromptTokens": 267482
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 3.56,
+    "requests": 11,
+    "opusPct": 89,
+    "avgPromptTokens": 183050
    }
   ],
   "shubhi.priya@level.agency": [
@@ -13316,6 +13944,14 @@
     "requests": 7,
     "opusPct": 0,
     "avgPromptTokens": 68894
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 51.15,
+    "requests": 328,
+    "opusPct": 0,
+    "avgPromptTokens": 283106
    }
   ],
   "brad.stephenson@level.agency": [
@@ -13478,6 +14114,14 @@
     "requests": 81,
     "opusPct": 0,
     "avgPromptTokens": 120916
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 34.29,
+    "requests": 301,
+    "opusPct": 0,
+    "avgPromptTokens": 179986
    }
   ],
   "rahil.shah@level.agency": [
@@ -13640,6 +14284,14 @@
     "requests": 242,
     "opusPct": 47,
     "avgPromptTokens": 155155
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 18.75,
+    "requests": 157,
+    "opusPct": 50,
+    "avgPromptTokens": 178194
    }
   ],
   "kristine.english@level.agency": [
@@ -13802,6 +14454,14 @@
     "requests": 564,
     "opusPct": 0,
     "avgPromptTokens": 104900
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 155.97,
+    "requests": 1194,
+    "opusPct": 0,
+    "avgPromptTokens": 185250
    }
   ],
   "timbre.wolf@level.agency": [
@@ -13964,6 +14624,14 @@
     "requests": 266,
     "opusPct": 0,
     "avgPromptTokens": 503945
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 42.38,
+    "requests": 211,
+    "opusPct": 0,
+    "avgPromptTokens": 411007
    }
   ],
   "alex.swope@level.agency": [
@@ -14126,6 +14794,14 @@
     "requests": 244,
     "opusPct": 13,
     "avgPromptTokens": 101657
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 39.0,
+    "requests": 209,
+    "opusPct": 0,
+    "avgPromptTokens": 97093
    }
   ],
   "spencer.emmerson@level.agency": [
@@ -14288,6 +14964,14 @@
     "requests": 33,
     "opusPct": 0,
     "avgPromptTokens": 120838
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.54,
+    "requests": 139,
+    "opusPct": 0,
+    "avgPromptTokens": 119951
    }
   ],
   "thiago.wehbe@level.agency": [
@@ -14450,6 +15134,14 @@
     "requests": 930,
     "opusPct": 34,
     "avgPromptTokens": 317948
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 16.85,
+    "requests": 155,
+    "opusPct": 97,
+    "avgPromptTokens": 71128
    }
   ],
   "bettina.young@level.agency": [
@@ -14596,6 +15288,14 @@
     "requests": 303,
     "opusPct": 0,
     "avgPromptTokens": 306880
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.93,
+    "requests": 27,
+    "opusPct": 0,
+    "avgPromptTokens": 83779
    }
   ],
   "faizan.ahmed@level.agency": [
@@ -14792,6 +15492,14 @@
     "requests": 3534,
     "opusPct": 22,
     "avgPromptTokens": 240039
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 181.39,
+    "requests": 2042,
+    "opusPct": 0,
+    "avgPromptTokens": 328566
    }
   ],
   "jeramie.wright@level.agency": [
@@ -15076,6 +15784,14 @@
     "requests": 241,
     "opusPct": 33,
     "avgPromptTokens": 173220
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 17.89,
+    "requests": 214,
+    "opusPct": 0,
+    "avgPromptTokens": 199696
    }
   ],
   "bogdan.cioanta@level.agency": [
@@ -15230,6 +15946,14 @@
     "requests": 325,
     "opusPct": 100,
     "avgPromptTokens": 129377
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 33.57,
+    "requests": 211,
+    "opusPct": 100,
+    "avgPromptTokens": 148128
    }
   ],
   "ashley.gordon@level.agency": [
@@ -15384,6 +16108,14 @@
     "requests": 835,
     "opusPct": 0,
     "avgPromptTokens": 159412
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 109.38,
+    "requests": 2123,
+    "opusPct": 0,
+    "avgPromptTokens": 201225
    }
   ],
   "shirley.tian@level.agency": [
@@ -15538,6 +16270,14 @@
     "requests": 306,
     "opusPct": 67,
     "avgPromptTokens": 94040
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 79.05,
+    "requests": 627,
+    "opusPct": 39,
+    "avgPromptTokens": 63107
    }
   ],
   "sara.siebert@level.agency": [
@@ -15692,6 +16432,14 @@
     "requests": 1067,
     "opusPct": 0,
     "avgPromptTokens": 160822
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 62.64,
+    "requests": 764,
+    "opusPct": 0,
+    "avgPromptTokens": 155014
    }
   ],
   "emily.george@level.agency": [
@@ -15846,6 +16594,14 @@
     "requests": 203,
     "opusPct": 0,
     "avgPromptTokens": 100701
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.8,
+    "requests": 84,
+    "opusPct": 0,
+    "avgPromptTokens": 98683
    }
   ],
   "brian.mcleod@level.agency": [
@@ -16000,6 +16756,14 @@
     "requests": 2381,
     "opusPct": 51,
     "avgPromptTokens": 207917
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 319.8,
+    "requests": 1999,
+    "opusPct": 60,
+    "avgPromptTokens": 253901
    }
   ],
   "rico.galassi@level.agency": [
@@ -16154,6 +16918,14 @@
     "requests": 390,
     "opusPct": 0,
     "avgPromptTokens": 161036
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.67,
+    "requests": 120,
+    "opusPct": 0,
+    "avgPromptTokens": 137731
    }
   ],
   "jessa.jacobs@level.agency": [
@@ -16292,6 +17064,14 @@
     "requests": 55,
     "opusPct": 22,
     "avgPromptTokens": 91748
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.82,
+    "requests": 58,
+    "opusPct": 54,
+    "avgPromptTokens": 86744
    }
   ],
   "aakriti.aakriti@level.agency": [
@@ -16406,6 +17186,14 @@
     "requests": 78,
     "opusPct": 0,
     "avgPromptTokens": 62216
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.92,
+    "requests": 25,
+    "opusPct": 0,
+    "avgPromptTokens": 72210
    }
   ],
   "camille.bosley@level.agency": [
@@ -16560,6 +17348,14 @@
     "requests": 513,
     "opusPct": 0,
     "avgPromptTokens": 167210
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 30.53,
+    "requests": 479,
+    "opusPct": 0,
+    "avgPromptTokens": 113832
    }
   ],
   "hayley.schultz@level.agency": [
@@ -16714,6 +17510,14 @@
     "requests": 382,
     "opusPct": 0,
     "avgPromptTokens": 394091
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.34,
+    "requests": 229,
+    "opusPct": 0,
+    "avgPromptTokens": 152045
    }
   ],
   "nancy.guiragossian@level.agency": [
@@ -16860,6 +17664,14 @@
     "requests": 213,
     "opusPct": 0,
     "avgPromptTokens": 94531
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.01,
+    "requests": 66,
+    "opusPct": 0,
+    "avgPromptTokens": 108521
    }
   ],
   "siera.willner@level.agency": [
@@ -17014,6 +17826,14 @@
     "requests": 531,
     "opusPct": 0,
     "avgPromptTokens": 54554
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 10.94,
+    "requests": 350,
+    "opusPct": 0,
+    "avgPromptTokens": 49344
    }
   ],
   "grant.denton@level.agency": [
@@ -17168,6 +17988,14 @@
     "requests": 791,
     "opusPct": 0,
     "avgPromptTokens": 111186
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 29.34,
+    "requests": 461,
+    "opusPct": 0,
+    "avgPromptTokens": 134682
    }
   ],
   "kristine.serrano@level.agency": [
@@ -17298,6 +18126,14 @@
     "requests": 761,
     "opusPct": 0,
     "avgPromptTokens": 145080
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 17.44,
+    "requests": 427,
+    "opusPct": 0,
+    "avgPromptTokens": 115350
    }
   ],
   "erin.ferranto@level.agency": [
@@ -17582,6 +18418,14 @@
     "requests": 215,
     "opusPct": 90,
     "avgPromptTokens": 130112
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 17.37,
+    "requests": 126,
+    "opusPct": 100,
+    "avgPromptTokens": 112470
    }
   ],
   "giordan.tobia@level.agency": [
@@ -17736,6 +18580,14 @@
     "requests": 832,
     "opusPct": 2,
     "avgPromptTokens": 257143
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 136.93,
+    "requests": 1171,
+    "opusPct": 4,
+    "avgPromptTokens": 253669
    }
   ],
   "sarah.breitschwerdt@level.agency": [
@@ -17890,6 +18742,14 @@
     "requests": 858,
     "opusPct": 13,
     "avgPromptTokens": 156523
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 126.85,
+    "requests": 1026,
+    "opusPct": 73,
+    "avgPromptTokens": 124119
    }
   ],
   "karma.grindl@level.agency": [
@@ -18012,6 +18872,14 @@
     "requests": 52,
     "opusPct": 0,
     "avgPromptTokens": 159325
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.62,
+    "requests": 8,
+    "opusPct": 0,
+    "avgPromptTokens": 84118
    }
   ],
   "natasha.warenycia@level.agency": [
@@ -18134,6 +19002,14 @@
     "requests": 934,
     "opusPct": 0,
     "avgPromptTokens": 201113
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 20.89,
+    "requests": 311,
+    "opusPct": 0,
+    "avgPromptTokens": 174517
    }
   ],
   "alex.cattabiani@level.agency": [
@@ -18288,6 +19164,14 @@
     "requests": 142,
     "opusPct": 0,
     "avgPromptTokens": 160337
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 6.72,
+    "requests": 116,
+    "opusPct": 0,
+    "avgPromptTokens": 133921
    }
   ],
   "julida.celaj@level.agency": [
@@ -18434,6 +19318,14 @@
     "requests": 40,
     "opusPct": 99,
     "avgPromptTokens": 211360
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.51,
+    "requests": 7,
+    "opusPct": 80,
+    "avgPromptTokens": 54983
    }
   ],
   "shawn.wang@level.agency": [
@@ -18580,6 +19472,14 @@
     "requests": 23,
     "opusPct": 0,
     "avgPromptTokens": 70419
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.05,
+    "requests": 30,
+    "opusPct": 0,
+    "avgPromptTokens": 90543
    }
   ],
   "mike.hoagland@level.agency": [
@@ -18808,6 +19708,14 @@
     "requests": 146,
     "opusPct": 0,
     "avgPromptTokens": 142346
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 32.1,
+    "requests": 373,
+    "opusPct": 0,
+    "avgPromptTokens": 167791
    }
   ],
   "george.landsly@level.agency": [
@@ -18954,6 +19862,14 @@
     "requests": 647,
     "opusPct": 0,
     "avgPromptTokens": 147899
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 19.79,
+    "requests": 330,
+    "opusPct": 20,
+    "avgPromptTokens": 119137
    }
   ],
   "emily.rupert@level.agency": [
@@ -19060,6 +19976,14 @@
     "requests": 1,
     "opusPct": 0,
     "avgPromptTokens": 50961
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.3,
+    "requests": 7,
+    "opusPct": 0,
+    "avgPromptTokens": 64022
    }
   ],
   "madison.fellner@level.agency": [
@@ -19174,6 +20098,14 @@
     "requests": 160,
     "opusPct": 0,
     "avgPromptTokens": 127305
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 6.42,
+    "requests": 132,
+    "opusPct": 0,
+    "avgPromptTokens": 111541
    }
   ],
   "sarah.kelly@level.agency": [
@@ -19314,6 +20246,14 @@
     "requests": 149,
     "opusPct": 85,
     "avgPromptTokens": 223522
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 39.4,
+    "requests": 151,
+    "opusPct": 73,
+    "avgPromptTokens": 393710
    }
   ],
   "tyler.bowa@level.agency": [
@@ -19460,6 +20400,14 @@
     "requests": 20,
     "opusPct": 82,
     "avgPromptTokens": 138192
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 44.91,
+    "requests": 194,
+    "opusPct": 98,
+    "avgPromptTokens": 202498
    }
   ],
   "sarah.mckinney@level.agency": [
@@ -19606,6 +20554,14 @@
     "requests": 791,
     "opusPct": 0,
     "avgPromptTokens": 437691
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 68.65,
+    "requests": 398,
+    "opusPct": 0,
+    "avgPromptTokens": 526588
    }
   ],
   "joel.macdonald@level.agency": [
@@ -19744,6 +20700,14 @@
     "requests": 114,
     "opusPct": 0,
     "avgPromptTokens": 230748
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 82.43,
+    "requests": 702,
+    "opusPct": 0,
+    "avgPromptTokens": 180315
    }
   ],
   "jenna.kerr@level.agency": [
@@ -19882,6 +20846,14 @@
     "requests": 172,
     "opusPct": 0,
     "avgPromptTokens": 125160
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.44,
+    "requests": 84,
+    "opusPct": 0,
+    "avgPromptTokens": 205609
    }
   ],
   "dominique.toutounji@level.agency": [
@@ -20012,6 +20984,14 @@
     "requests": 110,
     "opusPct": 0,
     "avgPromptTokens": 164238
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 6.49,
+    "requests": 97,
+    "opusPct": 0,
+    "avgPromptTokens": 167303
    }
   ],
   "roland.tetteh@level.agency": [
@@ -20158,6 +21138,14 @@
     "requests": 946,
     "opusPct": 0,
     "avgPromptTokens": 143699
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 59.7,
+    "requests": 698,
+    "opusPct": 31,
+    "avgPromptTokens": 139452
    }
   ],
   "kylie.vandendool@level.agency": [
@@ -20304,6 +21292,14 @@
     "requests": 244,
     "opusPct": 0,
     "avgPromptTokens": 164774
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 13.95,
+    "requests": 852,
+    "opusPct": 0,
+    "avgPromptTokens": 136133
    }
   ],
   "brandon.grimes@level.agency": [
@@ -20410,6 +21406,14 @@
     "requests": 611,
     "opusPct": 81,
     "avgPromptTokens": 204773
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 75.37,
+    "requests": 479,
+    "opusPct": 100,
+    "avgPromptTokens": 205785
    }
   ],
   "rachel.stockwell@level.agency": [
@@ -20556,6 +21560,14 @@
     "requests": 637,
     "opusPct": 0,
     "avgPromptTokens": 139097
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 42.54,
+    "requests": 886,
+    "opusPct": 0,
+    "avgPromptTokens": 121731
    }
   ],
   "jill.bartlett@level.agency": [
@@ -20694,6 +21706,14 @@
     "requests": 74,
     "opusPct": 0,
     "avgPromptTokens": 185192
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.61,
+    "requests": 205,
+    "opusPct": 0,
+    "avgPromptTokens": 119117
    }
   ],
   "adam.muscott@level.agency": [
@@ -20840,6 +21860,14 @@
     "requests": 478,
     "opusPct": 0,
     "avgPromptTokens": 166316
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 32.96,
+    "requests": 507,
+    "opusPct": 0,
+    "avgPromptTokens": 126619
    }
   ],
   "lisa.woolf@level.agency": [
@@ -20986,6 +22014,14 @@
     "requests": 357,
     "opusPct": 0,
     "avgPromptTokens": 155199
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 115.4,
+    "requests": 1417,
+    "opusPct": 0,
+    "avgPromptTokens": 264779
    }
   ],
   "melissa.guliakearns@level.agency": [
@@ -21132,6 +22168,14 @@
     "requests": 370,
     "opusPct": 0,
     "avgPromptTokens": 134830
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 30.08,
+    "requests": 497,
+    "opusPct": 0,
+    "avgPromptTokens": 147928
    }
   ],
   "kara.turcotte@level.agency": [
@@ -21246,6 +22290,14 @@
     "requests": 96,
     "opusPct": 0,
     "avgPromptTokens": 69760
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.01,
+    "requests": 30,
+    "opusPct": 0,
+    "avgPromptTokens": 71933
    }
   ],
   "maria.sukey@level.agency": [
@@ -21376,6 +22428,14 @@
     "requests": 173,
     "opusPct": 0,
     "avgPromptTokens": 95019
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 15.39,
+    "requests": 247,
+    "opusPct": 0,
+    "avgPromptTokens": 113068
    }
   ],
   "jim.crimella@level.agency": [
@@ -21514,6 +22574,14 @@
     "requests": 150,
     "opusPct": 17,
     "avgPromptTokens": 261722
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 8.51,
+    "requests": 22,
+    "opusPct": 0,
+    "avgPromptTokens": 138282
    }
   ],
   "patrick.bonsu@level.agency": [
@@ -21636,6 +22704,14 @@
     "requests": 525,
     "opusPct": 0,
     "avgPromptTokens": 128597
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 79.03,
+    "requests": 638,
+    "opusPct": 63,
+    "avgPromptTokens": 154827
    }
   ],
   "xavier.picquerey@level.agency": [
@@ -21774,6 +22850,14 @@
     "requests": 207,
     "opusPct": 0,
     "avgPromptTokens": 94866
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 50.24,
+    "requests": 887,
+    "opusPct": 0,
+    "avgPromptTokens": 169364
    }
   ],
   "angie.johnson@level.agency": [
@@ -22010,6 +23094,14 @@
     "requests": 901,
     "opusPct": 0,
     "avgPromptTokens": 494567
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 132.78,
+    "requests": 695,
+    "opusPct": 0,
+    "avgPromptTokens": 395378
    }
   ],
   "sarah.vader@level.agency": [
@@ -22148,6 +23240,14 @@
     "requests": 106,
     "opusPct": 0,
     "avgPromptTokens": 106515
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.14,
+    "requests": 380,
+    "opusPct": 0,
+    "avgPromptTokens": 98758
    }
   ],
   "kallan.carter@level.agency": [
@@ -22270,6 +23370,14 @@
     "requests": 978,
     "opusPct": 0,
     "avgPromptTokens": 106746
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 85.65,
+    "requests": 1181,
+    "opusPct": 0,
+    "avgPromptTokens": 96260
    }
   ],
   "justin.glass@level.agency": [
@@ -22408,6 +23516,14 @@
     "requests": 96,
     "opusPct": 0,
     "avgPromptTokens": 72569
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.42,
+    "requests": 105,
+    "opusPct": 0,
+    "avgPromptTokens": 82509
    }
   ],
   "whitney.miracle@level.agency": [
@@ -22538,6 +23654,14 @@
     "requests": 786,
     "opusPct": 0,
     "avgPromptTokens": 180528
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 24.18,
+    "requests": 254,
+    "opusPct": 0,
+    "avgPromptTokens": 149441
    }
   ],
   "geoff.roebuck@level.agency": [
@@ -22668,6 +23792,14 @@
     "requests": 533,
     "opusPct": 0,
     "avgPromptTokens": 169412
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 23.99,
+    "requests": 323,
+    "opusPct": 0,
+    "avgPromptTokens": 150087
    }
   ],
   "elspeth.baird@level.agency": [
@@ -22806,6 +23938,14 @@
     "requests": 107,
     "opusPct": 0,
     "avgPromptTokens": 163973
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.11,
+    "requests": 94,
+    "opusPct": 0,
+    "avgPromptTokens": 148248
    }
   ],
   "justin.starnes@level.agency": [
@@ -22944,6 +24084,14 @@
     "requests": 111,
     "opusPct": 0,
     "avgPromptTokens": 103140
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.85,
+    "requests": 99,
+    "opusPct": 0,
+    "avgPromptTokens": 139377
    }
   ],
   "mike.criswell@level.agency": [
@@ -23082,6 +24230,14 @@
     "requests": 51,
     "opusPct": 60,
     "avgPromptTokens": 167844
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.75,
+    "requests": 29,
+    "opusPct": 30,
+    "avgPromptTokens": 213674
    }
   ],
   "katie.blomberg@level.agency": [
@@ -23212,6 +24368,14 @@
     "requests": 146,
     "opusPct": 0,
     "avgPromptTokens": 97524
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.11,
+    "requests": 95,
+    "opusPct": 0,
+    "avgPromptTokens": 117417
    }
   ],
   "allie.stclair@level.agency": [
@@ -23350,6 +24514,14 @@
     "requests": 228,
     "opusPct": 0,
     "avgPromptTokens": 103243
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 51.1,
+    "requests": 816,
+    "opusPct": 0,
+    "avgPromptTokens": 170911
    }
   ],
   "steven.hines@level.agency": [
@@ -23472,6 +24644,14 @@
     "requests": 471,
     "opusPct": 0,
     "avgPromptTokens": 198485
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 75.5,
+    "requests": 771,
+    "opusPct": 0,
+    "avgPromptTokens": 291711
    }
   ],
   "marie.karasseferian@level.agency": [
@@ -23822,6 +25002,14 @@
     "requests": 1067,
     "opusPct": 0,
     "avgPromptTokens": 143507
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 10.87,
+    "requests": 218,
+    "opusPct": 0,
+    "avgPromptTokens": 112874
    }
   ],
   "mike.kedzorski@level.agency": [
@@ -23944,6 +25132,14 @@
     "requests": 50,
     "opusPct": 0,
     "avgPromptTokens": 105858
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.54,
+    "requests": 45,
+    "opusPct": 0,
+    "avgPromptTokens": 98352
    }
   ],
   "sara.trivisonno@level.agency": [
@@ -24082,6 +25278,14 @@
     "requests": 97,
     "opusPct": 0,
     "avgPromptTokens": 90584
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 16.51,
+    "requests": 325,
+    "opusPct": 0,
+    "avgPromptTokens": 138013
    }
   ],
   "joanna.nagle@level.agency": [
@@ -24196,6 +25400,14 @@
     "requests": 21,
     "opusPct": 0,
     "avgPromptTokens": 93626
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 1.52,
+    "requests": 46,
+    "opusPct": 0,
+    "avgPromptTokens": 104982
    }
   ],
   "jessica.lovett@level.agency": [
@@ -24310,6 +25522,14 @@
     "requests": 180,
     "opusPct": 48,
     "avgPromptTokens": 134080
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 8.74,
+    "requests": 173,
+    "opusPct": 31,
+    "avgPromptTokens": 106576
    }
   ],
   "julia.berry@level.agency": [
@@ -24432,6 +25652,14 @@
     "requests": 433,
     "opusPct": 62,
     "avgPromptTokens": 121810
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 20.03,
+    "requests": 331,
+    "opusPct": 0,
+    "avgPromptTokens": 106126
    }
   ],
   "abby.baker@level.agency": [
@@ -24554,6 +25782,14 @@
     "requests": 48,
     "opusPct": 0,
     "avgPromptTokens": 103094
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.25,
+    "requests": 183,
+    "opusPct": 0,
+    "avgPromptTokens": 116296
    }
   ],
   "shiv.harrilal@level.agency": [
@@ -24676,6 +25912,14 @@
     "requests": 125,
     "opusPct": 0,
     "avgPromptTokens": 135574
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 25.73,
+    "requests": 486,
+    "opusPct": 0,
+    "avgPromptTokens": 149063
    }
   ],
   "abbey.schuyler@level.agency": [
@@ -24798,6 +26042,14 @@
     "requests": 1,
     "opusPct": 0,
     "avgPromptTokens": 42590
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 3.35,
+    "requests": 85,
+    "opusPct": 0,
+    "avgPromptTokens": 83812
    }
   ],
   "savannah.juel@level.agency": [
@@ -24928,6 +26180,14 @@
     "requests": 47,
     "opusPct": 0,
     "avgPromptTokens": 81186
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 11.67,
+    "requests": 226,
+    "opusPct": 0,
+    "avgPromptTokens": 120181
    }
   ],
   "katie.woods@level.agency": [
@@ -25050,6 +26310,14 @@
     "requests": 2137,
     "opusPct": 0,
     "avgPromptTokens": 216935
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 290.14,
+    "requests": 4397,
+    "opusPct": 0,
+    "avgPromptTokens": 244508
    }
   ],
   "mike.rubino@level.agency": [
@@ -25172,6 +26440,14 @@
     "requests": 24,
     "opusPct": 0,
     "avgPromptTokens": 117650
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.34,
+    "requests": 7,
+    "opusPct": 0,
+    "avgPromptTokens": 67671
    }
   ],
   "lisa-marie.faria@level.agency": [
@@ -25294,6 +26570,14 @@
     "requests": 262,
     "opusPct": 0,
     "avgPromptTokens": 83367
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 11.12,
+    "requests": 179,
+    "opusPct": 0,
+    "avgPromptTokens": 63331
    }
   ],
   "erik.intrevado@level.agency": [
@@ -25416,6 +26700,14 @@
     "requests": 747,
     "opusPct": 0,
     "avgPromptTokens": 101626
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.81,
+    "requests": 1069,
+    "opusPct": 0,
+    "avgPromptTokens": 256409
    }
   ],
   "lucy.puglisi@level.agency": [
@@ -25546,6 +26838,14 @@
     "requests": 440,
     "opusPct": 0,
     "avgPromptTokens": 256551
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 3.67,
+    "requests": 71,
+    "opusPct": 0,
+    "avgPromptTokens": 129638
    }
   ],
   "beverly.vaz@level.agency": [
@@ -25726,6 +27026,14 @@
     "requests": 72,
     "opusPct": 0,
     "avgPromptTokens": 80614
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 7.41,
+    "requests": 76,
+    "opusPct": 0,
+    "avgPromptTokens": 59068
    }
   ],
   "rj.smith@level.agency": [
@@ -25832,6 +27140,14 @@
     "requests": 17,
     "opusPct": 0,
     "avgPromptTokens": 80568
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.79,
+    "requests": 16,
+    "opusPct": 0,
+    "avgPromptTokens": 82895
    }
   ],
   "bryan.marrero@level.agency": [
@@ -25898,6 +27214,14 @@
     "requests": 112,
     "opusPct": 0,
     "avgPromptTokens": 190967
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 27.21,
+    "requests": 230,
+    "opusPct": 0,
+    "avgPromptTokens": 235691
    }
   ],
   "bryan.bonham@level.agency": [
@@ -26004,6 +27328,14 @@
     "requests": 27,
     "opusPct": 0,
     "avgPromptTokens": 94915
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 17.58,
+    "requests": 56,
+    "opusPct": 0,
+    "avgPromptTokens": 117170
    }
   ],
   "alessandro.carvalho@level.agency": [
@@ -26110,6 +27442,14 @@
     "requests": 93,
     "opusPct": 95,
     "avgPromptTokens": 124692
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.32,
+    "requests": 97,
+    "opusPct": 100,
+    "avgPromptTokens": 127266
    }
   ],
   "katie.kaul@level.agency": [
@@ -26200,6 +27540,14 @@
     "requests": 158,
     "opusPct": 0,
     "avgPromptTokens": 109162
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 8.12,
+    "requests": 187,
+    "opusPct": 0,
+    "avgPromptTokens": 114184
    }
   ],
   "brook.johnston@level.agency": [
@@ -26314,6 +27662,14 @@
     "requests": 370,
     "opusPct": 70,
     "avgPromptTokens": 138821
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 36.02,
+    "requests": 251,
+    "opusPct": 90,
+    "avgPromptTokens": 166778
    }
   ],
   "cornelius.mwalwanda@level.agency": [
@@ -26412,6 +27768,14 @@
     "requests": 558,
     "opusPct": 0,
     "avgPromptTokens": 171301
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 70.01,
+    "requests": 864,
+    "opusPct": 0,
+    "avgPromptTokens": 260931
    }
   ],
   "lindsey.newman@level.agency": [
@@ -26534,6 +27898,14 @@
     "requests": 424,
     "opusPct": 0,
     "avgPromptTokens": 75554
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 105.66,
+    "requests": 1210,
+    "opusPct": 0,
+    "avgPromptTokens": 81511
    }
   ],
   "kellie.kaufman@level.agency": [
@@ -26762,6 +28134,14 @@
     "requests": 883,
     "opusPct": 2,
     "avgPromptTokens": 257280
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 37.66,
+    "requests": 350,
+    "opusPct": 0,
+    "avgPromptTokens": 242443
    }
   ],
   "anne.matzke@level.agency": [
@@ -26876,6 +28256,14 @@
     "requests": 47,
     "opusPct": 0,
     "avgPromptTokens": 67113
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.87,
+    "requests": 22,
+    "opusPct": 0,
+    "avgPromptTokens": 65396
    }
   ],
   "keefer.kopco@level.agency": [
@@ -26982,6 +28370,14 @@
     "requests": 192,
     "opusPct": 0,
     "avgPromptTokens": 131710
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 30.06,
+    "requests": 439,
+    "opusPct": 0,
+    "avgPromptTokens": 186510
    }
   ],
   "justine.letarte@level.agency": [
@@ -27056,6 +28452,14 @@
     "requests": 50,
     "opusPct": 0,
     "avgPromptTokens": 86130
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.19,
+    "requests": 21,
+    "opusPct": 0,
+    "avgPromptTokens": 109803
    }
   ],
   "brittany.wroblewski@level.agency": [
@@ -27106,6 +28510,14 @@
     "requests": 46,
     "opusPct": 0,
     "avgPromptTokens": 124489
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.57,
+    "requests": 46,
+    "opusPct": 0,
+    "avgPromptTokens": 130802
    }
   ],
   "jt.smith@level.agency": [
@@ -27212,6 +28624,14 @@
     "requests": 46,
     "opusPct": 0,
     "avgPromptTokens": 297408
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 41.17,
+    "requests": 488,
+    "opusPct": 1,
+    "avgPromptTokens": 175341
    }
   ],
   "lucy.bellissimo@level.agency": [
@@ -27326,6 +28746,14 @@
     "requests": 304,
     "opusPct": 0,
     "avgPromptTokens": 174555
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 13.82,
+    "requests": 237,
+    "opusPct": 0,
+    "avgPromptTokens": 180559
    }
   ],
   "tina.lee@level.agency": [
@@ -27432,6 +28860,14 @@
     "requests": 52,
     "opusPct": 0,
     "avgPromptTokens": 111019
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.51,
+    "requests": 11,
+    "opusPct": 0,
+    "avgPromptTokens": 62908
    }
   ],
   "mikhail.parker@level.agency": [
@@ -27572,6 +29008,14 @@
     "requests": 109,
     "opusPct": 0,
     "avgPromptTokens": 84252
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.72,
+    "requests": 54,
+    "opusPct": 0,
+    "avgPromptTokens": 94632
    }
   ],
   "erin.scheel@level.agency": [
@@ -27678,6 +29122,14 @@
     "requests": 93,
     "opusPct": 0,
     "avgPromptTokens": 64740
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.26,
+    "requests": 124,
+    "opusPct": 0,
+    "avgPromptTokens": 80174
    }
   ],
   "michelle.eatough@level.agency": [
@@ -27792,6 +29244,14 @@
     "requests": 137,
     "opusPct": 0,
     "avgPromptTokens": 80577
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 73.68,
+    "requests": 1002,
+    "opusPct": 0,
+    "avgPromptTokens": 176770
    }
   ],
   "dale.blignaut@level.agency": [
@@ -27898,6 +29358,14 @@
     "requests": 271,
     "opusPct": 0,
     "avgPromptTokens": 122267
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.18,
+    "requests": 68,
+    "opusPct": 0,
+    "avgPromptTokens": 145875
    }
   ],
   "merari.cipriano@level.agency": [
@@ -28030,6 +29498,14 @@
     "requests": 249,
     "opusPct": 0,
     "avgPromptTokens": 145406
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 25.57,
+    "requests": 314,
+    "opusPct": 0,
+    "avgPromptTokens": 182494
    }
   ],
   "dennis.zechman@level.agency": [
@@ -28128,6 +29604,14 @@
     "requests": 5246,
     "opusPct": 3,
     "avgPromptTokens": 296432
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 254.54,
+    "requests": 2846,
+    "opusPct": 0,
+    "avgPromptTokens": 302152
    }
   ],
   "clarisa.gimenez-comas@level.agency": [
@@ -28234,6 +29718,14 @@
     "requests": 312,
     "opusPct": 97,
     "avgPromptTokens": 136709
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 78.15,
+    "requests": 463,
+    "opusPct": 76,
+    "avgPromptTokens": 175167
    }
   ],
   "jessy.yi-ting.lin@level.agency": [
@@ -28332,6 +29824,14 @@
     "requests": 1785,
     "opusPct": 0,
     "avgPromptTokens": 281066
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 144.76,
+    "requests": 1259,
+    "opusPct": 0,
+    "avgPromptTokens": 212507
    }
   ],
   "kelly.langley@level.agency": [
@@ -28438,6 +29938,14 @@
     "requests": 43,
     "opusPct": 0,
     "avgPromptTokens": 191745
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 25.12,
+    "requests": 255,
+    "opusPct": 0,
+    "avgPromptTokens": 200347
    }
   ],
   "carrie.little@level.agency": [
@@ -28642,6 +30150,14 @@
     "requests": 40,
     "opusPct": 0,
     "avgPromptTokens": 171352
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.17,
+    "requests": 4,
+    "opusPct": 0,
+    "avgPromptTokens": 58570
    }
   ],
   "dior.carley@level.agency": [
@@ -28748,6 +30264,14 @@
     "requests": 60,
     "opusPct": 0,
     "avgPromptTokens": 78177
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 1.74,
+    "requests": 52,
+    "opusPct": 0,
+    "avgPromptTokens": 85727
    }
   ],
   "paul.forrest@level.agency": [
@@ -28838,6 +30362,14 @@
     "requests": 86,
     "opusPct": 0,
     "avgPromptTokens": 116597
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.97,
+    "requests": 86,
+    "opusPct": 6,
+    "avgPromptTokens": 148818
    }
   ],
   "cassie.myers@level.agency": [
@@ -28944,6 +30476,14 @@
     "requests": 9,
     "opusPct": 0,
     "avgPromptTokens": 100043
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.53,
+    "requests": 209,
+    "opusPct": 0,
+    "avgPromptTokens": 89063
    }
   ],
   "matt.parquette@level.agency": [
@@ -28986,6 +30526,14 @@
     "requests": 2,
     "opusPct": 0,
     "avgPromptTokens": 28424
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.35,
+    "requests": 13,
+    "opusPct": 0,
+    "avgPromptTokens": 67950
    }
   ],
   "tim.fitzgerald@level.agency": [
@@ -29068,6 +30616,14 @@
     "requests": 84,
     "opusPct": 100,
     "avgPromptTokens": 87117
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 21.87,
+    "requests": 97,
+    "opusPct": 96,
+    "avgPromptTokens": 108398
    }
   ],
   "matty.alburger@level.agency": [
@@ -29118,6 +30674,14 @@
     "requests": 29,
     "opusPct": 0,
     "avgPromptTokens": 54111
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.63,
+    "requests": 84,
+    "opusPct": 0,
+    "avgPromptTokens": 68989
    }
   ],
   "michelle.nihls@level.agency": [
@@ -29216,6 +30780,14 @@
     "requests": 152,
     "opusPct": 0,
     "avgPromptTokens": 73198
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.32,
+    "requests": 78,
+    "opusPct": 0,
+    "avgPromptTokens": 82704
    }
   ],
   "hui.wang@level.agency": [
@@ -29314,6 +30886,14 @@
     "requests": 480,
     "opusPct": 0,
     "avgPromptTokens": 160819
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.53,
+    "requests": 92,
+    "opusPct": 0,
+    "avgPromptTokens": 111499
    }
   ],
   "julianne.avolio@level.agency": [
@@ -29412,6 +30992,14 @@
     "requests": 1411,
     "opusPct": 0,
     "avgPromptTokens": 209680
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 44.93,
+    "requests": 949,
+    "opusPct": 0,
+    "avgPromptTokens": 236413
    }
   ],
   "maricca.magdalera@level.agency": [
@@ -29510,6 +31098,14 @@
     "requests": 296,
     "opusPct": 0,
     "avgPromptTokens": 148807
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 137.36,
+    "requests": 1217,
+    "opusPct": 0,
+    "avgPromptTokens": 282487
    }
   ],
   "mackenzie.nowak@level.agency": [
@@ -29608,6 +31204,14 @@
     "requests": 800,
     "opusPct": 0,
     "avgPromptTokens": 289740
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 65.72,
+    "requests": 1021,
+    "opusPct": 0,
+    "avgPromptTokens": 172688
    }
   ],
   "luke.gracie@level.agency": [
@@ -29706,6 +31310,14 @@
     "requests": 515,
     "opusPct": 0,
     "avgPromptTokens": 115956
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 48.73,
+    "requests": 695,
+    "opusPct": 0,
+    "avgPromptTokens": 132108
    }
   ],
   "rhea.sabatine@level.agency": [
@@ -29878,6 +31490,14 @@
     "requests": 257,
     "opusPct": 0,
     "avgPromptTokens": 137703
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 26.31,
+    "requests": 388,
+    "opusPct": 0,
+    "avgPromptTokens": 119485
    }
   ],
   "tracy.velazquez@level.agency": [
@@ -29976,6 +31596,14 @@
     "requests": 7,
     "opusPct": 0,
     "avgPromptTokens": 65919
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 10.16,
+    "requests": 161,
+    "opusPct": 0,
+    "avgPromptTokens": 180587
    }
   ],
   "cael.hancock@level.agency": [
@@ -30074,6 +31702,14 @@
     "requests": 165,
     "opusPct": 0,
     "avgPromptTokens": 86618
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.98,
+    "requests": 134,
+    "opusPct": 0,
+    "avgPromptTokens": 83335
    }
   ],
   "quinn.ohearn@level.agency": [
@@ -30172,6 +31808,14 @@
     "requests": 135,
     "opusPct": 0,
     "avgPromptTokens": 113705
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.68,
+    "requests": 61,
+    "opusPct": 0,
+    "avgPromptTokens": 111756
    }
   ],
   "kacey.holifield@level.agency": [
@@ -30262,6 +31906,14 @@
     "requests": 113,
     "opusPct": 0,
     "avgPromptTokens": 110843
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.67,
+    "requests": 75,
+    "opusPct": 0,
+    "avgPromptTokens": 123646
    }
   ],
   "sage.mittal@level.agency": [
@@ -30352,6 +32004,14 @@
     "requests": 142,
     "opusPct": 0,
     "avgPromptTokens": 155368
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 4.44,
+    "requests": 77,
+    "opusPct": 0,
+    "avgPromptTokens": 113008
    }
   ],
   "will.gray@level.agency": [
@@ -30418,6 +32078,14 @@
     "requests": 79,
     "opusPct": 0,
     "avgPromptTokens": 100824
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 6.75,
+    "requests": 99,
+    "opusPct": 0,
+    "avgPromptTokens": 132595
    }
   ],
   "caitlin.hachman@level.agency": [
@@ -30508,6 +32176,14 @@
     "requests": 383,
     "opusPct": 0,
     "avgPromptTokens": 187552
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 25.02,
+    "requests": 205,
+    "opusPct": 0,
+    "avgPromptTokens": 110190
    }
   ],
   "micah.brightwell@level.agency": [
@@ -30560,6 +32236,14 @@
     "requests": 52,
     "opusPct": 0,
     "avgPromptTokens": 80747
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 1.27,
+    "requests": 35,
+    "opusPct": 0,
+    "avgPromptTokens": 103736
    }
   ],
   "adam.leech@level.agency": [
@@ -30710,6 +32394,14 @@
     "requests": 13,
     "opusPct": 0,
     "avgPromptTokens": 57283
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 2.85,
+    "requests": 11,
+    "opusPct": 100,
+    "avgPromptTokens": 212035
    }
   ],
   "viktoria.denkova@level.agency": [
@@ -30784,6 +32476,14 @@
     "requests": 144,
     "opusPct": 0,
     "avgPromptTokens": 127067
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.08,
+    "requests": 3,
+    "opusPct": 0,
+    "avgPromptTokens": 54146
    }
   ],
   "ryan.kempema@level.agency": [
@@ -30836,6 +32536,14 @@
     "opusPct": 0.0,
     "avgPromptTokens": 5331.0,
     "weekOf": "May 28 \u2013 Jun 3, 2026"
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 38.03,
+    "requests": 159,
+    "opusPct": 13,
+    "avgPromptTokens": 123014
    }
   ],
   "dan.bernard@level.agency": [
@@ -30912,6 +32620,14 @@
     "requests": 108,
     "opusPct": 0,
     "avgPromptTokens": 125861
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.09,
+    "requests": 111,
+    "opusPct": 0,
+    "avgPromptTokens": 98350
    }
   ],
   "cassie.carney@level.agency": [
@@ -30962,6 +32678,14 @@
     "requests": 40,
     "opusPct": 0,
     "avgPromptTokens": 161780
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 14.54,
+    "requests": 228,
+    "opusPct": 0,
+    "avgPromptTokens": 209827
    }
   ],
   "victoria.gillis@level.agency": [
@@ -31012,6 +32736,14 @@
     "requests": 497,
     "opusPct": 0,
     "avgPromptTokens": 206126
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 21.76,
+    "requests": 141,
+    "opusPct": 0,
+    "avgPromptTokens": 350717
    }
   ],
   "tejas.chaudhary@level.agency": [
@@ -31062,6 +32794,14 @@
     "requests": 443,
     "opusPct": 42,
     "avgPromptTokens": 134594
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 9.26,
+    "requests": 422,
+    "opusPct": 16,
+    "avgPromptTokens": 283125
    }
   ],
   "clyde.dsouza@level.agency": [
@@ -31104,6 +32844,14 @@
     "requests": 276,
     "opusPct": 0,
     "avgPromptTokens": 143819
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 116.81,
+    "requests": 515,
+    "opusPct": 100,
+    "avgPromptTokens": 229118
    }
   ],
   "(org service usage)": [
@@ -31146,6 +32894,14 @@
     "requests": 4050,
     "opusPct": 0,
     "avgPromptTokens": 36508
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.0,
+    "requests": 5576,
+    "opusPct": 0,
+    "avgPromptTokens": 40460
    }
   ],
   "fahmi.messaoudi@level.agency": [
@@ -31188,6 +32944,14 @@
     "requests": 309,
     "opusPct": 0,
     "avgPromptTokens": 150883
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 7.77,
+    "requests": 1205,
+    "opusPct": 0,
+    "avgPromptTokens": 172087
    }
   ],
   "jay.li@level.agency": [
@@ -31222,6 +32986,14 @@
     "requests": 297,
     "opusPct": 29,
     "avgPromptTokens": 214057
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 102.99,
+    "requests": 494,
+    "opusPct": 47,
+    "avgPromptTokens": 222065
    }
   ],
   "sohaib.umar@level.agency": [
@@ -31256,6 +33028,14 @@
     "requests": 445,
     "opusPct": 0,
     "avgPromptTokens": 463340
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 46.15,
+    "requests": 243,
+    "opusPct": 0,
+    "avgPromptTokens": 348811
    }
   ],
   "nathan.zoob@level.agency": [
@@ -31290,6 +33070,14 @@
     "requests": 17,
     "opusPct": 0,
     "avgPromptTokens": 54128
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.0,
+    "requests": 1056,
+    "opusPct": 0,
+    "avgPromptTokens": 43926
    }
   ],
   "veda.shah@level.agency": [
@@ -31316,6 +33104,14 @@
     "requests": 837,
     "opusPct": 0,
     "avgPromptTokens": 321168
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 75.16,
+    "requests": 595,
+    "opusPct": 0,
+    "avgPromptTokens": 274516
    }
   ],
   "brandon.carlson@level.agency": [
@@ -31342,6 +33138,14 @@
     "requests": 12,
     "opusPct": 0,
     "avgPromptTokens": 56170
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 1.71,
+    "requests": 30,
+    "opusPct": 0,
+    "avgPromptTokens": 63966
    }
   ],
   "jasmine.ehrich@level.agency": [
@@ -31360,6 +33164,14 @@
     "requests": 81,
     "opusPct": 0,
     "avgPromptTokens": 106244
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 6.94,
+    "requests": 104,
+    "opusPct": 0,
+    "avgPromptTokens": 136598
    }
   ],
   "jon.krasnoff@level.agency": [
@@ -31378,6 +33190,14 @@
     "requests": 751,
     "opusPct": 0,
     "avgPromptTokens": 285244
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.81,
+    "requests": 18,
+    "opusPct": 0,
+    "avgPromptTokens": 101528
    }
   ],
   "olivia.labella@level.agency": [
@@ -31396,6 +33216,54 @@
     "requests": 122,
     "opusPct": 0,
     "avgPromptTokens": 143683
+   },
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 3.94,
+    "requests": 65,
+    "opusPct": 0,
+    "avgPromptTokens": 121289
+   }
+  ],
+  "marissa.martin@level.agency": [
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 5.08,
+    "requests": 111,
+    "opusPct": 0,
+    "avgPromptTokens": 101435
+   }
+  ],
+  "corina.blondell@level.agency": [
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.1,
+    "requests": 2,
+    "opusPct": 0,
+    "avgPromptTokens": 50318
+   }
+  ],
+  "jamie.frech@level.agency": [
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.09,
+    "requests": 2,
+    "opusPct": 0,
+    "avgPromptTokens": 58330
+   }
+  ],
+  "sam.hale@level.agency": [
+   {
+    "weekOf": "July 23\u201329, 2026",
+    "weekStartISO": "2026-07-23",
+    "spend": 0.0,
+    "requests": 2,
+    "opusPct": 0,
+    "avgPromptTokens": 678
    }
   ]
  }
