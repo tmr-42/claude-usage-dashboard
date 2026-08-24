@@ -20,7 +20,15 @@
    `appIiNgRw8PojBJ51 / tblykviXbbb0cVdag`, filter Status = Active
    (choice `selFcUzg8No5LA2br`). Fields: Email address (Level), Preferred First Name,
    First Name, Last Name, Department, Team, Reports to Email, Manager Once Removed Email,
-   Sub-Dept Lead Email address (Level) (from Team). Write `roster.json`.
+   Sub-Dept Lead Email address (Level) (from Team), **Claude Enterprise Login
+   (`fldrgqmVLODFmOgT6`)** — the immutable Claude billing address, HR-maintained.
+   Write `roster.json` with `claudeLogin` on every employee record.
+   IDENTITY JOIN (2026-08-18): usage rows join on Claude Enterprise Login FIRST,
+   primary email as fallback; a person counts as active/adopter if EITHER address
+   appears in usage. DM delivery and skip-list checks resolve login -> primary
+   email (Slack lives on the primary). Pipeline hard-fails on duplicate logins.
+   Supersedes the standalone email_aliases.json bridge — divergent billing
+   addresses are now HR-owned in Airtable, not pipeline-owned in the repo.
    (api.airtable.com is NOT in the container network allowlist — the MCP pull is the
    supported path. Alternative if ever needed: n8n webhook proxy, since
    levelagency.app.n8n.cloud IS allowlisted.)
