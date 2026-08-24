@@ -1936,6 +1936,235 @@ function BreakdownTab() {
   })));
 }
 
+// ---------------------------------------------------------------------- Max Plans
+// Max seats are a FIXED monthly subscription billed OUTSIDE the Enterprise metered
+// account. Enterprise totals elsewhere in this dashboard deliberately exclude them;
+// the combined figure is shown here and only here, explicitly labelled.
+function MaxPlansTab() {
+  const m = DATA.maxPlans;
+  const [sort, setSort] = useState("enterpriseSpend");
+  const [onlyOverlap, setOnlyOverlap] = useState(false);
+  const [q, setQ] = useState("");
+  if (!m || !m.users.length) return /*#__PURE__*/React.createElement(Card, null, /*#__PURE__*/React.createElement(Sub, null, "No Max plan seats recorded."));
+  const rows = useMemo(() => {
+    let r = m.users.slice();
+    if (onlyOverlap) r = r.filter(u => u.stillOnEnterprise);
+    const needle = q.trim().toLowerCase();
+    if (needle) r = r.filter(u => (u.name + " " + u.email + " " + u.department + " " + u.logins.join(" ")).toLowerCase().includes(needle));
+    return r.sort((a, b) => typeof a[sort] === "string" ? String(a[sort]).localeCompare(String(b[sort])) : b[sort] - a[sort]);
+  }, [sort, onlyOverlap, q]);
+  const th = {
+    textAlign: "left",
+    padding: "8px 9px",
+    fontSize: 10.5,
+    color: C.dim,
+    fontFamily: BODY,
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: .5,
+    borderBottom: `1px solid ${C.border}`,
+    cursor: "pointer"
+  };
+  const td = {
+    padding: "9px",
+    fontSize: 12.5,
+    color: C.text,
+    fontFamily: BODY,
+    borderBottom: `1px solid ${C.border}`,
+    verticalAlign: "top"
+  };
+  const H = ({
+    k,
+    children
+  }) => /*#__PURE__*/React.createElement("th", {
+    style: th,
+    onClick: () => setSort(k)
+  }, children, sort === k ? " ▾" : "");
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 12,
+      flexWrap: "wrap",
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement(StatCard, {
+    label: "Max seats",
+    value: m.seats,
+    sub: `${m.holders} people · ${fmt(m.seatCostMonthly)}/seat/mo`,
+    accent: C.green
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    label: "Max cost / month",
+    value: fmt(m.monthlyCost),
+    sub: `${fmt(m.weeklyCost)} weekly equivalent`,
+    accent: C.green
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    label: "Enterprise metered",
+    value: fmt(DATA.summary.totalSpend),
+    sub: DATA.summary.weekOf,
+    accent: C.blue
+  }), /*#__PURE__*/React.createElement(StatCard, {
+    label: "Combined weekly cost",
+    value: fmt(m.combinedWeekly),
+    sub: "Max weekly equivalent + Enterprise metered",
+    accent: C.pink
+  })), /*#__PURE__*/React.createElement(Card, {
+    style: {
+      marginBottom: 14,
+      borderLeft: `3px solid ${m.overlapCount ? C.orange : C.green}`
+    }
+  }, /*#__PURE__*/React.createElement(Head, {
+    size: 15,
+    style: {
+      marginBottom: 6
+    }
+  }, "Still incurring Enterprise spend"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: HEAD,
+      fontWeight: 900,
+      fontSize: 30,
+      color: m.overlapCount ? C.orange : C.green
+    }
+  }, m.overlapCount, " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 15,
+      color: C.muted,
+      fontWeight: 700
+    }
+  }, "of ", m.holders, " Max holders")), /*#__PURE__*/React.createElement(Sub, {
+    style: {
+      marginTop: 4
+    }
+  }, fmt(m.overlapEnterpriseSpend), " of metered Enterprise spend this week came from people who also hold a Max seat.", " ", m.zeroEnterpriseCount, " holder", m.zeroEnterpriseCount === 1 ? "" : "s", " had zero Enterprise usage.")), m.integrity && m.integrity.length > 0 && /*#__PURE__*/React.createElement(Card, {
+    style: {
+      marginBottom: 14,
+      borderLeft: `3px solid ${C.orange}`
+    }
+  }, /*#__PURE__*/React.createElement(Head, {
+    size: 15,
+    style: {
+      marginBottom: 8
+    }
+  }, "Seat data to verify (", m.integrity.length, ")"), /*#__PURE__*/React.createElement(MiniTable, {
+    cols: ["Person", "Issue", "Detail"],
+    rows: m.integrity.map(i => [i.name, i.type, i.detail])
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 10,
+      alignItems: "center",
+      marginBottom: 10,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    value: q,
+    onChange: e => setQ(e.target.value),
+    placeholder: "Search name, email, department, Max login…",
+    style: {
+      flex: 1,
+      minWidth: 240,
+      background: C.card,
+      border: `1px solid ${C.border}`,
+      borderRadius: 8,
+      padding: "9px 12px",
+      color: C.text,
+      fontSize: 13
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setOnlyOverlap(!onlyOverlap),
+    style: {
+      background: onlyOverlap ? C.orange : "transparent",
+      color: onlyOverlap ? "#000" : C.muted,
+      border: `1px solid ${onlyOverlap ? C.orange : C.borderLight}`,
+      borderRadius: 8,
+      padding: "9px 14px",
+      fontFamily: BODY,
+      fontWeight: 700,
+      fontSize: 12,
+      cursor: "pointer"
+    }
+  }, "Still on Enterprise only")), /*#__PURE__*/React.createElement(Card, {
+    style: {
+      padding: 0,
+      overflowX: "auto"
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    style: {
+      width: "100%",
+      borderCollapse: "collapse",
+      minWidth: 900
+    }
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement(H, {
+    k: "name"
+  }, "Person"), /*#__PURE__*/React.createElement(H, {
+    k: "department"
+  }, "Department"), /*#__PURE__*/React.createElement(H, {
+    k: "seats"
+  }, "Seats"), /*#__PURE__*/React.createElement(H, {
+    k: "monthlyCost"
+  }, "Max $/mo"), /*#__PURE__*/React.createElement(H, {
+    k: "enterpriseSpend"
+  }, "Enterprise this week"), /*#__PURE__*/React.createElement(H, {
+    k: "enterpriseRequests"
+  }, "Ent. requests"), /*#__PURE__*/React.createElement(H, {
+    k: "combinedWeekly"
+  }, "Combined weekly"), /*#__PURE__*/React.createElement("th", {
+    style: {
+      ...th,
+      cursor: "default"
+    }
+  }, "Max logins"))), /*#__PURE__*/React.createElement("tbody", null, rows.map(u => /*#__PURE__*/React.createElement("tr", {
+    key: u.email
+  }, /*#__PURE__*/React.createElement("td", {
+    style: td
+  }, /*#__PURE__*/React.createElement("div", null, u.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      color: C.dim
+    }
+  }, u.email), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 3
+    }
+  }, u.flags.map(f => /*#__PURE__*/React.createElement(FlagPill, {
+    key: f,
+    type: f
+  })))), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...td,
+      color: C.muted
+    }
+  }, u.department), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...td,
+      fontWeight: 700
+    }
+  }, u.seats), /*#__PURE__*/React.createElement("td", {
+    style: td
+  }, fmt(u.monthlyCost)), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...td,
+      fontWeight: 700,
+      color: u.stillOnEnterprise ? C.orange : C.green
+    }
+  }, u.stillOnEnterprise ? fmt(u.enterpriseSpend) : "$0.00"), /*#__PURE__*/React.createElement("td", {
+    style: td
+  }, u.enterpriseRequests.toLocaleString()), /*#__PURE__*/React.createElement("td", {
+    style: td
+  }, fmt(u.combinedWeekly)), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...td,
+      fontSize: 11,
+      color: C.muted
+    }
+  }, u.logins.map(l => /*#__PURE__*/React.createElement("div", {
+    key: l
+  }, l)))))))), /*#__PURE__*/React.createElement(Sub, {
+    style: {
+      marginTop: 8
+    }
+  }, rows.length, " of ", m.users.length, " Max holders · Max seats are billed monthly outside the Enterprise metered account and are excluded from Enterprise spend totals elsewhere in this dashboard · weekly equivalent = ", fmt(m.seatCostMonthly), " × 12 ÷ 52"));
+}
+
 // ---------------------------------------------------------------------- root
 const CORE_TABS = [{
   id: "overview",
@@ -1965,6 +2194,10 @@ const CORE_TABS = [{
   id: "flags",
   label: "Flags & Alerts",
   C: FlagsTab
+}, {
+  id: "maxplans",
+  label: "Max Plans",
+  C: MaxPlansTab
 }, {
   id: "breakdown",
   label: "Breakdowns",

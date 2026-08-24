@@ -674,6 +674,8 @@
     "claude_opus_4_7": 116.0,
     "claude_haiku_4_5_20251001": 25.46
    },
+   "maxSeats": 29,
+   "maxMonthlyCost": 6206.0,
    "flagCounts": {
     "maxPlan": 12,
     "coworkOpus": 19,
@@ -38814,5 +38816,19 @@
     "avgPromptTokens": 61954
    }
   ]
+ },
+ "meta": {
+  "minToolchainVersion": 5,
+  "requiredFeatures": [
+   "legacy-retired",
+   "max-plans",
+   "model-version-history",
+   "people-overrides"
+  ],
+  "lastRun": {
+   "toolchainVersion": 5,
+   "weekStartISO": "2026-08-13",
+   "ranOn": "2026-08-24"
+  }
  }
 }
