@@ -34,7 +34,8 @@ def bucket(model_norm):
     if "_opus_"   in model_norm or model_norm.endswith("_opus"):   return "opus"
     if "_sonnet_" in model_norm or model_norm.endswith("_sonnet"): return "sonnet"
     if "_haiku_"  in model_norm or model_norm.endswith("_haiku"):  return "haiku"
-    return "other"   # fable / mythos / unknown
+    if "_fable_"  in model_norm or model_norm.endswith("_fable"):  return "fable"
+    return "other"   # mythos / unknown
 
 def week_label(iso):
     d0 = date.fromisoformat(iso); d1 = d0 + timedelta(days=6)
@@ -48,6 +49,23 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     os.makedirs(outdir, exist_ok=True)
 
     roster_doc = json.load(open(roster_path)); ROSTER = roster_doc["employees"]
+    # Identity join (2026-08-18): Airtable now carries "Claude Enterprise Login"
+    # (fldrgqmVLODFmOgT6) — the immutable Claude billing address. Usage rows join on
+    # login FIRST, primary email as fallback; a person counts as active if EITHER
+    # address appears in usage. Supersedes the standalone email_aliases.json bridge.
+    LOGIN2PRIMARY = {}
+    for pe, rec in ROSTER.items():
+        login = (rec.get("claudeLogin") or pe).strip().lower()
+        if login in LOGIN2PRIMARY:
+            raise SystemExit(f"FATAL: duplicate Claude Enterprise Login {login} in roster")
+        LOGIN2PRIMARY[login] = pe
+    def roster_for(usage_email):
+        pe = LOGIN2PRIMARY.get(usage_email.strip().lower())
+        if pe: return ROSTER[pe]
+        return ROSTER.get(usage_email)
+    def is_active_person(primary_email, users):
+        rec = ROSTER[primary_email]
+        return primary_email in users or (rec.get("claudeLogin") or primary_email) in users
     history = json.load(open(history_path))
     rows = list(csv.DictReader(open(csv_path)))
 
@@ -82,7 +100,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         base = e.split("@")[0]
         return " ".join(w.capitalize() for w in re.split(r"[._-]+", base))
     for e, u in users.items():
-        R = ROSTER.get(e)
+        R = roster_for(e)
         u["name"] = R["name"] if R else ("Org service usage" if "@" not in e else derived_name(e))
         u["org"] = {k: (R[k] if R else None) for k in ("department","team","managerEmail","morEmail","subDeptLeadEmail")}
         u["mapped"] = bool(R)
@@ -100,8 +118,13 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     opusHeavy = [u for u in users.values() if u["chat"] > 0 and u["opusChat"]/u["chat"] >= 0.30]
     legacyU   = [u for u in users.values() if u["legacySpend"] > 0]
     lowEng    = [u for u in users.values() if u["spend"] < 10]
+    # power users are published as org efficiency benchmarks, so their $/req must be
+    # REAL: exclude anyone with a $0.00-metered surface (Cowork/Claude Tag/Research
+    # can report zero net spend against real request volume) and any non-person row.
+    def fully_metered(u):
+        return "@" in u["email"] and all(v > 0 for v in u["products"].values())
     power     = sorted([u for u in users.values()
-                        if u["spend"] > 0 and u["requests"] >= 500
+                        if u["spend"] > 0 and u["requests"] >= 500 and fully_metered(u)
                         and u["models"].get("opus",0)/max(u["spend"],1e-9) < 0.15
                         and u["spend"]/max(u["requests"],1) < 0.10],
                        key=lambda x: -x["requests"])[:10]
@@ -134,6 +157,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         "opusSpend": round(sum(u["models"].get("opus",0) for u in users.values()),2),
         "sonnetSpend": round(sum(u["models"].get("sonnet",0) for u in users.values()),2),
         "haikuSpend": round(sum(u["models"].get("haiku",0) for u in users.values()),2),
+        "fableSpend": round(sum(u["models"].get("fable",0) for u in users.values()),2),
         "otherSpend": round(sum(u["models"].get("other",0) for u in users.values()),2),
         "cacheHitRate": org_cache,
         "flagCounts": {"maxPlan": len(maxPlan), "coworkOpus": len(coworkOp), "opusHeavy": len(opusHeavy),
@@ -165,7 +189,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         return [{"name": k, "spend": round(v,2), "pct": round(100*v/t)} for k,v in sorted(d.items(), key=lambda x:-x[1])]
     allUsers = []
     for e, u in sorted(users.items(), key=lambda kv: -kv[1]["spend"]):
-        prods = sorted(u["pm"].keys()); buckets = ["opus","sonnet","haiku","other"]
+        prods = sorted(u["pm"].keys()); buckets = ["opus","sonnet","haiku","fable","other"]
         matrix = {"products": prods, "models": buckets,
                   "cells": [[round(u["pm"][p].get(b,0),2) for b in buckets] for p in prods],
                   "rowTotals": [round(sum(u["pm"][p].values()),2) for p in prods],
@@ -234,7 +258,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
             units[uname] = {
                 "label": label_n, "rosterCount": len(members_roster),
                 "activeUsers": len(members_usage),
-                "nonAdopters": len([e for e in members_roster if e not in users]),
+                "nonAdopters": len([e for e in members_roster if not is_active_person(e, users)]),
                 "spend": cur_sp, "requests": cur_rq,
                 "cacheHitRate": round(100*cr/pt,1) if pt else 0,
                 "models": {k: round(v,2) for k,v in mm.items()},
@@ -247,7 +271,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     enablement["nonUsers"] = sorted([
         {"email": e, "name": R["name"], "department": R["department"], "team": R["team"],
          "managerEmail": R["managerEmail"]}
-        for e, R in ROSTER.items() if e not in users], key=lambda x: (x["department"], x["name"]))
+        for e, R in ROSTER.items() if not is_active_person(e, users)], key=lambda x: (x["department"], x["name"]))
 
     # deterministic template narratives per department (richer prose layered in at artifact time)
     for dname, unit in enablement["dimensions"]["department"].items():
@@ -281,12 +305,13 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         "opusHeavy": [{"email": u["email"], "name": u["name"], "opusSpend": round(u["opusChat"],2), "chatSpend": round(u["chat"],2), "opusPct": round(100*u["opusChat"]/u["chat"])} for u in sorted(opusHeavy,key=lambda x:-x["opusChat"])],
         "powerUsers": [{"email": u["email"], "name": u["name"], "requests": u["requests"], "spend": s(u), "cpr": round(u["spend"]/u["requests"],4), "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0} for u in power],
         "legacyModels": [{"email": u["email"], "name": u["name"], "spend": round(u["legacySpend"],2), "requests": u["requests"], "models": sorted(u["legacyModels"])} for u in sorted(legacyU,key=lambda x:-x["legacySpend"])],
-        "lowEngagement": [{"email": u["email"], "name": u["name"], "spend": s(u), "requests": u["requests"], "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0, "consecutiveLowWeeks": streak(u["email"]), "dmEligible": streak(u["email"])>=2 and u["email"] not in SKIP_LIST} for u in sorted(lowEng,key=lambda x:x["spend"])],
+        "lowEngagement": [{"email": u["email"], "name": u["name"], "spend": s(u), "requests": u["requests"], "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0, "consecutiveLowWeeks": streak(u["email"]), "dmEligible": streak(u["email"])>=2 and u["email"] not in SKIP_LIST and LOGIN2PRIMARY.get(u["email"].strip().lower(), u["email"]) not in SKIP_LIST} for u in sorted(lowEng,key=lambda x:x["spend"])],
         "products": [{"name": p, "spend": round(v,2)} for p,v in sorted(prodS.items(), key=lambda x:-x[1])],
         "models": [{"name": m, "spend": round(v["spend"],2), "requests": v["requests"]} for m,v in sorted(models_detail.items(), key=lambda x:-x[1]["spend"])],
         "roster": {e: {"name": R["name"], "department": R["department"], "team": R["team"],
                        "managerEmail": R["managerEmail"], "morEmail": R["morEmail"],
-                       "subDeptLeadEmail": R["subDeptLeadEmail"]} for e, R in ROSTER.items()},
+                       "subDeptLeadEmail": R["subDeptLeadEmail"],
+                       "claudeLogin": R.get("claudeLogin") or e} for e, R in ROSTER.items()},
         "enablement": enablement,
         "history": history,
     }

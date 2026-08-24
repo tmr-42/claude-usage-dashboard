@@ -6,7 +6,10 @@ const fs = require("fs"), vm = require("vm");
 const React = require("react");
 const RDS = require("react-dom/server");
 const babel = require("@babel/standalone");
-let src = fs.readFileSync("claude-usage-dashboard-2026-07-16-enablement.jsx", "utf8")
+const ART = process.argv[2] || fs.readdirSync(".").filter(f => /^claude-usage-dashboard-\d{4}-\d{2}-\d{2}\.jsx$/.test(f)).sort().pop();
+if (!ART) { console.error("FAIL: no built artifact found"); process.exit(1); }
+console.log("  artifact:", ART);
+let src = fs.readFileSync(ART, "utf8")
   .replace(/^import[^\n]*\n/, "")
   .replace("export default Dashboard;", "");
 const compiled = babel.transform(src, { presets: [["react", { runtime: "classic", development: false }]] }).code;

@@ -46,8 +46,10 @@ un = [u["email"] for u in d["allUsers"] if not u.get("mapped")]
 if any("org" not in u or "cacheHitRate" not in u for u in d["allUsers"]): fail("missing org/cacheHitRate on allUsers")
 ok(f"org join present on all users ({len(un)} unmapped -> Unmapped bucket: {un[:3]}{'...' if len(un)>3 else ''})")
 
-# 7. non-users consistency: roster - active users
-expected = len(d["roster"]) - sum(1 for e in d["roster"] if any(u["email"]==e for u in d["allUsers"]))
+# 7. non-users consistency: roster - active users (match primary email OR Claude Enterprise Login)
+active_emails = {u["email"] for u in d["allUsers"]}
+def _active(e): return e in active_emails or d["roster"][e].get("claudeLogin", e) in active_emails
+expected = len(d["roster"]) - sum(1 for e in d["roster"] if _active(e))
 if len(d["enablement"]["nonUsers"]) != expected: fail(f"nonUsers {len(d['enablement']['nonUsers'])} != expected {expected}")
 ok(f"nonUsers = {len(d['enablement']['nonUsers'])} (roster {len(d['roster'])} - mapped active)")
 
@@ -63,5 +65,17 @@ ok(f"history aligned: {len(isos)} weeks, latest {isos[-1]}")
 depts = set(d["enablement"]["dimensions"]["department"])
 if not depts.issubset(set(d["enablement"]["narratives"])): fail("missing department narratives")
 ok(f"narratives present for {len(depts)} departments")
+
+# 10. identity-join integrity: claudeLogin present on every roster record; no login
+#     maps to two people; anyone whose usage email matches a claudeLogin is mapped
+logins = {}
+for e, r in d["roster"].items():
+    L = r.get("claudeLogin")
+    if not L: fail(f"roster record missing claudeLogin: {e}")
+    if L in logins: fail(f"duplicate claudeLogin {L}: {logins[L]} and {e}")
+    logins[L] = e
+mism = [u["email"] for u in d["allUsers"] if u["email"] in logins and not u.get("mapped")]
+if mism: fail(f"users with a roster claudeLogin left unmapped: {mism}")
+ok(f"identity join: {len(logins)} logins unique; login-joined users all mapped")
 
 print("PASS — data.json is valid for promotion")

@@ -12,6 +12,7 @@ const bound = core.replace(BINDING, "const DATA = " + data + ";");
 
 const out = 'import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";\n' +
   bound + "\n" + actions + "\nexport default Dashboard;\n";
-const file = "claude-usage-dashboard-2026-07-16-enablement.jsx";
+const iso = JSON.parse(data).summary.weekStartISO;
+const file = "claude-usage-dashboard-" + iso + ".jsx";
 fs.writeFileSync(file, out);
 console.log("built", file, "(" + Math.round(out.length / 1024) + " KB)");

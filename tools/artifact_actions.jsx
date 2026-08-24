@@ -6,7 +6,17 @@ const SKIP_LIST = ["matt.rose@level.agency", "dave.brong@level.agency", "bill.bu
 const AUTOMATED_OPENER = "Quick automated note from the weekly Claude usage report \u2014 this goes out to everyone whose usage matched a few optimization patterns this week; nobody is monitoring your individual activity in real time.";
 const CLOSER = "That\u2019s everything \u2014 no reply needed. These notes are generated automatically each week so everyone gets the most value out of the org\u2019s Claude setup.";
 
+// Usage emails are Claude Enterprise Logins; Slack lives on the primary HR email.
+// Resolve login -> primary for all Slack delivery and skip-list checks.
+const LOGIN2PRIMARY = (() => {
+  const m = {};
+  Object.entries(DATA.roster || {}).forEach(([primary, r]) => { m[(r.claudeLogin || primary).toLowerCase()] = primary; });
+  return m;
+})();
+function primaryFor(email) { return LOGIN2PRIMARY[(email || "").toLowerCase()] || email; }
 function dmFirstName(email) {
+  const pr = DATA.roster[primaryFor(email)];
+  if (pr) return pr.name.split(" ")[0];
   const r = DATA.roster[email];
   if (r) return r.name.split(" ")[0];
   const u = DATA.allUsers.find(x => x.email === email);
@@ -22,7 +32,7 @@ function sectionOpus(o) {
 }
 function sectionLegacy(l) {
   return "*Legacy models*\nYou spent " + fmt(l.spend) + " on deprecated model versions (" + l.models.map(formatModel).join(", ") +
-    "). Switching to the current lineup (Sonnet 5 / Opus 4.8) gets you measurably better quality at the same or lower price \u2014 usually just a default-model update wherever these are configured.";
+    "). Switching to the current lineup (Sonnet 5 / Opus 5) gets you measurably better quality at the same or lower price \u2014 usually just a default-model update wherever these are configured.";
 }
 function buildConsolidatedDMs() {
   const byEmail = {};
@@ -32,30 +42,43 @@ function buildConsolidatedDMs() {
   DATA.legacyModels.forEach(l => { if (l.spend >= 5) ensure(l.email).sections.legacy = sectionLegacy(l); });
   const spendOf = e => { const u = DATA.allUsers.find(x => x.email === e); return u ? u.spend : 0; };
   const costDMs = Object.values(byEmail)
-    .filter(d => spendOf(d.email) >= 100 && !SKIP_LIST.includes(d.email) && Object.keys(d.sections).length > 0)
+    .filter(d => spendOf(d.email) >= 100 && !SKIP_LIST.includes(primaryFor(d.email)) && Object.keys(d.sections).length > 0)
     .map(d => ({
-      email: d.email, name: dmFirstName(d.email), spend: spendOf(d.email),
+      email: d.email, slackEmail: primaryFor(d.email), name: dmFirstName(d.email), spend: spendOf(d.email),
       flags: Object.keys(d.sections),
       body: "Hey " + dmFirstName(d.email) + ",\n\n" + AUTOMATED_OPENER + "\n\n" +
         ["cowork", "opus", "legacy"].filter(k => d.sections[k]).map(k => d.sections[k]).join("\n\n") +
         "\n\n" + CLOSER,
     }))
     .sort((a, b) => b.spend - a.spend);
-  const lowDMs = DATA.lowEngagement
-    .filter(u => u.dmEligible)
+  const hasZeroMeteredSurface = (email) => {
+    const u = DATA.allUsers.find(x => x.email === email);
+    if (!u) return false;
+    if (email.indexOf("@") === -1) return true; // org service account, never a person
+    return Object.values(u.products || {}).some(v => v === 0);
+  };
+  const lowEligible = DATA.lowEngagement.filter(u => u.dmEligible);
+  const heldMetering = lowEligible.filter(u => hasZeroMeteredSurface(u.email)).map(u => {
+    const a = DATA.allUsers.find(x => x.email === u.email) || {};
+    const zero = Object.entries(a.products || {}).filter(([, v]) => v === 0).map(([p]) => p);
+    return { email: u.email, weeks: u.consecutiveLowWeeks, requests: a.requests || 0,
+             spend: u.spend, surfaces: zero.length ? zero : ["service account"] };
+  });
+  const lowDMs = lowEligible
+    .filter(u => !hasZeroMeteredSurface(u.email) && !SKIP_LIST.includes(primaryFor(u.email)))
     .map(u => ({
-      email: u.email, name: dmFirstName(u.email), weeks: u.consecutiveLowWeeks,
+      email: u.email, slackEmail: primaryFor(u.email), name: dmFirstName(u.email), weeks: u.consecutiveLowWeeks,
       body: "Hey " + dmFirstName(u.email) + ",\n\n" + AUTOMATED_OPENER + "\n\nThis is your " + u.consecutiveLowWeeks +
         (u.consecutiveLowWeeks === 2 ? "nd" : u.consecutiveLowWeeks === 3 ? "rd" : "th") +
         " consecutive week under $10 of Claude usage. If Claude hasn\u2019t clicked for your workflow yet, the fastest wins for most roles are Chat for drafting and research, and Cowork for repetitive multi-step work \u2014 the enablement guides in #claude-utilization cover both in about ten minutes.\n\n" + CLOSER,
     }));
-  return { costDMs, lowDMs };
+  return { costDMs, lowDMs, heldMetering };
 }
 function generateChannelSummary() {
   const s = DATA.summary;
   const w = DATA.history.weeks[DATA.history.weeks.length - 1];
   const fc = w.flagCounts;
-  const mm = [["Sonnet", w.sonnetSpend], ["Opus", w.opusSpend], ["Haiku", w.haikuSpend], ["Other", w.otherSpend || 0]]
+  const mm = [["Sonnet", w.sonnetSpend], ["Opus", w.opusSpend], ["Fable", w.fableSpend || 0], ["Haiku", w.haikuSpend], ["Other", w.otherSpend || 0]]
     .filter(x => x[1] > 0).map(x => x[0] + " " + fmt(x[1]) + " (" + Math.round(100 * x[1] / s.totalSpend) + "%)").join(" \u00b7 ");
   const prods = Object.entries(w.productSpend).slice(0, 4).map(([p, v]) => p + " " + fmt(v)).join(" \u00b7 ");
   const power = DATA.powerUsers.slice(0, 5).map(u => u.name + " ($" + u.cpr.toFixed(3) + "/req at " + u.requests.toLocaleString() + " req)").join(", ");
@@ -69,7 +92,7 @@ function generateChannelSummary() {
 }
 
 function ActionsTab() {
-  const { costDMs, lowDMs } = useMemo(() => buildConsolidatedDMs(), []);
+  const { costDMs, lowDMs, heldMetering } = useMemo(() => buildConsolidatedDMs(), []);
   const summary = useMemo(() => generateChannelSummary(), []);
   const [status, setStatus] = useState({});
   const fire = (key, prompt, body) => {
@@ -80,13 +103,13 @@ function ActionsTab() {
     <Card key={d.email} style={{ marginBottom: 10, borderLeft: `3px solid ${manual ? C.blue : C.orange}` }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
         <div>
-          <span style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 14, color: C.text }}>{d.email}</span>
+          <span style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 14, color: C.text }}>{d.slackEmail || d.email}{d.slackEmail && d.slackEmail !== d.email ? " (usage: " + d.email + ")" : ""}</span>
           <span style={{ marginLeft: 10 }}>{manual
             ? <span style={{ background: C.blue, color: "#000", fontFamily: BODY, fontWeight: 700, fontSize: 10, borderRadius: 4, padding: "2px 7px" }}>manual send only \u00b7 {d.weeks} low weeks</span>
             : d.flags.map(f => <span key={f} style={{ background: C.orange, color: "#000", fontFamily: BODY, fontWeight: 700, fontSize: 10, borderRadius: 4, padding: "2px 7px", marginRight: 4 }}>{f}</span>)}
           </span>
         </div>
-        <button onClick={() => fire(d.email, "Send a Slack DM to " + d.email + ": " + d.body, d.body)}
+        <button onClick={() => fire(d.email, "Send a Slack DM to " + (d.slackEmail || d.email) + ": " + d.body, d.body)}
           style={{ background: manual ? "transparent" : C.green, color: manual ? C.muted : "#000", border: manual ? `1px solid ${C.borderLight}` : "none",
             borderRadius: 7, padding: "7px 13px", fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: BODY }}>
           {manual ? "Send (manual)" : "Send DM"}
@@ -114,6 +137,18 @@ function ActionsTab() {
       {costDMs.map((d, i) => dmCard(d, i, false))}
       <Head size={16} style={{ margin: "18px 0 10px" }}>Low-engagement drafts ({lowDMs.length}) \u2014 never bulk-sent</Head>
       {lowDMs.map((d, i) => dmCard(d, i, true))}
+      <Head size={16} style={{ margin: "18px 0 6px" }}>Held \u2014 $0.00 metering gap ({heldMetering.length})</Head>
+      <Sub style={{ marginBottom: 10 }}>Flagged low-engagement but excluded from all send lists: real request volume landed on a surface reporting $0.00 net spend, so the engagement signal is understated. No DM drafted.</Sub>
+      {heldMetering.map(h => (
+        <Card key={h.email} style={{ marginBottom: 8, borderLeft: `3px solid ${C.grey}` }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 13.5, color: C.text }}>{h.email}</span>
+            <span style={{ fontFamily: BODY, fontSize: 11.5, color: C.muted }}>
+              {h.requests.toLocaleString()} req \u00b7 {fmt(h.spend)} \u00b7 {h.weeks} low weeks \u00b7 unmetered: {h.surfaces.join(", ")}
+            </span>
+          </div>
+        </Card>
+      ))}
     </div>
   );
 }

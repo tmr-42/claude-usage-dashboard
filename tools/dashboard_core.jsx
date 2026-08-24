@@ -25,7 +25,7 @@ const C = {
 const HEAD = "'Inter Tight','Inter',system-ui,sans-serif";
 const BODY = "'DM Sans',system-ui,sans-serif";
 const SERIES = [C.blue, C.pink, C.green, C.orange, C.grey, "#ffffff"];
-const MODEL_COLORS = { opus: C.pink, sonnet: C.blue, haiku: C.green, other: C.orange };
+const MODEL_COLORS = { opus: C.pink, sonnet: C.blue, haiku: C.green, fable: C.grey, other: C.orange };
 const FLAG_META = {
   "max-plan":       { label: "Max plan",       color: C.orange },
   "cowork-opus":    { label: "Cowork Opus",    color: C.orange },
@@ -79,7 +79,7 @@ function Bar({ value, max, color = C.blue }) {
   );
 }
 function ModelBar({ models }) {
-  const keys = ["opus","sonnet","haiku","other"];
+  const keys = ["opus","sonnet","haiku","fable","other"];
   const total = keys.reduce((a,k)=>a+(models[k]||0),0);
   if (!total) return <div style={{ height: 8 }} />;
   return (
@@ -176,7 +176,8 @@ function OverviewTab() {
   const w = DATA.history.weeks[DATA.history.weeks.length - 1];
   const modelSplit = [
     { k: "sonnet", v: w.sonnetSpend }, { k: "opus", v: w.opusSpend },
-    { k: "haiku", v: w.haikuSpend }, { k: "other", v: w.otherSpend || 0 },
+    { k: "haiku", v: w.haikuSpend }, { k: "fable", v: w.fableSpend || 0 },
+    { k: "other", v: w.otherSpend || 0 },
   ].filter(m => m.v > 0);
   return (
     <div>
@@ -400,6 +401,7 @@ function TrendsTab() {
           { name: "Sonnet", color: C.blue, values: H.map(w => w.sonnetSpend) },
           { name: "Opus", color: C.pink, values: H.map(w => w.opusSpend) },
           { name: "Haiku", color: C.green, values: H.map(w => w.haikuSpend) },
+          { name: "Fable", color: C.grey, values: H.map(w => w.fableSpend || 0) },
         ]} />
       </Card>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
