@@ -17,6 +17,28 @@ import csv, json, sys, os, re
 from collections import defaultdict
 from datetime import date, timedelta
 
+# ---------------------------------------------------------------- toolchain stamp
+# Monotonic version + a manifest of the CAPABILITIES this toolchain provides.
+# history.json carries the minimum the pipeline must meet (ratcheted forward on every
+# successful run). If a session fetches an older tools/ from GitHub than the history
+# file expects, the run HARD-FAILS and names the missing capabilities, instead of
+# quietly producing a dashboard with features silently absent.
+# LIMITATION: this only protects from the commit that introduced it forward. A
+# toolchain predating the stamp has no check to run, so it cannot self-detect.
+TOOLCHAIN_VERSION = 5
+TOOLCHAIN_FEATURES = {
+    "people-overrides",        # contractor/departed/service classification + dmEligible gate
+    "legacy-retired",          # legacy flag removed; models reported by version instead
+    "model-version-history",   # history.weeks[].modelSpend per exact model version
+    "max-plans",               # Max seat inventory, cost, and Enterprise overlap
+}
+
+# Max plan seat price (Anthropic Max, per seat per MONTH). Single source of truth.
+MAX_SEAT_MONTHLY = 214.00
+# Weekly equivalent uses 12 months / 52 weeks so a monthly subscription can be compared
+# like-for-like against a Thursday-Wednesday metered week.
+MAX_SEAT_WEEKLY = MAX_SEAT_MONTHLY * 12 / 52
+
 SKIP_LIST = {f"{u}@level.agency" for u in ("matt.rose","dave.brong","bill.buchanan","patrick.patterson")}
 
 # is_legacy() retired 2026-08-24 (TMR). A version-number rule cannot answer the only
@@ -24,6 +46,15 @@ SKIP_LIST = {f"{u}@level.agency" for u in ("matt.rose","dave.brong","bill.buchan
 # Model usage is REPORTED by exact version (data.models, Breakdowns tab) and now accrues
 # per-version in history.weeks[].modelSpend, so a retirement announcement can be scoped
 # from data instead of nudged weekly. Migration is an event-driven project, not a flag.
+
+def _editdist(a, b):
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i]
+        for j, cb in enumerate(b, 1):
+            cur.append(min(prev[j] + 1, cur[j-1] + 1, prev[j-1] + (ca != cb)))
+        prev = cur
+    return prev[-1]
 
 def bucket(model_norm):
     if "_opus_"   in model_norm or model_norm.endswith("_opus"):   return "opus"
@@ -76,7 +107,35 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         if o.get("reviewBy") and o["reviewBy"] < today:
             print(f"[warn] people_overrides: {oe} ({o['classification']}) passed reviewBy {o['reviewBy']} — confirm still accurate")
 
+    # Max plan seats (roster-sourced; needed before the week summary is assembled)
+    def norm_login(x): return x.strip().lower()
+    max_holders = {e: R for e, R in ROSTER.items() if R.get("maxSeats", 0) > 0}
+    seat_total = sum(R["maxSeats"] for R in max_holders.values())
+
     history = json.load(open(history_path))
+
+    # ---------- toolchain ratchet (runs BEFORE any data work) ----------
+    meta = history.setdefault("meta", {})
+    req_ver = meta.get("minToolchainVersion", 0)
+    req_feat = set(meta.get("requiredFeatures", []))
+    missing = sorted(req_feat - TOOLCHAIN_FEATURES)
+    if TOOLCHAIN_VERSION < req_ver or missing:
+        raise SystemExit(
+            "FATAL: toolchain is older than this history file requires.\n"
+            f"  running toolchain : v{TOOLCHAIN_VERSION}\n"
+            f"  history requires  : v{req_ver}\n"
+            + (f"  missing capability: {', '.join(missing)}\n" if missing else "")
+            + "  Fetch the current tools/ from GitHub before rerunning. Do NOT proceed:\n"
+              "  an older toolchain ships older gates and will report PASS while silently\n"
+              "  omitting the capabilities listed above.")
+    meta["minToolchainVersion"] = max(req_ver, TOOLCHAIN_VERSION)
+    meta["requiredFeatures"] = sorted(req_feat | TOOLCHAIN_FEATURES)
+    meta["lastRun"] = {"toolchainVersion": TOOLCHAIN_VERSION, "weekStartISO": iso,
+                       "ranOn": date.today().isoformat()}
+    if req_ver and TOOLCHAIN_VERSION > req_ver:
+        print(f"[toolchain] ratcheted v{req_ver} -> v{TOOLCHAIN_VERSION}")
+    elif not req_ver:
+        print(f"[toolchain] stamp seeded at v{TOOLCHAIN_VERSION}")
     rows = list(csv.DictReader(open(csv_path)))
 
     # ---------- per-user aggregation ----------
@@ -178,6 +237,8 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         # per-version model spend (added 2026-08-24). Family buckets above are kept for
         # continuity with the prior 23 weeks; this accrues version-level trend going forward.
         "modelSpend": {},
+        # Max seats tracked alongside (never inside) metered spend
+        "maxSeats": seat_total, "maxMonthlyCost": round(seat_total * MAX_SEAT_MONTHLY, 2),
         "flagCounts": {"maxPlan": len(maxPlan), "coworkOpus": len(coworkOp), "opusHeavy": len(opusHeavy),
                        "lowEngagement": len(lowEng)},
         "productSpend": {}
@@ -230,6 +291,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
             "flags": flags_for(u),
             "org": u["org"], "mapped": u["mapped"],
             "classification": u["classification"], "dmEligible": u["dmEligible"],
+            "maxSeats": (roster_for(e) or {}).get("maxSeats", 0),
         })
 
     # ---------- enablement layer ----------
@@ -311,6 +373,72 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         if unit["cacheHitRate"]: parts.append(f"Cache hit rate: {unit['cacheHitRate']}%.")
         enablement["narratives"][dname] = " ".join(parts)
 
+    # ---------- Max plan layer ----------
+    # Max seats are a FIXED monthly subscription billed outside the Enterprise metered
+    # account. They are deliberately NOT added to summary.totalSpend: mixing a fixed
+    # subscription into a variable weekly meter would break comparability with the 23
+    # prior weeks of history. Combined cost is presented explicitly on the Max Plans tab.
+    integrity = []
+    seen_login = {}
+    for e, R in sorted(max_holders.items()):
+        logins = [norm_login(x) for x in R.get("maxLogins", [])]
+        if R["maxSeats"] != len(logins):
+            integrity.append({"type": "quantity-mismatch", "email": e, "name": R["name"],
+                "detail": f"Max Plan Quantity is {R['maxSeats']} but {len(logins)} login address(es) are listed."})
+        for L in logins:
+            if L in seen_login:
+                integrity.append({"type": "duplicate-login", "email": e, "name": R["name"],
+                    "detail": f"Max login {L} is also listed on {seen_login[L]}."})
+            seen_login[L] = e
+        # near-duplicate detection within one person's own seats: two addresses differing by
+        # <=2 characters are far more likely a typo than two genuine accounts.
+        for i in range(len(logins)):
+            for j in range(i+1, len(logins)):
+                a, b = logins[i], logins[j]
+                if a != b and abs(len(a)-len(b)) <= 2 and _editdist(a, b) <= 2:
+                    integrity.append({"type": "possible-duplicate-seat", "email": e, "name": R["name"],
+                        "detail": f"{a} and {b} differ by <=2 characters — verify these are two real seats, "
+                                  f"not one seat entered twice (${MAX_SEAT_MONTHLY:,.2f}/mo at stake)."})
+
+    # does any Max login address also appear in the Enterprise usage export?
+    usage_emails = {norm_login(e) for e in users}
+    for L, owner in sorted(seen_login.items()):
+        if L in usage_emails:
+            integrity.append({"type": "max-login-in-enterprise-usage", "email": owner, "name": ROSTER[owner]["name"],
+                "detail": f"Max login {L} also appears as a metered Enterprise account this week."})
+
+    max_users = []
+    for e, R in max_holders.items():
+        u = users.get(e) or (users.get((R.get("claudeLogin") or e)))
+        ent = round(u["spend"], 2) if u else 0.0
+        max_users.append({
+            "name": R["name"], "email": e, "department": R["department"], "team": R["team"],
+            "seats": R["maxSeats"], "logins": R.get("maxLogins", []),
+            "monthlyCost": round(R["maxSeats"] * MAX_SEAT_MONTHLY, 2),
+            "weeklyCost": round(R["maxSeats"] * MAX_SEAT_WEEKLY, 2),
+            "enterpriseSpend": ent,
+            "enterpriseRequests": u["requests"] if u else 0,
+            "stillOnEnterprise": bool(u and u["spend"] > 0),
+            "combinedWeekly": round(R["maxSeats"] * MAX_SEAT_WEEKLY + ent, 2),
+            "flags": flags_for(u) if u else [],
+        })
+    max_users.sort(key=lambda x: (-x["enterpriseSpend"], -x["seats"]))
+    overlap = [m for m in max_users if m["stillOnEnterprise"]]
+
+    maxPlans = {
+        "seatCostMonthly": MAX_SEAT_MONTHLY,
+        "seatCostWeekly": round(MAX_SEAT_WEEKLY, 2),
+        "holders": len(max_holders), "seats": seat_total,
+        "monthlyCost": round(seat_total * MAX_SEAT_MONTHLY, 2),
+        "weeklyCost": round(seat_total * MAX_SEAT_WEEKLY, 2),
+        "users": max_users,
+        "overlapCount": len(overlap),
+        "overlapEnterpriseSpend": round(sum(m["enterpriseSpend"] for m in overlap), 2),
+        "zeroEnterpriseCount": len(max_users) - len(overlap),
+        "combinedWeekly": round(seat_total * MAX_SEAT_WEEKLY + total, 2),
+        "integrity": integrity,
+    }
+
     # ---------- top-level data ----------
     leaderboard = allUsers[:30]
     models_detail = defaultdict(lambda: {"spend":0.0,"requests":0})
@@ -328,6 +456,8 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         "opusHeavy": [{"email": u["email"], "name": u["name"], "opusSpend": round(u["opusChat"],2), "chatSpend": round(u["chat"],2), "opusPct": round(100*u["opusChat"]/u["chat"])} for u in sorted(opusHeavy,key=lambda x:-x["opusChat"])],
         "powerUsers": [{"email": u["email"], "name": u["name"], "requests": u["requests"], "spend": s(u), "cpr": round(u["spend"]/u["requests"],4), "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0} for u in power],
         "lowEngagement": [{"email": u["email"], "name": u["name"], "spend": s(u), "requests": u["requests"], "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0, "consecutiveLowWeeks": streak(u["email"]), "dmEligible": streak(u["email"])>=2 and u["dmEligible"], "classification": u["classification"]} for u in sorted(lowEng,key=lambda x:x["spend"])],
+        "toolchain": {"version": TOOLCHAIN_VERSION, "features": sorted(TOOLCHAIN_FEATURES)},
+        "maxPlans": maxPlans,
         "classifications": {c: {"users": sum(1 for u in users.values() if u["classification"]==c),
                                "spend": round(sum(u["spend"] for u in users.values() if u["classification"]==c),2)}
                             for c in sorted({u["classification"] for u in users.values()})},

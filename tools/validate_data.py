@@ -9,7 +9,7 @@ d = json.load(open(sys.argv[1] if len(sys.argv)>1 else "staging/data.json"))
 
 # 1. required keys
 req = ["summary","leaderboard","allUsers","maxPlan","coworkOpus","opusHeavy","powerUsers",
-       "lowEngagement","products","models","roster","enablement","history"]
+       "lowEngagement","products","models","roster","enablement","history","maxPlans","toolchain"]
 missing = [k for k in req if k not in d]
 if missing: fail(f"missing keys: {missing}")
 ok("all required keys present (incl. roster, enablement)")
@@ -71,6 +71,34 @@ if {m["name"] for m in d["models"]} != set(ms):
 ok(f"per-version modelSpend: {len(ms)} models, ties to totalSpend")
 if "legacy" in h["weeks"][-1]["flagCounts"]: fail("legacy flag reappeared in current week flagCounts")
 ok("legacy flag retired (absent from current week)")
+
+# 8c. Max plan layer (added 2026-08-24) — seats, arithmetic, and separation from metered spend
+# 8d. toolchain ratchet — data.json must satisfy what history.json demands
+tc = d["toolchain"]; hm = d["history"].get("meta", {})
+if tc["version"] < hm.get("minToolchainVersion", 0):
+    fail(f"toolchain v{tc['version']} < history minimum v{hm['minToolchainVersion']}")
+miss = sorted(set(hm.get("requiredFeatures", [])) - set(tc["features"]))
+if miss: fail(f"toolchain missing required capabilities: {', '.join(miss)}")
+ok(f"toolchain v{tc['version']} satisfies history minimum v{hm.get('minToolchainVersion', 0)} "
+   f"({len(tc['features'])} capabilities)")
+
+mp = d["maxPlans"]
+if sum(u["seats"] for u in mp["users"]) != mp["seats"]:
+    fail("maxPlans.seats != sum of per-user seats")
+if abs(mp["seats"] * mp["seatCostMonthly"] - mp["monthlyCost"]) > 0.01:
+    fail("maxPlans.monthlyCost does not equal seats x seatCostMonthly")
+if abs(mp["combinedWeekly"] - (mp["weeklyCost"] + s_["totalSpend"] if False else mp["weeklyCost"] + d["summary"]["totalSpend"])) > 0.02:
+    fail("maxPlans.combinedWeekly != weeklyCost + summary.totalSpend")
+if mp["overlapCount"] != sum(1 for u in mp["users"] if u["stillOnEnterprise"]):
+    fail("maxPlans.overlapCount inconsistent with per-user stillOnEnterprise")
+if mp["overlapCount"] + mp["zeroEnterpriseCount"] != len(mp["users"]):
+    fail("maxPlans overlap + zero != holder count")
+# the critical separation guarantee: Max cost must NOT be inside metered totals
+if abs(sum(u["spend"] for u in d["allUsers"]) - d["summary"]["totalSpend"]) > 0.02:
+    fail("summary.totalSpend no longer equals metered user spend (Max cost may have leaked in)")
+ok(f"maxPlans: {mp['holders']} holders / {mp['seats']} seats, arithmetic ties, metered totals unpolluted")
+if mp["integrity"]:
+    ok(f"maxPlans integrity: {len(mp['integrity'])} item(s) surfaced for review")
 
 # 9. narratives exist for every department
 depts = set(d["enablement"]["dimensions"]["department"])

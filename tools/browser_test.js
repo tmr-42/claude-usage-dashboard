@@ -39,6 +39,7 @@ setTimeout(() => {
     ["Enablement tab label", text.includes("Enablement")],
     ["Team Trends tab label", text.includes("Team Trends")],
     ["Flags & Alerts tab label", text.includes("Flags & Alerts")],
+    ["Max Plans tab label", text.includes("Max Plans")],
     ["Breakdowns tab label", text.includes("Breakdowns")],
     ["NO Slack Actions on Vercel", !text.includes("Slack Actions")],
     ["real spend figure " + spend, text.includes(spend)],

@@ -14,7 +14,7 @@ const ctx = { window: { __APP_DATA__: data }, React,
   useState: React.useState, useMemo: React.useMemo, useEffect: React.useEffect,
   useRef: React.useRef, useCallback: React.useCallback, Fragment: React.Fragment, console };
 vm.createContext(ctx);
-vm.runInContext(compiled + "\n;__EXPORTS__ = { Dashboard, OverviewTab, LeaderboardTab, AllUsersTab, TrendsTab, EnablementTab, TeamTrendsTab, FlagsTab, BreakdownTab, UserDetailRow };", ctx);
+vm.runInContext(compiled + "\n;__EXPORTS__ = { Dashboard, OverviewTab, LeaderboardTab, AllUsersTab, TrendsTab, EnablementTab, TeamTrendsTab, FlagsTab, MaxPlansTab, BreakdownTab, UserDetailRow };", ctx);
 const X = ctx.__EXPORTS__;
 
 let fails = 0;
@@ -35,6 +35,7 @@ check("TrendsTab", React.createElement(X.TrendsTab), ["Org spend by model family
 check("EnablementTab", React.createElement(X.EnablementTab), ["Non-adopters", "Narrative"]);
 check("TeamTrendsTab", React.createElement(X.TeamTrendsTab), ["Small multiples"]);
 check("FlagsTab", React.createElement(X.FlagsTab), ["Engagement, not cost"]);
+check("MaxPlansTab", React.createElement(X.MaxPlansTab));
 check("BreakdownTab", React.createElement(X.BreakdownTab));
 let rowFails = 0;
 for (const u of data.allUsers) {

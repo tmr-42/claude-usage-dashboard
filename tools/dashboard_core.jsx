@@ -824,6 +824,111 @@ function BreakdownTab() {
   );
 }
 
+// ---------------------------------------------------------------------- Max Plans
+// Max seats are a FIXED monthly subscription billed OUTSIDE the Enterprise metered
+// account. Enterprise totals elsewhere in this dashboard deliberately exclude them;
+// the combined figure is shown here and only here, explicitly labelled.
+function MaxPlansTab() {
+  const m = DATA.maxPlans;
+  const [sort, setSort] = useState("enterpriseSpend");
+  const [onlyOverlap, setOnlyOverlap] = useState(false);
+  const [q, setQ] = useState("");
+  if (!m || !m.users.length) return <Card><Sub>No Max plan seats recorded.</Sub></Card>;
+
+  const rows = useMemo(() => {
+    let r = m.users.slice();
+    if (onlyOverlap) r = r.filter(u => u.stillOnEnterprise);
+    const needle = q.trim().toLowerCase();
+    if (needle) r = r.filter(u => (u.name + " " + u.email + " " + u.department + " " + u.logins.join(" ")).toLowerCase().includes(needle));
+    return r.sort((a, b) => (typeof a[sort] === "string" ? String(a[sort]).localeCompare(String(b[sort])) : b[sort] - a[sort]));
+  }, [sort, onlyOverlap, q]);
+
+  const th = { textAlign: "left", padding: "8px 9px", fontSize: 10.5, color: C.dim, fontFamily: BODY, fontWeight: 700,
+    textTransform: "uppercase", letterSpacing: .5, borderBottom: `1px solid ${C.border}`, cursor: "pointer" };
+  const td = { padding: "9px", fontSize: 12.5, color: C.text, fontFamily: BODY, borderBottom: `1px solid ${C.border}`, verticalAlign: "top" };
+  const H = ({ k, children }) => <th style={th} onClick={() => setSort(k)}>{children}{sort === k ? " ▾" : ""}</th>;
+
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 14 }}>
+        <StatCard label="Max seats" value={m.seats} sub={`${m.holders} people · ${fmt(m.seatCostMonthly)}/seat/mo`} accent={C.green} />
+        <StatCard label="Max cost / month" value={fmt(m.monthlyCost)} sub={`${fmt(m.weeklyCost)} weekly equivalent`} accent={C.green} />
+        <StatCard label="Enterprise metered" value={fmt(DATA.summary.totalSpend)} sub={DATA.summary.weekOf} accent={C.blue} />
+        <StatCard label="Combined weekly cost" value={fmt(m.combinedWeekly)} sub="Max weekly equivalent + Enterprise metered" accent={C.pink} />
+      </div>
+
+      <Card style={{ marginBottom: 14, borderLeft: `3px solid ${m.overlapCount ? C.orange : C.green}` }}>
+        <Head size={15} style={{ marginBottom: 6 }}>Still incurring Enterprise spend</Head>
+        <div style={{ fontFamily: HEAD, fontWeight: 900, fontSize: 30, color: m.overlapCount ? C.orange : C.green }}>
+          {m.overlapCount} <span style={{ fontSize: 15, color: C.muted, fontWeight: 700 }}>of {m.holders} Max holders</span>
+        </div>
+        <Sub style={{ marginTop: 4 }}>
+          {fmt(m.overlapEnterpriseSpend)} of metered Enterprise spend this week came from people who also hold a Max seat.
+          {" "}{m.zeroEnterpriseCount} holder{m.zeroEnterpriseCount === 1 ? "" : "s"} had zero Enterprise usage.
+        </Sub>
+      </Card>
+
+      {m.integrity && m.integrity.length > 0 && (
+        <Card style={{ marginBottom: 14, borderLeft: `3px solid ${C.orange}` }}>
+          <Head size={15} style={{ marginBottom: 8 }}>Seat data to verify ({m.integrity.length})</Head>
+          <MiniTable cols={["Person", "Issue", "Detail"]}
+            rows={m.integrity.map(i => [i.name, i.type, i.detail])} />
+        </Card>
+      )}
+
+      <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 10, flexWrap: "wrap" }}>
+        <input value={q} onChange={e => setQ(e.target.value)} placeholder="Search name, email, department, Max login…"
+          style={{ flex: 1, minWidth: 240, background: C.card, border: `1px solid ${C.border}`, borderRadius: 8,
+            padding: "9px 12px", color: C.text, fontSize: 13 }} />
+        <button onClick={() => setOnlyOverlap(!onlyOverlap)}
+          style={{ background: onlyOverlap ? C.orange : "transparent", color: onlyOverlap ? "#000" : C.muted,
+            border: `1px solid ${onlyOverlap ? C.orange : C.borderLight}`, borderRadius: 8, padding: "9px 14px",
+            fontFamily: BODY, fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+          Still on Enterprise only
+        </button>
+      </div>
+
+      <Card style={{ padding: 0, overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 900 }}>
+          <thead><tr>
+            <H k="name">Person</H><H k="department">Department</H><H k="seats">Seats</H>
+            <H k="monthlyCost">Max $/mo</H><H k="enterpriseSpend">Enterprise this week</H>
+            <H k="enterpriseRequests">Ent. requests</H><H k="combinedWeekly">Combined weekly</H>
+            <th style={{ ...th, cursor: "default" }}>Max logins</th>
+          </tr></thead>
+          <tbody>
+            {rows.map(u => (
+              <tr key={u.email}>
+                <td style={td}>
+                  <div>{u.name}</div>
+                  <div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div>
+                  <div style={{ marginTop: 3 }}>{u.flags.map(f => <FlagPill key={f} type={f} />)}</div>
+                </td>
+                <td style={{ ...td, color: C.muted }}>{u.department}</td>
+                <td style={{ ...td, fontWeight: 700 }}>{u.seats}</td>
+                <td style={td}>{fmt(u.monthlyCost)}</td>
+                <td style={{ ...td, fontWeight: 700, color: u.stillOnEnterprise ? C.orange : C.green }}>
+                  {u.stillOnEnterprise ? fmt(u.enterpriseSpend) : "$0.00"}
+                </td>
+                <td style={td}>{u.enterpriseRequests.toLocaleString()}</td>
+                <td style={td}>{fmt(u.combinedWeekly)}</td>
+                <td style={{ ...td, fontSize: 11, color: C.muted }}>
+                  {u.logins.map(l => <div key={l}>{l}</div>)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+      <Sub style={{ marginTop: 8 }}>
+        {rows.length} of {m.users.length} Max holders · Max seats are billed monthly outside the Enterprise
+        metered account and are excluded from Enterprise spend totals elsewhere in this dashboard ·
+        weekly equivalent = {fmt(m.seatCostMonthly)} × 12 ÷ 52
+      </Sub>
+    </div>
+  );
+}
+
 // ---------------------------------------------------------------------- root
 const CORE_TABS = [
   { id: "overview", label: "Overview", C: OverviewTab },
@@ -833,6 +938,7 @@ const CORE_TABS = [
   { id: "enablement", label: "Enablement", C: EnablementTab },
   { id: "teamtrends", label: "Team Trends", C: TeamTrendsTab },
   { id: "flags", label: "Flags & Alerts", C: FlagsTab },
+  { id: "maxplans", label: "Max Plans", C: MaxPlansTab },
   { id: "breakdown", label: "Breakdowns", C: BreakdownTab },
 ];
 function Dashboard() {
