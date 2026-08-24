@@ -30,7 +30,6 @@ const FLAG_META = {
   "max-plan":       { label: "Max plan",       color: C.orange },
   "cowork-opus":    { label: "Cowork Opus",    color: C.orange },
   "opus":           { label: "Opus heavy",     color: C.pink },
-  "legacy":         { label: "Legacy",         color: C.orange },
   "low-engagement": { label: "Low engagement", color: C.blue },
 };
 const FONT_CSS = "@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap');" +
@@ -88,6 +87,23 @@ function ModelBar({ models }) {
         <div key={k} style={{ width: (100*(models[k]||0)/total)+"%", background: MODEL_COLORS[k] }} title={k} />
       ))}
     </div>
+  );
+}
+const CLASS_META = {
+  contractor:   { label: "Contractor", color: C.blue },
+  departed:     { label: "Departed",   color: C.muted },
+  service:      { label: "Service",    color: C.muted },
+  leave:        { label: "On leave",   color: C.muted },
+  unclassified: { label: "Unclassified", color: C.orange },
+};
+function ClassPill({ c }) {
+  const m = CLASS_META[c]; if (!m) return null;  // employees render no pill
+  return (
+    <span style={{ display: "inline-block", background: "transparent", color: m.color,
+      border: "1px solid " + m.color, fontFamily: BODY, fontWeight: 700, fontSize: 9.5,
+      borderRadius: 4, padding: "1px 6px", marginLeft: 6, whiteSpace: "nowrap", verticalAlign: "middle" }}>
+      {m.label}
+    </span>
   );
 }
 function FlagPill({ type }) {
@@ -233,7 +249,7 @@ function LeaderboardTab() {
             return (
               <tr key={u.email}>
                 <td style={{ ...td, color: C.dim }}>{i + 1}</td>
-                <td style={td}><div>{u.name}</div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
+                <td style={td}><div>{u.name}<ClassPill c={u.classification} /></div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
                 <td style={{ ...td, color: C.muted }}>{u.org && u.org.department || "—"}</td>
                 <td style={{ ...td, fontWeight: 700 }}>{fmt(u.spend)}</td>
                 <td style={td}>{u.requests.toLocaleString()}</td>
@@ -366,7 +382,7 @@ function FragmentRow({ u, isOpen, onToggle, td }) {
   return (
     <React.Fragment>
       <tr onClick={onToggle} style={{ cursor: "pointer", background: isOpen ? C.cardHover : "transparent" }}>
-        <td style={td}><div>{u.name}</div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
+        <td style={td}><div>{u.name}<ClassPill c={u.classification} /></div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
         <td style={{ ...td, color: C.muted }}>{u.org && u.org.department || "—"}</td>
         <td style={{ ...td, fontWeight: 700 }}>{fmt(u.spend)}</td>
         <td style={td}>{u.requests.toLocaleString()}</td>
@@ -771,12 +787,6 @@ function FlagsTab() {
         <Sub style={{ marginBottom: 8 }}>Weekly spend over $200 (projected $800+/month).</Sub>
         <MiniTable cols={["Name", "Weekly spend", "Projected monthly"]}
           rows={d.maxPlan.map(u => [u.name, fmt(u.weeklySpend), fmt(u.projectedMonthly)])} />
-      </FlagCard>
-      <FlagCard title="Legacy models" count={d.legacyModels.length} color={C.orange}>
-        {d.legacyModels.length === 0
-          ? <Sub>No legacy-model usage this week — org is fully on current model families.</Sub>
-          : <MiniTable cols={["Name", "Legacy spend", "Models"]}
-              rows={d.legacyModels.map(u => [u.name, fmt(u.spend), u.models.map(formatModel).join(", ")])} />}
       </FlagCard>
       <FlagCard title="Power users — efficiency benchmarks" count={d.powerUsers.length} color={C.green}>
         <MiniTable cols={["Name", "Requests", "Spend", "$/request", "Opus %"]}

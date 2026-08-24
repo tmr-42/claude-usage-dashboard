@@ -3,6 +3,10 @@
 // AI narrative hook. This file is NEVER included in the Vercel build.
 // =============================================================================
 const SKIP_LIST = ["matt.rose@level.agency", "dave.brong@level.agency", "bill.buchanan@level.agency", "patrick.patterson@level.agency"];
+// dmEligible comes from run_pipeline.py: false for every non-roster classified account
+// (contractors, departed, service). It gates ALL DM categories, on top of SKIP_LIST.
+const DM_OK = {}; (DATA.allUsers || []).forEach(u => { DM_OK[u.email] = u.dmEligible !== false; });
+const dmAllowed = e => DM_OK[e] !== false;
 const AUTOMATED_OPENER = "Quick automated note from the weekly Claude usage report \u2014 this goes out to everyone whose usage matched a few optimization patterns this week; nobody is monitoring your individual activity in real time.";
 const CLOSER = "That\u2019s everything \u2014 no reply needed. These notes are generated automatically each week so everyone gets the most value out of the org\u2019s Claude setup.";
 
@@ -30,24 +34,19 @@ function sectionOpus(o) {
   return "*Opus in Chat*\n" + o.opusPct + "% of your Chat spend this week (" + fmt(o.opusSpend) + " of " + fmt(o.chatSpend) +
     ") ran on Opus models. For everyday drafting, research, and analysis, Sonnet 5 is tuned to deliver the same quality faster and at much lower cost \u2014 the model picker in the chat composer switches it per conversation. Opus earns its premium on long, multi-step reasoning work.";
 }
-function sectionLegacy(l) {
-  return "*Legacy models*\nYou spent " + fmt(l.spend) + " on deprecated model versions (" + l.models.map(formatModel).join(", ") +
-    "). Switching to the current lineup (Sonnet 5 / Opus 5) gets you measurably better quality at the same or lower price \u2014 usually just a default-model update wherever these are configured.";
-}
 function buildConsolidatedDMs() {
   const byEmail = {};
   const ensure = (email) => byEmail[email] || (byEmail[email] = { email, sections: {} });
   DATA.coworkOpus.forEach(c => { ensure(c.email).sections.cowork = sectionCowork(c); });
   DATA.opusHeavy.forEach(o => { if (o.opusSpend >= 10) ensure(o.email).sections.opus = sectionOpus(o); });
-  DATA.legacyModels.forEach(l => { if (l.spend >= 5) ensure(l.email).sections.legacy = sectionLegacy(l); });
   const spendOf = e => { const u = DATA.allUsers.find(x => x.email === e); return u ? u.spend : 0; };
   const costDMs = Object.values(byEmail)
-    .filter(d => spendOf(d.email) >= 100 && !SKIP_LIST.includes(primaryFor(d.email)) && Object.keys(d.sections).length > 0)
+    .filter(d => spendOf(d.email) >= 100 && dmAllowed(d.email) && !SKIP_LIST.includes(primaryFor(d.email)) && Object.keys(d.sections).length > 0)
     .map(d => ({
       email: d.email, slackEmail: primaryFor(d.email), name: dmFirstName(d.email), spend: spendOf(d.email),
       flags: Object.keys(d.sections),
       body: "Hey " + dmFirstName(d.email) + ",\n\n" + AUTOMATED_OPENER + "\n\n" +
-        ["cowork", "opus", "legacy"].filter(k => d.sections[k]).map(k => d.sections[k]).join("\n\n") +
+        ["cowork", "opus"].filter(k => d.sections[k]).map(k => d.sections[k]).join("\n\n") +
         "\n\n" + CLOSER,
     }))
     .sort((a, b) => b.spend - a.spend);
@@ -65,7 +64,7 @@ function buildConsolidatedDMs() {
              spend: u.spend, surfaces: zero.length ? zero : ["service account"] };
   });
   const lowDMs = lowEligible
-    .filter(u => !hasZeroMeteredSurface(u.email) && !SKIP_LIST.includes(primaryFor(u.email)))
+    .filter(u => !hasZeroMeteredSurface(u.email) && dmAllowed(u.email) && !SKIP_LIST.includes(primaryFor(u.email)))
     .map(u => ({
       email: u.email, slackEmail: primaryFor(u.email), name: dmFirstName(u.email), weeks: u.consecutiveLowWeeks,
       body: "Hey " + dmFirstName(u.email) + ",\n\n" + AUTOMATED_OPENER + "\n\nThis is your " + u.consecutiveLowWeeks +
@@ -87,7 +86,7 @@ function generateChannelSummary() {
     "*Model mix:* " + mm + "\n" +
     "*Surfaces:* " + prods + "\n" +
     "*Cache efficiency:* org-wide prompt-cache hit rate " + s.cacheHitRate + "%\n" +
-    "*Flags this week:* " + fc.coworkOpus + " Cowork\u2192Opus \u00b7 " + fc.opusHeavy + " Opus-heavy Chat \u00b7 " + fc.legacy + " legacy \u00b7 " + fc.lowEngagement + " low engagement\n" +
+    "*Flags this week:* " + fc.coworkOpus + " Cowork\u2192Opus \u00b7 " + fc.opusHeavy + " Opus-heavy Chat \u00b7 " + fc.lowEngagement + " low engagement\n" +
     "*Power user benchmarks:* " + power;
 }
 
@@ -133,7 +132,7 @@ function ActionsTab() {
         {status["channel"] && <Sub style={{ marginTop: 6, color: C.green }}>{status["channel"]}</Sub>}
       </Card>
       <Head size={16} style={{ margin: "6px 0 10px" }}>Consolidated cost DMs ({costDMs.length})</Head>
-      <Sub style={{ marginBottom: 10 }}>One DM per user \u00b7 \u2265$100 weekly spend + qualifying flag \u00b7 skip list applied \u00b7 section order cowork \u2192 opus \u2192 legacy</Sub>
+      <Sub style={{ marginBottom: 10 }}>One DM per user \u00b7 \u2265$100 weekly spend + qualifying flag \u00b7 skip list applied \u00b7 section order cowork \u2192 opus</Sub>
       {costDMs.map((d, i) => dmCard(d, i, false))}
       <Head size={16} style={{ margin: "18px 0 10px" }}>Low-engagement drafts ({lowDMs.length}) \u2014 never bulk-sent</Head>
       {lowDMs.map((d, i) => dmCard(d, i, true))}

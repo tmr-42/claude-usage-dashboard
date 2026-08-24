@@ -1,0 +1,51 @@
+{
+  "_doc": "Classification layer for Claude usage accounts that are NOT in the Airtable Active roster. Airtable is the system of record for employees; this file is the system of record for everyone else who legitimately shows up in Claude billing. Keys are the usage (Claude Enterprise billing) email. classification: contractor | departed | leave | service. dmEligible gates ALL DM categories. reviewBy is a maintenance date, not an expiry - the pipeline warns when it passes.",
+  "_updated": "2026-08-24",
+  "people": {
+    "dominique.toutounji@level.agency": {
+      "classification": "contractor",
+      "name": "Dominique Toutounji",
+      "department": "Contractors",
+      "team": "Contractor",
+      "dmEligible": false,
+      "reason": "Contractor; not carried in Airtable roster.",
+      "reviewBy": "2026-11-24"
+    },
+    "hui.wang@level.agency": {
+      "classification": "contractor",
+      "name": "Hui Wang",
+      "department": "Contractors",
+      "team": "Contractor",
+      "dmEligible": false,
+      "reason": "Contractor; not carried in Airtable roster.",
+      "reviewBy": "2026-11-24"
+    },
+    "tyler.bowa@level.agency": {
+      "classification": "contractor",
+      "name": "Tyler Bowa",
+      "department": "Contractors",
+      "team": "Contractor",
+      "dmEligible": false,
+      "reason": "Contractor; not carried in Airtable roster.",
+      "reviewBy": "2026-11-24"
+    },
+    "lucy.bellissimo@level.agency": {
+      "classification": "departed",
+      "name": "Lucy Bellissimo",
+      "department": "Departed",
+      "team": "Departed",
+      "dmEligible": false,
+      "reason": "Departed 2026-08; residual metered usage expected to trail off. Removed from Airtable.",
+      "reviewBy": "2026-09-24"
+    },
+    "(org service usage)": {
+      "classification": "service",
+      "name": "Org service usage",
+      "department": "Service accounts",
+      "team": "Service",
+      "dmEligible": false,
+      "reason": "Synthetic aggregate bucket for org-level service usage. Permanently DM-ineligible.",
+      "reviewBy": null
+    }
+  }
+}

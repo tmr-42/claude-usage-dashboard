@@ -9,7 +9,7 @@ d = json.load(open(sys.argv[1] if len(sys.argv)>1 else "staging/data.json"))
 
 # 1. required keys
 req = ["summary","leaderboard","allUsers","maxPlan","coworkOpus","opusHeavy","powerUsers",
-       "legacyModels","lowEngagement","products","models","roster","enablement","history"]
+       "lowEngagement","products","models","roster","enablement","history"]
 missing = [k for k in req if k not in d]
 if missing: fail(f"missing keys: {missing}")
 ok("all required keys present (incl. roster, enablement)")
@@ -60,6 +60,17 @@ isos = [w["weekStartISO"] for w in h["weeks"]]
 if len(isos) != len(set(isos)): fail("duplicate weeks in history")
 if [w["weekStartISO"] for w in d["enablement"]["weeks"]] != isos: fail("enablement weeks != history weeks")
 ok(f"history aligned: {len(isos)} weeks, latest {isos[-1]}")
+
+# 8b. per-version model spend on the current week (added 2026-08-24) must tie to totalSpend
+ms = h["weeks"][-1].get("modelSpend")
+if not ms: fail("current history week is missing per-version modelSpend")
+if abs(sum(ms.values()) - h["weeks"][-1]["totalSpend"]) > 0.02:
+    fail(f"modelSpend {sum(ms.values()):.2f} != totalSpend {h['weeks'][-1]['totalSpend']:.2f}")
+if {m["name"] for m in d["models"]} != set(ms):
+    fail("modelSpend versions != data.models versions")
+ok(f"per-version modelSpend: {len(ms)} models, ties to totalSpend")
+if "legacy" in h["weeks"][-1]["flagCounts"]: fail("legacy flag reappeared in current week flagCounts")
+ok("legacy flag retired (absent from current week)")
 
 # 9. narratives exist for every department
 depts = set(d["enablement"]["dimensions"]["department"])

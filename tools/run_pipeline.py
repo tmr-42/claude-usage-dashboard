@@ -10,7 +10,8 @@ v3 changes vs v2 (2026-06/07 toolchain):
 - rebuild mode: if the CSV's week already exists in history, do NOT append; regenerate data.json
   against existing history and require exact tie-out to the stored week aggregates.
 - cache efficiency retained (org + per-user cacheHitRate); token-density flag remains retired.
-- is_legacy() family-aware: gen<=3 any family; sonnet<=4.5; opus<=4.5; haiku<=4.4.
+- legacy flag RETIRED (2026-08-24); model usage is reported by version, and history.weeks[]
+  now carries per-version modelSpend for deprecation scoping.
 """
 import csv, json, sys, os, re
 from collections import defaultdict
@@ -18,17 +19,11 @@ from datetime import date, timedelta
 
 SKIP_LIST = {f"{u}@level.agency" for u in ("matt.rose","dave.brong","bill.buchanan","patrick.patterson")}
 
-def is_legacy(model_norm):
-    m = model_norm  # e.g. claude_sonnet_4_5
-    fam = re.match(r"claude_(opus|sonnet|haiku)_(\d+)(?:_(\d+))?", m)
-    if not fam:
-        return bool(re.match(r"claude_(2|3)([_.]|$)", m))
-    family, major, minor = fam.group(1), int(fam.group(2)), int(fam.group(3) or 0)
-    if major <= 3: return True
-    if family == "sonnet": return (major, minor) <= (4, 5)
-    if family == "opus":   return (major, minor) <= (4, 5)
-    if family == "haiku":  return (major, minor) <= (4, 4)
-    return False
+# is_legacy() retired 2026-08-24 (TMR). A version-number rule cannot answer the only
+# question that mattered — deprecation exposure — and it was never computed against price.
+# Model usage is REPORTED by exact version (data.models, Breakdowns tab) and now accrues
+# per-version in history.weeks[].modelSpend, so a retirement announcement can be scoped
+# from data instead of nudged weekly. Migration is an event-driven project, not a flag.
 
 def bucket(model_norm):
     if "_opus_"   in model_norm or model_norm.endswith("_opus"):   return "opus"
@@ -66,6 +61,21 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     def is_active_person(primary_email, users):
         rec = ROSTER[primary_email]
         return primary_email in users or (rec.get("claudeLogin") or primary_email) in users
+    # ---------- people_overrides: classification for non-roster accounts ----------
+    # Airtable is the system of record for EMPLOYEES. This file is the system of record
+    # for everyone else who legitimately appears in Claude billing (contractors, departed
+    # accounts with residual usage, leave, service buckets). It never overrides a person
+    # who is Active in Airtable — that direction is a hard fail.
+    ov_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "people_overrides.json")
+    OVERRIDES = json.load(open(ov_path))["people"] if os.path.exists(ov_path) else {}
+    today = date.today().isoformat()
+    for oe, o in OVERRIDES.items():
+        if o["classification"] in ("departed", "leave") and oe in ROSTER:
+            raise SystemExit(f"FATAL: {oe} is classified '{o['classification']}' in people_overrides.json "
+                             f"but is ACTIVE in the Airtable roster. Resolve before running.")
+        if o.get("reviewBy") and o["reviewBy"] < today:
+            print(f"[warn] people_overrides: {oe} ({o['classification']}) passed reviewBy {o['reviewBy']} — confirm still accurate")
+
     history = json.load(open(history_path))
     rows = list(csv.DictReader(open(csv_path)))
 
@@ -78,8 +88,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
                                  "products": defaultdict(float), "models": defaultdict(float),
                                  "modelDetail": defaultdict(float),
                                  "pm": defaultdict(lambda: defaultdict(float)),
-                                 "opusChat": 0.0, "chat": 0.0, "coworkOpus": 0.0, "legacySpend": 0.0,
-                                 "legacyModels": set()})
+                                 "opusChat": 0.0, "chat": 0.0, "coworkOpus": 0.0})
         spend = float(r["total_net_spend_usd"]); req = int(r["total_requests"] or 0)
         pt = int(r["total_prompt_tokens"] or 0); ct = int(r["total_completion_tokens"] or 0)
         cr = int(r.get("total_cache_read_tokens") or 0)
@@ -92,8 +101,6 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
             u["chat"] += spend
             if b == "opus": u["opusChat"] += spend
         if prod == "Cowork" and b == "opus": u["coworkOpus"] += spend
-        if is_legacy(model):
-            u["legacySpend"] += spend; u["legacyModels"].add(model)
 
     # roster join + display name (roster wins; else derive from email)
     def derived_name(e):
@@ -101,9 +108,19 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         return " ".join(w.capitalize() for w in re.split(r"[._-]+", base))
     for e, u in users.items():
         R = roster_for(e)
-        u["name"] = R["name"] if R else ("Org service usage" if "@" not in e else derived_name(e))
+        O = OVERRIDES.get(e)
+        u["name"] = (R["name"] if R else (O["name"] if O else
+                     ("Org service usage" if "@" not in e else derived_name(e))))
         u["org"] = {k: (R[k] if R else None) for k in ("department","team","managerEmail","morEmail","subDeptLeadEmail")}
+        if not R and O:
+            # classified non-roster account: route to its own named org unit instead of "Unmapped"
+            u["org"]["department"] = O.get("department") or "Unmapped"
+            u["org"]["team"] = O.get("team") or "Unmapped"
         u["mapped"] = bool(R)
+        u["classification"] = "employee" if R else (O["classification"] if O else "unclassified")
+        # dmEligible is a hard gate on EVERY DM category, applied on top of skip list + thresholds
+        u["dmEligible"] = bool(O.get("dmEligible", False)) if (O and not R) else (
+            e not in SKIP_LIST and LOGIN2PRIMARY.get(e.strip().lower(), e) not in SKIP_LIST and "@" in e)
 
     total = round(sum(u["spend"] for u in users.values()), 2)
     n = len(users)
@@ -116,7 +133,6 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     maxPlan   = [u for u in users.values() if u["spend"] > 200]
     coworkOp  = [u for u in users.values() if u["coworkOpus"] > 0]
     opusHeavy = [u for u in users.values() if u["chat"] > 0 and u["opusChat"]/u["chat"] >= 0.30]
-    legacyU   = [u for u in users.values() if u["legacySpend"] > 0]
     lowEng    = [u for u in users.values() if u["spend"] < 10]
     # power users are published as org efficiency benchmarks, so their $/req must be
     # REAL: exclude anyone with a $0.00-metered surface (Cowork/Claude Tag/Research
@@ -142,7 +158,6 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         if u["spend"] > 200: f.append("max-plan")
         if u["coworkOpus"] > 0: f.append("cowork-opus")
         if u["chat"] > 0 and u["opusChat"]/u["chat"] >= 0.30: f.append("opus")
-        if u["legacySpend"] > 0: f.append("legacy")
         if u["spend"] < 10: f.append("low-engagement")
         return f
 
@@ -160,10 +175,17 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         "fableSpend": round(sum(u["models"].get("fable",0) for u in users.values()),2),
         "otherSpend": round(sum(u["models"].get("other",0) for u in users.values()),2),
         "cacheHitRate": org_cache,
+        # per-version model spend (added 2026-08-24). Family buckets above are kept for
+        # continuity with the prior 23 weeks; this accrues version-level trend going forward.
+        "modelSpend": {},
         "flagCounts": {"maxPlan": len(maxPlan), "coworkOpus": len(coworkOp), "opusHeavy": len(opusHeavy),
-                       "legacy": len(legacyU), "lowEngagement": len(lowEng)},
+                       "lowEngagement": len(lowEng)},
         "productSpend": {}
     }
+    verS = defaultdict(float)
+    for r in rows:
+        verS[r["model"].replace("-","_")] += float(r["total_net_spend_usd"])
+    week_summary["modelSpend"] = {m: round(v,2) for m, v in sorted(verS.items(), key=lambda x:-x[1])}
     prodS = defaultdict(float)
     for u in users.values():
         for p, v in u["products"].items(): prodS[p] += v
@@ -207,6 +229,7 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
             "sparkline": [w["spend"] for w in uw.get(e, [])] or [s(u)],
             "flags": flags_for(u),
             "org": u["org"], "mapped": u["mapped"],
+            "classification": u["classification"], "dmEligible": u["dmEligible"],
         })
 
     # ---------- enablement layer ----------
@@ -304,8 +327,11 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
         "coworkOpus": [{"email": u["email"], "name": u["name"], "spend": round(u["coworkOpus"],2), "requests": u["requests"]} for u in sorted(coworkOp,key=lambda x:-x["coworkOpus"])],
         "opusHeavy": [{"email": u["email"], "name": u["name"], "opusSpend": round(u["opusChat"],2), "chatSpend": round(u["chat"],2), "opusPct": round(100*u["opusChat"]/u["chat"])} for u in sorted(opusHeavy,key=lambda x:-x["opusChat"])],
         "powerUsers": [{"email": u["email"], "name": u["name"], "requests": u["requests"], "spend": s(u), "cpr": round(u["spend"]/u["requests"],4), "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0} for u in power],
-        "legacyModels": [{"email": u["email"], "name": u["name"], "spend": round(u["legacySpend"],2), "requests": u["requests"], "models": sorted(u["legacyModels"])} for u in sorted(legacyU,key=lambda x:-x["legacySpend"])],
-        "lowEngagement": [{"email": u["email"], "name": u["name"], "spend": s(u), "requests": u["requests"], "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0, "consecutiveLowWeeks": streak(u["email"]), "dmEligible": streak(u["email"])>=2 and u["email"] not in SKIP_LIST and LOGIN2PRIMARY.get(u["email"].strip().lower(), u["email"]) not in SKIP_LIST} for u in sorted(lowEng,key=lambda x:x["spend"])],
+        "lowEngagement": [{"email": u["email"], "name": u["name"], "spend": s(u), "requests": u["requests"], "opusPct": round(100*u["models"].get("opus",0)/u["spend"]) if u["spend"] else 0, "consecutiveLowWeeks": streak(u["email"]), "dmEligible": streak(u["email"])>=2 and u["dmEligible"], "classification": u["classification"]} for u in sorted(lowEng,key=lambda x:x["spend"])],
+        "classifications": {c: {"users": sum(1 for u in users.values() if u["classification"]==c),
+                               "spend": round(sum(u["spend"] for u in users.values() if u["classification"]==c),2)}
+                            for c in sorted({u["classification"] for u in users.values()})},
+        "overrides": {e: {k: o.get(k) for k in ("classification","reason","reviewBy")} for e, o in OVERRIDES.items()},
         "products": [{"name": p, "spend": round(v,2)} for p,v in sorted(prodS.items(), key=lambda x:-x[1])],
         "models": [{"name": m, "spend": round(v["spend"],2), "requests": v["requests"]} for m,v in sorted(models_detail.items(), key=lambda x:-x[1]["spend"])],
         "roster": {e: {"name": R["name"], "department": R["department"], "team": R["team"],
