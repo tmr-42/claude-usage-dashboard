@@ -67,10 +67,6 @@ const FLAG_META = {
     label: "Opus heavy",
     color: C.pink
   },
-  "legacy": {
-    label: "Legacy",
-    color: C.orange
-  },
   "low-engagement": {
     label: "Low engagement",
     color: C.blue
@@ -221,6 +217,50 @@ function ModelBar({
     },
     title: k
   })));
+}
+const CLASS_META = {
+  contractor: {
+    label: "Contractor",
+    color: C.blue
+  },
+  departed: {
+    label: "Departed",
+    color: C.muted
+  },
+  service: {
+    label: "Service",
+    color: C.muted
+  },
+  leave: {
+    label: "On leave",
+    color: C.muted
+  },
+  unclassified: {
+    label: "Unclassified",
+    color: C.orange
+  }
+};
+function ClassPill({
+  c
+}) {
+  const m = CLASS_META[c];
+  if (!m) return null; // employees render no pill
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: "inline-block",
+      background: "transparent",
+      color: m.color,
+      border: "1px solid " + m.color,
+      fontFamily: BODY,
+      fontWeight: 700,
+      fontSize: 9.5,
+      borderRadius: 4,
+      padding: "1px 6px",
+      marginLeft: 6,
+      whiteSpace: "nowrap",
+      verticalAlign: "middle"
+    }
+  }, m.label);
 }
 function FlagPill({
   type
@@ -576,7 +616,9 @@ function LeaderboardTab() {
       }
     }, i + 1), /*#__PURE__*/React.createElement("td", {
       style: td
-    }, /*#__PURE__*/React.createElement("div", null, u.name), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", null, u.name, /*#__PURE__*/React.createElement(ClassPill, {
+      c: u.classification
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 10.5,
         color: C.dim
@@ -903,7 +945,9 @@ function FragmentRow({
     }
   }, /*#__PURE__*/React.createElement("td", {
     style: td
-  }, /*#__PURE__*/React.createElement("div", null, u.name), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, u.name, /*#__PURE__*/React.createElement(ClassPill, {
+    c: u.classification
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 10.5,
       color: C.dim
@@ -1828,13 +1872,6 @@ function FlagsTab() {
   }, "Weekly spend over $200 (projected $800+/month)."), /*#__PURE__*/React.createElement(MiniTable, {
     cols: ["Name", "Weekly spend", "Projected monthly"],
     rows: d.maxPlan.map(u => [u.name, fmt(u.weeklySpend), fmt(u.projectedMonthly)])
-  })), /*#__PURE__*/React.createElement(FlagCard, {
-    title: "Legacy models",
-    count: d.legacyModels.length,
-    color: C.orange
-  }, d.legacyModels.length === 0 ? /*#__PURE__*/React.createElement(Sub, null, "No legacy-model usage this week — org is fully on current model families.") : /*#__PURE__*/React.createElement(MiniTable, {
-    cols: ["Name", "Legacy spend", "Models"],
-    rows: d.legacyModels.map(u => [u.name, fmt(u.spend), u.models.map(formatModel).join(", ")])
   })), /*#__PURE__*/React.createElement(FlagCard, {
     title: "Power users — efficiency benchmarks",
     count: d.powerUsers.length,
