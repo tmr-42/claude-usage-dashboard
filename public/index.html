@@ -51,6 +51,7 @@ const MODEL_COLORS = {
   opus: C.pink,
   sonnet: C.blue,
   haiku: C.green,
+  fable: C.grey,
   other: C.orange
 };
 const FLAG_META = {
@@ -197,7 +198,7 @@ function Bar({
 function ModelBar({
   models
 }) {
-  const keys = ["opus", "sonnet", "haiku", "other"];
+  const keys = ["opus", "sonnet", "haiku", "fable", "other"];
   const total = keys.reduce((a, k) => a + (models[k] || 0), 0);
   if (!total) return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -427,6 +428,9 @@ function OverviewTab() {
   }, {
     k: "haiku",
     v: w.haikuSpend
+  }, {
+    k: "fable",
+    v: w.fableSpend || 0
   }, {
     k: "other",
     v: w.otherSpend || 0
@@ -1005,6 +1009,10 @@ function TrendsTab() {
       name: "Haiku",
       color: C.green,
       values: H.map(w => w.haikuSpend)
+    }, {
+      name: "Fable",
+      color: C.grey,
+      values: H.map(w => w.fableSpend || 0)
     }]
   })), /*#__PURE__*/React.createElement("div", {
     style: {
