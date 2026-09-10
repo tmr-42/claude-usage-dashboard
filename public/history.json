@@ -44282,15 +44282,18 @@
   ]
  },
  "meta": {
-  "minToolchainVersion": 5,
+  "minToolchainVersion": 6,
   "requiredFeatures": [
+   "acknowledged-seat-pairs",
+   "gap-honest-sparkline",
    "legacy-retired",
    "max-plans",
    "model-version-history",
-   "people-overrides"
+   "people-overrides",
+   "wow-delta"
   ],
   "lastRun": {
-   "toolchainVersion": 5,
+   "toolchainVersion": 6,
    "weekStartISO": "2026-09-03",
    "ranOn": "2026-09-10"
   }

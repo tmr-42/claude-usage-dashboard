@@ -282,6 +282,9 @@ function FlagPill({
     }
   }, m.label);
 }
+// values spans the FULL history window. null = before this person's first week (drawn as
+// nothing, but its x-slot is preserved so every row shares one timeline); 0 = a real
+// zero-usage week, drawn on the baseline as a genuine trough.
 function Sparkline({
   values,
   color = C.blue,
@@ -289,20 +292,24 @@ function Sparkline({
   height = 22
 }) {
   if (!values || !values.length) return null;
-  if (values.length === 1) return /*#__PURE__*/React.createElement("svg", {
+  const live = values.map((v, i) => [i, v]).filter(p => p[1] !== null && p[1] !== undefined);
+  if (!live.length) return null;
+  const nums = live.map(p => p[1]);
+  const max = Math.max(...nums, 0.01),
+    min = Math.min(...nums, 0);
+  const stepX = values.length > 1 ? width / (values.length - 1) : 0;
+  const y = v => height - 3 - (v - min) / (max - min || 1) * (height - 6);
+  const last = live[live.length - 1];
+  if (live.length === 1) return /*#__PURE__*/React.createElement("svg", {
     width: width,
     height: height
   }, /*#__PURE__*/React.createElement("circle", {
-    cx: width / 2,
+    cx: last[0] * stepX,
     cy: height / 2,
     r: 2.5,
     fill: color
   }));
-  const max = Math.max(...values, 0.01),
-    min = Math.min(...values, 0);
-  const stepX = width / (values.length - 1);
-  const y = v => height - 3 - (v - min) / (max - min || 1) * (height - 6);
-  const pts = values.map((v, i) => `${(i * stepX).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const pts = live.map(([i, v]) => `${(i * stepX).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   return /*#__PURE__*/React.createElement("svg", {
     width: width,
     height: height
@@ -312,11 +319,40 @@ function Sparkline({
     stroke: color,
     strokeWidth: "1.5"
   }), /*#__PURE__*/React.createElement("circle", {
-    cx: (values.length - 1) * stepX,
-    cy: y(values[values.length - 1]),
+    cx: last[0] * stepX,
+    cy: y(last[1]),
     r: 2.4,
     fill: color
   }));
+}
+// Week-over-week change. "New" = no history before this week, where a percentage would be
+// meaningless. Arrow + sign carry the direction; color is a secondary cue only.
+function WowCell({
+  u
+}) {
+  if (u.wowDelta === null || u.wowDelta === undefined) return /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.dim
+    }
+  }, "new");
+  const up = u.wowDelta > 0,
+    flat = Math.abs(u.wowDelta) < 0.005;
+  if (flat) return /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.dim
+    }
+  }, "—");
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: up ? C.orange : C.muted,
+      whiteSpace: "nowrap"
+    }
+  }, (up ? "▲ " : "▼ ") + fmt(Math.abs(u.wowDelta)), u.wowPct !== null && u.wowPct !== undefined && /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.dim,
+      fontSize: 11
+    }
+  }, " " + (up ? "+" : "") + u.wowPct.toFixed(0) + "%"));
 }
 function LineChart({
   series,
@@ -834,7 +870,9 @@ function AllUsersTab() {
       const hay = (u.name + " " + u.email + " " + (top ? top[0] : "") + " " + (u.org && u.org.department || "")).toLowerCase();
       return hay.includes(q.toLowerCase());
     });
-    const get = u => sortK === "name" ? u.name : sortK === "dept" ? u.org && u.org.department || "" : sortK === "cache" ? u.cacheHitRate : u[sortK];
+    // wowDelta is null for brand-new accounts; -Infinity parks them at the bottom of a
+    // descending sort instead of letting null coerce to 0 and rank above real decliners.
+    const get = u => sortK === "name" ? u.name : sortK === "dept" ? u.org && u.org.department || "" : sortK === "cache" ? u.cacheHitRate : sortK === "wow" ? u.wowDelta === null || u.wowDelta === undefined ? -Infinity : u.wowDelta : u[sortK];
     return [...f].sort((a, b) => {
       const A = get(a),
         B = get(b);
@@ -914,6 +952,9 @@ function AllUsersTab() {
     style: th("cache"),
     onClick: () => setSort("cache")
   }, "Cache", arrow("cache")), /*#__PURE__*/React.createElement("th", {
+    style: th("wow"),
+    onClick: () => setSort("wow")
+  }, "WoW", arrow("wow")), /*#__PURE__*/React.createElement("th", {
     style: th("_m")
   }, "Model mix"), /*#__PURE__*/React.createElement("th", {
     style: th("_t")
@@ -972,6 +1013,10 @@ function FragmentRow({
       color: u.cacheHitRate >= 90 ? C.text : C.muted
     }
   }, u.cacheHitRate, "%"), /*#__PURE__*/React.createElement("td", {
+    style: td
+  }, /*#__PURE__*/React.createElement(WowCell, {
+    u: u
+  })), /*#__PURE__*/React.createElement("td", {
     style: {
       ...td,
       width: 100
@@ -988,7 +1033,7 @@ function FragmentRow({
     key: f,
     type: f
   })))), isOpen && /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
-    colSpan: 9,
+    colSpan: 10,
     style: {
       padding: 0,
       borderBottom: `1px solid ${C.border}`
