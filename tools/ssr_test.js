@@ -30,7 +30,18 @@ const spendMarker = data.summary.totalSpend.toLocaleString("en-US", { minimumFra
 check("Dashboard (default tab)", React.createElement(X.Dashboard), [spendMarker, "Enablement", "Team Trends"]);
 check("OverviewTab", React.createElement(X.OverviewTab), [spendMarker, "Cache hit rate"]);
 check("LeaderboardTab", React.createElement(X.LeaderboardTab), [data.leaderboard[0].name]);
-check("AllUsersTab", React.createElement(X.AllUsersTab));
+// v6: assert the WoW column renders with real movement, not just that the header exists —
+// a header with every cell empty would otherwise pass. Pick the largest real mover and
+// require its formatted delta to appear.
+const movers = data.allUsers.filter(u => u.wowDelta !== null && u.wowDelta !== undefined);
+const top = movers.slice().sort((a, b) => Math.abs(b.wowDelta) - Math.abs(a.wowDelta))[0];
+const deltaMarker = "$" + Math.abs(top.wowDelta).toLocaleString("en-US", { minimumFractionDigits: 2 });
+check("AllUsersTab", React.createElement(X.AllUsersTab), ["WoW", "Trend", deltaMarker]);
+// sparklines must span the full history window for every user (gap-honest series)
+const W = data.history.weeks.length;
+const badSpark = data.allUsers.filter(u => (u.sparkline || []).length !== W);
+if (badSpark.length) { console.error("  FAIL: sparkline not " + W + "-wide for " + badSpark.length + " user(s)"); fails++; }
+else console.log("  ok: sparklines span full " + W + "-week window for all " + data.allUsers.length + " users");
 check("TrendsTab", React.createElement(X.TrendsTab), ["Org spend by model family"]);
 check("EnablementTab", React.createElement(X.EnablementTab), ["Non-adopters", "Narrative"]);
 check("TeamTrendsTab", React.createElement(X.TeamTrendsTab), ["Small multiples"]);

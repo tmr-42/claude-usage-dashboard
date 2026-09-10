@@ -117,4 +117,39 @@ mism = [u["email"] for u in d["allUsers"] if u["email"] in logins and not u.get(
 if mism: fail(f"users with a roster claudeLogin left unmapped: {mism}")
 ok(f"identity join: {len(logins)} logins unique; login-joined users all mapped")
 
+# 11. sparkline window + week-over-week deltas (v6)
+#     Every sparkline must span the full history window on the same x-axis, and every
+#     non-null wowDelta must reconcile against the stored prior-week figure. This is the
+#     check that would have caught the old gap-hiding series: a short array is now a fail,
+#     not a silently-compressed line.
+weeks = [w["weekStartISO"] for w in d["history"]["weeks"]]
+W = len(weeks)
+uw = d["history"]["userWeeks"]
+prev_iso = weeks[-2] if W >= 2 else None
+bad_len = [u["email"] for u in d["allUsers"] if len(u.get("sparkline") or []) != W]
+if bad_len: fail(f"sparkline not aligned to {W}-week window: {bad_len[:5]}")
+for u in d["allUsers"]:
+    sp = u["sparkline"]
+    if sp[-1] is None or abs(sp[-1] - u["spend"]) > 0.05:
+        fail(f"sparkline last point != current spend for {u['email']}")
+    seen = False
+    for v in sp:                       # nulls may only lead, never appear mid-series
+        if v is not None: seen = True
+        elif seen: fail(f"null after first observed week in sparkline for {u['email']}")
+gaps = sum(1 for u in d["allUsers"] if 0.0 in [v for v in u["sparkline"] if v is not None])
+newacct = [u for u in d["allUsers"] if u.get("wowDelta") is None]
+for u in d["allUsers"]:
+    if u.get("wowDelta") is None:
+        if any(x["weekStartISO"] != weeks[-1] for x in uw.get(u["email"], [])):
+            fail(f"{u['email']} marked new but has prior history")
+        continue
+    stored = next((x["spend"] for x in uw.get(u["email"], [])
+                   if x["weekStartISO"] == prev_iso), 0.0)
+    if abs(u["prevSpend"] - stored) > 0.05:
+        fail(f"prevSpend {u['prevSpend']} != history {stored} for {u['email']}")
+    if abs((u["spend"] - u["prevSpend"]) - u["wowDelta"]) > 0.05:
+        fail(f"wowDelta does not tie for {u['email']}")
+ok(f"sparklines aligned to {W}-week window; {gaps} user(s) show real zero-usage weeks")
+ok(f"WoW deltas tie to history for {len(d['allUsers']) - len(newacct)} users; {len(newacct)} new account(s)")
+
 print("PASS — data.json is valid for promotion")

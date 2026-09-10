@@ -25,12 +25,27 @@ from datetime import date, timedelta
 # quietly producing a dashboard with features silently absent.
 # LIMITATION: this only protects from the commit that introduced it forward. A
 # toolchain predating the stamp has no check to run, so it cannot self-detect.
-TOOLCHAIN_VERSION = 5
+TOOLCHAIN_VERSION = 6
 TOOLCHAIN_FEATURES = {
     "people-overrides",        # contractor/departed/service classification + dmEligible gate
     "legacy-retired",          # legacy flag removed; models reported by version instead
     "model-version-history",   # history.weeks[].modelSpend per exact model version
     "max-plans",               # Max seat inventory, cost, and Enterprise overlap
+    "acknowledged-seat-pairs", # allowlist suppressing verified near-duplicate Max seats
+    "wow-delta",               # per-user prevSpend / wowDelta / wowPct on allUsers
+    "gap-honest-sparkline",    # sparklines padded to the full history window
+}
+
+# Near-duplicate Max seat pairs that have been MANUALLY VERIFIED as two real seats.
+# The near-duplicate heuristic (edit distance <=2) exists to catch a typo'd address
+# being billed twice at $214/mo. It cannot distinguish a typo from two genuine
+# accounts that happen to look alike, so verified pairs are recorded here once and
+# suppressed thereafter. A recurring known-false item trains the reader to skim the
+# integrity list, which is exactly when a real duplicate slips through.
+# Format: frozenset of the two normalized login addresses -> short provenance note.
+ACKNOWLEDGED_SEAT_PAIRS = {
+    frozenset({"kingpinzs@gmail.com", "kingpingzs@gmail.com"}):
+        "Jeremy King — two separate legitimate Max accounts, confirmed by TMR.",
 }
 
 # Max plan seat price (Anthropic Max, per seat per MONTH). Single source of truth.
@@ -205,6 +220,42 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
                        key=lambda x: -x["requests"])[:10]
 
     uw = history["userWeeks"]
+
+    # ---------- per-user weekly series (gap-honest + time-aligned) ----------
+    # The old sparkline was [w["spend"] for w in uw[e]] — weeks with no usage were simply
+    # ABSENT, so a user who went dark for two months and came back drew one unbroken line.
+    # Now every sparkline spans the full history window on the same x-axis:
+    #   None -> before this person's first observed week (no account / not yet onboarded)
+    #   0.0  -> a real zero-usage week AFTER they first appeared (a genuine trough)
+    # The renderer skips leading Nones but keeps their x-positions, so the last point is
+    # always the current week for every user and rows are comparable left-to-right.
+    def week_order():
+        order = [w["weekStartISO"] for w in history["weeks"]]
+        if iso not in order: order.append(iso)   # current week, pre-append
+        return sorted(set(order))
+    WEEKS = week_order()
+    WEEK_IX = {w: i for i, w in enumerate(WEEKS)}
+
+    def series_for(e, cur_spend):
+        by_week = {w["weekStartISO"]: w["spend"] for w in uw.get(e, [])}
+        by_week[iso] = cur_spend                 # current week is not in history yet
+        first = min((WEEK_IX[w] for w in by_week if w in WEEK_IX), default=len(WEEKS)-1)
+        return [None if i < first else round(by_week.get(w, 0.0), 2)
+                for i, w in enumerate(WEEKS)]
+
+    def wow_for(e, cur_spend):
+        """Prior-week spend and change. prevSpend is None only when the person has no
+        history at all before this week — a brand-new account, where a percentage would
+        be meaningless rather than infinite."""
+        prior = [w for w in uw.get(e, []) if WEEK_IX.get(w["weekStartISO"], 99999) < WEEK_IX[iso]]
+        if not prior:
+            return {"prevSpend": None, "wowDelta": None, "wowPct": None}
+        prev_ix = WEEK_IX[iso] - 1
+        prev = next((w["spend"] for w in prior if WEEK_IX.get(w["weekStartISO"]) == prev_ix), 0.0)
+        delta = round(cur_spend - prev, 2)
+        return {"prevSpend": round(prev, 2), "wowDelta": delta,
+                "wowPct": (round(100 * delta / prev, 1) if prev > 0 else None)}
+
     def streak(e):
         c = 0
         for w in reversed(uw.get(e, [])):
@@ -287,7 +338,8 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
             "models": {k: round(v,2) for k,v in u["models"].items()},
             "productMix": mix(u["products"]), "modelMix": mix(u["models"]),
             "productModelMatrix": matrix,
-            "sparkline": [w["spend"] for w in uw.get(e, [])] or [s(u)],
+            "sparkline": series_for(e, s(u)),
+            **wow_for(e, s(u)),
             "flags": flags_for(u),
             "org": u["org"], "mapped": u["mapped"],
             "classification": u["classification"], "dmEligible": u["dmEligible"],
@@ -396,6 +448,13 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
             for j in range(i+1, len(logins)):
                 a, b = logins[i], logins[j]
                 if a != b and abs(len(a)-len(b)) <= 2 and _editdist(a, b) <= 2:
+                    if frozenset({a, b}) in ACKNOWLEDGED_SEAT_PAIRS:
+                        # verified real; record as acknowledged so the pair stays auditable
+                        # without re-raising as an open item every single week.
+                        integrity.append({"type": "acknowledged-seat-pair", "email": e, "name": R["name"],
+                            "detail": f"{a} and {b} look alike but are verified separate seats. "
+                                      f"{ACKNOWLEDGED_SEAT_PAIRS[frozenset({a, b})]}"})
+                        continue
                     integrity.append({"type": "possible-duplicate-seat", "email": e, "name": R["name"],
                         "detail": f"{a} and {b} differ by <=2 characters — verify these are two real seats, "
                                   f"not one seat entered twice (${MAX_SEAT_MONTHLY:,.2f}/mo at stake)."})
