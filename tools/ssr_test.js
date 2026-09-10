@@ -36,7 +36,19 @@ check("LeaderboardTab", React.createElement(X.LeaderboardTab), [data.leaderboard
 const movers = data.allUsers.filter(u => u.wowDelta !== null && u.wowDelta !== undefined);
 const top = movers.slice().sort((a, b) => Math.abs(b.wowDelta) - Math.abs(a.wowDelta))[0];
 const deltaMarker = "$" + Math.abs(top.wowDelta).toLocaleString("en-US", { minimumFractionDigits: 2 });
-check("AllUsersTab", React.createElement(X.AllUsersTab), ["WoW", "Trend", deltaMarker]);
+check("AllUsersTab", React.createElement(X.AllUsersTab), ["vs. last wk", "Trend", deltaMarker]);
+// v6: the expanded panel must render the FULL per-week series, not just the latest delta.
+// Assert against the user with the longest history: row count must equal their observed
+// weeks, so a table silently truncated to the last N weeks fails here.
+const longest = data.allUsers.slice().sort((a, b) =>
+  (b.sparkline || []).filter(v => v !== null).length - (a.sparkline || []).filter(v => v !== null).length)[0];
+const observed = (longest.sparkline || []).filter(v => v !== null).length;
+const detailHtml = ReactDOMServer.renderToString(React.createElement(X.UserDetailRow, { u: longest }));
+const bodyRows = (detailHtml.match(/Weekly history[\s\S]*/) || [""])[0];
+const weekRowCount = (bodyRows.match(/current/g) || []).length;
+if (!detailHtml.includes("Weekly history")) { console.error("  FAIL: weekly history block missing"); fails++; }
+else if (weekRowCount !== 1) { console.error("  FAIL: expected exactly one 'current' week marker, got " + weekRowCount); fails++; }
+else console.log("  ok: weekly history table renders " + observed + " observed weeks for " + longest.email);
 // sparklines must span the full history window for every user (gap-honest series)
 const W = data.history.weeks.length;
 const badSpark = data.allUsers.filter(u => (u.sparkline || []).length !== W);
