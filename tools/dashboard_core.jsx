@@ -269,6 +269,28 @@ function LeaderboardTab() {
 function UserDetailRow({ u }) {
   const box = { background: "rgba(217,222,240,0.04)", border: `1px solid ${C.border}`, borderRadius: 8, padding: 14 };
   const mm = u.productModelMatrix;
+  // Weekly history is derived from the gap-honest sparkline, which is padded to the full
+  // history window: null = before this account first appeared, 0 = a real zero-usage week.
+  // Dropping only the leading nulls gives every week the account has actually existed for,
+  // so the table can never be silently truncated to a trailing window.
+  const weekRows = (() => {
+    const W = (DATA.history && DATA.history.weeks) || [];
+    const sp = u.sparkline || [];
+    const out = [];
+    for (let i = 0; i < W.length; i++) {
+      const v = sp[i];
+      if (v === null || v === undefined) continue;
+      const prevIdx = out.length ? out[out.length - 1].idx : -1;
+      const prevVal = prevIdx >= 0 ? sp[prevIdx] : null;
+      out.push({
+        idx: i, iso: W[i].weekStartISO, weekOf: W[i].weekOf, spend: v,
+        delta: prevVal === null ? null : Math.round((v - prevVal) * 100) / 100,
+        pct: prevVal === null || prevVal === 0 ? null : Math.round(((v - prevVal) / prevVal) * 100),
+        isCurrent: i === W.length - 1,
+      });
+    }
+    return out.reverse();
+  })();
   const cellS = { padding: "5px 9px", fontSize: 11.5, fontFamily: BODY, color: C.muted, borderBottom: `1px solid ${C.border}`, textAlign: "right" };
   return (
     <div style={{ padding: 14, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
@@ -297,6 +319,34 @@ function UserDetailRow({ u }) {
             <Bar value={m.spend} max={u.spend} color={MODEL_COLORS[m.name] || C.grey} />
           </div>
         ))}
+      </div>
+      <div style={{ ...box, gridColumn: "1 / -1", overflowX: "auto" }}>
+        <Sub style={{ marginBottom: 8, fontWeight: 700 }}>Weekly history</Sub>
+        <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <thead><tr>
+            <th style={{ ...cellS, textAlign: "left", color: C.dim }}>Week</th>
+            <th style={{ ...cellS, color: C.dim }}>Spend</th>
+            <th style={{ ...cellS, color: C.dim }}>Change</th>
+            <th style={{ ...cellS, color: C.dim }}>%</th>
+          </tr></thead>
+          <tbody>
+            {weekRows.map(r => (
+              <tr key={r.iso}>
+                <td style={{ ...cellS, textAlign: "left", color: C.text }}>
+                  {r.weekOf}{r.isCurrent ? <span style={{ marginLeft: 6, fontSize: 10, color: C.dim }}>current</span> : null}
+                </td>
+                <td style={{ ...cellS, color: C.text, fontWeight: r.isCurrent ? 700 : 400 }}>{fmt(r.spend)}</td>
+                <td style={{ ...cellS, color: r.delta === null ? C.dim : r.delta >= 0 ? C.orange : C.green }}>
+                  {r.delta === null ? "—" : (r.delta >= 0 ? "+" : "−") + "$" + Math.abs(r.delta).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </td>
+                <td style={{ ...cellS, color: r.pct === null ? C.dim : r.pct >= 0 ? C.orange : C.green }}>
+                  {r.pct === null ? "—" : (r.pct >= 0 ? "+" : "−") + Math.abs(r.pct).toFixed(0) + "%"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <Sub style={{ marginTop: 6 }}>Every week since this account first appeared, newest first.</Sub>
       </div>
       <div style={{ ...box, gridColumn: "1 / -1", overflowX: "auto" }}>
         <Sub style={{ marginBottom: 8, fontWeight: 700 }}>Product × model</Sub>
@@ -339,7 +389,11 @@ function AllUsersTab() {
       return hay.includes(q.toLowerCase());
     });
     const get = u => sortK === "name" ? u.name : sortK === "dept" ? (u.org && u.org.department || "") :
-      sortK === "cache" ? u.cacheHitRate : u[sortK];
+      sortK === "cache" ? u.cacheHitRate :
+      // a brand-new account has no prior week; sort it below every real mover rather than
+      // letting undefined compare unpredictably against numbers
+      sortK === "wowDelta" ? (u.wowDelta === null || u.wowDelta === undefined ? -Infinity : u.wowDelta) :
+      u[sortK];
     return [...f].sort((a,b)=>{ const A=get(a), B=get(b); return (A<B?-1:A>B?1:0) * dir; });
   }, [q, sortK, dir]);
   const setSort = k => { if (k === sortK) setDir(-dir); else { setSortK(k); setDir(-1); } };
@@ -359,6 +413,7 @@ function AllUsersTab() {
             <th style={th("name")} onClick={()=>setSort("name")}>Name{arrow("name")}</th>
             <th style={th("dept")} onClick={()=>setSort("dept")}>Dept{arrow("dept")}</th>
             <th style={th("spend")} onClick={()=>setSort("spend")}>Spend{arrow("spend")}</th>
+            <th style={th("wowDelta")} onClick={()=>setSort("wowDelta")}>vs. last wk.{arrow("wowDelta")}</th>
             <th style={th("requests")} onClick={()=>setSort("requests")}>Req{arrow("requests")}</th>
             <th style={th("cpr")} onClick={()=>setSort("cpr")}>$/req{arrow("cpr")}</th>
             <th style={th("cache")} onClick={()=>setSort("cache")}>Cache{arrow("cache")}</th>
@@ -385,6 +440,12 @@ function FragmentRow({ u, isOpen, onToggle, td }) {
         <td style={td}><div>{u.name}<ClassPill c={u.classification} /></div><div style={{ fontSize: 10.5, color: C.dim }}>{u.email}</div></td>
         <td style={{ ...td, color: C.muted }}>{u.org && u.org.department || "—"}</td>
         <td style={{ ...td, fontWeight: 700 }}>{fmt(u.spend)}</td>
+        <td style={{ ...td, whiteSpace: "nowrap", color: u.wowDelta === null || u.wowDelta === undefined ? C.dim : u.wowDelta >= 0 ? C.orange : C.green }}>
+          {u.wowDelta === null || u.wowDelta === undefined ? "new"
+            : (u.wowDelta >= 0 ? "+" : "−") + "$" + Math.abs(u.wowDelta).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          {u.wowPct === null || u.wowPct === undefined ? null
+            : <span style={{ color: C.dim, fontSize: 10.5, marginLeft: 5 }}>{(u.wowPct >= 0 ? "+" : "−") + Math.abs(u.wowPct).toFixed(0) + "%"}</span>}
+        </td>
         <td style={td}>{u.requests.toLocaleString()}</td>
         <td style={td}>{"$" + u.cpr.toFixed(3)}</td>
         <td style={{ ...td, color: u.cacheHitRate >= 90 ? C.text : C.muted }}>{u.cacheHitRate}%</td>
@@ -392,7 +453,7 @@ function FragmentRow({ u, isOpen, onToggle, td }) {
         <td style={td}><Sparkline values={u.sparkline} /></td>
         <td style={td}>{u.flags.map(f => <FlagPill key={f} type={f} />)}</td>
       </tr>
-      {isOpen && <tr><td colSpan={9} style={{ padding: 0, borderBottom: `1px solid ${C.border}` }}><UserDetailRow u={u} /></td></tr>}
+      {isOpen && <tr><td colSpan={10} style={{ padding: 0, borderBottom: `1px solid ${C.border}` }}><UserDetailRow u={u} /></td></tr>}
     </React.Fragment>
   );
 }

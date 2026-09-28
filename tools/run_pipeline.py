@@ -25,7 +25,7 @@ from datetime import date, timedelta
 # quietly producing a dashboard with features silently absent.
 # LIMITATION: this only protects from the commit that introduced it forward. A
 # toolchain predating the stamp has no check to run, so it cannot self-detect.
-TOOLCHAIN_VERSION = 6
+TOOLCHAIN_VERSION = 7
 TOOLCHAIN_FEATURES = {
     "people-overrides",        # contractor/departed/service classification + dmEligible gate
     "legacy-retired",          # legacy flag removed; models reported by version instead
@@ -34,6 +34,9 @@ TOOLCHAIN_FEATURES = {
     "acknowledged-seat-pairs", # allowlist suppressing verified near-duplicate Max seats
     "wow-delta",               # per-user prevSpend / wowDelta / wowPct on allUsers
     "gap-honest-sparkline",    # sparklines padded to the full history window
+    "acknowledged-enterprise-overlap",  # allowlist for grandfathered Max+Enterprise dual-holds
+    "unmapped-org-units",      # roster rows missing department/team route to "Unmapped"
+                               # instead of crashing the enablement aggregation
 }
 
 # Near-duplicate Max seat pairs that have been MANUALLY VERIFIED as two real seats.
@@ -46,6 +49,18 @@ TOOLCHAIN_FEATURES = {
 ACKNOWLEDGED_SEAT_PAIRS = {
     frozenset({"kingpinzs@gmail.com", "kingpingzs@gmail.com"}):
         "Jeremy King — two separate legitimate Max accounts, confirmed by TMR.",
+}
+
+# Anthropic originally permitted one work address to hold BOTH a Max subscription and an
+# Enterprise seat. That is no longer possible, but accounts created before the change are
+# grandfathered and are legitimate — confirmed by TMR 2026-09-28. The overlap check below
+# still runs, because a NEW same-address pair can no longer be created legitimately and
+# would indicate a real data-entry error; these known-good addresses are recorded once so
+# they report as acknowledged instead of re-raising as open items every week.
+ACKNOWLEDGED_ENTERPRISE_OVERLAP = {
+    "bill.buchanan@level.agency", "jt.smith@level.agency", "lonn.shulkin@level.agency",
+    "mike.smith@level.agency", "pvangorder@level.agency", "shirley.tian@level.agency",
+    "brian.mcleod@level.agency",
 }
 
 # Max plan seat price (Anthropic Max, per seat per MONTH). Single source of truth.
@@ -356,9 +371,13 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
                   ("department","team","manager","mor","subDeptLead")}
     # roster-wide membership (incl. non-users) for filters + non-adopter counts
     roster_units = defaultdict(lambda: defaultdict(list))
+    # department/team are required in Airtable but are not enforced there, so an Active
+    # row can legitimately arrive with either blank. unit_key() already folds a blank to
+    # "Unmapped" on the usage side; do the same here so the two sides share a key space
+    # and a missing field surfaces as a visible Unmapped bucket rather than a crash.
     for e, R in ROSTER.items():
-        roster_units["department"][R["department"]].append(e)
-        roster_units["team"][R["team"]].append(e)
+        roster_units["department"][R["department"] or "Unmapped"].append(e)
+        roster_units["team"][R["team"] or "Unmapped"].append(e)
         if R["managerEmail"]: roster_units["manager"][R["managerEmail"]].append(e)
         if R["morEmail"]: roster_units["mor"][R["morEmail"]].append(e)
         if R["subDeptLeadEmail"]: roster_units["subDeptLead"][R["subDeptLeadEmail"]].append(e)
@@ -463,8 +482,15 @@ def main(csv_path, history_path, roster_path, outdir="staging"):
     usage_emails = {norm_login(e) for e in users}
     for L, owner in sorted(seen_login.items()):
         if L in usage_emails:
-            integrity.append({"type": "max-login-in-enterprise-usage", "email": owner, "name": ROSTER[owner]["name"],
-                "detail": f"Max login {L} also appears as a metered Enterprise account this week."})
+            if L in ACKNOWLEDGED_ENTERPRISE_OVERLAP:
+                integrity.append({"type": "acknowledged-enterprise-overlap", "email": owner, "name": ROSTER[owner]["name"],
+                    "detail": f"Max login {L} is also a metered Enterprise account. Legacy dual-hold, "
+                              f"predates Anthropic's one-address rule — verified legitimate, seat cost counts."})
+            else:
+                integrity.append({"type": "max-login-in-enterprise-usage", "email": owner, "name": ROSTER[owner]["name"],
+                    "detail": f"Max login {L} also appears as a metered Enterprise account this week. Same-address "
+                              f"dual-hold can no longer be created, so verify this is a grandfathered account "
+                              f"and not a mistyped Max login."})
 
     max_users = []
     for e, R in max_holders.items():
