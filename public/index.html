@@ -282,9 +282,6 @@ function FlagPill({
     }
   }, m.label);
 }
-// values spans the FULL history window. null = before this person's first week (drawn as
-// nothing, but its x-slot is preserved so every row shares one timeline); 0 = a real
-// zero-usage week, drawn on the baseline as a genuine trough.
 function Sparkline({
   values,
   color = C.blue,
@@ -292,24 +289,20 @@ function Sparkline({
   height = 22
 }) {
   if (!values || !values.length) return null;
-  const live = values.map((v, i) => [i, v]).filter(p => p[1] !== null && p[1] !== undefined);
-  if (!live.length) return null;
-  const nums = live.map(p => p[1]);
-  const max = Math.max(...nums, 0.01),
-    min = Math.min(...nums, 0);
-  const stepX = values.length > 1 ? width / (values.length - 1) : 0;
-  const y = v => height - 3 - (v - min) / (max - min || 1) * (height - 6);
-  const last = live[live.length - 1];
-  if (live.length === 1) return /*#__PURE__*/React.createElement("svg", {
+  if (values.length === 1) return /*#__PURE__*/React.createElement("svg", {
     width: width,
     height: height
   }, /*#__PURE__*/React.createElement("circle", {
-    cx: last[0] * stepX,
+    cx: width / 2,
     cy: height / 2,
     r: 2.5,
     fill: color
   }));
-  const pts = live.map(([i, v]) => `${(i * stepX).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const max = Math.max(...values, 0.01),
+    min = Math.min(...values, 0);
+  const stepX = width / (values.length - 1);
+  const y = v => height - 3 - (v - min) / (max - min || 1) * (height - 6);
+  const pts = values.map((v, i) => `${(i * stepX).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   return /*#__PURE__*/React.createElement("svg", {
     width: width,
     height: height
@@ -319,40 +312,11 @@ function Sparkline({
     stroke: color,
     strokeWidth: "1.5"
   }), /*#__PURE__*/React.createElement("circle", {
-    cx: last[0] * stepX,
-    cy: y(last[1]),
+    cx: (values.length - 1) * stepX,
+    cy: y(values[values.length - 1]),
     r: 2.4,
     fill: color
   }));
-}
-// Week-over-week change. "New" = no history before this week, where a percentage would be
-// meaningless. Arrow + sign carry the direction; color is a secondary cue only.
-function WowCell({
-  u
-}) {
-  if (u.wowDelta === null || u.wowDelta === undefined) return /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.dim
-    }
-  }, "new");
-  const up = u.wowDelta > 0,
-    flat = Math.abs(u.wowDelta) < 0.005;
-  if (flat) return /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.dim
-    }
-  }, "—");
-  return /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: up ? C.orange : C.muted,
-      whiteSpace: "nowrap"
-    }
-  }, (up ? "▲ " : "▼ ") + fmt(Math.abs(u.wowDelta)), u.wowPct !== null && u.wowPct !== undefined && /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.dim,
-      fontSize: 11
-    }
-  }, " " + (up ? "+" : "") + u.wowPct.toFixed(0) + "%"));
 }
 function LineChart({
   series,
@@ -565,7 +529,7 @@ function OverviewTab() {
     style: {
       textTransform: "capitalize"
     }
-  }, m.k), /*#__PURE__*/React.createElement("span", null, fmt(m.v), " · ", (100 * m.v / s.totalSpend).toFixed(0), "%")), /*#__PURE__*/React.createElement(Bar, {
+  }, m.k), /*#__PURE__*/React.createElement("span", null, fmt(m.v), " \xB7 ", (100 * m.v / s.totalSpend).toFixed(0), "%")), /*#__PURE__*/React.createElement(Bar, {
     value: m.v,
     max: s.totalSpend,
     color: MODEL_COLORS[m.k]
@@ -588,7 +552,7 @@ function OverviewTab() {
       fontFamily: BODY,
       marginBottom: 4
     }
-  }, /*#__PURE__*/React.createElement("span", null, p.name), /*#__PURE__*/React.createElement("span", null, fmt(p.spend), " · ", (100 * p.spend / s.totalSpend).toFixed(0), "%")), /*#__PURE__*/React.createElement(Bar, {
+  }, /*#__PURE__*/React.createElement("span", null, p.name), /*#__PURE__*/React.createElement("span", null, fmt(p.spend), " \xB7 ", (100 * p.spend / s.totalSpend).toFixed(0), "%")), /*#__PURE__*/React.createElement(Bar, {
     value: p.spend,
     max: s.totalSpend,
     color: SERIES[i % SERIES.length]
@@ -690,112 +654,6 @@ function LeaderboardTab() {
 }
 
 // ----------------------------------------------------------------- all users
-// Week labels for the per-user history table. Sorted ascending by ISO so index i here
-// refers to the SAME week as sparkline[i] — the pipeline builds that series against a
-// sorted() window, so any other ordering here would silently mislabel every row.
-const WEEK_LABELS = (DATA.history && DATA.history.weeks || []).map(w => w.weekStartISO).sort().map(iso => {
-  const p = iso.split("-"); // built from parts, not Date(iso), which shifts by TZ
-  return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Number(p[1]) - 1] + " " + Number(p[2]);
-});
-// Full week-by-week history for one person. Rows run newest first so the current week is
-// visible without scrolling. Nulls (before their first observed week) are skipped; zeros
-// are real no-usage weeks and are shown as $0.00, which is the whole point of the series.
-function WeeklyHistoryTable({
-  u
-}) {
-  const sp = u.sparkline || [];
-  const rows = [];
-  let prev = null;
-  sp.forEach((v, i) => {
-    if (v === null || v === undefined) return;
-    rows.push({
-      label: WEEK_LABELS[i] || "wk " + (i + 1),
-      spend: v,
-      delta: prev === null ? null : Math.round((v - prev) * 100) / 100,
-      pct: prev === null || prev === 0 ? null : Math.round(1000 * (v - prev) / prev) / 10
-    });
-    prev = v;
-  });
-  if (!rows.length) return null;
-  rows.reverse();
-  const h = {
-    padding: "5px 9px",
-    fontSize: 10.5,
-    color: C.dim,
-    fontFamily: BODY,
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: .6,
-    borderBottom: `1px solid ${C.border}`,
-    textAlign: "right",
-    position: "sticky",
-    top: 0,
-    background: C.card
-  };
-  const c = {
-    padding: "5px 9px",
-    fontSize: 11.5,
-    fontFamily: BODY,
-    color: C.muted,
-    borderBottom: `1px solid ${C.border}`,
-    textAlign: "right",
-    whiteSpace: "nowrap"
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxHeight: 260,
-      overflowY: "auto"
-    }
-  }, /*#__PURE__*/React.createElement("table", {
-    style: {
-      width: "100%",
-      borderCollapse: "collapse"
-    }
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
-    style: {
-      ...h,
-      textAlign: "left"
-    }
-  }, "Week"), /*#__PURE__*/React.createElement("th", {
-    style: h
-  }, "Spend"), /*#__PURE__*/React.createElement("th", {
-    style: h
-  }, "Change"), /*#__PURE__*/React.createElement("th", {
-    style: h
-  }, "%"))), /*#__PURE__*/React.createElement("tbody", null, rows.map((r, i) => {
-    const up = r.delta !== null && r.delta > 0;
-    const flat = r.delta !== null && Math.abs(r.delta) < 0.005;
-    return /*#__PURE__*/React.createElement("tr", {
-      key: r.label + i
-    }, /*#__PURE__*/React.createElement("td", {
-      style: {
-        ...c,
-        textAlign: "left",
-        color: i === 0 ? C.text : C.muted
-      }
-    }, r.label, i === 0 && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.dim,
-        fontSize: 10.5
-      }
-    }, " · current")), /*#__PURE__*/React.createElement("td", {
-      style: {
-        ...c,
-        color: C.text
-      }
-    }, fmt(r.spend)), /*#__PURE__*/React.createElement("td", {
-      style: {
-        ...c,
-        color: r.delta === null || flat ? C.dim : up ? C.orange : C.muted
-      }
-    }, r.delta === null ? "—" : flat ? "—" : (up ? "▲ " : "▼ ") + fmt(Math.abs(r.delta))), /*#__PURE__*/React.createElement("td", {
-      style: {
-        ...c,
-        color: C.dim
-      }
-    }, r.pct === null ? "—" : (r.pct > 0 ? "+" : "") + r.pct.toFixed(0) + "%"));
-  }))));
-}
 function UserDetailRow({
   u
 }) {
@@ -806,6 +664,31 @@ function UserDetailRow({
     padding: 14
   };
   const mm = u.productModelMatrix;
+  // Weekly history is derived from the gap-honest sparkline, which is padded to the full
+  // history window: null = before this account first appeared, 0 = a real zero-usage week.
+  // Dropping only the leading nulls gives every week the account has actually existed for,
+  // so the table can never be silently truncated to a trailing window.
+  const weekRows = (() => {
+    const W = DATA.history && DATA.history.weeks || [];
+    const sp = u.sparkline || [];
+    const out = [];
+    for (let i = 0; i < W.length; i++) {
+      const v = sp[i];
+      if (v === null || v === undefined) continue;
+      const prevIdx = out.length ? out[out.length - 1].idx : -1;
+      const prevVal = prevIdx >= 0 ? sp[prevIdx] : null;
+      out.push({
+        idx: i,
+        iso: W[i].weekStartISO,
+        weekOf: W[i].weekOf,
+        spend: v,
+        delta: prevVal === null ? null : Math.round((v - prevVal) * 100) / 100,
+        pct: prevVal === null || prevVal === 0 ? null : Math.round((v - prevVal) / prevVal * 100),
+        isCurrent: i === W.length - 1
+      });
+    }
+    return out.reverse();
+  })();
   const cellS = {
     padding: "5px 9px",
     fontSize: 11.5,
@@ -858,7 +741,7 @@ function UserDetailRow({
       color: C.muted,
       fontFamily: BODY
     }
-  }, /*#__PURE__*/React.createElement("span", null, p.name), /*#__PURE__*/React.createElement("span", null, fmt(p.spend), " · ", p.pct, "%")), /*#__PURE__*/React.createElement(Bar, {
+  }, /*#__PURE__*/React.createElement("span", null, p.name), /*#__PURE__*/React.createElement("span", null, fmt(p.spend), " \xB7 ", p.pct, "%")), /*#__PURE__*/React.createElement(Bar, {
     value: p.spend,
     max: u.spend,
     color: SERIES[i % SERIES.length]
@@ -886,24 +769,11 @@ function UserDetailRow({
     style: {
       textTransform: "capitalize"
     }
-  }, m.name), /*#__PURE__*/React.createElement("span", null, fmt(m.spend), " · ", m.pct, "%")), /*#__PURE__*/React.createElement(Bar, {
+  }, m.name), /*#__PURE__*/React.createElement("span", null, fmt(m.spend), " \xB7 ", m.pct, "%")), /*#__PURE__*/React.createElement(Bar, {
     value: m.spend,
     max: u.spend,
     color: MODEL_COLORS[m.name] || C.grey
   })))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...box,
-      gridColumn: "1 / -1",
-      padding: "14px 14px 4px"
-    }
-  }, /*#__PURE__*/React.createElement(Sub, {
-    style: {
-      marginBottom: 8,
-      fontWeight: 700
-    }
-  }, "Weekly history · newest first"), /*#__PURE__*/React.createElement(WeeklyHistoryTable, {
-    u: u
-  })), /*#__PURE__*/React.createElement("div", {
     style: {
       ...box,
       gridColumn: "1 / -1",
@@ -914,7 +784,81 @@ function UserDetailRow({
       marginBottom: 8,
       fontWeight: 700
     }
-  }, "Product × model"), /*#__PURE__*/React.createElement("table", {
+  }, "Weekly history"), /*#__PURE__*/React.createElement("table", {
+    style: {
+      borderCollapse: "collapse",
+      width: "100%"
+    }
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+    style: {
+      ...cellS,
+      textAlign: "left",
+      color: C.dim
+    }
+  }, "Week"), /*#__PURE__*/React.createElement("th", {
+    style: {
+      ...cellS,
+      color: C.dim
+    }
+  }, "Spend"), /*#__PURE__*/React.createElement("th", {
+    style: {
+      ...cellS,
+      color: C.dim
+    }
+  }, "Change"), /*#__PURE__*/React.createElement("th", {
+    style: {
+      ...cellS,
+      color: C.dim
+    }
+  }, "%"))), /*#__PURE__*/React.createElement("tbody", null, weekRows.map(r => /*#__PURE__*/React.createElement("tr", {
+    key: r.iso
+  }, /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...cellS,
+      textAlign: "left",
+      color: C.text
+    }
+  }, r.weekOf, r.isCurrent ? /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: 6,
+      fontSize: 10,
+      color: C.dim
+    }
+  }, "current") : null), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...cellS,
+      color: C.text,
+      fontWeight: r.isCurrent ? 700 : 400
+    }
+  }, fmt(r.spend)), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...cellS,
+      color: r.delta === null ? C.dim : r.delta >= 0 ? C.orange : C.green
+    }
+  }, r.delta === null ? "—" : (r.delta >= 0 ? "+" : "−") + "$" + Math.abs(r.delta).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...cellS,
+      color: r.pct === null ? C.dim : r.pct >= 0 ? C.orange : C.green
+    }
+  }, r.pct === null ? "—" : (r.pct >= 0 ? "+" : "−") + Math.abs(r.pct).toFixed(0) + "%"))))), /*#__PURE__*/React.createElement(Sub, {
+    style: {
+      marginTop: 6
+    }
+  }, "Every week since this account first appeared, newest first.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...box,
+      gridColumn: "1 / -1",
+      overflowX: "auto"
+    }
+  }, /*#__PURE__*/React.createElement(Sub, {
+    style: {
+      marginBottom: 8,
+      fontWeight: 700
+    }
+  }, "Product \xD7 model"), /*#__PURE__*/React.createElement("table", {
     style: {
       borderCollapse: "collapse",
       width: "100%"
@@ -989,9 +933,10 @@ function AllUsersTab() {
       const hay = (u.name + " " + u.email + " " + (top ? top[0] : "") + " " + (u.org && u.org.department || "")).toLowerCase();
       return hay.includes(q.toLowerCase());
     });
-    // wowDelta is null for brand-new accounts; -Infinity parks them at the bottom of a
-    // descending sort instead of letting null coerce to 0 and rank above real decliners.
-    const get = u => sortK === "name" ? u.name : sortK === "dept" ? u.org && u.org.department || "" : sortK === "cache" ? u.cacheHitRate : sortK === "wow" ? u.wowDelta === null || u.wowDelta === undefined ? -Infinity : u.wowDelta : u[sortK];
+    const get = u => sortK === "name" ? u.name : sortK === "dept" ? u.org && u.org.department || "" : sortK === "cache" ? u.cacheHitRate :
+    // a brand-new account has no prior week; sort it below every real mover rather than
+    // letting undefined compare unpredictably against numbers
+    sortK === "wowDelta" ? u.wowDelta === null || u.wowDelta === undefined ? -Infinity : u.wowDelta : u[sortK];
     return [...f].sort((a, b) => {
       const A = get(a),
         B = get(b);
@@ -1029,7 +974,7 @@ function AllUsersTab() {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
     value: q,
     onChange: e => setQ(e.target.value),
-    placeholder: "Search name, email, department, or top product…",
+    placeholder: "Search name, email, department, or top product\u2026",
     style: {
       width: "100%",
       boxSizing: "border-box",
@@ -1062,6 +1007,9 @@ function AllUsersTab() {
     style: th("spend"),
     onClick: () => setSort("spend")
   }, "Spend", arrow("spend")), /*#__PURE__*/React.createElement("th", {
+    style: th("wowDelta"),
+    onClick: () => setSort("wowDelta")
+  }, "vs. last wk.", arrow("wowDelta")), /*#__PURE__*/React.createElement("th", {
     style: th("requests"),
     onClick: () => setSort("requests")
   }, "Req", arrow("requests")), /*#__PURE__*/React.createElement("th", {
@@ -1071,9 +1019,6 @@ function AllUsersTab() {
     style: th("cache"),
     onClick: () => setSort("cache")
   }, "Cache", arrow("cache")), /*#__PURE__*/React.createElement("th", {
-    style: th("wow"),
-    onClick: () => setSort("wow")
-  }, "vs. last wk", arrow("wow")), /*#__PURE__*/React.createElement("th", {
     style: th("_m")
   }, "Model mix"), /*#__PURE__*/React.createElement("th", {
     style: th("_t")
@@ -1089,7 +1034,7 @@ function AllUsersTab() {
     style: {
       marginTop: 8
     }
-  }, rows.length, " of ", DATA.allUsers.length, " users · click any row for detail"));
+  }, rows.length, " of ", DATA.allUsers.length, " users \xB7 click any row for detail"));
 }
 function FragmentRow({
   u,
@@ -1123,6 +1068,21 @@ function FragmentRow({
       fontWeight: 700
     }
   }, fmt(u.spend)), /*#__PURE__*/React.createElement("td", {
+    style: {
+      ...td,
+      whiteSpace: "nowrap",
+      color: u.wowDelta === null || u.wowDelta === undefined ? C.dim : u.wowDelta >= 0 ? C.orange : C.green
+    }
+  }, u.wowDelta === null || u.wowDelta === undefined ? "new" : (u.wowDelta >= 0 ? "+" : "−") + "$" + Math.abs(u.wowDelta).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }), u.wowPct === null || u.wowPct === undefined ? null : /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.dim,
+      fontSize: 10.5,
+      marginLeft: 5
+    }
+  }, (u.wowPct >= 0 ? "+" : "−") + Math.abs(u.wowPct).toFixed(0) + "%")), /*#__PURE__*/React.createElement("td", {
     style: td
   }, u.requests.toLocaleString()), /*#__PURE__*/React.createElement("td", {
     style: td
@@ -1132,10 +1092,6 @@ function FragmentRow({
       color: u.cacheHitRate >= 90 ? C.text : C.muted
     }
   }, u.cacheHitRate, "%"), /*#__PURE__*/React.createElement("td", {
-    style: td
-  }, /*#__PURE__*/React.createElement(WowCell, {
-    u: u
-  })), /*#__PURE__*/React.createElement("td", {
     style: {
       ...td,
       width: 100
@@ -1470,7 +1426,7 @@ function EnablementTab() {
   }, /*#__PURE__*/React.createElement("input", {
     value: pq,
     onChange: e => setPq(e.target.value),
-    placeholder: "Add specific people to build a custom group…",
+    placeholder: "Add specific people to build a custom group\u2026",
     style: {
       background: C.bg,
       color: C.text,
@@ -1514,7 +1470,7 @@ function EnablementTab() {
       marginLeft: 6,
       cursor: "pointer"
     }
-  }, "×"))), customMode && /*#__PURE__*/React.createElement(Sub, null, "(custom group overrides org filters)"))), /*#__PURE__*/React.createElement("div", {
+  }, "\xD7"))), customMode && /*#__PURE__*/React.createElement(Sub, null, "(custom group overrides org filters)"))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 12,
@@ -1796,7 +1752,7 @@ function TeamTrendsTab() {
         fontFamily: BODY,
         fontWeight: on ? 700 : 400
       }
-    }, unitLabel(dim, k), " · ", fmt0(units[k].spend));
+    }, unitLabel(dim, k), " \xB7 ", fmt0(units[k].spend));
   }))), mode === "small" && /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
@@ -1831,7 +1787,7 @@ function TeamTrendsTab() {
       style: {
         marginBottom: 8
       }
-    }, u.activeUsers, " active / ", u.rosterCount || u.activeUsers, " people", u.nonAdopters ? ` · ${u.nonAdopters} non-adopters` : "", " · cache ", u.cacheHitRate, "%"), /*#__PURE__*/React.createElement(LineChart, {
+    }, u.activeUsers, " active / ", u.rosterCount || u.activeUsers, " people", u.nonAdopters ? ` · ${u.nonAdopters} non-adopters` : "", " \xB7 cache ", u.cacheHitRate, "%"), /*#__PURE__*/React.createElement(LineChart, {
       height: 130,
       xLabels: xL,
       sharedMax: sharedY ? maxAll : null,
@@ -1846,7 +1802,7 @@ function TeamTrendsTab() {
     style: {
       marginBottom: 12
     }
-  }, "Spend overlay — ", DIM_LABELS[dim].toLowerCase()), /*#__PURE__*/React.createElement(LineChart, {
+  }, "Spend overlay \u2014 ", DIM_LABELS[dim].toLowerCase()), /*#__PURE__*/React.createElement(LineChart, {
     height: 300,
     xLabels: xL,
     series: selected.map((k, i) => ({
@@ -1858,7 +1814,7 @@ function TeamTrendsTab() {
     style: {
       marginTop: 8
     }
-  }, "Tip: overlay reads best with 6 or fewer units — try the heatmap for wider comparisons.")), mode === "heat" && /*#__PURE__*/React.createElement(Card, {
+  }, "Tip: overlay reads best with 6 or fewer units \u2014 try the heatmap for wider comparisons.")), mode === "heat" && /*#__PURE__*/React.createElement(Card, {
     style: {
       overflowX: "auto"
     }
@@ -2007,7 +1963,7 @@ function FlagsTab() {
     style: {
       marginBottom: 8
     }
-  }, "Highest-priority cost item — automated Cowork traffic on Opus pricing."), /*#__PURE__*/React.createElement(MiniTable, {
+  }, "Highest-priority cost item \u2014 automated Cowork traffic on Opus pricing."), /*#__PURE__*/React.createElement(MiniTable, {
     cols: ["Name", "Cowork Opus spend", "Requests"],
     rows: d.coworkOpus.map(u => [u.name, fmt(u.spend), u.requests.toLocaleString()])
   })), /*#__PURE__*/React.createElement(FlagCard, {
@@ -2018,7 +1974,7 @@ function FlagsTab() {
     style: {
       marginBottom: 8
     }
-  }, "≥30% of personal Chat spend on Opus models."), /*#__PURE__*/React.createElement(MiniTable, {
+  }, "\u226530% of personal Chat spend on Opus models."), /*#__PURE__*/React.createElement(MiniTable, {
     cols: ["Name", "Opus Chat spend", "Chat spend", "Opus %"],
     rows: d.opusHeavy.slice(0, 20).map(u => [u.name, fmt(u.opusSpend), fmt(u.chatSpend), u.opusPct + "%"])
   }), d.opusHeavy.length > 20 && /*#__PURE__*/React.createElement(Sub, {
@@ -2037,7 +1993,7 @@ function FlagsTab() {
     cols: ["Name", "Weekly spend", "Projected monthly"],
     rows: d.maxPlan.map(u => [u.name, fmt(u.weeklySpend), fmt(u.projectedMonthly)])
   })), /*#__PURE__*/React.createElement(FlagCard, {
-    title: "Power users — efficiency benchmarks",
+    title: "Power users \u2014 efficiency benchmarks",
     count: d.powerUsers.length,
     color: C.green
   }, /*#__PURE__*/React.createElement(MiniTable, {
@@ -2058,7 +2014,7 @@ function FlagsTab() {
     style: {
       marginBottom: 12
     }
-  }, "Users under $10 this week — an adoption signal, not a spend problem.")), /*#__PURE__*/React.createElement(FlagCard, {
+  }, "Users under $10 this week \u2014 an adoption signal, not a spend problem.")), /*#__PURE__*/React.createElement(FlagCard, {
     title: "Low engagement",
     count: d.lowEngagement.length,
     color: C.blue
@@ -2222,7 +2178,7 @@ function MaxPlansTab() {
   }, /*#__PURE__*/React.createElement("input", {
     value: q,
     onChange: e => setQ(e.target.value),
-    placeholder: "Search name, email, department, Max login…",
+    placeholder: "Search name, email, department, Max login\u2026",
     style: {
       flex: 1,
       minWidth: 240,
@@ -2326,7 +2282,7 @@ function MaxPlansTab() {
     style: {
       marginTop: 8
     }
-  }, rows.length, " of ", m.users.length, " Max holders · Max seats are billed monthly outside the Enterprise metered account and are excluded from Enterprise spend totals elsewhere in this dashboard · weekly equivalent = ", fmt(m.seatCostMonthly), " × 12 ÷ 52"));
+  }, rows.length, " of ", m.users.length, " Max holders \xB7 Max seats are billed monthly outside the Enterprise metered account and are excluded from Enterprise spend totals elsewhere in this dashboard \xB7 weekly equivalent = ", fmt(m.seatCostMonthly), " \xD7 12 \xF7 52"));
 }
 
 // ---------------------------------------------------------------------- root
@@ -2414,7 +2370,7 @@ function Dashboard() {
     style: {
       marginBottom: 18
     }
-  }, DATA.summary.weekOf, " · Thursday–Wednesday cycle · net spend"), /*#__PURE__*/React.createElement("div", {
+  }, DATA.summary.weekOf, " \xB7 Thursday\u2013Wednesday cycle \xB7 net spend"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 4,
@@ -2442,7 +2398,7 @@ function Dashboard() {
       paddingTop: 12,
       borderTop: `1px solid ${C.border}`
     }
-  }, "Level Agency · Claude Enterprise reporting · data as of ", DATA.summary.weekStartISO)));
+  }, "Level Agency \xB7 Claude Enterprise reporting \xB7 data as of ", DATA.summary.weekStartISO)));
 }
 </script>
 <script>
